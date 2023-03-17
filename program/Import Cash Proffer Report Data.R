@@ -1,4 +1,5 @@
 # Read Cash Proffer Report data from .pdf into data.table
+# TODO: import amounts from all pdf reports
 
 rm(list = ls())
 
@@ -7,31 +8,43 @@ setwd(dir)
 
 pacman::p_load(data.table, pdftools, readxl) # tabulizer
 
+DATA_PATH <- "data/DHCD Cash Proffer Reports/FY22-Tables.xlsx"
+
+YEAR_MIN <- 2000
+YEAR_MAX <- 2021
+  
 # Import cash proffer eligibility and amounts ----
 
 # * Option 1: Use Excel to import tables first, then read into R and clean ----
-l.files <- list.files("data/DHCD Cash Proffer Reports/", pattern = "*.xlsx", full.names = TRUE)
+# l.files <- list.files("data/DHCD Cash Proffer Reports/", pattern = "*.xlsx", full.names = TRUE)
 
-dt <- as.data.table(read_xlsx(l.files[1], sheet = "Table008 (Page 13)", skip = 1, col_names = FALSE))
+l.sheets <- as.list(excel_sheets(DATA_PATH))
+dt <- rbindlist(lapply(l.sheets, function(x) read_excel(DATA_PATH, sheet = x)), use.names = FALSE)
 
-dt.1 <- dt[, paste0("...", 1:4)]
-dt.2 <- dt[, paste0("...", 5:8)]
+dt.1 <- dt[, paste0("Column", 1:4)]
+dt.2 <- dt[, paste0("Column", c(5,7,8,9))]
 
-setnames(dt.1, new = c("Jurisdiction", "y2000", "y2010", "y2020"))
-setnames(dt.2, new = c("Jurisdiction", "y2000", "y2010", "y2020"))
+setnames(dt.1, new = c("Jurisdiction", "2000", "2010", "2020"))
+setnames(dt.2, new = c("Jurisdiction", "2000", "2010", "2020"))
 
 dt <- rbindlist(list(dt.1, dt.2))
 
-dt[grepl(Jurisdiction, "CITIES",), type := 1]
-dt[grepl(Jurisdiction, "COUNTIES"), type := 2] 
-dt[grepl(Jurisdiction, "TOWNS"), type := 3]
+dt[grepl("CITIES", Jurisdiction), type := 1]
+dt[grepl("COUNTIES", Jurisdiction), type := 2] 
+dt[grepl("TOWNS", Jurisdiction), type := 3]
+dt[, type := nafill(type, type = "locf")]
 
+dt <- dt[`2000` != "2000"]
 
-# * Option 2: Use pdftools to extract text and then parse manually ----
-l.files <- list.files("data/DHCD Cash Proffer Reports/", pattern = "*.pdf")
-l.files <- paste0("data/DHCD Cash Proffer Reports/", l.files)
+dt.l <- melt(dt, id.vars = c("Jurisdiction", "type"), variable.name = "Year4", value.name = "Eligible")
+dt.l[, Year4 := as.numeric(as.character(Year4))]
+dt.l[, isEligible := fifelse(is.na(Eligible), 0, 1)]
 
-# dt <- rbindlist(lapply(l.files, pdf_text))
+# Expand data to include intervening years
+dt <- CJ(Year4 = YEAR_MIN:YEAR_MAX, Jurisdiction = unique(dt.l$Jurisdiction))
+dt <- merge(dt, dt.l, by = c("Year4", "Jurisdiction"), all.x = TRUE)
 
-# pdftools
-dt <- data.table(pdf_text(l.files[1]))
+setorder(dt, Jurisdiction, Year4)
+dt[, isEligible := nafill(isEligible, type = "locf")]
+
+saveRDS(dt, paste0("derived/County Eligibility (", YEAR_MIN, "-", YEAR_MAX, ").Rds"))
