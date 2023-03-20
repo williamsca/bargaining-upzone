@@ -34,11 +34,11 @@ dt[grepl("COUNTIES", Jurisdiction), type := 2]
 dt[grepl("TOWNS", Jurisdiction), type := 3]
 dt[, type := nafill(type, type = "locf")]
 
-dt <- dt[`2000` != "2000"]
-
 dt.l <- melt(dt, id.vars = c("Jurisdiction", "type"), variable.name = "Year4", value.name = "Eligible")
 dt.l[, Year4 := as.numeric(as.character(Year4))]
 dt.l[, isEligible := fifelse(is.na(Eligible), 0, 1)]
+
+dt.l <- dt.l[!is.na(Jurisdiction) & !grepl("COUNTIES|CITIES|TOWNS", Jurisdiction)]
 
 # Expand data to include intervening years
 dt <- CJ(Year4 = YEAR_MIN:YEAR_MAX, Jurisdiction = unique(dt.l$Jurisdiction))
