@@ -39,6 +39,8 @@ dt.l[, Year4 := as.numeric(as.character(Year4))]
 dt.l[, isEligible := fifelse(is.na(Eligible), 0, 1)]
 
 dt.l <- dt.l[!is.na(Jurisdiction) & !grepl("COUNTIES|CITIES|TOWNS", Jurisdiction)]
+dt.l[type == 1, Jurisdiction := paste0(Jurisdiction, " City")]
+dt.l[type == 2, Jurisdiction := paste0(Jurisdiction, " County")]
 
 # Expand data to include intervening years
 dt <- CJ(Year4 = YEAR_MIN:YEAR_MAX, Jurisdiction = unique(dt.l$Jurisdiction))
@@ -46,5 +48,6 @@ dt <- merge(dt, dt.l, by = c("Year4", "Jurisdiction"), all.x = TRUE)
 
 setorder(dt, Jurisdiction, Year4)
 dt[, isEligible := nafill(isEligible, type = "locf")]
+dt[, type := nafill(type, type = "locf")]
 
 saveRDS(dt, paste0("derived/County Eligibility (", YEAR_MIN, "-", YEAR_MAX, ").Rds"))
