@@ -13,7 +13,7 @@ dt.elig <- readRDS("derived/County Eligibility (2000-2022).Rds")
 dt.bp <- readRDS("derived/County Residential Building Permits by Month (2000-2021).Rds")
 
 # Prepare regression sample ----
-dt.bp <- dt.bp[FIPS.Code.State %in% c("51")] # filter to VA and MD (24) counties
+dt.bp <- dt.bp[FIPS.Code.State %in% c("51", "24")] # filter to VA and MD (24) counties
 
 dt.bp[Name == "Bedford (Independent City)", `:=`(Name = "Bedford County", FIPS.Code.County = "019")] # Bedford City became a town on July 1, 2013. https://en.wikipedia.org/wiki/Bedford,_Virginia
 dt.bp[Name == "Clifton Forge (Independent Cit",  `:=`(Name = "Alleghany County", FIPS.Code.County = "005")] # Clifton Forge became a town in 2001. https://en.wikipedia.org/wiki/Clifton_Forge,_Virginia
