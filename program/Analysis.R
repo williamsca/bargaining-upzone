@@ -23,9 +23,14 @@ v.collected2016 <- c(paste0(v.collected2016, " County"), "Charlottesville City",
                      "Chesapeake City", "Fairfax City", "Fredericksburg City",
                      "Manassas City", "Manassas Park City", "Suffolk City")
 
-dt[, treated := (Name %in% v.collected2016)]
+v.collected2016m <- c("Albemarle County", "Chesterfield County", "Fairfax County",
+                      "Frederick County", "Hanover County", "Loudoun County", "Prince William County",
+                      "Spotsylvania County", "Stafford County", "Chesapeake City",
+                      "Manassas Park City")
 
-dt[, avgPermits1 := mean(Units1), by = .(Name)]
+dt[FIPS.Code.State == "51", treated := (Name %in% v.collected2016m)]
+
+dt[, avgPermits1 := mean(Units1), by = .(FIPS.Code.State, Name)]
 dt[FIPS.Code.State == "24", treated := (avgPermits1 >= 30)] # high-growth counties in MD
 
 ggplot(data = dt[FIPS.Code.State == "51"], mapping = aes(x = Units1, color = treated)) +
@@ -51,13 +56,13 @@ stargazer(dt[FIPS.Code.State == "24"], summary = TRUE, keep = c("isEligible", "U
 # Diff-in-Diff using 2016 reform ----
 
 # * Graphical analysis ----
-feols <- feols(arcsinh(Value1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + Name, cluster = "Name", data = dt)
+feols <- feols(log(Units1+1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
+                 Date + Name, cluster = "Name", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
 etable(feols)
 iplot(feols, lab.fit = "simple")
 
 # Triple-diff using MD high-growth counties as comparison ----
-feols.trip <- feols(arcsinh(Units1) ~ -1 + as.factor(Date)*treated*FIPS.Code.State |
+feols.trip <- feols(Units1 ~ -1 + as.factor(Date)*treated*FIPS.Code.State |
                       Name, data = dt, cluster = "Name")
 etable(feols.trip)
 
