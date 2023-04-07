@@ -18,7 +18,7 @@ dt.l <- melt(dt, id.vars = c("RegionName", "RegionType", "State", "StateCodeFIPS
                              "MunicipalCodeFIPS"), measure.vars = v.measure,
              variable.name = "Date", value.name = "ZHVI")
 
-dt.l[, Date := ymd(Date) + 1]
+dt.l[, Date := ymd(Date) + 1][, FIPS := StateCodeFIPS * 1000 + MunicipalCodeFIPS]
 
 saveRDS(dt.l, file = "derived/Housing Price Index (Zillow).Rds")
 

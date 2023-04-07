@@ -11,6 +11,7 @@ pacman::p_load(data.table, lubridate)
 
 dt.elig <- readRDS("derived/County Eligibility (2000-2022).Rds")
 dt.bp <- readRDS("derived/County Residential Building Permits by Month (2000-2021).Rds")
+dt.zhvi <- readRDS("derived/Housing Price Index (Zillow).Rds")
 
 # Prepare regression sample ----
 dt.bp <- dt.bp[FIPS.Code.State %in% c("51", "24")] # filter to VA and MD (24) counties
@@ -29,9 +30,14 @@ dt.bp[, FY := Year4 + fifelse(Month >= 7, 1, 0)] # The VA fiscal year runs from 
 # Note: some proffer-collecting jurisdictions are not covered in the county building permits survey
 dt <- merge(dt.bp, dt.elig, by.x = c("Name", "FY"), by.y = c("Jurisdiction", "FY"), all.x = TRUE)
 
-dt[, Date := make_date(year = Year4, month = Month)]
+dt[, Date := make_date(year = Year4, month = Month)][, FIPS := as.numeric(FIPS.Code.State)*1000 + as.numeric(FIPS.Code.County)]
+
+dt <- merge(dt, dt.zhvi[, .(Date, FIPS, ZHVI, RegionName)], by = c("Date", "FIPS"), all.x = TRUE)
 
 # Sanity checks ----
+nrow(dt[RegionName != Name]) == 0 # TRUE --> merge of ZHVI is consistent with data
+dt$RegionName <- NULL
+
 nrow(dt[FIPS.Code.State == "51" & is.na(isEligible)]) == 0 # TRUE --> every VA county has a known eligibility status (FALSE b/c missing pre-2002 eligibility)
 nrow(dt[is.na(isEligible) & FY >= 2002]) == 0 # TRUE --> every VA county has known eligibility post-2002
 

@@ -57,9 +57,14 @@ stargazer(dt[FIPS.Code.State == "24"], summary = TRUE, keep = c("isEligible", "U
 
 # * Graphical analysis ----
 feols <- feols(log(Units1+1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + Name, cluster = "Name", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
+                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
 etable(feols)
 iplot(feols, lab.fit = "simple")
+
+feols.zhvi <- feols(ZHVI ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
+                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
+etable(feols)
+iplot(feols.zhvi, lab.fit = "simple")
 
 # Triple-diff using MD high-growth counties as comparison ----
 feols.trip <- feols(Units1 ~ -1 + as.factor(Date)*treated*FIPS.Code.State |
