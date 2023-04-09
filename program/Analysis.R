@@ -56,13 +56,17 @@ stargazer(dt[FIPS.Code.State == "24"], summary = TRUE, keep = c("isEligible", "U
 # Diff-in-Diff using 2016 reform ----
 
 # * Graphical analysis ----
-feols <- feols(log(Units1+1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
+feols <- feols(arcsinh(Units1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
+                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", 
+               data = dt[FIPS.Code.State == "51" & Year4 <= 2019])
 etable(feols)
-iplot(feols, lab.fit = "simple")
+pdf(file = "results/eventstudy_units1.pdf")
+iplot(feols, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
+dev.off()
 
-feols.zhvi <- feols(ZHVI ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
+feols.zhvi <- feols(log(ZHVI) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
+                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", 
+                 data = dt[FIPS.Code.State == "51" & Year4 <= 2019])
 etable(feols)
 iplot(feols.zhvi, lab.fit = "simple")
 
