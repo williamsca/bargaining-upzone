@@ -14,7 +14,7 @@ dt.bp <- readRDS("derived/County Residential Building Permits by Month (2000-202
 dt.zhvi <- readRDS("derived/Housing Price Index (Zillow).Rds")
 
 # Prepare regression sample ----
-dt.bp <- dt.bp[FIPS.Code.State %in% c("51", "24")] # filter to VA and MD (24) counties
+# dt.bp <- dt.bp[FIPS.Code.State %in% c("51", "24")] # filter to VA and MD (24) counties
 
 dt.bp[Name == "Bedford (Independent City)", `:=`(Name = "Bedford County", FIPS.Code.County = "019")] # Bedford City became a town on July 1, 2013. https://en.wikipedia.org/wiki/Bedford,_Virginia
 dt.bp[Name == "Clifton Forge (Independent Cit",  `:=`(Name = "Alleghany County", FIPS.Code.County = "005")] # Clifton Forge became a town in 2001. https://en.wikipedia.org/wiki/Clifton_Forge,_Virginia
@@ -39,6 +39,6 @@ nrow(dt[RegionName != Name]) == 0 # TRUE --> merge of ZHVI is consistent with da
 dt$RegionName <- NULL
 
 nrow(dt[FIPS.Code.State == "51" & is.na(isEligible)]) == 0 # TRUE --> every VA county has a known eligibility status (FALSE b/c missing pre-2002 eligibility)
-nrow(dt[is.na(isEligible) & FY >= 2002]) == 0 # TRUE --> every VA county has known eligibility post-2002
+nrow(dt[FIPS.Code.State == "51" & is.na(isEligible) & FY >= 2002]) == 0 # TRUE --> every VA county has known eligibility post-2002
 
 saveRDS(dt, "derived/Regression Sample.Rds")

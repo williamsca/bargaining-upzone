@@ -7,11 +7,16 @@ rm(list = ls())
 dir <- dirname(dirname(rstudioapi::getSourceEditorContext()$path))
 setwd(dir)
 
-pacman::p_load(data.table, stargazer, ggplot2, fixest) 
+pacman::p_load(data.table, stargazer, ggplot2, fixest, devtools, lubridate) 
 
 dt <- readRDS("derived/Regression Sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2+1))
+
+# Create treatment indicator ----
+
+dt <- dt[!(FIPS.Code.State %in% c("02", "15")) & Year4 %between% c(2000, 2019)] # exclude Alaska and Hawaii
+dt <- unique(dt, by = c("FIPS", "Date", "Units1")) # drop 24 duplicate entries
 
 # Counties and cities that collected >50k in cash proffer revenue in FY2016
 v.collected2016 <- c("Accomack", "Albemarle", "Amelia", "Caroline", "Chesterfield", 
@@ -28,48 +33,89 @@ v.collected2016m <- c("Albemarle County", "Chesterfield County", "Fairfax County
                       "Spotsylvania County", "Stafford County", "Chesapeake City",
                       "Manassas Park City")
 
-dt[FIPS.Code.State == "51", treated := (Name %in% v.collected2016m)]
-
-dt[, avgPermits1 := mean(Units1), by = .(FIPS.Code.State, Name)]
-dt[FIPS.Code.State == "24", treated := (avgPermits1 >= 30)] # high-growth counties in MD
-
-ggplot(data = dt[FIPS.Code.State == "51"], mapping = aes(x = Units1, color = treated)) +
-  stat_ecdf()
+dt[, treated := fifelse(Name %in% v.collected2016m & FIPS.Code.State == "51", 1, 0)]
 
 
-# Summary statistics by treatment status ----
 dt[, Units2p := Units2 + 3*`Units3-4` + 5*`Units5+`] # lower bound on multi-family units
 dt[, Value2p := Value2 + `Value3-4` + `Value5+`]
 
-stargazer(dt[FIPS.Code.State == "51" & treated == TRUE], summary = TRUE, 
-          keep = c("Units1", "Value1", "Units2p", "Value2p"),
-          type = "text", digits = 0)
+dt.qtr <- dt[, .(Units1 = sum(Units1), Units2p = sum(Units2p), ZHVI = mean(ZHVI)), 
+               by = .(FIPS, Date = quarter(Date, type = "date_first"), treated)]
 
-stargazer(dt[FIPS.Code.State == "51" & treated == FALSE], summary = TRUE, 
-          keep = c("Units1", "Value1", "Units2p", "Value2p"),
-          type = "text", digits = 0)
-
-stargazer(dt[FIPS.Code.State == "24"], summary = TRUE, keep = c("isEligible", "Units1", "Value1", "Units2p", "Value2p"),
-          type = "text", digits = 0)
-
+# Summary statistics by treatment status ----
+dt.fig1 <- dt[treated == 1 & Units1 <= 400]
+ggplot(dt.fig1, aes(x = Units1)) + 
+  geom_histogram() +
+  scale_x_continuous() +
+  labs(title = "", # Distribution of Bond Elections by Vote Share
+       x = "Construction Permits for One-Unit Housing", y = "Frequency",
+       caption = paste0("N = ", nrow(dt.fig1), "")) +
+  theme_light() + theme(plot.caption = element_text(hjust = 0)) # left-align caption
+# ggsave("", device = "pdf")
 
 # Diff-in-Diff using 2016 reform ----
+RHS <- " ~ -1 + i(Date, treated, ref = \"2016-07-01\") | Date + as.factor(FIPS)"
 
-# * Graphical analysis ----
-feols <- feols(log(Units1+1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
-etable(feols)
-iplot(feols, lab.fit = "simple")
+# Monthly TWFE regression ----
+feols.un1 <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
+                 cluster = "as.factor(FIPS)", data = dt)
+# etable(feols.un1)
+iplot(feols.un1, lab.fit = "simple")
 
-feols.zhvi <- feols(ZHVI ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", data = dt[FIPS.Code.State == "51" & Year4 >= 2012])
-etable(feols)
+feols.zhvi <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
+                 cluster = "as.factor(FIPS)", data = dt)
+# etable(feols)
 iplot(feols.zhvi, lab.fit = "simple")
 
-# Triple-diff using MD high-growth counties as comparison ----
-feols.trip <- feols(Units1 ~ -1 + as.factor(Date)*treated*FIPS.Code.State |
-                      Name, data = dt, cluster = "Name")
-etable(feols.trip)
+
+# Quarterly TWFE regression ----
+feols.un1_qtr <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
+                 cluster = "as.factor(FIPS)", data = dt.qtr)
+# etable(feols.un1_qtr)
+iplot(feols.un1_qtr, lab.fit = "simple")
+
+feols.zhvi_qtr <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
+                 cluster = "as.factor(FIPS)", data = dt.qtr)
+# etable(feols.un1_qtr)
+iplot(feols.zhvi_qtr, lab.fit = "simple")
+
+
+# Synthetic Diff-in-Diff (Arkhangelsky et al (2019) ----
+devtools::install_github("synth-inference/synthdid")
+library(synthdid)
+
+dt.synthdid <- dt.qtr[Date <= as.Date("2016-06-01"), treated := 0] # redefine treatment indicator for synthdid
+
+dt.synthdid <- dt.synthdid[Date %between% c(as.Date("2005-01-01"), as.Date("2019-06-01")), 
+                           .(FIPS = as.factor(FIPS), Date, 
+                             arcsinhUnits1 = arcsinh(Units1), 
+                             lnZHVI = log(ZHVI), treated)]
+
+RunSynthDid <- function(dt, LHS) {
+  setup <- panel.matrices(dt, unit = "FIPS", time = "Date", 
+                          outcome = LHS, treatment = "treated")
+  return(synthdid_estimate(setup$Y, setup$N0, setup$T0))
+}
+
+# Quantities
+dt.synthdid[, nObs := sum(!is.na(arcsinhUnits1)), by = .(FIPS)]
+
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "arcsinhUnits1")
+plot(tau.hat, se.method = "jackknife")
+
+se <- sqrt(vcov(tau.hat, method = "bootstrap")) # this should be a bootstrap
+sprintf("Point estimate: %1.2f", tau.hat)
+sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
+
+# Prices
+dt.synthdid[, nObs := sum(!is.na(lnZHVI)), by = .(FIPS)]
+
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "lnZHVI")
+plot(tau.hat, se.method = "jackknife")
+
+se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
+sprintf("Point estimate: %1.2f", tau.hat)
+sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
 
 
 
