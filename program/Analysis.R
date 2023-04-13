@@ -56,6 +56,7 @@ ggplot(dt.fig1, aes(x = Units1)) +
 # Diff-in-Diff using 2016 reform ----
 RHS <- " ~ -1 + i(Date, treated, ref = \"2016-07-01\") | Date + as.factor(FIPS)"
 
+<<<<<<< HEAD
 # Monthly TWFE regression ----
 feols.un1 <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt)
@@ -65,6 +66,21 @@ iplot(feols.un1, lab.fit = "simple")
 feols.zhvi <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt)
 # etable(feols)
+=======
+# * Graphical analysis ----
+feols <- feols(arcsinh(Units1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
+                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", 
+               data = dt[FIPS.Code.State == "51" & Year4 <= 2019])
+etable(feols)
+pdf(file = "results/eventstudy_units1.pdf")
+iplot(feols, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
+dev.off()
+
+feols.zhvi <- feols(log(ZHVI) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
+                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", 
+                 data = dt[FIPS.Code.State == "51" & Year4 <= 2019])
+etable(feols)
+>>>>>>> c033dd582608428c569a615a646a13dbebd515b7
 iplot(feols.zhvi, lab.fit = "simple")
 
 
