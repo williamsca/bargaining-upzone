@@ -33,56 +33,42 @@ v.collected2016m <- c("Albemarle County", "Chesterfield County", "Fairfax County
                       "Spotsylvania County", "Stafford County", "Chesapeake City",
                       "Manassas Park City")
 
-dt[, treated := fifelse(Name %in% v.collected2016m & FIPS.Code.State == "51", 1, 0)]
+dt[, everTreated := fifelse(Name %in% v.collected2016m & FIPS.Code.State == "51", 1, 0)]
 
 
 dt[, Units2p := Units2 + 3*`Units3-4` + 5*`Units5+`] # lower bound on multi-family units
 dt[, Value2p := Value2 + `Value3-4` + `Value5+`]
 
 dt.qtr <- dt[, .(Units1 = sum(Units1), Units2p = sum(Units2p), ZHVI = mean(ZHVI)), 
-               by = .(FIPS, Date = quarter(Date, type = "date_first"), treated)]
+               by = .(FIPS, Date = quarter(Date, type = "date_first"), everTreated)]
 
 # Summary statistics by treatment status ----
-dt.fig1 <- dt[treated == 1 & Units1 <= 400]
+dt.fig1 <- dt[everTreated == 1 & Units1 <= 400]
 ggplot(dt.fig1, aes(x = Units1)) + 
   geom_histogram() +
   scale_x_continuous() +
-  labs(title = "", # Distribution of Bond Elections by Vote Share
-       x = "Construction Permits for One-Unit Housing", y = "Frequency",
-       caption = paste0("N = ", nrow(dt.fig1), "")) +
+  labs(title = "Distribution of Monthly Building Permits: Treated Counties", 
+       subtitle = paste0(min(year(dt.fig1$Date)), " - ", max(year(dt.fig1$Date))),
+       x = "Single-Unit Permits", y = "Frequency",
+       caption = paste0("Permits censored at ", max(dt.fig1$Units1), ". N = ", nrow(dt.fig1), "")) +
   theme_light() + theme(plot.caption = element_text(hjust = 0)) # left-align caption
 # ggsave("", device = "pdf")
 
 # Diff-in-Diff using 2016 reform ----
-RHS <- " ~ -1 + i(Date, treated, ref = \"2016-07-01\") | Date + as.factor(FIPS)"
+RHS <- " ~ -1 + i(Date, everTreated, ref = \"2016-06-01\") | Date + as.factor(FIPS)"
 
-<<<<<<< HEAD
 # Monthly TWFE regression ----
 feols.un1 <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
-                 cluster = "as.factor(FIPS)", data = dt)
+                 cluster = "as.factor(FIPS)", data = dt[year(Date) >= 2010])
 # etable(feols.un1)
-iplot(feols.un1, lab.fit = "simple")
+# pdf(file = "results/eventstudy_units1.pdf")
+iplot(feols.un1, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
+# dev.off()
 
 feols.zhvi <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt)
-# etable(feols)
-=======
-# * Graphical analysis ----
-feols <- feols(arcsinh(Units1) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", 
-               data = dt[FIPS.Code.State == "51" & Year4 <= 2019])
-etable(feols)
-pdf(file = "results/eventstudy_units1.pdf")
-iplot(feols, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
-dev.off()
-
-feols.zhvi <- feols(log(ZHVI) ~ -1 + i(Date, treated, ref = as.Date("2016-06-01")) |
-                 Date + as.factor(FIPS), cluster = "as.factor(FIPS)", 
-                 data = dt[FIPS.Code.State == "51" & Year4 <= 2019])
-etable(feols)
->>>>>>> c033dd582608428c569a615a646a13dbebd515b7
+# etable(feols.zhvi)
 iplot(feols.zhvi, lab.fit = "simple")
-
 
 # Quarterly TWFE regression ----
 feols.un1_qtr <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
@@ -100,30 +86,32 @@ iplot(feols.zhvi_qtr, lab.fit = "simple")
 devtools::install_github("synth-inference/synthdid")
 library(synthdid)
 
-dt.synthdid <- dt.qtr[Date <= as.Date("2016-06-01"), treated := 0] # redefine treatment indicator for synthdid
+dt.synthdid <- dt.qtr[Date <= as.Date("2016-06-01"), isTreated := 0] # redefine treatment indicator for synthdid
+dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
-dt.synthdid <- dt.synthdid[Date %between% c(as.Date("2005-01-01"), as.Date("2019-06-01")), 
-                           .(FIPS = as.factor(FIPS), Date, 
+dt.synthdid <- dt.synthdid[Date %between% c(as.Date("2010-01-01"), as.Date("2019-06-01")), 
+                           .(FIPS = as.factor(FIPS), Date, Units1,
                              arcsinhUnits1 = arcsinh(Units1), 
-                             lnZHVI = log(ZHVI), treated)]
+                             lnZHVI = log(ZHVI), isTreated)]
 
 RunSynthDid <- function(dt, LHS) {
   setup <- panel.matrices(dt, unit = "FIPS", time = "Date", 
-                          outcome = LHS, treatment = "treated")
+                          outcome = LHS, treatment = "isTreated")
   return(synthdid_estimate(setup$Y, setup$N0, setup$T0))
 }
 
-# Quantities
+# * Quantities ----
 dt.synthdid[, nObs := sum(!is.na(arcsinhUnits1)), by = .(FIPS)]
+# dt.synthdid[, nObs := sum(!is.na(Units1)), by = .(FIPS)]
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "arcsinhUnits1")
-plot(tau.hat, se.method = "jackknife")
+plot(tau.hat, se.method = "jackknife", overlay = 1)
 
-se <- sqrt(vcov(tau.hat, method = "bootstrap")) # this should be a bootstrap
+se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
 
-# Prices
+# * Prices ----
 dt.synthdid[, nObs := sum(!is.na(lnZHVI)), by = .(FIPS)]
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "lnZHVI")
