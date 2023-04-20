@@ -1,3 +1,7 @@
+# Geodatabase files
+data/Virginia_Parcel_Dataset_LocalSchemas_2023Q1.gdb/
+data/Virginia_Parcel_Dataset_2023Q1.gdb/
+
 # History files
 .Rhistory
 .Rapp.history
