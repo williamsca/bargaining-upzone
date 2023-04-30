@@ -105,11 +105,17 @@ dt.synthdid[, nObs := sum(!is.na(arcsinhUnits1)), by = .(FIPS)]
 # dt.synthdid[, nObs := sum(!is.na(Units1)), by = .(FIPS)]
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "arcsinhUnits1")
-plot(tau.hat, se.method = "jackknife", overlay = 1)
 
-se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
+plot(tau.hat, se.method = "jackknife", overlay = 1)
+ggsave("paper/figures/20230430synthdid_overlay.pdf", device = "pdf")
+
+plot(tau.hat, se.method = "jackknife")
+ggsave("paper/figures/20230430synthdid.pdf", device = "pdf")
+
+se <- sqrt(vcov(tau.hat, method = "bootstrap")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
+sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64*se, tau.hat + 1.64*se)
 
 # * Prices ----
 dt.synthdid[, nObs := sum(!is.na(lnZHVI)), by = .(FIPS)]
