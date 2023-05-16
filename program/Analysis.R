@@ -15,7 +15,7 @@ arcsinh <- function(x) log(x + sqrt(x^2+1))
 
 # Create treatment indicator ----
 
-dt <- dt[!(FIPS.Code.State %in% c("02", "15")) & Year4 %between% c(2000, 2019)] # exclude Alaska and Hawaii
+dt <- dt[!(FIPS.Code.State %in% c("02", "15")) & Year4 %between% c(2000, 2022)] # exclude Alaska and Hawaii
 dt <- unique(dt, by = c("FIPS", "Date", "Units1")) # drop 24 duplicate entries
 
 # Counties and cities that collected >50k in cash proffer revenue in FY2016
@@ -55,7 +55,7 @@ ggplot(dt.fig1, aes(x = Units1)) +
 # ggsave("", device = "pdf")
 
 # Diff-in-Diff using 2016 reform ----
-RHS <- " ~ -1 + i(Date, everTreated, ref = \"2016-06-01\") | Date + as.factor(FIPS)"
+RHS <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | Date + as.factor(FIPS)"
 
 # Monthly TWFE regression ----
 feols.un1 <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
@@ -73,8 +73,14 @@ iplot(feols.zhvi, lab.fit = "simple")
 # Quarterly TWFE regression ----
 feols.un1_qtr <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt.qtr)
-# etable(feols.un1_qtr)
 iplot(feols.un1_qtr, lab.fit = "simple")
+# etable(feols.un1_qtr)
+
+fepois.un1_qtr <- feglm(as.formula(paste0("Units1", RHS)), 
+                 cluster = "as.factor(FIPS)", data = dt.qtr[year(Date) %between% c(2010, 2019)], 
+                 family = "quasipoisson")
+iplot(fepois.un1_qtr, lab.fit = "simple")
+
 
 feols.zhvi_qtr <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt.qtr)
