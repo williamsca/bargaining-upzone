@@ -9,38 +9,22 @@ setwd(dir)
 
 pacman::p_load(data.table, stargazer, ggplot2, fixest, devtools, lubridate) 
 
-dt <- readRDS("derived/Regression Sample.Rds")
+dt <- readRDS("derived/Sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2+1))
 
-# Create treatment indicator ----
+# Create indicators ----
+dt[FY == 2016, everTreated := fifelse(`Cash Proffer Revenue` > 0, 1, 0)]
+dt[is.na(everTreated), everTreated := 0]
+dt[, everTreated := max(everTreated), by = FIPS]
 
-dt <- dt[!(FIPS.Code.State %in% c("02", "15")) & Year4 %between% c(2000, 2022)] # exclude Alaska and Hawaii
-dt <- unique(dt, by = c("FIPS", "Date", "Units1")) # drop 24 duplicate entries
-
-# Counties and cities that collected >50k in cash proffer revenue in FY2016
-v.collected2016 <- c("Accomack", "Albemarle", "Amelia", "Caroline", "Chesterfield", 
-                     "Fairfax", "Fauquier", "Frederick", "Gloucester", "Goochland", 
-                     "Hanover", "Isle of Wight", "James City", "King William",
-                     "Loudoun", "New Kent", "Powhatan", "Prince William",
-                     "Rockingham", "Spotsylvania", "Stafford", "Warren", "York")
-v.collected2016 <- c(paste0(v.collected2016, " County"), "Charlottesville City",
-                     "Chesapeake City", "Fairfax City", "Fredericksburg City",
-                     "Manassas City", "Manassas Park City", "Suffolk City")
-
-v.collected2016m <- c("Albemarle County", "Chesterfield County", "Fairfax County",
-                      "Frederick County", "Hanover County", "Loudoun County", "Prince William County",
-                      "Spotsylvania County", "Stafford County", "Chesapeake City",
-                      "Manassas Park City")
-
-dt[, everTreated := fifelse(Name %in% v.collected2016m & FIPS.Code.State == "51", 1, 0)]
-
+dt[, Post := fifelse(Date >= as.Date("2017-01-01"), 1, 0)]
 
 dt[, Units2p := Units2 + 3*`Units3-4` + 5*`Units5+`] # lower bound on multi-family units
-dt[, Value2p := Value2 + `Value3-4` + `Value5+`]
 
 dt.qtr <- dt[, .(Units1 = sum(Units1), Units2p = sum(Units2p), ZHVI = mean(ZHVI)), 
-               by = .(FIPS, Date = quarter(Date, type = "date_first"), everTreated)]
+               by = .(FIPS, Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`, everTreated, Post)]
+nrow(dt.qtr) == uniqueN(dt.qtr[, .(FIPS, Date)]) # TRUE --> data are unique on FIPS and quarter
 
 # Summary statistics by treatment status ----
 dt.fig1 <- dt[everTreated == 1 & Units1 <= 400]
@@ -54,27 +38,46 @@ ggplot(dt.fig1, aes(x = Units1)) +
   theme_light() + theme(plot.caption = element_text(hjust = 0)) # left-align caption
 # ggsave("", device = "pdf")
 
-# Diff-in-Diff using 2016 reform ----
+# DiD ----
+RHS_DID <- " ~ -1 + Post*everTreated | as.factor(Date) + as.factor(FIPS)"
+RHS_DID_CONT <- " ~ -1 + Post*Intensity | as.factor(Date) + as.factor(FIPS)"
+
+fmla.dd <- as.formula(paste0("Units1", RHS_DID))
+fmla.dd_cont <- as.formula(paste0("Units1",RHS_DID_CONT))
+
+# * Monthly ----
+# ** Binary Treatment ----
+fepois.did <- feglm(fmla.dd, cluster = "as.factor(FIPS)", data = dt[FY %between% c(2010, 2019)],
+                    family = "quasipoisson")
+etable(fepois.did)
+
+# ** Continuous Treatment ----
+fepois.did <- feglm(fmla.dd_cont, cluster = "as.factor(FIPS)", data = dt[FY %between% c(2010, 2019)],
+                    family = "quasipoisson")
+etable(fepois.did)
+
+
+# Event Study ----
 RHS <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | Date + as.factor(FIPS)"
 
-# Monthly TWFE regression ----
+# * Monthly ----
 feols.un1 <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt[year(Date) >= 2010])
-# etable(feols.un1)
-# pdf(file = "results/eventstudy_units1.pdf")
+etable(feols.un1)
+pdf(file = "results/eventstudy_units1.pdf")
 iplot(feols.un1, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
-# dev.off()
+dev.off()
 
 feols.zhvi <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt)
-# etable(feols.zhvi)
+etable(feols.zhvi)
 iplot(feols.zhvi, lab.fit = "simple")
 
-# Quarterly TWFE regression ----
+# Quarterly ----
 feols.un1_qtr <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt.qtr)
 iplot(feols.un1_qtr, lab.fit = "simple")
-# etable(feols.un1_qtr)
+etable(feols.un1_qtr)
 
 fepois.un1_qtr <- feglm(as.formula(paste0("Units1", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt.qtr[year(Date) %between% c(2010, 2019)], 
@@ -133,5 +136,4 @@ se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
 
-
-
+# Superseded ----

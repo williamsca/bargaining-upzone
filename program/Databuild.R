@@ -29,6 +29,7 @@ dt.bp[, FY := Year4 + fifelse(Month >= 7, 1, 0)] # The VA fiscal year runs from 
 
 # Note: some proffer-collecting jurisdictions are not covered in the county building permits survey
 dt <- merge(dt.bp, dt.cp, by.x = c("Name", "FY"), by.y = c("Jurisdiction", "Year"), all.x = TRUE)
+dt[is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
 
 dt[, Date := make_date(year = Year4, month = Month)][, FIPS := as.numeric(FIPS.Code.State)*1000 + as.numeric(FIPS.Code.County)]
 dt <- merge(dt, dt.zhvi[, .(Date, FIPS, ZHVI, RegionName)], by = c("Date", "FIPS"), all.x = TRUE)
@@ -37,21 +38,28 @@ nrow(dt[RegionName != Name]) == 0 # TRUE --> merge of ZHVI is consistent with da
 dt$RegionName <- NULL
 
 # Treatment Intensity ----
-# Cash proffer revenues per housing unit and value
-dt.VA <- dt[FIPS.Code.State %in% c("51")] # filter to VA and MD (24) counties
-dt.VA <- dt.VA[, .(UnitsLB = sum(Units1 + 2*Units2 + 3*`Units3-4` + 5*`Units5+`),
-                       Value = sum(Value1 + Value2 + `Value3-4` + `Value5+`),
-                       Units1 = sum(Units1)),
-                   by = .(FY, FIPS.Code.State, FIPS.Code.County, Name, `Cash Proffer Revenue`)]
+# Cash proffer revenues per housing value before treatment
+YEAR_RANGE <- c(2010, 2016)
+dt.VA <- dt[FIPS.Code.State %in% c("51") & FY %between% YEAR_RANGE] # filter to VA and MD (24) counties
+dt.VA[, Value := as.numeric(Value1 + Value2 + `Value3-4` + `Value5+`)]
+dt.VA <- dt.VA[, .(Value = sum(Value), `Cash Proffer Revenue` = sum(`Cash Proffer Revenue`), # UnitsLB = sum(Units1 + 2*Units2 + 3*`Units3-4` + 5*`Units5+`),
+                   Units1 = sum(Units1)), 
+                   by = .(POST = ifelse(FY >= 2017, 1, 0), FIPS.Code.State, FIPS.Code.County, Name)]
 
 # Impute zeros
-dt.VA[FY %between% c(2004, 2022) & is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
+dt.VA[is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
 
+dt.VA[, Intensity := `Cash Proffer Revenue` / Value]
 
+dt <- merge(dt, dt.VA[POST == 0, .(FIPS.Code.State, FIPS.Code.County, Name, Intensity)],
+            by = c("FIPS.Code.State", "FIPS.Code.County", "Name"), all.x = TRUE)
+dt[is.na(Intensity), Intensity := 0]
 
+# Filter ----
+dt <- dt[!(FIPS.Code.State %in% c("02", "15"))] # exclude Alaska and Hawaii
+dt <- unique(dt, by = c("FIPS", "Date", "Units1")) # drop 24 duplicate entries
 
+# Sanity Checks ----
+nrow(dt) == uniqueN(dt[, .(Date, FIPS)])
 
-
-# Sanity checks ----
-
-saveRDS(dt, "derived/Regression Sample.Rds")
+saveRDS(dt, "derived/Sample.Rds")
