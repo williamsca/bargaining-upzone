@@ -13,8 +13,8 @@ dt <- readRDS("derived/Sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2+1))
 
-# Create indicators ----
-dt[FY == 2016, everTreated := fifelse(`Cash Proffer Revenue` > 0, 1, 0)]
+# Treatment indicators ----
+dt[FY == 2016, everTreated := fifelse(Intensity > 0.1, 1, 0)]
 dt[is.na(everTreated), everTreated := 0]
 dt[, everTreated := max(everTreated), by = FIPS]
 
@@ -23,7 +23,8 @@ dt[, Post := fifelse(Date >= as.Date("2017-01-01"), 1, 0)]
 dt[, Units2p := Units2 + 3*`Units3-4` + 5*`Units5+`] # lower bound on multi-family units
 
 dt.qtr <- dt[, .(Units1 = sum(Units1), Units2p = sum(Units2p), ZHVI = mean(ZHVI)), 
-               by = .(FIPS, Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`, everTreated, Post)]
+               by = .(FIPS, Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`, 
+                      everTreated, Post, FY, Intensity)]
 nrow(dt.qtr) == uniqueN(dt.qtr[, .(FIPS, Date)]) # TRUE --> data are unique on FIPS and quarter
 
 # Summary statistics by treatment status ----
@@ -56,16 +57,31 @@ fepois.did <- feglm(fmla.dd_cont, cluster = "as.factor(FIPS)", data = dt[FY %bet
                     family = "quasipoisson")
 etable(fepois.did)
 
+# Quarterly ----
+# (Nearly identical to monthly results)
+# ** Binary Treatment ----
+fepois.did <- feglm(fmla.dd, cluster = "as.factor(FIPS)", data = dt.qtr[FY %between% c(2010, 2019)],
+                    family = "quasipoisson")
+etable(fepois.did)
+
+# ** Continuous Treatment ----
+fepois.did <- feglm(fmla.dd_cont, cluster = "as.factor(FIPS)", data = dt.qtr[FY %between% c(2010, 2019)],
+                    family = "quasipoisson")
+etable(fepois.did)
+
+
 
 # Event Study ----
-RHS <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | Date + as.factor(FIPS)"
+RHS_ES <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | as.factor(Date) + as.factor(FIPS)"
+fmla.es <- as.formula(paste0("Units1", RHS_ES))
 
 # * Monthly ----
-feols.un1 <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
-                 cluster = "as.factor(FIPS)", data = dt[year(Date) >= 2010])
-etable(feols.un1)
+fepois.es <- feglm(fmla.es, cluster = "as.factor(FIPS)", data = dt[FY %between% c(2010, 2019)],
+                   family = "quasipoisson")
+etable(fepois.es)
+
 pdf(file = "results/eventstudy_units1.pdf")
-iplot(feols.un1, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
+iplot(fepois.es, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
 dev.off()
 
 feols.zhvi <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
@@ -74,15 +90,11 @@ etable(feols.zhvi)
 iplot(feols.zhvi, lab.fit = "simple")
 
 # Quarterly ----
-feols.un1_qtr <- feols(as.formula(paste0("arcsinh(Units1)", RHS)), 
-                 cluster = "as.factor(FIPS)", data = dt.qtr)
-iplot(feols.un1_qtr, lab.fit = "simple")
-etable(feols.un1_qtr)
+fepois.es <- feglm(fmla.es, cluster = "as.factor(FIPS)", data = dt.qtr[FY %between% c(2010, 2019)],
+                   family = "quasipoisson")
+etable(fepois.es)
 
-fepois.un1_qtr <- feglm(as.formula(paste0("Units1", RHS)), 
-                 cluster = "as.factor(FIPS)", data = dt.qtr[year(Date) %between% c(2010, 2019)], 
-                 family = "quasipoisson")
-iplot(fepois.un1_qtr, lab.fit = "simple")
+iplot(fepois.es, lab.fit = "simple")
 
 
 feols.zhvi_qtr <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
@@ -98,9 +110,10 @@ library(synthdid)
 dt.synthdid <- dt.qtr[Date <= as.Date("2016-06-01"), isTreated := 0] # redefine treatment indicator for synthdid
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
-dt.synthdid <- dt.synthdid[Date %between% c(as.Date("2010-01-01"), as.Date("2019-06-01")), 
+dt.synthdid <- dt.synthdid[Date %between% c(as.Date("2010-01-01"), as.Date("2020-01-01")), 
                            .(FIPS = as.factor(FIPS), Date, Units1,
                              arcsinhUnits1 = arcsinh(Units1), 
+                             logUnits1 = log(Units1),
                              lnZHVI = log(ZHVI), isTreated)]
 
 RunSynthDid <- function(dt, LHS) {
@@ -110,18 +123,18 @@ RunSynthDid <- function(dt, LHS) {
 }
 
 # * Quantities ----
-dt.synthdid[, nObs := sum(!is.na(arcsinhUnits1)), by = .(FIPS)]
+dt.synthdid[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
 # dt.synthdid[, nObs := sum(!is.na(Units1)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "arcsinhUnits1")
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
 
-plot(tau.hat, se.method = "jackknife", overlay = 1)
+plot(tau.hat, se.method = "jackknife", overlay = 0)
 ggsave("paper/figures/20230430synthdid_overlay.pdf", device = "pdf")
 
 plot(tau.hat, se.method = "jackknife")
 ggsave("paper/figures/20230430synthdid.pdf", device = "pdf")
 
-se <- sqrt(vcov(tau.hat, method = "bootstrap")) # this should be a bootstrap
+se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
 sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64*se, tau.hat + 1.64*se)

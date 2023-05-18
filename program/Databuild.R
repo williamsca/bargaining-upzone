@@ -28,7 +28,8 @@ dt.bp[, Name := gsub("\\s*\\(.*", " City", Name)]
 dt.bp[, FY := Year4 + fifelse(Month >= 7, 1, 0)] # The VA fiscal year runs from July 1 to June 30
 
 # Note: some proffer-collecting jurisdictions are not covered in the county building permits survey
-dt <- merge(dt.bp, dt.cp, by.x = c("Name", "FY"), by.y = c("Jurisdiction", "Year"), all.x = TRUE)
+dt <- merge(dt.bp, dt.cp[, FIPS.Code.State := "51"], by.x = c("Name", "FY", "FIPS.Code.State"), by.y = c("Jurisdiction", "Year", "FIPS.Code.State"), 
+            all.x = TRUE)
 dt[is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
 
 dt[, Date := make_date(year = Year4, month = Month)][, FIPS := as.numeric(FIPS.Code.State)*1000 + as.numeric(FIPS.Code.County)]
@@ -40,16 +41,17 @@ dt$RegionName <- NULL
 # Treatment Intensity ----
 # Cash proffer revenues per housing value before treatment
 YEAR_RANGE <- c(2010, 2016)
+
 dt.VA <- dt[FIPS.Code.State %in% c("51") & FY %between% YEAR_RANGE] # filter to VA and MD (24) counties
 dt.VA[, Value := as.numeric(Value1 + Value2 + `Value3-4` + `Value5+`)]
 dt.VA <- dt.VA[, .(Value = sum(Value), `Cash Proffer Revenue` = sum(`Cash Proffer Revenue`), # UnitsLB = sum(Units1 + 2*Units2 + 3*`Units3-4` + 5*`Units5+`),
                    Units1 = sum(Units1)), 
                    by = .(POST = ifelse(FY >= 2017, 1, 0), FIPS.Code.State, FIPS.Code.County, Name)]
 
-# Impute zeros
-dt.VA[is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
-
 dt.VA[, Intensity := `Cash Proffer Revenue` / Value]
+# ggplot(dt.VA, aes(x = Intensity)) +
+#   geom_histogram() +
+#   scale_x_continuous(limits = c(-.1, .65))
 
 dt <- merge(dt, dt.VA[POST == 0, .(FIPS.Code.State, FIPS.Code.County, Name, Intensity)],
             by = c("FIPS.Code.State", "FIPS.Code.County", "Name"), all.x = TRUE)
