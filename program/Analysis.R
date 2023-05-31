@@ -72,7 +72,7 @@ etable(fepois.did)
 
 
 # Event Study ----
-RHS_ES <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | i(Date) + i(FIPS)"
+RHS_ES <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | Date + FIPS"
 fmla.es <- as.formula(paste0("Units1", RHS_ES))
 
 # * Monthly ----
