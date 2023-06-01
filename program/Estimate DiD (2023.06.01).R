@@ -1,6 +1,4 @@
-# Regression analysis of cash proffer eligibility on building permits
-# Author: Colin Williams
-# Updated: 24 March 2023
+# Estimate the effect of the 2016 Proffer Reform Act on residential 
 
 rm(list = ls())
 
@@ -26,6 +24,12 @@ dt.qtr <- dt[, .(Units1 = sum(Units1), Units2p = sum(Units2p), ZHVI = mean(ZHVI)
                by = .(FIPS, Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`, 
                       everTreated, Post, FY, Intensity)]
 nrow(dt.qtr) == uniqueN(dt.qtr[, .(FIPS, Date)]) # TRUE --> data are unique on FIPS and quarter
+
+# Cash Proffer Revenues ----
+dt.year <- dt[, .(nUnits1 = sum(Units1), value1 = sum(as.numeric(Value1)), nUnitsAll = sum(Units1 + Units2p)), 
+              by = .(FIPS.Code.State, FIPS.Code.County, Name, FY, `Cash Proffer Revenue`)]
+dt.year[`Cash Proffer Revenue` > 0 & nUnitsAll == 0]
+
 
 # Summary statistics by treatment status ----
 dt.fig1 <- dt[everTreated == 1 & Units1 <= 400]
