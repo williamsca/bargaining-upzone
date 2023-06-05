@@ -14,6 +14,23 @@ Data:
 GIS Data:
 - Parcel boundaries: https://vgin.vdem.virginia.gov/datasets/virginia-parcels/about
 
+## Notes from John McGlennon on 6/5/2023
+Questions:
+In general, how much of a premium do you think local governments put on cash over in-kind proffers? 
+
+There's been a huge increase in the amount of cash proffer revenue collected by VA localities in the last two decades. What's behind this trend, and is it likely to continue?
+
+I understand that the bulk of reported cash proffer revenue comes from single-family residential uses. Is that correct? Do you have a ballpark guess on what fraction of proffer revenue comes from single-family residential, multi-family residential, and commercial development?
+
+Do you have suggestions for how to collect data on individual rezoning negotiations? The DCHD survey has yearly totals, but it would be great to see more detail: the characteristics of the development, the non-cash proffers, the original land use, etc.
+
+I've looked at whether the 2016 Proffer Reform Act had any effect on the number of approved single-family building permits for localities that routinely collected cash proffers. The diff-in-diff estimates are imprecise, but they indicate a ~10% decrease. Does that strike you as plausible?
+
+I appreciate any insight into the political economy of the 2016 reform, the 2019 fix, and what might be next.
+
+More broadly, I'm curious how Virginia conditional zoning policy differs from other states.
+
+
 
 ## Notes from Joe Lerch (VACo Director of Local Govt. Policy) on 4/5/2023
 2016/2019 Reforms:
