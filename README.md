@@ -7,8 +7,8 @@ Diff-in-diff:
 - use a synthetic control based on all other US counties (not just VA)
 
 Data:
-- Download parcel boundaries + local schema tables and read into R (https://vgin.vdem.virginia.gov/pages/cl-data-download)
-- If necessary, look county-by-county for zoning data (e.g., https://www.albemarle.org/government/information-technology/geographic-information-system-gis-mapping/gis-data)
+Albemarle County ZMAs: https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle
+
 
 # Data
 GIS Data:
