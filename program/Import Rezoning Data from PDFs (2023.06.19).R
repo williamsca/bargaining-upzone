@@ -1,11 +1,13 @@
 rm(list = ls())
 
-dir <- dirname(dirname(rstudioapi::getSourceEditorContext()$path))
-setwd(dir)
-
-pacman::p_load(data.table, pdftools, httr, openai)
+pacman::p_load(data.table, pdftools, openai, here)
 
 file <- "ZMA201100010 Approval - County 2012-09-25.pdf"
+# Read 'Approval' PDFs as strings
+l_approvals <- list.files(
+    path = "data/Albemarle ZMAs",
+    pattern = "*Approv*", full.names = TRUE, recursive = TRUE
+)
 
 # Sys.setenv(OPENAI_API_KEY = "")
 readRenviron("~/.Renviron") # Reload .Renviron
