@@ -20,6 +20,8 @@ dt <- data.table(
 
 nrow(dt[is.na(File)]) == 0 # TRUE --> paths are all valid
 
+# TODO: issues with date for files ending in "(2).pdf"
+# TODO: sanity checks on dates (within range, etc.)
 dt[, Date := ymd(substr(
     File, regexpr(".pdf", File) - 10,
     regexpr(".pdf", File) - 1
