@@ -1,13 +1,35 @@
 rm(list = ls())
 
-pacman::p_load(data.table, pdftools, openai, here)
+pacman::p_load(data.table, pdftools, openai, here, lubridate)
 
-file <- "ZMA201100010 Approval - County 2012-09-25.pdf"
-# Read 'Approval' PDFs as strings
-l_approvals <- list.files(
+# Read PDFS ----
+l_files <- list.files(
     path = "data/Albemarle ZMAs",
-    pattern = "*Approv*", full.names = TRUE, recursive = TRUE
+    pattern = "*.pdf", full.names = TRUE, recursive = TRUE
 )
+
+# extract the text between the second and third '/' in each file path
+c_zmas <- sapply(strsplit(l_files, "/"), "[", 4)
+c_names <- sapply(strsplit(l_files, "/"), "[", 5)
+
+dt <- data.table(
+    ZMA = c_zmas,
+    Paths = l_files,
+    File = c_names
+)
+
+nrow(dt[is.na(File)]) == 0 # TRUE --> paths are all valid
+
+dt[, Date := ymd(substr(
+    File, regexpr(".pdf", File) - 10,
+    regexpr(".pdf", File) - 1
+))]
+
+dt[, isApproved := max(regexpr("Approv", File) > 0), by = ZMA]
+
+dt[, appLength := max(Date, na.rm = TRUE) - min(Date, na.rm = TRUE),
+    by = ZMA
+]
 
 # Sys.setenv(OPENAI_API_KEY = "")
 readRenviron("~/.Renviron") # Reload .Renviron
