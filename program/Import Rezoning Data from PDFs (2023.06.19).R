@@ -22,16 +22,20 @@ nrow(dt[is.na(File)]) == 0 # TRUE --> paths are all valid
 
 # TODO: issues with date for files ending in "(2).pdf"
 # TODO: sanity checks on dates (within range, etc.)
-dt[, Date := ymd(substr(
-    File, regexpr(".pdf", File) - 10,
-    regexpr(".pdf", File) - 1
-))]
+dt[regexpr("\\b\\d{4}-", File) > 0, Date := ymd(substr(
+    File, regexpr("\\b\\d{4}-", File),
+    regexpr("\\b\\d{4}", File) + 9
+), truncated = 1)]
 
 dt[, isApproved := max(regexpr("Approv", File) > 0), by = ZMA]
 
 dt[, appLength := max(Date, na.rm = TRUE) - min(Date, na.rm = TRUE),
     by = ZMA
 ]
+
+ggplot(data = dt, mapping = aes(x = Date)) +
+    geom_histogram() +
+    scale_x_date(limits = c(date("2014-01-01"), date("2020-01-01")))
 
 # Sys.setenv(OPENAI_API_KEY = "")
 readRenviron("~/.Renviron") # Reload .Renviron

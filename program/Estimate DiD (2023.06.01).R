@@ -1,11 +1,8 @@
-# Estimate the effect of the 2016 Proffer Reform Act on residential 
+# Estimate the effect of the 2016 Proffer Reform Act on residential construction
 
 rm(list = ls())
 
-dir <- dirname(dirname(rstudioapi::getSourceEditorContext()$path))
-setwd(dir)
-
-pacman::p_load(data.table, stargazer, ggplot2, fixest, devtools, lubridate) 
+pacman::p_load(data.table, stargazer, ggplot2, fixest, devtools, lubridate, here)
 
 dt <- readRDS("derived/Sample.Rds")
 
@@ -76,8 +73,8 @@ etable(fepois.did)
 
 
 # Event Study ----
-RHS_ES <- " ~ -1 + i(Date, everTreated, ref = \"2016-07-01\") | Date + FIPS"
-fmla.es <- as.formula(paste0("Units1", RHS_ES))
+RHS_ES <- " ~ -1 + i(Date, everTreated, ref = \"2016-04-01\") | Date + FIPS"
+fmla.es <- as.formula(paste0("log(Units1)", RHS_ES))
 
 # * Monthly ----
 fepois.es <- feglm(fmla.es, cluster = "as.factor(FIPS)", data = dt[FY %between% c(2010, 2019)],
@@ -88,17 +85,28 @@ pdf(file = "results/eventstudy_units1.pdf")
 iplot(fepois.es, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
 dev.off()
 
+feols.es <- feols(fmla.es,
+  cluster = "as.factor(FIPS)", data = dt[FY %between% c(2010, 2019)]
+)
+iplot(feols.es, lab.fit = "simple", value.lab = "", main = "Effect on single-family housing permits")
+
 feols.zhvi <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
                  cluster = "as.factor(FIPS)", data = dt)
 etable(feols.zhvi)
 iplot(feols.zhvi, lab.fit = "simple")
 
 # Quarterly ----
-fepois.es <- feglm(fmla.es, cluster = "as.factor(FIPS)", data = dt.qtr[FY %between% c(2010, 2019)],
-                   family = "quasipoisson")
+fepois.es <- feglm(fmla.es,
+  cluster = "as.factor(FIPS)", data = dt.qtr[FY %between% c(2012, 2019)],
+  family = "quasipoisson"
+)
 etable(fepois.es)
-
 iplot(fepois.es, lab.fit = "simple")
+feols.es <- feols(fmla.es,
+  cluster = "as.factor(FIPS)", data = dt.qtr[FY %between% c(2012, 2019)]
+)
+etable(feols.es)
+iplot(feols.es, lab.fit = "simple")
 
 
 feols.zhvi_qtr <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
@@ -140,8 +148,18 @@ ggsave("paper/figures/20230430synthdid.pdf", device = "pdf")
 
 se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
-sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
-sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64*se, tau.hat + 1.64*se)
+sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
+sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64 * se, tau.hat + 1.64 * se)
+
+
+tau_hat_inhs <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "arcsinhUnits1")
+plot(tau_hat_inhs, se.method = "jackknife", overlay = 0)
+
+se <- sqrt(vcov(tau_hat_inhs, method = "jackknife")) # this should be a bootstrap
+sprintf("Point estimate: %1.2f", tau_hat_inhs)
+sprintf("95%% CI (%1.2f, %1.2f)", tau_hat_inhs - 1.96 * se, tau_hat_inhs + 1.96 * se)
+sprintf("90%% CI (%1.2f, %1.2f)", tau_hat_inhs - 1.64 * se, tau_hat_inhs + 1.64 * se)
+
 
 # * Prices ----
 dt.synthdid[, nObs := sum(!is.na(lnZHVI)), by = .(FIPS)]
