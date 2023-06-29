@@ -2,18 +2,29 @@
 How does bargaining between local governments and residential developers affect the housing market?
 
 # TODO
-Diff-in-diff:
-- aggregate to quarterly
-- use a synthetic control based on all other US counties (not just VA)
+
+
 
 Data:
-Albemarle County ZMAs: https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle
+Chesterfield County: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
 Prince William Proffers: https://www.pwcva.gov/department/planning-office/proffer-administration
+Chesapeake City Rezonings: https://www.cityofchesapeake.net/1162/Agendas-Video
+(Done) Albemarle County ZMAs: https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle
 
+Stafford County 
+- Rezonings: https://pob.staffordcountyva.gov/PublicAccess/
+- Search "Planning Department (Conditional Use Permits.....)" 
+- Care: date filter appears not to work properly
 
 # Data
 GIS Data:
 - Parcel boundaries: https://vgin.vdem.virginia.gov/datasets/virginia-parcels/about
+
+Current Assessments and Zoning:
+- http://www.vamanet.com/cgi-bin/HOME
+
+Zoning Ordinance:
+- Caroline County https://co.caroline.va.us/270/Zoning-Ordinance
 
 ## Notes from John McGlennon on 6/5/2023
 

@@ -35,12 +35,15 @@ dt[, appLength := max(Date, na.rm = TRUE) - min(Date, na.rm = TRUE),
 # Read PDFs ----
 
 # Identify ordinances
-HasOrdinance <- function(file) {
-    pdf_text <- pdf_text(file)
-    return(max(regexpr("ORDINANCE", pdf_text, ignore.case = TRUE) > 0))
+has_ordinance <- function(file) {
+    pdf_text <- suppressMessages(pdf_text(file))
+    return(max(regexpr("the board hereby approves ZMA",
+        pdf_text,
+        ignore.case = TRUE
+    ) > 0))
 }
 
-dt$isOrdinance <- sapply(dt$Paths, HasOrdinance)
+dt$isOrdinance <- sapply(dt$Paths, has_ordinance)
 
 
 
