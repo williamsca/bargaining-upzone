@@ -5,16 +5,58 @@ How does bargaining between local governments and residential developers affect 
 
 
 
-Data:
-Chesterfield County: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
-Prince William Proffers: https://www.pwcva.gov/department/planning-office/proffer-administration
-Chesapeake City Rezonings: https://www.cityofchesapeake.net/1162/Agendas-Video
-(Done) Albemarle County ZMAs: https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle
+## Data:
+Albemarle County
+- Archive: https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle
+- Downloaded all ZMA files (staff reports, correspondence, and ordinances) 
+
+Caroline County
+
+Chesapeake City
+- Archive: https://www.cityofchesapeake.net/1162/Agendas-Video
+
+Chesterfield County
+- Archive: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
+- Downloaded all 'Summary' files for 2014-2019. May need to download 'Minutes' for further information. 
+
+Fairfax City
+- Archive: https://www.fairfaxva.gov/services/about-us/city-meetings
+- Not clear that city council "Reporter" actually has info about proffers or rezonings (or maybe they are just infrequent?)
+
+Fairfax County
+
+
+Frederick County
+
+Goochland County
+
+Hanover County
+
+Isle of Wight County
+
+Loudoun County
+
+Manasses City
+
+Manasses Park City
+
+Prince George County
+
+Prince William County
+- Archive: https://www.pwcva.gov/department/planning-office/proffer-administration
 
 Stafford County 
 - Rezonings: https://pob.staffordcountyva.gov/PublicAccess/
 - Search "Planning Department (Conditional Use Permits.....)" 
 - Care: date filter appears not to work properly
+
+Williamsburg City
+
+
+
+
+
+
 
 # Data
 GIS Data:
