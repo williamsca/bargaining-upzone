@@ -24,7 +24,8 @@ Fairfax City
 - Not clear that city council "Reporter" actually has info about proffers or rezonings (or maybe they are just infrequent?)
 
 Fairfax County
-
+- Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx
+- Plan is to use Selenium to scrape -- there is a lot here
 
 Frederick County
 
