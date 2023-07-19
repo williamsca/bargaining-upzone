@@ -69,6 +69,16 @@ Current Assessments and Zoning:
 Zoning Ordinance:
 - Caroline County https://co.caroline.va.us/270/Zoning-Ordinance
 
+## Meetings
+Ben (7/19/2023)
+- The [NLCD](https://www.usgs.gov/centers/eros/science/national-land-cover-database) has data on the % of impervious land and distinguishes between low, medium, and high density land uses. In general, it is safe to assume that low and medium densities are single-family residential. Need to think about how policy will affect intensive and extensive margins of development.
+- Is there leakage from high to low proffer counties?
+- How much development did not happen? How much cash proffer revenue was lost?
+- Think of policy as mandating a $0 price on rezoning
+- What are the long-run impacts on urban structure? Do the effects persist?
+- Need to collect rezoning applications in control counties. Choose a handful like Greene and Louisa with non-zero development but minimal proffer revenue.
+- It is reasonable to think that the 2019 "fix" would not total reverse the effect of the reform, especially if there is hysteresis in land development.
+
 ## Notes from John McGlennon on 6/5/2023
 
 ### Questions:
