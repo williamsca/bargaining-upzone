@@ -25,7 +25,8 @@ Fairfax City
 
 Fairfax County
 - Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx
-- Plan is to use Selenium to scrape -- there is a lot here
+- Used Selenium to scrape list of records, but may need to dig into individual records to get zoning, proffer information
+- See '.../program/Scrape Rezoning Applications (2023.07.12).py'
 
 Frederick County
 

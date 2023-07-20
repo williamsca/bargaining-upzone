@@ -1,5 +1,8 @@
 # Estimate the effect of the 2016 Proffer Reform Act on residential construction
 
+# Reform goes into effect on July 1, 2016:
+# https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
+
 rm(list = ls())
 
 pacman::p_load(
