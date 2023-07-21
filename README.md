@@ -1,8 +1,11 @@
 # bargaining-upzone
 How does bargaining between local governments and residential developers affect the housing market?
 
-# TODO
+# Proffer Reform Act of 2016
+Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
 
+# TODO
+- Convert pdf files to text and save locally; upload raw pdfs to OneDrive 
 
 
 ## Data:
@@ -29,6 +32,8 @@ Fairfax County
 - See '.../program/Scrape Rezoning Applications (2023.07.12).py'
 
 Frederick County
+- Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
+- Uploaded BOS minutes for 2014 and 2015, need to get 2016-2019 and parse
 
 Goochland County
 
