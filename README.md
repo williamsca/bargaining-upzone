@@ -14,6 +14,7 @@ Albemarle County
 - Downloaded all ZMA files (staff reports, correspondence, and ordinances) 
 
 Caroline County
+- Archive: https://co.caroline.va.us/AgendaCenter/Board-of-Supervisors-2
 
 Chesapeake City
 - Archive: https://www.cityofchesapeake.net/1162/Agendas-Video
@@ -37,12 +38,18 @@ Frederick County
 - Downloaded BOS minutes for 2014 and 2015
 
 Goochland County
+- Archive: https://goochlandcountyva.iqm2.com/Citizens/calendar.aspx?From=1%2f1%2f2023&To=12%2f31%2f2023
+- Downloaded BoS minutes for 2014-2019
 
 Hanover County
+- Archive: http://weblink.mccinnovations.com/WebLink/?dbid=5
+- Downloaded BoS minutes for 2014-2019
 
 Isle of Wight County
+- Archive: https://www.co.isle-of-wight.va.us/government/county_board_of_supervisors/board_of_supervisors_agendas.php
 
 Loudoun County
+
 
 Manasses City
 
