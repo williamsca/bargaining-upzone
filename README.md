@@ -33,7 +33,8 @@ Fairfax County
 
 Frederick County
 - Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
-- Uploaded BOS minutes for 2014 and 2015, need to get 2016-2019 and parse
+- Downloaded all "Rezoning" resolutions for FY2014-2020
+- Downloaded BOS minutes for 2014 and 2015
 
 Goochland County
 
