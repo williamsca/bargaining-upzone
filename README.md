@@ -6,6 +6,7 @@ Great background article: https://www.williamsmullen.com/news/dissecting-proffer
 
 # TODO
 - Convert pdf files to text and save locally; upload raw pdfs to OneDrive 
+- Consider Ring Method (Diamond & McQuade (2019)) using location of large upzonings. Compare results to Hector Fernandez and Noemie Sportiche (2023).
 
 
 ## Data:
@@ -15,9 +16,12 @@ Albemarle County
 
 Caroline County
 - Archive: https://co.caroline.va.us/AgendaCenter/Board-of-Supervisors-2
+- No BoS minutes
+- Can get Planning Commission Actions: https://co.caroline.va.us/636/2014-Summary-of-Actions
 
 Chesapeake City
 - Archive: https://www.cityofchesapeake.net/1162/Agendas-Video
+- BoS Minutes archive begins in 2020
 
 Chesterfield County
 - Archive: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
@@ -25,7 +29,7 @@ Chesterfield County
 
 Fairfax City
 - Archive: https://www.fairfaxva.gov/services/about-us/city-meetings
-- Not clear that city council "Reporter" actually has info about proffers or rezonings (or maybe they are just infrequent?)
+- Downloaded "Reporter" html files for 2014-2020m2; may need to get "Minutes" instead
 
 Fairfax County
 - Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx
