@@ -26,6 +26,7 @@ Chesapeake City
 Chesterfield County
 - Archive: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
 - Downloaded all 'Summary' files for 2014-2019. May need to download 'Minutes' for further information. 
+- Parsed 'Summary' files to get rezoning cases. Next step: filter to actual rezonings and manually input relevant details: old and new zoning codes, acreage, proffers, etc.
 
 Fairfax City
 - Archive: https://www.fairfaxva.gov/services/about-us/city-meetings
@@ -35,6 +36,7 @@ Fairfax County
 - Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx
 - Used Selenium to scrape list of records, but may need to dig into individual records to get zoning, proffer information
 - See '.../program/Scrape Rezoning Applications (2023.07.12).py'
+- Downloaded BoS minutes for 2013-2020m2
 
 Frederick County
 - Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
@@ -50,10 +52,12 @@ Hanover County
 - Downloaded BoS minutes for 2014-2019
 
 Isle of Wight County
-- Archive: https://www.co.isle-of-wight.va.us/government/county_board_of_supervisors/board_of_supervisors_agendas.php
+- Archive: https://lfweb.isleofwightus.net/WebLink/Browse.aspx?id=422&dbid=1&repo=CountyAdministration
+- Downloaded BoS minutes for 2013-2019
 
 Loudoun County
-
+- Archive: https://www.loudoun.gov/3426/Board-of-Supervisors-Meetings-Packets
+- 
 
 Manasses City
 
