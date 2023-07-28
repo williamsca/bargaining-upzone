@@ -10,7 +10,7 @@ pacman::p_load(
   fixest, devtools, lubridate, here
 )
 
-INTENSITY_THRESHOLD <- 0.01
+INTENSITY_THRESHOLD <- 0.0075
 
 dt <- readRDS("derived/Sample.Rds")
 
@@ -20,6 +20,8 @@ arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 dt[FY == 2016, everTreated := fifelse(
   intensity12_16 > INTENSITY_THRESHOLD, 1, 0
 )]
+dt[grepl("City", Name), everTreated := 0]
+
 dt[is.na(everTreated), everTreated := 0]
 dt[, everTreated := max(everTreated), by = FIPS]
 
@@ -32,7 +34,7 @@ dt_qtr <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p),
   ZHVI = mean(ZHVI)
 ),
-by = .(FIPS,
+by = .(FIPS, PCT001001, FIPS.Code.State,
   Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`,
   everTreated, Post, FY, intensity12_16
 )
@@ -100,8 +102,12 @@ etable(fepois.did)
 
 
 # Event Study ----
-RHS_ES <- " ~ -1 + i(Date, everTreated, ref = \"2016-04-01\") | Date + FIPS"
-fmla.es <- as.formula(paste0("log(Units1 + 1)", RHS_ES))
+RHS_ES <- paste0(
+  " ~ -1 + i(Date, everTreated, ref = \"2016-04-01\")",
+  " + FIPS.Code.State:as.numeric(Date)",
+  " | Date + FIPS"
+)
+fmla.es <- as.formula(paste0("Units1", RHS_ES))
 
 # * Monthly ----
 # Poisson QMLE
@@ -127,15 +133,17 @@ iplot(feols.es,
 
 # Quarterly ----
 # Poisson QMLE
-fepois.es <- feglm(fmla.es,
+fepois.es <- feglm(as.formula(paste0("Units1", RHS_ES)),
   cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2012, 2019)],
-  family = "quasipoisson"
+  family = "quasipoisson", weights = ~PCT001001
 )
 etable(fepois.es)
 iplot(fepois.es, lab.fit = "simple")
+
 # OLS
-feols.es <- feols(fmla.es,
-  cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2012, 2019)]
+feols.es <- feols(as.formula(paste0("log(Units1 + 1)", RHS_ES)),
+  cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2011, 2019)],
+  weights = ~PCT001001
 )
 etable(feols.es)
 pdf(file = "paper/figures/eventstudy_units1.pdf")

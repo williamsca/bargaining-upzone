@@ -43,7 +43,7 @@ for (offset in seq(375, N_RECORDS, 25)) { # 375 is roughly the start of 2020
 
 # Cleaning up ----
 names(dt) <- gsub("attributes.", "", names(dt))
-dt[, final_date := as_datetime(FinalDate / 1000)]
+dt[, final_date := as.Date(as_datetime(FinalDate / 1000))]
 
 # Save ----
 saveRDS(dt, "derived/ChesterfieldCo/GIS Rezonings (2023.07.28).RDS")

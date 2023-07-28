@@ -23,15 +23,21 @@ dt[, submit_month := floor_date(submit_date, "month")]
 
 dt[, FIPS := 51059] # Fairfax County, VA
 
+dt[, `Original Application` := gsub("\\s", "", `Original Application`)]
+dt[, `Original Application` := gsub("RZ", "RZ-", `Original Application`)]
 dt[, isOriginal := (`Record Number` == `Original Application`)]
 dt[, original_submit := min(submit_date), by = `Original Application`]
 
 # Sanity Checks ----
-# True --> original application has the earliest submission date
-nrow(dt[isOriginal == TRUE & original_submit != submit_date]) == 0
+# TRUE --> original application has the earliest submit date
+nrow(dt[isOriginal == TRUE & submit_date != original_submit]) == 0
+
+dt[`Original Application` == "RZ-2010-PR-023"]
 
 # True --> observations are unique on `Record Number`
 nrow(dt) == uniqueN(dt$`Record Number`)
+
+dt[`Original Application` == "RZ-2010-PR-023"]
 
 # Save ----
 saveRDS(dt, paste0(
