@@ -107,9 +107,4 @@ dt[, TaxIDs := str_replace_all(TaxIDs, "\\s", "")]
 dt <- dt[!is.na(CaseID)]
 
 # Export ----
-s_output <- "derived/ChesterfieldCo/BoS Summary Rezonings (2023.07.27).csv"
-if (!file.exists(s_output)) {
-    fwrite(dt, s_output)
-} else {
-    stop("The file already exists.")
-}
+fwrite(dt, "derived/ChesterfieldCo/BoS Summary Raw Rezonings (2023.07.27).csv")
