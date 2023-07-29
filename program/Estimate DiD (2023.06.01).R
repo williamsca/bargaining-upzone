@@ -10,7 +10,7 @@ pacman::p_load(
   fixest, devtools, lubridate, here
 )
 
-INTENSITY_THRESHOLD <- 0.0075
+INTENSITY_THRESHOLD <- 0.001
 
 dt <- readRDS("derived/Sample.Rds")
 
@@ -20,19 +20,19 @@ arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 dt[FY == 2016, everTreated := fifelse(
   intensity12_16 > INTENSITY_THRESHOLD, 1, 0
 )]
-dt[grepl("City", Name), everTreated := 0]
+# dt[grepl("City", Name), everTreated := 0]
 
 dt[is.na(everTreated), everTreated := 0]
 dt[, everTreated := max(everTreated), by = FIPS]
 
 dt[, Post := fifelse(Date >= as.Date("2017-01-01"), 1, 0)]
 
-# lower bound on multi-family units
-dt[, Units2p := Units2 + 3 * `Units3-4` + 5 * `Units5+`]
+# total units in multi-family buildings
+dt[, Units2p := Units2 + `Units3-4` + `Units5+`]
 
 dt_qtr <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p),
-  ZHVI = mean(ZHVI)
+  ZHVI = mean(ZHVI), Units5p = sum(`Units5+`)
 ),
 by = .(FIPS, PCT001001, FIPS.Code.State,
   Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`,
@@ -165,11 +165,12 @@ dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
 dt.synthdid <- dt.synthdid[
-  FY %between% c(2012, 2019),
+  Date %between% as.Date(c("2009-01-01", "2019-06-01")),
   .(
     FIPS = as.factor(FIPS), Date, Units1,
-    arcsinhUnits1 = arcsinh(Units1),
-    logUnits1 = log(Units1 + 1), isTreated = as.logical(isTreated)
+    arcsinhUnits1 = arcsinh(Units1), logUnits5p = log(Units5p + 1),
+    logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
+    everTreated, isTreated = as.logical(isTreated)
   )
 ]
 
@@ -183,7 +184,8 @@ RunSynthDid <- function(dt, LHS) {
 dt.synthdid[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
 # dt.synthdid[, nObs := sum(!is.na(Units1)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits5p")
+
 
 plot(tau.hat, se.method = "jackknife", overlay = 1)
 ggsave("paper/figures/synthdid_overlay.pdf", device = "pdf")
@@ -191,7 +193,8 @@ ggsave("paper/figures/synthdid_overlay.pdf", device = "pdf")
 plot(tau.hat, se.method = "jackknife")
 ggsave("paper/figures/synthdid.pdf", device = "pdf", width = 8, height = 6)
 
-se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
+# this should be a bootstrap
+se <- sqrt(vcov(tau.hat, method = "jackknife"))
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
 sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64 * se, tau.hat + 1.64 * se)
