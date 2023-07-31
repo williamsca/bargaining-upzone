@@ -9,3 +9,6 @@ l_files <- list.files("data/County Finances", full.names = TRUE,
 )
 
 dt <- read_xls(l_files[1], sheet = "Exhibit A", skip = 10)
+
+dt[, Locality := paste0()]
+View(dt)

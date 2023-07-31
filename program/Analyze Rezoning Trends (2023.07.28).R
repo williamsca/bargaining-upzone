@@ -33,8 +33,12 @@ ggplot(
         color = "gray", size = 1, linetype = "dashed"
     ) +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-    labs(y = "Number of Approved Rezonings", x = "") +
+    labs(y = "Number of Approved Rezonings", x = "Approval Date") +
     scale_fill_discrete(name = "Cash Proffer", labels = c("No", "Yes"))
+
+ggsave("paper/figures/plot_chesterfield_approvals.pdf",
+    width = 8, height = 4.25
+)
 
 # Fairfax County ----
 dt_fairfax[, submit_quarter := floor_date(submit_date, "quarter")]
@@ -45,8 +49,11 @@ ggplot(dt_fairfax[year(submit_quarter) >= 2014],
 ) +
     geom_bar() +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-    labs(y = "Number of Rezoning Applications", x = "") +
+    labs(y = "Number of Rezoning Applications", x = "Submission Date") +
     geom_vline(xintercept = as.numeric(ymd("2016-07-01")),
         color = "gray", linetype = "dashed") +
     theme_light()
 
+ggsave("paper/figures/plot_fairfaxco_submissions.pdf",
+    width = 8, height = 4.25
+)
