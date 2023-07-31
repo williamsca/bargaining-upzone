@@ -181,10 +181,10 @@ RunSynthDid <- function(dt, LHS) {
 }
 
 # * Quantities ----
-dt.synthdid[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
+dt.synthdid[, nObs := sum(!is.infinite(logsUnits1)), by = .(FIPS)]
 # dt.synthdid[, nObs := sum(!is.na(Units1)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits5p")
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
 
 
 plot(tau.hat, se.method = "jackknife", overlay = 1)
