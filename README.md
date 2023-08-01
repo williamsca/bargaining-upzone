@@ -5,7 +5,10 @@ How does bargaining between local governments and residential developers affect 
 Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
 
 # TODO
-- Convert pdf files to text and save locally; upload raw pdfs to OneDrive 
+- Convert pdf files to text and save locally; upload raw pdfs to OneDrive
+- Weight regressions by 2010 population
+- Experiment with different treatment designations 
+- Consider Ring Method (Diamond & McQuade (2019)) using location of large upzonings. Compare results to Hector Fernandez and Noemie Sportiche (2023).
 
 
 ## Data:
@@ -14,35 +17,52 @@ Albemarle County
 - Downloaded all ZMA files (staff reports, correspondence, and ordinances) 
 
 Caroline County
+- Archive: https://co.caroline.va.us/AgendaCenter/Board-of-Supervisors-2
+- No BoS minutes
+- Can get Planning Commission Actions: https://co.caroline.va.us/636/2014-Summary-of-Actions
 
 Chesapeake City
 - Archive: https://www.cityofchesapeake.net/1162/Agendas-Video
+- BoS Minutes archive begins in 2020
 
 Chesterfield County
 - Archive: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
 - Downloaded all 'Summary' files for 2014-2019. May need to download 'Minutes' for further information. 
+- Parsed 'Summary' files to get rezoning cases (see '.../derived/BoS Summary Raw Rezonings.csv'). TODO: filter to actual rezonings and manually input relevant details: old and new zoning codes, acreage, proffers, etc.
 
 Fairfax City
 - Archive: https://www.fairfaxva.gov/services/about-us/city-meetings
-- Not clear that city council "Reporter" actually has info about proffers or rezonings (or maybe they are just infrequent?)
+- Downloaded "Reporter" html files for 2014-2020m2
+- TODO: "Reporter" files are parsed in '.../derived/FairfaxCity/BoS Reporter Raw Rezonings'. There are only five. Details are scant --> need to look in official minutes.
+- NOTE: Only comprehensive for 'Regular Meetings'. May need to go back for 'Special Meetings'.
 
 Fairfax County
 - Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx
 - Used Selenium to scrape list of records, but may need to dig into individual records to get zoning, proffer information
 - See '.../program/Scrape Rezoning Applications (2023.07.12).py'
+- Downloaded BoS minutes for 2013-2020m2
 
 Frederick County
 - Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
 - Downloaded all "Rezoning" resolutions for FY2014-2020
 - Downloaded BOS minutes for 2014 and 2015
+- TODO: use 'tesseract' to parse pdfs, see ".../program/Parse FrederickCo Rezonings (2023.07.28).R'
 
 Goochland County
+- Archive: https://goochlandcountyva.iqm2.com/Citizens/calendar.aspx?From=1%2f1%2f2023&To=12%2f31%2f2023
+- Downloaded BoS minutes for 2014-2019
 
 Hanover County
+- Archive: http://weblink.mccinnovations.com/WebLink/?dbid=5
+- Downloaded BoS minutes for 2014-2019
 
 Isle of Wight County
+- Archive: https://lfweb.isleofwightus.net/WebLink/Browse.aspx?id=422&dbid=1&repo=CountyAdministration
+- Downloaded BoS minutes for 2013-2019
 
 Loudoun County
+- Archive: https://www.loudoun.gov/3426/Board-of-Supervisors-Meetings-Packets
+- 
 
 Manasses City
 
