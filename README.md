@@ -94,6 +94,12 @@ This paper may be a useful reference for outcomes:
 - https://ishanbhatt42.github.io/files/paper_adu.pdf
 
 ## Meetings
+Leora (8/1/2023)
+- Need to know if building is happening on recently rezoning properties
+- Call up neighborhood services in Charlottesville and ask about the process of rezoning
+- Would be nice to see the full process -- from planning committee to staff to board of supervisors
+- Look at impact fees in other states
+
 Ben (7/19/2023)
 - The [NLCD](https://www.usgs.gov/centers/eros/science/national-land-cover-database) has data on the % of impervious land and distinguishes between low, medium, and high density land uses. In general, it is safe to assume that low and medium densities are single-family residential. Need to think about how policy will affect intensive and extensive margins of development.
 - Is there leakage from high to low proffer counties?
