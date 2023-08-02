@@ -90,11 +90,8 @@ Williamsburg City
 GIS Data:
 - Parcel boundaries: https://vgin.vdem.virginia.gov/datasets/virginia-parcels/about
 
-Current Assessments and Zoning:
-- http://www.vamanet.com/cgi-bin/HOME
-
-Zoning Ordinance:
-- Caroline County https://co.caroline.va.us/270/Zoning-Ordinance
+This paper may be a useful reference for outcomes:
+- https://ishanbhatt42.github.io/files/paper_adu.pdf
 
 ## Meetings
 Ben (7/19/2023)

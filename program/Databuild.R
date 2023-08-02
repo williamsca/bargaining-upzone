@@ -6,13 +6,18 @@ rm(list = ls())
 
 pacman::p_load(data.table, lubridate, here, readxl)
 
+CONSTANT_YEAR <- 2015
+
 # Import ----
 dt_bp <- readRDS(
     "derived/County Residential Building Permits by Month (2000-2021).Rds"
 )
 dt_zhvi <- readRDS("derived/Housing Price Index (Zillow).Rds")
-dt_cp <- readRDS("derived/Cash Proffer Revenues.Rds")
-dt_cpi <- read_xlsx() # TODO: defalate nominal values by CPI
+dt_cp <- readRDS("derived/Cash Proffer Revenues (2004-2022).Rds")
+dt_rev <- readRDS("derived/Revenues (2014-2016).Rds")
+dt_cpi <- as.data.table(read_xlsx(
+    "crosswalks/CPI/CUUR0000SA0 CPI-U (1995-2022).xlsx", skip = 10
+))
 dt_pop <- readRDS("derived/County Populations (2010).RDS")
 
 # Building Permits ----
@@ -44,13 +49,21 @@ dt_bp[, FY := Year4 + fifelse(Month >= 7, 1, 0)]
 
 # Note: some proffer-collecting jurisdictions are not
 # covered in the county building permits survey
+# TODO: construct balanced panel using CJ()?
 dt <- merge(dt_bp, dt_cp[, FIPS.Code.State := "51"],
     by.x = c("Name", "FY", "FIPS.Code.State"),
-    by.y = c("Jurisdiction", "Year", "FIPS.Code.State"),
+    by.y = c("Jurisdiction", "FY", "FIPS.Code.State"),
     all.x = TRUE
 )
 
 dt[is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
+
+dt <- merge(dt, dt_rev,
+    by = c("Name", "FY", "FIPS.Code.State"),
+    all.x = TRUE, UE
+)
+table(dt[is.na(`Cash Proffer Revenue`), locality_type])
+View(dt[FIPS.Code.State == "51"])
 
 dt[, Date := make_date(year = Year4, month = Month)]
 dt[, FIPS := as.numeric(FIPS.Code.State) * 1000 +
