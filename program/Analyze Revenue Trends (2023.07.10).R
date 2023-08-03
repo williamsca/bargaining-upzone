@@ -8,6 +8,7 @@ dt <- readRDS(here("derived", "Revenues (2004-2022).Rds"))
 dt[, isTown := (locality_type == 3)]
 dt[, `Proffer Share (%)` :=
     `Cash Proffer Revenue` / `Local Revenue` * 100]
+dt[, Post := (FY >= 2017)]
 
 dt_year <- dt[, .(`Cash Proffer Revenue` = sum(`Cash Proffer Revenue`),
     `Total Revenue` = sum(`Total Revenue`),
@@ -42,10 +43,14 @@ ggplot(
     theme_light(base_size = 12)
 
 # Top Proffer Localities ----
-setorder(dt, -`Proffer Share (%)`)
+dt_top <- dt[FY < 2022]
+dt_top <- dt_top[, .(`Cash Proffer Revenue` = sum(`Cash Proffer Revenue`),
+    `Local Revenue` = sum(`Local Revenue`)), by = .(Name, Post, isTown)]
 
-dt_top <- dt[FY == 2014 & isTown == FALSE & `Cash Proffer Revenue` > 0,
-    .(Name, `Cash Proffer Revenue`, `Local Revenue`,
-    `Proffer Share (%)`)]
+dt_top[, `Proffer Share (%)` := `Cash Proffer Revenue` / `Local Revenue` * 100]
+setorder(dt_top, -`Proffer Share (%)`)
 
-xtable(dt_top, digits = c(0, 0, 0, 0, 1))
+xtable(dt_top[isTown == FALSE & Post == FALSE & `Cash Proffer Revenue` > 0,
+              .(Name, `Cash Proffer Revenue`, `Local Revenue`,
+                `Proffer Share (%)`)],
+       digits = c(0, 0, 0, 0, 1))

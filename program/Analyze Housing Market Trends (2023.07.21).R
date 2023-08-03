@@ -7,9 +7,10 @@ pacman::p_load(
 
 # Import ----
 dt <- readRDS("derived/Sample.Rds")
+dt_fairfax <- readRDS("derived/FairfaxCo/Building Permits (2012-2019).Rds")
 
 # lower bound on multi-family units
-dt[, Units2p := Units2 + 3 * `Units3-4` + 5 * `Units5+`]
+dt[, Units2p := Units2 + `Units3-4` + `Units5+`]
 
 # Treatment Indicator ----
 INTENSITY_THRESHOLD <- 0.01
@@ -54,10 +55,22 @@ for (county in c_treated) {
         theme(plot.caption = element_text(hjust = 0)))
 }
 
-ggplot(dt[Name == "Fairfax County"], aes(x = Date, y = Units1)) +
-    geom_line() +
+# Fairfax County ----
+ggplot(dt[Name == "Fairfax County" & Year4 %between% c(2012, 2019)],
+       aes(x = Date, y = Units1)) +
+geom_line() +
+labs(
+    title = "Single-Unit Building Permits",
+    subtitle = "Fairfax County, VA",
+    x = "Date", y = "Permits"
+) +
+theme_light() +
+theme(plot.caption = element_text(hjust = 0))
+
+ggplot(dt_fairfax, aes(x = submit_month, fill = `Record Type`)) +
+    geom_bar(position = "stack") +
     labs(
-        title = "Single-Unit Building Permits",
+        title = "Building Permits",
         subtitle = "Fairfax County, VA",
         x = "Date", y = "Permits"
     ) +
