@@ -9,7 +9,8 @@ rm(list = ls())
 pacman::p_load(here, data.table, lubridate)
 
 # Import Record Lists ----
-l_files <- list.files("data/FairfaxCo/Record Lists", full.names = TRUE)
+l_files <- list.files("data/FairfaxCo/Record Lists/Rezoning",
+    full.names = TRUE)
 
 dt <- rbindlist(lapply(l_files, fread, header = TRUE))
 dt$V8 <- NULL
@@ -29,15 +30,64 @@ dt[, isOriginal := (`Record Number` == `Original Application`)]
 dt[, original_submit := min(submit_date), by = `Original Application`]
 
 # Sanity Checks ----
-# TRUE --> original application has the earliest submit date
-nrow(dt[isOriginal == TRUE & submit_date != original_submit]) == 0
-
-dt[`Original Application` == "RZ-2010-PR-023"]
-
 # True --> observations are unique on `Record Number`
 nrow(dt) == uniqueN(dt$`Record Number`)
 
-dt[`Original Application` == "RZ-2010-PR-023"]
+# Geocode ----
+# Unique ID
+setnames(dt, "Record Number", "Unique ID")
+
+# City
+v_cities <- c(
+    "FAIRFAX", "SPRINGFIELD", "RESTON", "ANNANDALE",
+    "CHANTILLY", "ALEXANDRIA", "LORTON", "VIENNA", "HERNDON",
+    "FALLS CHURCH", "CENTREVILLE", "MCLEAN", "CLIFTON", "GREAT FALLS",
+    "BURKE", "MC LEAN", "OAKTON", "ARLINGTON", "DUNN LORING",
+    "FORT BELVOIR"
+)
+pattern_cities <- paste(v_cities, collapse = "|")
+
+dt[, City := str_extract(Address, pattern_cities)]
+dt[City == "MC LEAN", City := "MCLEAN"]
+dt[Address == "8990 SILVERBROOK RD, VA", City := "FAIRFAX STATION"]
+
+nrow(dt[Address != "" & is.na(City)]) == 0
+dt[, Address := gsub(pattern_cities, "", Address)]
+
+# Street
+dt[, `Street address` := trimws(str_extract(Address, "^[^,]+"))]
+nrow(dt[is.na(`Street address`) & Address != ""]) == 0
+
+# ZIP
+dt[, ZIP := str_extract(Address, "\\d{5}-")]
+dt[, ZIP := gsub("-", "", ZIP)]
+dt[is.na(ZIP), ZIP := str_extract(Address, "\\d{5}")]
+dt[Address == "8990 SILVERBROOK RD, VA", ZIP := "22039"]
+
+nrow(dt[is.na(ZIP) & Address != ""]) == 0
+nrow(dt[nchar(ZIP) != 5]) == 0
+
+# State
+dt[, State := "VA"]
+
+file <- tempfile(fileext = ".csv")
+write.csv(dt[!is.na(ZIP), .(
+    `Unique ID`, `Street address`, City,
+    State, ZIP
+)], file, row.names = FALSE)
+
+url <- "https://geocoding.geo.census.gov/geocoder/locations/addressbatch"
+req <- POST(url,
+    body = list(
+        addressFile = upload_file(file),
+        benchmark = "Public_AR_Current",
+        vintage = "Current_Current",
+        format = "json"
+    ),
+    encode = "multipart"
+)
+cnt <- content(req, "text", encoding = "UTF-8")
+unlink(file)
 
 # Save ----
 saveRDS(dt, paste0(
