@@ -113,9 +113,15 @@ sf$CASE_NUMBE <- gsub("RZ-", "RZ", sf$CASE_NUMBE)
 
 # m:1 (one rezoning case can correspond to multiple GIS records)
 sf <- merge(sf, dt, by.x = "CASE_NUMBE", by.y = "Unique ID",
-    all.x = TRUE, all.y = TRUE)
+    all = TRUE)
 
-# TODO: validate this merge:
-# 1. Check that all dt records are matched to sf
-# 2. Check CREATED_US values for unmatched sf records
-is.na(sf$OBJECTID)
+# TRUE --> all applications matched to a GIS record
+nrow(subset(sf, is.na(`CASE_NUMBE`))) == 0
+
+# The 'Status' variables aren't totally consistent
+table(sf$STATUS, sf$Status)
+
+saveRDS(sf, paste0(
+    "derived/FairfaxCo/Rezoning Applications (",
+    paste(range(year(dt$submit_date)), collapse = "-"), ").Rds"
+))
