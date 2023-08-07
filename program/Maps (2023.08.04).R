@@ -41,7 +41,7 @@ nrow(dt_ff_rezone[nDup > 1]) == 0
 
 # Maps ----
 MapFairfax <- function(yr = NA) {
-    if (is.na(yr)) {n
+    if (is.na(yr)) {
         sf_rezone <- sf_ff_rezone
     } else {
         sf_rezone <- subset(sf_ff_rezone, year(submit_date) == yr)
@@ -50,8 +50,9 @@ MapFairfax <- function(yr = NA) {
     ggplot() +
         geom_sf(
             data = subset(sf_va, NAMELSAD == "Fairfax County"),
-            fill = "lightgray"
+            fill = "white"
         ) +
+        geom_sf(data = sf_ff_exempt, fill = "lightgray") +
         geom_sf(
             data = subset(sf_ff_roads, RTTYP %in% c("I", "S")),
             color = "gray", size = 0.5
