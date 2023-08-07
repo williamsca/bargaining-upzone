@@ -82,6 +82,7 @@ write.csv(dt[!is.na(ZIP), .(
 )], file, row.names = FALSE)
 
 url <- "https://geocoding.geo.census.gov/geocoder/locations/addressbatch"
+
 req <- POST(url,
     body = list(
         addressFile = upload_file(file),
@@ -103,7 +104,7 @@ setnames(
 
 dt <- merge(dt,
     dt_geo[, .(`Unique ID`, `Exact Address`, `Coordinates`)], by = "Unique ID",
-    all = TRUE
+    all.x = TRUE
 )
 
 # Import GIS Rezoning Cases ----

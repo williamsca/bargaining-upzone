@@ -1,5 +1,8 @@
 # Mapping the location of rezonings and building permits
 
+# Comprehensive Plan Units downloaded on 8/7/2023 from:
+# https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::comprehensive-plan-land-units/explore
+
 rm(list = ls())
 pacman::p_load(here, data.table, ggplot2, sf, tigris, lubridate)
 
@@ -38,7 +41,7 @@ nrow(dt_ff_rezone[nDup > 1]) == 0
 
 # Maps ----
 MapFairfax <- function(yr = NA) {
-    if (is.na(yr)) {
+    if (is.na(yr)) {n
         sf_rezone <- sf_ff_rezone
     } else {
         sf_rezone <- subset(sf_ff_rezone, year(submit_date) == yr)
