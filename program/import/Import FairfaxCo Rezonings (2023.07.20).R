@@ -9,7 +9,7 @@
 # but this would take many hours.
 
 rm(list = ls())
-pacman::p_load(here, data.table, lubridate, sf)
+pacman::p_load(here, data.table, lubridate, sf, stringr, httr)
 
 # Import Record Lists ----
 l_files <- list.files("data/FairfaxCo/Record Lists/Rezoning",
@@ -53,7 +53,8 @@ pattern_cities <- paste(v_cities, collapse = "|")
 
 dt[, City := str_extract(Address, pattern_cities)]
 dt[City == "MC LEAN", City := "MCLEAN"]
-dt[Address == "8990 SILVERBROOK RD, VA", City := "FAIRFAX STATION"]
+dt[Address == "8990 SILVERBROOK RD, VA", 
+    City := "FAIRFAX STATION"]
 
 nrow(dt[Address != "" & is.na(City)]) == 0
 dt[, Address := gsub(pattern_cities, "", Address)]
@@ -93,19 +94,21 @@ req <- POST(url,
 cnt <- content(req, "text", encoding = "UTF-8")
 unlink(file)
 
-# Save ----
-saveRDS(dt, paste0(
-    "derived/FairfaxCo/Rezoning Applications (2010-2020).R",
-    paste(range(year(dt$submit_date)), collapse = "-"), ").Rds"
-))
+dt_geo <- fread(cnt, header = FALSE, fill = TRUE)
 
-dt <- readRDS("derived/FairfaxCo/Rezoning Applications (2010-2020).Rds")
+setnames(
+    dt_geo, c("V1", "V5", "V6"),
+    c("Unique ID", "Exact Address", "Coordinates")
+)
+
+dt <- merge(dt,
+    dt_geo[, .(`Unique ID`, `Exact Address`, `Coordinates`)], by = "Unique ID",
+    all = TRUE
+)
 
 # Import GIS Rezoning Cases ----
 sf <- st_read(
     dsn = "data/FairfaxCo/GIS/Zoning_Cases_(post-2000)/Zoning_Cases_(post-2000).shp")
-
-nrow(sf) == nrow(unique(sf[, "OBJECTID"]))
 
 # Merge ----
 dt[, `Unique ID` := gsub("RZ-", "RZ", `Unique ID`)]
@@ -120,6 +123,10 @@ nrow(subset(sf, is.na(`CASE_NUMBE`))) == 0
 
 # The 'Status' variables aren't totally consistent
 table(sf$STATUS, sf$Status)
+
+sf$isResi <- (sf$ZONETYPE %in% c(
+    "RESIDENTIAL", "PLANNED UNITS"
+))
 
 saveRDS(sf, paste0(
     "derived/FairfaxCo/Rezoning Applications (",

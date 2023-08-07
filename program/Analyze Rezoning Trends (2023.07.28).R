@@ -9,7 +9,9 @@ pacman::p_load(here, data.table, ggplot2, lubridate)
 dt_chesterfield <- readRDS(
     "derived/ChesterfieldCo/GIS Rezonings (2023.07.28).RDS"
 )
-dt_fairfax <- readRDS("derived/FairfaxCo/Rezoning Applications (2010-2020).Rds")
+sf_fairfax <- readRDS(
+    "derived/FairfaxCo/Rezoning Applications (2010-2020).Rds"
+)
 
 # Chesterfield County ----
 dt_chesterfield[, final_date_yq := floor_date(final_date, "quarter")]
@@ -41,7 +43,13 @@ ggsave("paper/figures/plot_chesterfield_approvals.pdf",
 )
 
 # Fairfax County ----
+dt_fairfax <- as.data.table(sf_fairfax)
+
 dt_fairfax[, submit_quarter := floor_date(submit_date, "quarter")]
+
+dt_fairfax <- unique(dt_fairfax[, .(CASE_NUMBE, isResi, Status,
+    submit_date, submit_quarter, Shape__Are)])
+    
 dt_fairfax <- dt_fairfax[submit_date == original_submit]
 
 # All Rezoning Applications by Quarter
