@@ -37,10 +37,9 @@ Fairfax City
 - NOTE: Only comprehensive for 'Regular Meetings'. May need to go back for 'Special Meetings'.
 
 Fairfax County
-- Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx
-- Used Selenium to scrape list of records, but may need to dig into individual records to get zoning, proffer information
-- See '.../program/Scrape Rezoning Applications (2023.07.12).py'
-- Downloaded BoS minutes for 2013-2020m2
+- Rezoning Applications Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx. See '.../program/Scrape Rezoning Applications (2023.07.12).py'
+- Downloaded BoS minutes for 2013-2020m2: https://www.fairfaxcounty.gov/boardofsupervisors/board-meeting-summaries
+- Downloaded Rezoning GIS files: https://www.fairfaxcounty.gov/maps/open-geospatial-data
 
 Frederick County
 - Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
@@ -61,8 +60,9 @@ Isle of Wight County
 - Downloaded BoS minutes for 2013-2019
 
 Loudoun County
-- Archive: https://www.loudoun.gov/3426/Board-of-Supervisors-Meetings-Packets
-- 
+- BoS Minutes: https://www.loudoun.gov/3426/Board-of-Supervisors-Meetings-Packets
+- GIS data: https://www.loudoun.gov/3362/LOLA
+- 8/7/2023: Emailed Loudoun Co Office of Mapping and GIS to request zoning map amendment database. Downloaded budget documents that map proffer revenue to rezoning cases. Conveniently, it looks like they track whether a zoning application is exempt from the 2016 reform or not, but need to confirm.
 
 Manasses City
 
