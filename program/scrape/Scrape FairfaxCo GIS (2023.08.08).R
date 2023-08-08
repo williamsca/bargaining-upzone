@@ -17,6 +17,16 @@ if (status_code(response) == 200) {
 }
 
 # TODO: convert the geometry.rings column to a polygon that sf can read
+# Convert the 'geometry.rings' field to a list of matrices
+dt[, geometry := lapply(geometry.rings, function(ring) {
+  coords <- as.numeric(unlist(strsplit(ring, ",")))
+  matrix(coords, ncol = 2, byrow = TRUE)
+})]
+
+# Convert to an sf object
+dt[, geometry := lapply(geometry, function(ring) {
+  st_polygon(list(ring))
+})]
 
 sf <- st_as_sf(dt, wkt = "geometry.rings", crs = st_crs("ESRI:102100"))
 
