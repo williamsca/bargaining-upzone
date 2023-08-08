@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <title>URBAN_DEVELOPMENT_AREA</title>
+                <geoform>vector digital data</geoform>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>Tysons Urban Development Area.Owner: Planning &amp;amp; DevelopmentUpdates: N/A</abstract>
+            <purpose>Tysons Urban Development Area</purpose>
+        </descript>
+        <spdom>
+            <bounding>
+                <westbc>-77.252794</westbc>
+                <eastbc>-77.196958</eastbc>
+                <northbc>38.934374</northbc>
+                <southbc>38.903489</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>Tysons</themekey>
+                <themekey>Planning</themekey>
+                <themekey>Development</themekey>
+                <themekey>DPD</themekey>
+                <themekey>FFX</themekey>
+                <themekey>Fairfax County</themekey>
+                <themekey>Virginia</themekey>
+                <themekey>VA</themekey>
+                <themekey>Department of Planning and Development</themekey>
+            </theme>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>The geographic data layers produced by the Government of Fairfax County, Virginia (“Fairfax County”), and any associated maps and applications, are provided as a public resource. While every reasonable effort is made to ensure the accuracy and completeness of the data, Fairfax County makes no warranties, expressed or implied, concerning the accuracy, completeness or suitability of its data, and it should not be construed or used as a legal description. Pursuant to Section 54.1-402 of the Code of Virginia, any determination of topography or contours, or any depiction of physical improvements, property lines or boundaries is for general information only and shall not be used for the design, modification, or construction of improvements to real property or for flood plain determination. Copyright by Fairfax County. Except as provided herein, all rights are reserved. Authorization to reproduce material for internal or personal use by any user of this information is granted by Fairfax County, the copyright owner. Contact GIS to report any errors or issues or to get more information about Fairfax County’s geospatial data, maps or applications.</useconst>
+        <datacred>Fairfax County, Virginia; Department of Planning and Development</datacred>
+        <native> Version 6.2 (Build 9200) ; Esri ArcGIS 10.6.1.9270</native>
+    </idinfo>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>1</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>URBAN_DEVELOPMENT_AREA</enttypl>
+            </enttyp>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Coordinates defining the features.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>NAME</attrlabl>
+                <attrdef>Name of UDA District</attrdef>
+                <attrdefs>Fairfax County Comprehensive Plan</attrdefs>
+                <begdatea>June 22, 2010</begdatea>
+                <attrmfrq>None planned</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.AREA</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.LEN</attrlabl>
+            </attr>
+        </detailed>
+    </eainfo>
+    <distinfo>
+        <distliab>See access and use constraints information.</distliab>
+        <stdorder>
+            <digform>
+                <digtinfo>
+                    <formname>Feature Class</formname>
+                </digtinfo>
+                <digtopt>
+                    <onlinopt/>
+                </digtopt>
+            </digform>
+        </stdorder>
+    </distinfo>
+    <metainfo>
+        <metd>20201207</metd>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>

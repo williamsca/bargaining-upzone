@@ -19,6 +19,7 @@ sf_ff_exempt <- st_read(dsn = paste0(
     "data/FairfaxCo/GIS/Comprehensive_Plan_Land_Units/",
     "Comprehensive_Plan_Land_Units.shp"
 ))
+sf_reston_tysons <- readRDS("derived/FairfaxCo/Reston and Tysons SF.Rds")
 
 # Clean ----
 # Tagging resi/commercial rezonings
@@ -38,6 +39,21 @@ dt_ff_rezone[, nDup := .N, by = .(CASE_NUMBE)]
 # TRUE --> no rezoning case is amended from resi to non-resi use
 nrow(dt_ff_rezone[nDup > 1]) == 0
 
+# Tagging exempt plan land areas
+v_exempt17 <- c("Merrifield Suburban Center",
+    "Franconia-Springfield TSA", "Springfield CBC",
+    "Dulles Suburban Center", "Huntington TSA", "Vienna TSA",
+    "Van Dorn TSA", "West Falls Church TSA", "Fairfax Center Area",
+    "Annandale CBC", "Baileys Crossroads CBC", "Seven Corners CBC",
+    "North Gateway CBC", "Penn Daw CBC", "Beacon/Groveton CBC",
+    "Hybla Valley/Gum Springs CBC", "South County Center CBC",
+    "Woodlawn CBC",
+    "Dulles (Route 28 Corridor) Suburban Center")
+v_exempt18 <- c("McLean CBC") # exempt from 3/14/2017
+v_exempt19 <- c("Lincolnia CBC") # exempt from 3/6/2018
+
+sf_ff_exempt <- subset(sf_ff_exempt,
+    PRIMARY_PL %in% v_exempt16 | grepl("SNA", PRIMARY_PL))
 
 # Maps ----
 MapFairfax <- function(yr = NA) {
@@ -53,6 +69,7 @@ MapFairfax <- function(yr = NA) {
             fill = "white"
         ) +
         geom_sf(data = sf_ff_exempt, fill = "lightgray") +
+        geom_sf(data = sf_reston_tysons, fill = "lightgray") +
         geom_sf(
             data = subset(sf_ff_roads, RTTYP %in% c("I", "S")),
             color = "gray", size = 0.5
@@ -60,6 +77,8 @@ MapFairfax <- function(yr = NA) {
         geom_sf(data = sf_rezone, aes(fill = isResi)) +
         labs(title = "Fairfax Rezonings",
              subtitle = paste0("Application Year ", yr)) +
+        scale_fill_discrete(name = "",
+            labels = c("Commercial", "Residential or Mixed")) +
         theme(
             axis.text.x = element_blank(), axis.text.y = element_blank(),
             axis.ticks.x = element_blank(), axis.ticks.y = element_blank(),
