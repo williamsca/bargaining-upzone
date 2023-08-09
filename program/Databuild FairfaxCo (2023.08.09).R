@@ -21,9 +21,27 @@ sf_ff_exempt <- st_read(dsn = paste0(
 sf_reston_tysons <- readRDS(
     "derived/FairfaxCo/Reston and Tysons SF.Rds")
 
+# Tagging exempt plan land areas
+v_exempt17 <- c(
+    "Merrifield Suburban Center",
+    "Franconia-Springfield TSA", "Springfield CBC",
+    "Dulles Suburban Center", "Huntington TSA", "Vienna TSA",
+    "Van Dorn TSA", "West Falls Church TSA", "Fairfax Center Area",
+    "Annandale CBC", "Baileys Crossroads CBC", "Seven Corners CBC",
+    "North Gateway CBC", "Penn Daw CBC", "Beacon/Groveton CBC",
+    "Hybla Valley/Gum Springs CBC", "South County Center CBC",
+    "Woodlawn CBC",
+    "Dulles (Route 28 Corridor) Suburban Center"
+)
+v_exempt18 <- c("McLean CBC") # exempt from 3/14/2017
+v_exempt19 <- c("Lincolnia CBC") # exempt from 3/6/2018
+
+sf_ff_exempt <- subset(
+    sf_ff_exempt,
+    PRIMARY_PL %in% v_exempt17 | grepl("SNA", PRIMARY_PL)
+)
 
 # Exempt Areas ----
-# TODO: filter sf_ff_exempt to include only exempt areas (see 'Maps (2023.08.04).R')
 names(sf_ff_exempt)[names(sf_ff_exempt) == "PRIMARY_PL"] <- "LABEL"
 names(sf_ff_exempt)[names(sf_ff_exempt) == "SHAPE_Leng"] <-
  "SHAPE_Length"
@@ -59,4 +77,3 @@ nrow(sf) == nrow(sf_ff_rezone)
 saveRDS(sf, paste0("derived/FairfaxCo/Rezoning GIS (",
     paste(range(year(sf$submit_date), na.rm = TRUE), collapse = "-"),
     ").Rds"))
-
