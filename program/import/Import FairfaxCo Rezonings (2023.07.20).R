@@ -9,7 +9,7 @@
 # but this would take many hours.
 
 rm(list = ls())
-pacman::p_load(here, data.table, lubridate, sf, stringr, httr)
+pacman::p_load(here, data.table, lubridate, sf, stringr, httr, dplyr)
 
 # Import Record Lists ----
 l_files <- list.files("data/FairfaxCo/Record Lists/Rezoning",
@@ -113,14 +113,15 @@ sf <- st_read(
 
 # Merge ----
 dt[, `Unique ID` := gsub("RZ-", "RZ", `Unique ID`)]
-sf$CASE_NUMBE <- gsub("RZ-", "RZ", sf$CASE_NUMBE)
+sf$`Unique ID` <- gsub("RZ-", "RZ", sf$CASE_NUMBE)
 
 # m:1 (one rezoning case can correspond to multiple GIS records)
-sf <- merge(sf, dt, by.x = "CASE_NUMBE", by.y = "Unique ID",
-    all = TRUE)
+sf <- left_join(sf, dt, by = "Unique ID")
 
-# TRUE --> all applications matched to a GIS record
-nrow(subset(sf, is.na(`CASE_NUMBE`))) == 0
+# TRUE --> all applications match to a GIS record (by construction)
+nrow(subset(sf, is.na(OBJECTID))) == 0
+
+subset(sf, `Unique ID` == "RZ2019-HM-016")
 
 # The 'Status' variables aren't totally consistent
 table(sf$STATUS, sf$Status)
