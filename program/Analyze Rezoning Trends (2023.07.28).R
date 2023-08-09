@@ -3,14 +3,14 @@
 # proffers.
 
 rm(list = ls())
-pacman::p_load(here, data.table, ggplot2, lubridate)
+pacman::p_load(here, data.table, ggplot2, lubridate, units)
 
 # Import ----
 dt_chesterfield <- readRDS(
     "derived/ChesterfieldCo/GIS Rezonings (2023.07.28).RDS"
 )
 sf_fairfax <- readRDS(
-    "derived/FairfaxCo/Rezoning Applications (2010-2020).Rds"
+    "derived/FairfaxCo/Rezoning GIS (2010-2020).Rds"
 )
 
 # Chesterfield County ----
@@ -43,14 +43,14 @@ ggsave("paper/figures/plot_chesterfield_approvals.pdf",
 )
 
 # Fairfax County ----
+sf_fairfax$submit_quarter <- floor_date(
+    sf_fairfax$submit_date, "quarter")
+
+sf_fairfax$Area <- st_area(sf_fairfax)
+
 dt_fairfax <- as.data.table(sf_fairfax)
-
-dt_fairfax[, submit_quarter := floor_date(submit_date, "quarter")]
-
-dt_fairfax <- unique(dt_fairfax[, .(CASE_NUMBE, isResi, Status,
-    submit_date, submit_quarter, Shape__Are)])
-    
-dt_fairfax <- dt_fairfax[submit_date == original_submit]
+dt_fairfax <- unique(dt_fairfax[, .(`Unique ID`, isResi, isExempt,
+    Status, submit_date, submit_quarter, Area)])
 
 # All Rezoning Applications by Quarter
 ggplot(dt_fairfax[year(submit_quarter) >= 2014],
@@ -78,6 +78,43 @@ ggplot(
     geom_vline(
         xintercept = as.numeric(ymd("2016-07-01")),
         color = "gray", linetype = "dashed"
+    ) +
+    theme_light()
+
+# Exempt and non-exempt by fiscal year
+dt_fairfax[, FY := year(submit_date) +
+    fifelse(month(submit_date) >= 7, 1, 0)]
+
+dt_fairfax_yr <- dt_fairfax[, .(nApproved = .N,
+    Area = sum(Area)),
+    by = .(FY, isExempt, Status, isResi)]
+
+# Counts
+ggplot(dt_fairfax_yr[Status == "Approved" & isResi == TRUE],
+    aes(x = FY, y = nApproved, group = isExempt,
+        color = isExempt)) +
+    geom_line(linetype = "dashed") +
+    geom_point() +
+    scale_x_continuous(breaks = seq(2010, 2020, 2)) +    
+    labs(y = "Number of Approved Rezonings", x = "Fiscal Year") +
+    geom_vline(xintercept = 2016, color = "gray",
+        linetype = "dashed") +
+    theme_light()
+
+# Areas
+ggplot(
+    dt_fairfax_yr[Status == "Approved" & isResi == TRUE],
+    aes(
+        x = FY, y = Area, group = isExempt, color = isExempt
+    )
+) +
+    geom_line(linetype = "dashed") +
+    geom_point() +
+    labs(x = "Fiscal Year") +
+    scale_x_continuous(breaks = seq(2010, 2020, 2)) +
+    geom_vline(
+        xintercept = 2016, color = "gray",
+        linetype = "dashed"
     ) +
     theme_light()
 
