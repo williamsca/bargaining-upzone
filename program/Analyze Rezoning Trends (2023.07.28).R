@@ -3,7 +3,7 @@
 # proffers.
 
 rm(list = ls())
-pacman::p_load(here, data.table, ggplot2, lubridate, units)
+pacman::p_load(here, data.table, ggplot2, lubridate, units, sf)
 
 # Import ----
 dt_chesterfield <- readRDS(
@@ -32,7 +32,7 @@ ggplot(
     theme_light() +
     geom_vline(
         xintercept = as.numeric(ymd("2016-07-01")),
-        color = "gray", size = 1, linetype = "dashed"
+        color = "gray", linewidth = 1, linetype = "dashed"
     ) +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     labs(y = "Number of Approved Rezonings", x = "Approval Date") +
@@ -85,6 +85,7 @@ ggplot(
 dt_fairfax[, FY := year(submit_date) +
     fifelse(month(submit_date) >= 7, 1, 0)]
 
+# Note: panel is not balanced -- some years have zero rezonings
 dt_fairfax_yr <- dt_fairfax[, .(nApproved = .N,
     Area = sum(Area)),
     by = .(FY, isExempt, Status, isResi)]
