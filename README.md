@@ -81,10 +81,21 @@ Stafford County
 Williamsburg City
 
 
+# Model
+Locality chooses vector $\vec{a}$ of upzonings over parcels $j \in \{1, ..., J\}$ to maximize welfare: 
+$$U = \max_{\vec{a}} \sum_{j=1}^J a_j(p_j + v_{j}q_j) - C\left(\sum_{j=1}^Ja_jq_j\right)$$
 
+where $p_j$ is the dollar value of the proffer, $v_{j}$ is a stochastic shock to the value of upzoning the parcel, $q_j$ is the area of the parcel, and $C(\cdot)$ is a cost function that is increasing in the total area of upzoned land across the locality.
 
+Let $Q_{-j}$ be the total area of upzoned land not counting parcel $j$. The optimum is characterized by $J$ inequalities: 
+$$p_j + v_{j}q_j > C(q_j + Q_{-j}) - C(Q_{-j})$$
 
+Estimate by GMM where $p_j$, $q_j$ are data, $v_j$ is T1EV, and assume a parametric form for $C(\cdot)$. (See IO notes on inequality estimation.)
 
+Simplifications:
+- Myopic planner ignores dynamics. Upzoning is irreversible $\implies$ option value to waiting
+- Can't observe $p_j$ for parcels that are not upzoned (but might look at denied applications)
+- Locality may have market power $\implies$ $p_j$ is endogenous
 
 # Data
 GIS Data:
