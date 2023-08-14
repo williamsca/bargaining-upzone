@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  2 AUG 2023 17:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  14 AUG 2023 12:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/colin/Documents/Research/bargaining-upzone/paper/Slides (2023.07.10)"
-(/home/colin/Documents/Research/bargaining-upzone/paper/Slides (2023.07.10).tex
+**"/home/colin/Documents/Research/bargaining-upzone/paper/Slides (2023.08.14)"
+(/home/colin/Documents/Research/bargaining-upzone/paper/Slides (2023.08.14).tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2022/01/21 v3.65 A class for typesetting presentations
@@ -693,33 +693,35 @@ File: pgfcalendar.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@cal@easter@julianday=\count363
 ))) (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
-) (/usr/share/texlive/texmf-dist/tex/latex/beamertheme-metropolis/pgfplotsthemetol.sty
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 29.
+ (/usr/share/texlive/texmf-dist/tex/latex/beamertheme-metropolis/pgfplotsthemetol.sty
 Package: pgfplotsthemetol 2017/01/23 PGFplots colors based on Paul Tol's SRON technical note
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count364
 \l__pdf_internal_box=\box81
-) (./Slides (2023.07.10).aux)
-\openout1 = `"Slides (2023.07.10).aux"'.
+) (./Slides (2023.08.14).aux)
+\openout1 = `"Slides (2023.08.14).aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -774,7 +776,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 25.
+Package hyperref Info: Link coloring ON on input line 39.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -784,62 +786,62 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count371
 )
-LaTeX Info: Redefining \ref on input line 25.
-LaTeX Info: Redefining \pageref on input line 25.
-LaTeX Info: Redefining \nameref on input line 25.
- (./Slides (2023.07.10).out) (./Slides (2023.07.10).out)
+LaTeX Info: Redefining \ref on input line 39.
+LaTeX Info: Redefining \pageref on input line 39.
+LaTeX Info: Redefining \nameref on input line 39.
+ (./Slides (2023.08.14).out) (./Slides (2023.08.14).out)
 \@outlinefile=\write5
-\openout5 = `"Slides (2023.07.10).out"'.
+\openout5 = `"Slides (2023.08.14).out"'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 25.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 39.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 25.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 39.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 25.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 25.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 25.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 25.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 39.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 25.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 25.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 25.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 39.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 25.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 25.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 25.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 39.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 25.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 25.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 39.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 25.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 39.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 25.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 25.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 25.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 25.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 25.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 39.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 25.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 25.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 39.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 39.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 25.
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 39.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 25.
+(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 39.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 25.
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 39.
  (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -855,149 +857,181 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 Package pgfplots notification 'compat/show suggested version=true': you might benefit from \pgfplotsset{compat=1.18} (current compat level: 1.9).
 
-(./Slides (2023.07.10).nav)
-Overfull \vbox (13.79993pt too high) detected at line 27
+(./Slides (2023.08.14).nav)
+Overfull \vbox (13.79993pt too high) detected at line 41
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 41.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
-File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Trying to load font information for U+msa on input line 41.
+<figures/fairfax/plot_fairfax_exempt_counts.pdf, id=23, 578.16pt x 307.1475pt>
+File: figures/fairfax/plot_fairfax_exempt_counts.pdf Graphic file (type pdf)
+<use figures/fairfax/plot_fairfax_exempt_counts.pdf>
+Package pdftex.def Info: figures/fairfax/plot_fairfax_exempt_counts.pdf  used on input line 45.
+(pdftex.def)             Requested size: 307.28987pt x 163.24669pt.
+ [2
+
+ <./figures/fairfax/plot_fairfax_exempt_counts.pdf>]
+<figures/fairfax/plot_fairfax_exempt_areas.pdf, id=34, 578.16pt x 307.1475pt>
+File: figures/fairfax/plot_fairfax_exempt_areas.pdf Graphic file (type pdf)
+<use figures/fairfax/plot_fairfax_exempt_areas.pdf>
+Package pdftex.def Info: figures/fairfax/plot_fairfax_exempt_areas.pdf  used on input line 49.
+(pdftex.def)             Requested size: 307.28987pt x 163.24669pt.
+ [3
+
+ <./figures/fairfax/plot_fairfax_exempt_areas.pdf>]
+<figures/fairfax/map_fairfax_2010-2020.pdf, id=46, 505.89pt x 433.62pt>
+File: figures/fairfax/map_fairfax_2010-2020.pdf Graphic file (type pdf)
+<use figures/fairfax/map_fairfax_2010-2020.pdf>
+Package pdftex.def Info: figures/fairfax/map_fairfax_2010-2020.pdf  used on input line 54.
+(pdftex.def)             Requested size: 307.29561pt x 248.55544pt.
+
+Overfull \vbox (1.0025pt too high) detected at line 54
+ []
+
+[4
+
+ <./figures/fairfax/map_fairfax_2010-2020.pdf>]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 66.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 41.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 66.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 41.
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 66.
  (/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
-) [2
+)
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 66.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
+File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) [5
+
+] [6
+
+] [7
 
 ]
-<figures/images/20230312 Rezoning News VA.png, id=31, 521.44812pt x 340.77313pt>
+<figures/images/20230312 Rezoning News VA.png, id=76, 521.44812pt x 340.77313pt>
 File: figures/images/20230312 Rezoning News VA.png Graphic file (type png)
 <use figures/images/20230312 Rezoning News VA.png>
-Package pdftex.def Info: figures/images/20230312 Rezoning News VA.png  used on input line 46.
+Package pdftex.def Info: figures/images/20230312 Rezoning News VA.png  used on input line 89.
 (pdftex.def)             Requested size: 307.28987pt x 200.8204pt.
- [3
+ [8
 
- <./figures/images/20230312 Rezoning News VA.png>] [4
+ <./figures/images/20230312 Rezoning News VA.png>] [9
 
 ]
-<figures/proffer_revenues.pdf, id=45, 578.16pt x 433.62pt>
+<figures/proffer_revenues.pdf, id=90, 578.16pt x 433.62pt>
 File: figures/proffer_revenues.pdf Graphic file (type pdf)
 <use figures/proffer_revenues.pdf>
-Package pdftex.def Info: figures/proffer_revenues.pdf  used on input line 62.
+Package pdftex.def Info: figures/proffer_revenues.pdf  used on input line 106.
 (pdftex.def)             Requested size: 307.28987pt x 230.46591pt.
 
-Overfull \vbox (13.70181pt too high) detected at line 62
- []
-
-[5
-
- <./figures/proffer_revenues.pdf>] [6
-
-]
-<figures/eventstudy_units1.pdf, id=68, 505.89pt x 505.89pt>
-File: figures/eventstudy_units1.pdf Graphic file (type pdf)
-<use figures/eventstudy_units1.pdf>
-Package pdftex.def Info: figures/eventstudy_units1.pdf  used on input line 79.
-(pdftex.def)             Requested size: 307.29561pt x 248.55211pt.
-
-Overfull \vbox (31.78801pt too high) detected at line 79
- []
-
-[7
-
- <./figures/eventstudy_units1.pdf>]
-<figures/synthdid.pdf, id=81, 578.16pt x 433.62pt>
-File: figures/synthdid.pdf Graphic file (type pdf)
-<use figures/synthdid.pdf>
-Package pdftex.def Info: figures/synthdid.pdf  used on input line 83.
-(pdftex.def)             Requested size: 307.28789pt x 248.55544pt.
-
-Overfull \vbox (31.79134pt too high) detected at line 83
- []
-
-[8
-
- <./figures/synthdid.pdf>] [9
-
-]
-<figures/images/rezoning_example1.png, id=104, 831.105pt x 771.88374pt>
-File: figures/images/rezoning_example1.png Graphic file (type png)
-<use figures/images/rezoning_example1.png>
-Package pdftex.def Info: figures/images/rezoning_example1.png  used on input line 98.
-(pdftex.def)             Requested size: 307.28987pt x 285.39229pt.
-
-Overfull \vbox (68.62819pt too high) detected at line 98
+Overfull \vbox (13.70181pt too high) detected at line 106
  []
 
 [10
 
- <./figures/images/rezoning_example1.png>]
-<figures/images/rezoning_example2.png, id=111, 867.24pt x 687.56876pt>
-File: figures/images/rezoning_example2.png Graphic file (type png)
-<use figures/images/rezoning_example2.png>
-Package pdftex.def Info: figures/images/rezoning_example2.png  used on input line 102.
-(pdftex.def)             Requested size: 307.28987pt x 243.62175pt.
+ <./figures/proffer_revenues.pdf>] [11
 
-Overfull \vbox (26.85765pt too high) detected at line 102
+]
+<figures/eventstudy_units1.pdf, id=113, 505.89pt x 505.89pt>
+File: figures/eventstudy_units1.pdf Graphic file (type pdf)
+<use figures/eventstudy_units1.pdf>
+Package pdftex.def Info: figures/eventstudy_units1.pdf  used on input line 123.
+(pdftex.def)             Requested size: 307.29561pt x 248.55211pt.
+
+Overfull \vbox (31.78801pt too high) detected at line 123
  []
 
-[11
+[12
+
+ <./figures/eventstudy_units1.pdf>]
+<figures/synthdid.pdf, id=125, 578.16pt x 433.62pt>
+File: figures/synthdid.pdf Graphic file (type pdf)
+<use figures/synthdid.pdf>
+Package pdftex.def Info: figures/synthdid.pdf  used on input line 127.
+(pdftex.def)             Requested size: 307.28789pt x 248.55544pt.
+
+Overfull \vbox (31.79134pt too high) detected at line 127
+ []
+
+[13
+
+ <./figures/synthdid.pdf>] [14
+
+]
+<figures/images/rezoning_example1.png, id=149, 831.105pt x 771.88374pt>
+File: figures/images/rezoning_example1.png Graphic file (type png)
+<use figures/images/rezoning_example1.png>
+Package pdftex.def Info: figures/images/rezoning_example1.png  used on input line 142.
+(pdftex.def)             Requested size: 307.28987pt x 285.39229pt.
+
+Overfull \vbox (68.62819pt too high) detected at line 142
+ []
+
+[15
+
+ <./figures/images/rezoning_example1.png>]
+<figures/images/rezoning_example2.png, id=156, 867.24pt x 687.56876pt>
+File: figures/images/rezoning_example2.png Graphic file (type png)
+<use figures/images/rezoning_example2.png>
+Package pdftex.def Info: figures/images/rezoning_example2.png  used on input line 146.
+(pdftex.def)             Requested size: 307.28987pt x 243.62175pt.
+
+Overfull \vbox (26.85765pt too high) detected at line 146
+ []
+
+[16
 
  <./figures/images/rezoning_example2.png>]
-<figures/plot_chesterfield_approvals.pdf, id=118, 578.16pt x 307.1475pt>
+<figures/plot_chesterfield_approvals.pdf, id=164, 578.16pt x 307.1475pt>
 File: figures/plot_chesterfield_approvals.pdf Graphic file (type pdf)
 <use figures/plot_chesterfield_approvals.pdf>
-Package pdftex.def Info: figures/plot_chesterfield_approvals.pdf  used on input line 106.
+Package pdftex.def Info: figures/plot_chesterfield_approvals.pdf  used on input line 150.
 (pdftex.def)             Requested size: 307.28987pt x 163.24669pt.
- [12
+ [17
 
  <./figures/plot_chesterfield_approvals.pdf>]
-<figures/plot_fairfaxco_submissions.pdf, id=129, 578.16pt x 307.1475pt>
+<figures/plot_fairfaxco_submissions.pdf, id=175, 578.16pt x 307.1475pt>
 File: figures/plot_fairfaxco_submissions.pdf Graphic file (type pdf)
 <use figures/plot_fairfaxco_submissions.pdf>
-Package pdftex.def Info: figures/plot_fairfaxco_submissions.pdf  used on input line 110.
+Package pdftex.def Info: figures/plot_fairfaxco_submissions.pdf  used on input line 154.
 (pdftex.def)             Requested size: 307.28987pt x 163.24669pt.
- [13
+ [18
 
- <./figures/plot_fairfaxco_submissions.pdf>] [14
+ <./figures/plot_fairfaxco_submissions.pdf>] [19
 
 ]
 \tf@nav=\write6
-\openout6 = `"Slides (2023.07.10).nav"'.
+\openout6 = `"Slides (2023.08.14).nav"'.
 
 \tf@toc=\write7
-\openout7 = `"Slides (2023.07.10).toc"'.
+\openout7 = `"Slides (2023.08.14).toc"'.
 
 \tf@snm=\write8
-\openout8 = `"Slides (2023.07.10).snm"'.
+\openout8 = `"Slides (2023.08.14).snm"'.
 
- (./Slides (2023.07.10).aux)
-Package rerunfilecheck Info: File `"Slides (2023.07.10)".out' has not changed.
+ (./Slides (2023.08.14).aux)
+Package rerunfilecheck Info: File `"Slides (2023.08.14)".out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 35859 strings out of 480247
- 867953 string characters out of 5896151
+ 35905 strings out of 480247
+ 869243 string characters out of 5896151
  1236058 words of memory out of 5000000
- 53070 multiletter control sequences out of 15000+600000
+ 53102 multiletter control sequences out of 15000+600000
  475852 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  128i,13n,122p,1895b,789s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/colin/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "Slides (2023.07.10).pdf" (14 pages, 729978 bytes).
+Output written on "Slides (2023.08.14).pdf" (19 pages, 1064725 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
- 29 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 252 PDF objects out of 1000 (max. 8388607)
+ 179 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 98 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -10,7 +10,7 @@ options(tigris_use_cache = TRUE, tigris_class = "sf")
 
 # Import ----
 sf_ff_rezone <- readRDS(
-    "derived/FairfaxCo/Rezoning Applications (2010-2020).Rds"
+    "derived/FairfaxCo/Rezoning GIS (2010-2020).Rds"
 )
 sf_va <- tigris::counties(state = "VA", cb = TRUE)
 sf_ff_roads <- tigris::roads(state = "VA", county = "059",
@@ -19,25 +19,17 @@ sf_ff_exempt <- st_read(dsn = paste0(
     "data/FairfaxCo/GIS/Comprehensive_Plan_Land_Units/",
     "Comprehensive_Plan_Land_Units.shp"
 ))
-sf_reston_tysons <- readRDS("derived/FairfaxCo/Reston and Tysons SF.Rds")
+sf_reston_tysons <- readRDS(
+    "derived/FairfaxCo/Reston and Tysons SF.Rds")
 
 # Clean ----
 # Tagging resi/commercial rezonings
 sf_ff_rezone <- subset(sf_ff_rezone, Status == "Approved")
 
 sf_ff_rezone <- subset(sf_ff_rezone,
-    select = c("CASE_NUMBE", "submit_date", "isResi", "geometry"))
-
-sf_ff_rezone <- sf_ff_rezone[!duplicated(
-    st_drop_geometry(sf_ff_rezone)
-), ]
-
-# Sanity Check ----
-dt_ff_rezone <- as.data.table(sf_ff_rezone)
-dt_ff_rezone[, nDup := .N, by = .(CASE_NUMBE)]
-
-# TRUE --> no rezoning case is amended from resi to non-resi use
-nrow(dt_ff_rezone[nDup > 1]) == 0
+    select = c("Unique ID", "isExempt", "submit_date", "isResi",
+    "geometry")
+)
 
 # Tagging exempt plan land areas
 v_exempt17 <- c("Merrifield Suburban Center",
@@ -53,14 +45,16 @@ v_exempt18 <- c("McLean CBC") # exempt from 3/14/2017
 v_exempt19 <- c("Lincolnia CBC") # exempt from 3/6/2018
 
 sf_ff_exempt <- subset(sf_ff_exempt,
-    PRIMARY_PL %in% v_exempt16 | grepl("SNA", PRIMARY_PL))
+    PRIMARY_PL %in% v_exempt17 | grepl("SNA", PRIMARY_PL))
 
 # Maps ----
 MapFairfax <- function(yr = NA) {
     if (is.na(yr)) {
-        sf_rezone <- sf_ff_rezone
+        sf_rezone <- subset(sf_ff_rezone, isResi == TRUE)
+        yr <- "2010-2020"
     } else {
-        sf_rezone <- subset(sf_ff_rezone, year(submit_date) == yr)
+        sf_rezone <- subset(sf_ff_rezone, isResi == TRUE &
+            year(submit_date) == yr)
     }
 
     ggplot() +
@@ -74,25 +68,24 @@ MapFairfax <- function(yr = NA) {
             data = subset(sf_ff_roads, RTTYP %in% c("I", "S")),
             color = "gray", size = 0.5
         ) +
-        geom_sf(data = sf_rezone, aes(fill = isResi)) +
-        labs(title = "Fairfax Rezonings",
+        geom_sf(data = sf_rezone, aes(fill = isExempt)) +
+        labs(title = "Fairfax Residential Rezonings",
              subtitle = paste0("Application Year ", yr)) +
-        scale_fill_discrete(name = "",
-            labels = c("Commercial", "Residential or Mixed")) +
+        scale_fill_discrete(name = "", labels = c("Affected", "Exempt")) +
         theme(
             axis.text.x = element_blank(), axis.text.y = element_blank(),
             axis.ticks.x = element_blank(), axis.ticks.y = element_blank(),
-            panel.background = element_blank(), text = element_text(size = 14)
+            panel.background = element_blank(),
+            text = element_text(size = 14),
+            legend.position = c(1, .8)
         )
+
+        ggsave(paste0("paper/figures/fairfax/map_fairfax_", yr, ".pdf"),
+            width = 7, height = 6)
 }
 
 print(MapFairfax())
 
-for (yr in 2014:2018) {
+for (yr in 2014:2019) {
     print(MapFairfax(yr))
 }
-
-# Superseded ----
-dt_fairfax <- dt_fairfax[Coordinates != "" & Status == "Approved"]
-dt_fairfax[, c("lon", "lat") := tstrsplit(Coordinates, ",")]
-sf_fairfax <- st_as_sf(dt_fairfax, coords = c("lon", "lat"), crs = 4326)

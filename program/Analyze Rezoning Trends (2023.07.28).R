@@ -49,8 +49,15 @@ sf_fairfax$submit_quarter <- floor_date(
 sf_fairfax$Area <- st_area(sf_fairfax)
 
 dt_fairfax <- as.data.table(sf_fairfax)
-dt_fairfax <- unique(dt_fairfax[, .(`Unique ID`, isResi, isExempt,
-    Status, submit_date, submit_quarter, Area)])
+dt_fairfax <- dt_fairfax[, .(Area = sum(Area)),
+    by = .(submit_quarter, submit_date, isResi, isExempt, Status,
+           `Unique ID`)]
+
+# Note: there are a handful of duplicates on `Unique ID` which are
+# all either missing `submit_quarter` or have Status == "Dismissed"
+
+dt_fairfax[, FY := year(submit_date) +
+    fifelse(month(submit_date) >= 7, 1, 0)]
 
 # All Rezoning Applications by Quarter
 ggplot(dt_fairfax[year(submit_quarter) >= 2014],
@@ -63,7 +70,7 @@ ggplot(dt_fairfax[year(submit_quarter) >= 2014],
         color = "gray", linetype = "dashed") +
     theme_light()
 
-ggsave("paper/figures/plot_fairfaxco_submissions.pdf",
+ggsave("paper/figures/fairfax/plot_fairfaxco_submissions.pdf",
     width = 8, height = 4.25
 )
 
@@ -82,40 +89,54 @@ ggplot(
     theme_light()
 
 # Exempt and non-exempt by fiscal year
-dt_fairfax[, FY := year(submit_date) +
-    fifelse(month(submit_date) >= 7, 1, 0)]
+dt_fairfax_yr <- CJ(
+    FY = seq(2010, 2020),
+    isExempt = c(TRUE, FALSE),
+    isResi = c(TRUE, FALSE)
+)
 
-# Note: panel is not balanced -- some years have zero rezonings
-dt_fairfax_yr <- dt_fairfax[, .(nApproved = .N,
-    Area = sum(Area)),
-    by = .(FY, isExempt, Status, isResi)]
+dt_fairfax_yr <- merge(dt_fairfax_yr,
+    dt_fairfax[Status == "Approved", .(nApproved = .N, Area = sum(Area)),
+        by = .(FY, isExempt, isResi)
+    ]
+, by = c("FY", "isExempt", "isResi"),
+    all.x = TRUE)
+dt_fairfax_yr[is.na(nApproved), nApproved := 0]
+dt_fairfax_yr[is.na(Area), Area := 0]
 
 # Counts
-ggplot(dt_fairfax_yr[Status == "Approved" & isResi == TRUE],
+ggplot(dt_fairfax_yr[isResi == TRUE],
     aes(x = FY, y = nApproved, group = isExempt,
         color = isExempt)) +
     geom_line(linetype = "dashed") +
     geom_point() +
     scale_x_continuous(breaks = seq(2010, 2020, 2)) +    
-    labs(y = "Number of Approved Rezonings", x = "Fiscal Year") +
+    labs(y = "Approved Rezonings (#)", x = "Fiscal Year") +
     geom_vline(xintercept = 2016, color = "gray",
         linetype = "dashed") +
-    theme_light()
+    scale_color_discrete(name = "", labels = c("Affected", "Exempt")) +
+    theme_light(base_size = 12) +
+    theme(legend.pos = c(.1, .9))
+ggsave("paper/figures/fairfax/plot_fairfax_exempt_counts.pdf",
+    width = 8, height = 4.25)
 
 # Areas
 ggplot(
-    dt_fairfax_yr[Status == "Approved" & isResi == TRUE],
+    dt_fairfax_yr[isResi == TRUE],
     aes(
         x = FY, y = Area, group = isExempt, color = isExempt
     )
 ) +
     geom_line(linetype = "dashed") +
     geom_point() +
-    labs(x = "Fiscal Year") +
+    labs(x = "Fiscal Year", y = "Approved Rezonings") +
     scale_x_continuous(breaks = seq(2010, 2020, 2)) +
     geom_vline(
         xintercept = 2016, color = "gray",
         linetype = "dashed"
     ) +
-    theme_light()
-
+    scale_color_discrete(name = "", labels = c("Affected", "Exempt")) +
+    theme_light(base_size = 12) +
+    theme(legend.position = c(.1, .9))
+ggsave("paper/figures/fairfax/plot_fairfax_exempt_areas.pdf",
+    width = 8, height = 4.25)
