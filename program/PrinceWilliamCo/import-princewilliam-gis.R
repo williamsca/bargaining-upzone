@@ -27,13 +27,12 @@ table(sf$BUILT_OUT)
 
 
 table(sf$FLEXIBLE_U) # flexible use, rarely populated
-
 table(sf$ESTIMATED_) # unclear, rarely population
-
 summary(sf$TOTAL_UNIT) # unclear what this is
 
 summary(sf$SFD) # single-family dwelling
 summary(sf$SFA) # single-family attached?
 summary(sf$MFA) # multi-family attached?
 
-
+# Save ----
+saveRDS(sf, "derived/PrinceWilliamCo/Rezoning GIS.Rds")

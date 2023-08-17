@@ -13,6 +13,30 @@ sf_fairfax <- readRDS(
     "derived/FairfaxCo/Rezoning GIS (2010-2020).Rds"
 )
 
+dt_pwc <- readRDS(
+    "derived\\PrinceWilliamCo\\Rezoning Applications (1958-2023).Rds)"
+)
+
+# Prince William County ----
+dt_pwc[, FY := year(submit_date) +
+    fifelse(month(submit_date) >= 7, 1, 0)]
+
+dt_pwc <- dt_pwc[, .(nCases = .N), by = .(isResi, isApproved, FY)]
+
+ggplot(
+    dt_pwc[isApproved == TRUE & FY >= 2010],
+    aes(x = FY, y = nCases, group = isResi, color = isResi)
+) +
+    geom_line(linetype = "dashed") +
+    scale_x_continuous(breaks = seq(2010, 2020, 2)) +
+    geom_point() +
+    theme_light() +
+    geom_vline(xintercept = 2016, color = "gray",
+        linewidth = 1, linetype = "dashed"
+    ) +
+    labs(y = "Approved Rezonings (#)", x = "Submission Date")
+
+
 # Chesterfield County ----
 dt_chesterfield[, final_date_yq := floor_date(final_date, "quarter")]
 
@@ -105,12 +129,12 @@ dt_fairfax_yr[is.na(nApproved), nApproved := 0]
 dt_fairfax_yr[is.na(Area), Area := 0]
 
 # Counts
-ggplot(dt_fairfax_yr[isResi == TRUE],
+ggplot(dt_fairfax_yr[isResi == FALSE],
     aes(x = FY, y = nApproved, group = isExempt,
         color = isExempt)) +
     geom_line(linetype = "dashed") +
     geom_point() +
-    scale_x_continuous(breaks = seq(2010, 2020, 2)) +    
+    scale_x_continuous(breaks = seq(2010, 2020, 2)) +
     labs(y = "Approved Rezonings (#)", x = "Fiscal Year") +
     geom_vline(xintercept = 2016, color = "gray",
         linetype = "dashed") +
@@ -122,7 +146,7 @@ ggsave("paper/figures/fairfax/plot_fairfax_exempt_counts.pdf",
 
 # Areas
 ggplot(
-    dt_fairfax_yr[isResi == TRUE],
+    dt_fairfax_yr[isResi == FALSE],
     aes(
         x = FY, y = Area, group = isExempt, color = isExempt
     )

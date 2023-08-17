@@ -4,10 +4,15 @@ How does bargaining between local governments and residential developers affect 
 # Proffer Reform Act of 2016
 Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
 
+# GOAL
+Create a panel of all rezoning applications in Virginia counties. Each rezoning should, at minimum, include:
+- Submission date
+- Type (residential, commercial, etc.)
+- Address or polygon
+- Status (approved, denied, withdrawn, etc.)
+
 # TODO
-- Convert pdf files to text and save locally; upload raw pdfs to OneDrive
 - Weight regressions by 2010 population
-- Experiment with different treatment designations 
 - Consider Ring Method (Diamond & McQuade (2019)) using location of large upzonings. Compare results to Hector Fernandez and Noemie Sportiche (2023).
 
 
