@@ -1,8 +1,15 @@
 # Geodatabase files
 data/Virginia_Parcel_Dataset_LocalSchemas_2023Q1.gdb/
 data/Virginia_Parcel_Dataset_2023Q1.gdb/
+data/AlbemarleCo/
+data/CarolineCo/
 data/ChesterfieldCo/
+data/FairfaxCo/BoS Minutes/
 data/FrederickCo/
+data/GoochlandCo/
+data/HanoverCo/
+data/IsleOfWightCo/
+data/LoudonCo/
 
 # Output files
 *.pdf
