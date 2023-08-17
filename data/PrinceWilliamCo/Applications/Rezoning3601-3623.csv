@@ -1,24 +1,24 @@
 Case Number,Type,Status,Project Name,Issued Date,Applied Date,Expiration Date,Completion Date,Start Date,Expected End Date,Completed Date,Finalized Date,Requested Date,Scheduled Date,Module Name,Address,Main Parcel
-"BCE2023-00337","Building Code Enforcement","Summons","","","12/27/2022","","","","","","","","","Code Case","13905 DUMFRIES RD MANASSAS VA 20112","7892-51-0786"
-"SUP2018-00043","Special Use - Special Use Permit","Under Review","American Trade Center","","04/18/2018","","","","","","","","","Plan","11408 BALLS FORD RD MANASSAS VA 20109","7597-73-4080"
-"PLNP2017-00057","Planning Projects","Active","James Madison Marketplace","","","","","03/07/2017","","","","","","Project","15410 JOHN MARSHALL HWY HAYMARKET VA 20169","7298-54-0948"
-"PLNP2016-00041","Planning Projects","Closed","TownPlace Suites on Shoppers Best","","","","","","","09/01/2016","","","","Project","14090 SHOPPERS BEST WAY WOODBRIDGE VA 22192","8292-51-9351"
-"PLNP2017-00031","Planning Projects","Active","Estates at Bren Landing","","","","","10/21/2016","","","","","","Project","",""
-"PLNP2016-00063","Planning Projects","Active","Eco-Nize Office","","","","","07/16/2019","","","","","","Project","14809 LEE HY GAINESVILLE VA 20155","7397-01-2696"
-"SUP2018-00042","Special Use - Special Use Permit","Under Review","American Trade Center","","04/18/2018","","","","","","","","","Plan","11408 BALLS FORD RD MANASSAS VA 20109","7597-73-7592"
-"ZON2019-01647","Zoning","Closed - Nolle Prosequi","","","04/01/2019","","","","","","10/16/2020","","","Code Case","8961 WELLINGTON RD MANASSAS VA 20109","7696-52-2407"
-"SUP2018-00041","Special Use - Special Use Permit","Under Review","American Trade Center","","04/18/2018","","","","","","","","","Plan","11408 BALLS FORD RD MANASSAS VA 20109","7597-73-7592"
-"PLNP2017-00046","Planning Projects","Active","University Village Proffer Amendment","","","","","01/25/2017","","","","","","Project","","7596-51-8465"
-"PLNP2018-00037","Planning Projects","Open","Dominion Valley Country Club Proffer Amendment","","","","","","","","","","","Project","5600 JAMES MADISON HWY HAYMARKET VA 20169","7298-49-4583"
-"ZON2019-01649","Zoning","Closed - Abated","","","04/01/2019","","","","","","06/27/2019","","","Code Case","8935 WELLINGTON RD MANASSAS VA 20109","7696-52-0717"
-"PLNP2016-00052","Planning Projects","Active","Apollo Enterprises, LLC","","","","","","","","","","","Project","12701 APOLLO DR WOODBRIDGE VA 22192","8093-81-6290"
-"PLNP2023-00035","Planning Projects","Active","Edge Car Wash, Sudley Road ","","","","","","","","","","","Project","8430 SUDLEY RD MANASSAS VA 20109","7696-85-1866"
-"PLNP2017-00042","Planning Projects","Active","USTA at Innovation (formerly SA Group)","","","","","01/10/2017","","","","","","Project","8995 ELLSWORTH RD MANASSAS VA 20110","7696-31-8611"
-"PLNP2023-00059","Planning Projects","Active","Bradley South ","","","","","","","","","","","Project","10791 DUMFRIES RD MANASSAS VA 20112","7794-87-1236"
-"ZON2019-01646","Zoning","Closed - Nolle Prosequi","","","04/01/2019","","","","","","02/21/2020","","","Code Case","8971 WELLINGTON RD MANASSAS VA 20109","7696-52-3508"
-"ZON2019-01648","Zoning","Closed - Abated","","","04/01/2019","","","","","","07/10/2019","","","Code Case","8947 WELLINGTON RD MANASSAS VA 20109","7696-52-1710"
-"ZNR2018-00107","Zoning Review - Interpretation/Determination","Closed","","","12/19/2017","","","","","","","","","Plan","8517 SUDLEY RD MANASSAS VA 20109","7696-95-0875"
-"PLNP2023-00046","Planning Projects","Active","HIGHPOINTE AT HAYMARKET","","","","","03/30/2023","","","","","","Project","6652 JAMES MADISON HWY HAYMARKET VA 20169","7297-69-1959"
-"ZON2022-01244","Zoning","Closed - Abated","","","02/11/2022","","","","","","05/04/2022","","","Code Case","18621 TRIANGLE ST TRIANGLE VA 22172","8188-64-3731"
-"PLNP2017-00034","Planning Projects","Active","Preserve at Long Branch (Mid-County Park & Estates)","","","","","10/27/2016","","","","","","Project","12775 CLASSIC SPRINGS DR NOKESVILLE VA 20181","7792-99-5798"
-"ZON2019-01621","Zoning","Closed - Abated","","","03/28/2019","","","","","","09/09/2020","","","Code Case","8826 WELLINGTON RD MANASSAS VA 20109","7696-42-1302"
+BCE2023-00337,Building Code Enforcement,Summons,,,12/27/2022,,,,,,,,,Code Case,13905 DUMFRIES RD MANASSAS VA 20112,7892-51-0786
+SUP2018-00043,Special Use - Special Use Permit,Under Review,American Trade Center,,04/18/2018,,,,,,,,,Plan,11408 BALLS FORD RD MANASSAS VA 20109,7597-73-4080
+PLNP2017-00057,Planning Projects,Active,James Madison Marketplace,,,,,03/07/2017,,,,,,Project,15410 JOHN MARSHALL HWY HAYMARKET VA 20169,7298-54-0948
+PLNP2016-00041,Planning Projects,Closed,TownPlace Suites on Shoppers Best,,,,,,,09/01/2016,,,,Project,14090 SHOPPERS BEST WAY WOODBRIDGE VA 22192,8292-51-9351
+PLNP2017-00031,Planning Projects,Active,Estates at Bren Landing,,,,,10/21/2016,,,,,,Project,,
+PLNP2016-00063,Planning Projects,Active,Eco-Nize Office,,,,,07/16/2019,,,,,,Project,14809 LEE HY GAINESVILLE VA 20155,7397-01-2696
+SUP2018-00042,Special Use - Special Use Permit,Under Review,American Trade Center,,04/18/2018,,,,,,,,,Plan,11408 BALLS FORD RD MANASSAS VA 20109,7597-73-7592
+ZON2019-01647,Zoning,Closed - Nolle Prosequi,,,04/01/2019,,,,,,10/16/2020,,,Code Case,8961 WELLINGTON RD MANASSAS VA 20109,7696-52-2407
+SUP2018-00041,Special Use - Special Use Permit,Under Review,American Trade Center,,04/18/2018,,,,,,,,,Plan,11408 BALLS FORD RD MANASSAS VA 20109,7597-73-7592
+PLNP2017-00046,Planning Projects,Active,University Village Proffer Amendment,,,,,01/25/2017,,,,,,Project,,7596-51-8465
+PLNP2018-00037,Planning Projects,Open,Dominion Valley Country Club Proffer Amendment,,,,,,,,,,,Project,5600 JAMES MADISON HWY HAYMARKET VA 20169,7298-49-4583
+ZON2019-01649,Zoning,Closed - Abated,,,04/01/2019,,,,,,06/27/2019,,,Code Case,8935 WELLINGTON RD MANASSAS VA 20109,7696-52-0717
+PLNP2016-00052,Planning Projects,Active,"Apollo Enterprises, LLC",,,,,,,,,,,Project,12701 APOLLO DR WOODBRIDGE VA 22192,8093-81-6290
+PLNP2023-00035,Planning Projects,Active,"Edge Car Wash, Sudley Road ",,,,,,,,,,,Project,8430 SUDLEY RD MANASSAS VA 20109,7696-85-1866
+PLNP2017-00042,Planning Projects,Active,USTA at Innovation (formerly SA Group),,,,,01/10/2017,,,,,,Project,8995 ELLSWORTH RD MANASSAS VA 20110,7696-31-8611
+PLNP2023-00059,Planning Projects,Active,Bradley South ,,,,,,,,,,,Project,10791 DUMFRIES RD MANASSAS VA 20112,7794-87-1236
+ZON2019-01646,Zoning,Closed - Nolle Prosequi,,,04/01/2019,,,,,,02/21/2020,,,Code Case,8971 WELLINGTON RD MANASSAS VA 20109,7696-52-3508
+ZON2019-01648,Zoning,Closed - Abated,,,04/01/2019,,,,,,07/10/2019,,,Code Case,8947 WELLINGTON RD MANASSAS VA 20109,7696-52-1710
+ZNR2018-00107,Zoning Review - Interpretation/Determination,Closed,,,12/19/2017,,,,,,,,,Plan,8517 SUDLEY RD MANASSAS VA 20109,7696-95-0875
+PLNP2023-00046,Planning Projects,Active,HIGHPOINTE AT HAYMARKET,,,,,03/30/2023,,,,,,Project,6652 JAMES MADISON HWY HAYMARKET VA 20169,7297-69-1959
+ZON2022-01244,Zoning,Closed - Abated,,,02/11/2022,,,,,,05/04/2022,,,Code Case,18621 TRIANGLE ST TRIANGLE VA 22172,8188-64-3731
+PLNP2017-00034,Planning Projects,Active,Preserve at Long Branch (Mid-County Park & Estates),,,,,10/27/2016,,,,,,Project,12775 CLASSIC SPRINGS DR NOKESVILLE VA 20181,7792-99-5798
+ZON2019-01621,Zoning,Closed - Abated,,,03/28/2019,,,,,,09/09/2020,,,Code Case,8826 WELLINGTON RD MANASSAS VA 20109,7696-42-1302
