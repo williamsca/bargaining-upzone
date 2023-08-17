@@ -4,6 +4,9 @@ data/Virginia_Parcel_Dataset_2023Q1.gdb/
 data/ChesterfieldCo/
 data/FrederickCo/
 
+# Output files
+*.pdf
+
 # History files
 .Rhistory
 .Rapp.history

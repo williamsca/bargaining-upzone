@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>20170330</pubdate>
+                <title>Zoning</title>
+                <geoform>vector digital data</geoform>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>This dataset comprises Zoning District classifications for Prince William County, Virginia.</abstract>
+            <purpose>This dataset is to be used for data analysis and cartographic overlay. This layer is used by and for multiple Prince William County applications including County Mapper, Demographic Mapper, GPIN Centered map and for internal mapping projects.</purpose>
+            <supplinf>Any determination of topography or contours or any depiction of physical improvements, property lines or boundaries is for general information only and shall not be used for the design modification or construction of improvements to real property or for flood plain determination.</supplinf>
+        </descript>
+        <status>
+            <progress>In work</progress>
+            <update>As needed</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-77.719597</westbc>
+                <eastbc>-77.21135</eastbc>
+                <northbc>38.943297</northbc>
+                <southbc>38.499835</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>ISO 19115 Topic Categories</themekt>
+                <themekey>planningCadastre</themekey>
+            </theme>
+            <theme>
+                <themekt>Zoning</themekt>
+                <themekey>Zoning</themekey>
+                <themekey>Planning</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>United States of America</placekey>
+                <placekey>Prince William County</placekey>
+                <placekey>VA</placekey>
+                <placekey>Virginia</placekey>
+                <placekey>Prince William</placekey>
+                <placekey>Commonwealth of Virginia</placekey>
+            </place>
+        </keywords>
+        <accconst>The Prince William County GIS database is copyrighted and digital map data will be released under a license-to-use agreement.</accconst>
+        <useconst>All data Pursuant to Section 54.1-402, paragraph C of the Code of Virginia which is quoted below, since the data was not created, nor is it maintained under the supervision of a licensed land surveyor. “Any determination of topography or contours, or any depiction of physical improvements, property lines or boundaries is for general information only and shall not be used for the design, modification, or construction of improvements to real property or for flood plain determination.”This data is for reference purposes only and should not be used for design work.Prince William County hereby disclaims any and all liability or responsibility for any damage, injury, loss, claim, or lawsuit arising from any error, inaccuracy or other problem with either the digital maps contained with digital data delivery or digital data delivered. The User hereby releases the County, its officers, agents and all employees and volunteers, from all liability, damage, claims, injuries or suits arising from any such error, inaccuracy or problem. Furthermore, the User agrees to indemnify and hold harmless the County and its officers, agents and all employees and volunteers, from any and all claims, liability damages, injuries and suits arising from the use of the digital maps and data therein or thereon by the User, its employees or assignees, or by any third parties.Prince William County reserves the right to deny access to certain datasets.The digital maps and data provided hereunder are provided &amp;quot;as is&amp;quot; and the County expressly disclaims all warranties, UCC and otherwise, express or implied including warranties as to accuracy of the digital maps, data and merchantability and fitness for a particular purpose, and further expressly disclaims responsibility for all incidental, consequential or special damages arising out of or in connection with the use or performance of the digital maps and data.User acknowledges this disclaimer of warranty and expressly waives all warranties express or implied and waives any right of claim for damages incidental, consequential or special, arising out of or in connection with the use or performance of the digital maps and data.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Prince William County Department of Information Technology, GIS Division</cntorg>
+                    <cntper>GIS Service Counter</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>5 County Complex Court, Suite 140</address>
+                    <city>Woodbridge</city>
+                    <state>VA</state>
+                    <postal>22192</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>703-792-6840</cntvoice>
+                <cntfax>703-792-7192</cntfax>
+                <cntemail>pwcmaps@pwcgov.org</cntemail>
+                <hours>8 am to 4 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <datacred>Prince William County Office of Planning, Geographic Information Systems Department.</datacred>
+        <native>Version 6.2 (Build 9200) ; Esri ArcGIS 10.4.1.5713</native>
+    </idinfo>
+    <dataqual>
+        <logic>Data is represented within the National Map Accuracy Standards. Original planimetric map data was provided at a scale of 1:2400. Zoning Districts were recompiled, in accordance with National Map Accuracy Standards, from source materials with varying levels of accuracy. Source was coded with each Zoning District and Zoning Districts are updated as needed.</logic>
+        <complete>These data represent Zoning District features as determined by the Prince William County Office of Planning. The data is updated as necessary by the Prince William County Office of Planning, GIS Department.</complete>
+        <posacc>
+            <horizpa>
+                <horizpar>Data is represented within the National Map Accuracy Standards. Original planimetric map data was provided at a scale of 1:2400. Zoning Areas were recompiled, in accordance with National Map Accuracy Standards, from source materials with varying levels of accuracy. Source was coded with each Zoning Area and Zoning Areas are updated as needed.</horizpar>
+            </horizpa>
+        </posacc>
+    </dataqual>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>2061</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>VECTOR.Zoning</enttypl>
+                <enttypd>Polygon layer representing Zoning Classifications</enttypd>
+                <enttypds>Geodatabase Design Document, ESRI</enttypds>
+            </enttyp>
+            <attr>
+                <attrlabl>ESTIMATED_UNIT_FIELDS</attrlabl>
+                <attrdef>Yes/No Field - Estimated Units, Null if unavailable</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <codesetd>
+                        						
+                        <codesetn>dYesNo</codesetn>
+                        						
+                        <codesets>PWC Office Of Planning</codesets>
+                        					
+                    </codesetd>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>ACREAGE</attrlabl>
+                <attrdef>Number of acres within the area of rezoning. This is entered based upon case information and may be different than Shape Area.</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Number of acres within the area of rezoning. This is entered based upon case information and may be different than Shape Area.</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>SFD</attrlabl>
+                <attrdef>Maximum number of single family detached units possible.</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Maximum number of single family detached units possible.</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>ZONE_TYPE</attrlabl>
+                <attrdef>Zoning Type</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>1</edomv>
+                        						
+                        <edomvd>Business</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <udom>See above</udom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>2</edomv>
+                        						
+                        <edomvd>Residential</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>5</edomv>
+                        						
+                        <edomvd>Agricultural</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>6</edomv>
+                        						
+                        <edomvd>Office</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>3</edomv>
+                        						
+                        <edomvd>Industrial</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>7</edomv>
+                        						
+                        <edomvd>Countwide</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>4</edomv>
+                        						
+                        <edomvd>Mixed</edomvd>
+                        						
+                        <edomvds>PWC Office of Planning</edomvds>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>CLASS</attrlabl>
+                <attrdef>Zoning Classification - Full listing can be found in the PWC Domain Dictionary</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <codesetd>
+                        						
+                        <codesetn>dBusiness</codesetn>
+                        						
+                        <codesets>PWC Office of Planning</codesets>
+                        					
+                    </codesetd>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>OPEN_SPACE</attrlabl>
+                <attrdef>Is open space present? Yes/No field</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <codesetd>
+                        						
+                        <codesetn>dYesNo</codesetn>
+                        						
+                        <codesets>PWC Office of Planning</codesets>
+                        					
+                    </codesetd>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>INDUSTRIAL_SQ_FT</attrlabl>
+                <attrdef>If it is industrial the square foot amount is provided.  Not industrial if null.</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Number of industrial square feet allowed within the area of rezoning. This is entered based upon case information</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>INST_EDU_SQ_FT</attrlabl>
+                <attrdef>Number of industrial/educational square feet allowed within the area of rezoning. This is entered based upon case information</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>See above</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>ZONECASE1</attrlabl>
+                <attrdef>Zoning Case Number</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Zoning case number associated with the revision/case</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>MFA</attrlabl>
+                <attrdef>Maximum number of multi-family units possible.</attrdef>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>See above</udom>
+                    				
+                </attrdomv>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>TOTAL_SQ_FT</attrlabl>
+                <attrdefs>PWC Office of Planning</attrdefs>
+                <attrmfrq>011</attrmfrq>
+            </attr>
+            <attr>
+                <attrlabl>OFFICE_SQ_FT</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ESTIMATED_FAR</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.AREA</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>FLEXIBLE_SQ_FT</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>FLEXIBLE_UNIT_TYPE</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.LEN</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>NAME</attrlabl>
+                <attrdef>Zoning Case Name</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>RETAIL_COMMERCIAL_SQ_FT</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BUILT_OUT</attrlabl>
+                <attrdef>Is district built to capacity?</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>Y</edomv>
+                        						
+                        <edomvd>Yes</edomvd>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>N</edomv>
+                        						
+                        <edomvd>No</edomvd>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>PROFFERS</attrlabl>
+                <attrdef>Proffers status</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>Y</edomv>
+                        						
+                        <edomvd>Yes</edomvd>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                    				
+                </attrdomv>
+                <attrdomv>
+                    					
+                    <edom>
+                        						
+                        <edomv>N</edomv>
+                        						
+                        <edomvd>No</edomvd>
+                        					
+                    </edom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>TOTAL_UNITS</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>SFA</attrlabl>
+                <attrdef>Maximum number of townhouse (single family attached) units possible.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>Coordinates defining the features.</udom>
+                    				
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>UPDATE_DATE</attrlabl>
+                <attrdef>Date of last update</attrdef>
+                <attrdefs>PWC</attrdefs>
+                <attrdomv>
+                    					
+                    <udom>mm/dd/yyyy</udom>
+                    				
+                </attrdomv>
+            </attr>
+        </detailed>
+    </eainfo>
+    <metainfo>
+        <metd>20170330</metd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Prince William County Department of Information Technology, GIS Division</cntorg>
+                    <cntper>GIS Service Counter</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>5 County Complex Court, Suite 140</address>
+                    <city>Woodbridge</city>
+                    <state>VA</state>
+                    <postal>22192</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>703-792-6840</cntvoice>
+                <cntfax>703-792-7192</cntfax>
+                <cntemail>pwcmaps@pwcgov.org</cntemail>
+                <hours>8 am to 4 pm</hours>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>

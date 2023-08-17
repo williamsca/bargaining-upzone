@@ -72,6 +72,8 @@ Prince George County
 
 Prince William County
 - Archive: https://www.pwcva.gov/department/planning-office/proffer-administration
+- Suggested cash proffers (2014): https://eservice.pwcgov.org/documents/bocs/agendas/2014/0617/11-A.pdf
+- Zoning: https://gisdata-pwcgov.opendata.arcgis.com/datasets/PWCGOV::zoning/about
 
 Stafford County 
 - Rezonings: https://pob.staffordcountyva.gov/PublicAccess/
