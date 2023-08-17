@@ -48,3 +48,5 @@ ggplot(data = sf) +
     ) +
     labs(y = "Number of Approved Rezonings", x = "Approval Date") +
     theme_light()
+
+

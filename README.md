@@ -80,6 +80,9 @@ Stafford County
 
 Williamsburg City
 
+# Abstract
+> Statewide zoning reforms may fail to increase housing supply if local governments can respond along unregulated margins. I study the policy response of Virginia counties to a 2016 statewide reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of housing units allowed through residential upzonings fell by [X]\%. In counties which were partially exempted from the reform, however, total activity remained constant as localities substituted upzoning from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should directly subsidize the number of newly-permitted housing units.
+
 
 # Model
 Locality chooses vector $\vec{a}$ of upzonings over parcels $j \in \{1, ..., J\}$ to maximize welfare: 
@@ -95,7 +98,7 @@ Estimate by GMM where $p_j$, $q_j$ are data, $v_j$ is T1EV, and assume a paramet
 Simplifications:
 - Myopic planner ignores dynamics. Upzoning is irreversible $\implies$ option value to waiting
 - Can't observe $p_j$ for parcels that are not upzoned (but might look at denied applications)
-- Locality may have market power $\implies$ $p_j$ is endogenous
+- Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
 
 # Data
 GIS Data:
@@ -105,6 +108,10 @@ This paper may be a useful reference for outcomes:
 - https://ishanbhatt42.github.io/files/paper_adu.pdf
 
 ## Meetings
+Leora (8/15/2023)
+- Is this a first-stage for something?
+- Try to write an abstract, research question (not just "Effect of Policy on ...")
+
 Leora (8/1/2023)
 - Need to know if building is happening on recently rezoning properties
 - Call up neighborhood services in Charlottesville and ask about the process of rezoning
