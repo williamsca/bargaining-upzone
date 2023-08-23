@@ -31,7 +31,9 @@ ggplot(
     scale_x_continuous(breaks = seq(2010, 2020, 2)) +
     geom_point() +
     theme_light() +
-    geom_vline(xintercept = 2016, color = "gray",
+    geom_vline(
+        xintercept = 2016,
+        color = "gray",
         linewidth = 1, linetype = "dashed"
     ) +
     labs(y = "Approved Rezonings (#)", x = "Submission Date")

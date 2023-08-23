@@ -69,18 +69,19 @@ MapFairfax <- function(yr = NA) {
             color = "gray", size = 0.5
         ) +
         geom_sf(data = sf_rezone, aes(fill = isExempt)) +
-        labs(title = "Fairfax Residential Rezonings",
-             subtitle = paste0("Application Year ", yr)) +
+        labs(title = "Fairfax Co.",
+             subtitle = paste0("Residential Rezonings (", yr, ")")) +
         scale_fill_discrete(name = "", labels = c("Affected", "Exempt")) +
         theme(
             axis.text.x = element_blank(), axis.text.y = element_blank(),
             axis.ticks.x = element_blank(), axis.ticks.y = element_blank(),
             panel.background = element_blank(),
             text = element_text(size = 14),
-            legend.position = c(1, .8)
+            legend.position = c(1, .8),
+            plot.title = element_text(hjust = 0, vjust = -2) 
         )
 
-        ggsave(paste0("paper/figures/fairfax/map_fairfax_", yr, ".pdf"),
+        ggsave(paste0("paper/figures/fairfax/map_fairfax_", yr, ".png"),
             width = 7, height = 6)
 }
 
