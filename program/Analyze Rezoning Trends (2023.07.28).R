@@ -13,8 +13,9 @@ sf_fairfax <- readRDS(
     "derived/FairfaxCo/Rezoning GIS (2010-2020).Rds"
 )
 
-dt_pwc <- readRDS(
-    "derived\\PrinceWilliamCo\\Rezoning Applications (1958-2023).Rds)"
+dt_pwc <- readRDS(here(
+    "derived", "PrinceWilliamCo", "Rezoning Applications (1958-2023).Rds"
+    )
 )
 
 # Prince William County ----
@@ -24,7 +25,7 @@ dt_pwc[, FY := year(submit_date) +
 dt_pwc <- dt_pwc[, .(nCases = .N), by = .(isResi, isApproved, FY)]
 
 ggplot(
-    dt_pwc[isApproved == TRUE & FY >= 2010],
+    dt_pwc[isApproved == TRUE & FY %between% c(2010, 2020)],
     aes(x = FY, y = nCases, group = isResi, color = isResi)
 ) +
     geom_line(linetype = "dashed") +
@@ -36,7 +37,7 @@ ggplot(
         color = "gray",
         linewidth = 1, linetype = "dashed"
     ) +
-    labs(y = "Approved Rezonings (#)", x = "Submission Date")
+    labs(y = "Approved Rezonings (#)", x = "Submission Fiscal Year")
 
 
 # Chesterfield County ----
@@ -129,33 +130,34 @@ dt_fairfax_yr <- merge(dt_fairfax_yr,
     all.x = TRUE)
 dt_fairfax_yr[is.na(nApproved), nApproved := 0]
 dt_fairfax_yr[is.na(Area), Area := 0]
+dt_fairfax_yr[, Area := set_units(Area, "acre")]
 
 # Counts
-ggplot(dt_fairfax_yr[isResi == FALSE],
+ggplot(dt_fairfax_yr[isResi == TRUE],
     aes(x = FY, y = nApproved, group = isExempt,
         color = isExempt)) +
     geom_line(linetype = "dashed") +
     geom_point() +
     scale_x_continuous(breaks = seq(2010, 2020, 2)) +
-    labs(y = "Approved Rezonings (#)", x = "Fiscal Year") +
+    labs(y = "Approved Rezonings (#)", x = "Submission Fiscal Year") +
     geom_vline(xintercept = 2016, color = "gray",
         linetype = "dashed") +
     scale_color_discrete(name = "", labels = c("Affected", "Exempt")) +
     theme_light(base_size = 12) +
     theme(legend.pos = c(.1, .9))
-ggsave("paper/figures/fairfax/plot_fairfax_exempt_counts.pdf",
+ggsave("paper/figures/fairfax/plot_fairfax_exempt_counts.png",
     width = 8, height = 4.25)
 
 # Areas
 ggplot(
-    dt_fairfax_yr[isResi == FALSE],
+    dt_fairfax_yr[isResi == TRUE],
     aes(
         x = FY, y = Area, group = isExempt, color = isExempt
     )
 ) +
     geom_line(linetype = "dashed") +
     geom_point() +
-    labs(x = "Fiscal Year", y = "Approved Rezonings") +
+    labs(x = "Submission Fiscal Year", y = "Approved Rezonings") +
     scale_x_continuous(breaks = seq(2010, 2020, 2)) +
     geom_vline(
         xintercept = 2016, color = "gray",
@@ -164,5 +166,5 @@ ggplot(
     scale_color_discrete(name = "", labels = c("Affected", "Exempt")) +
     theme_light(base_size = 12) +
     theme(legend.position = c(.1, .9))
-ggsave("paper/figures/fairfax/plot_fairfax_exempt_areas.pdf",
+ggsave("paper/figures/fairfax/plot_fairfax_exempt_areas.png",
     width = 8, height = 4.25)

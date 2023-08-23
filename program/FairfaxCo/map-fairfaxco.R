@@ -70,7 +70,7 @@ MapFairfax <- function(yr = NA) {
         ) +
         geom_sf(data = sf_rezone, aes(fill = isExempt)) +
         labs(title = "Fairfax Co.",
-             subtitle = paste0("Residential Rezonings (", yr, ")")) +
+             subtitle = paste0("Res. Rezonings (", yr, ")")) +
         scale_fill_discrete(name = "", labels = c("Affected", "Exempt")) +
         theme(
             axis.text.x = element_blank(), axis.text.y = element_blank(),
@@ -78,7 +78,8 @@ MapFairfax <- function(yr = NA) {
             panel.background = element_blank(),
             text = element_text(size = 14),
             legend.position = c(1, .8),
-            plot.title = element_text(hjust = 0, vjust = -2) 
+            plot.title = element_text(hjust = 0, vjust = -2),
+            plot.subtitle = element_text(hjust = 0, vjust = -3) 
         )
 
         ggsave(paste0("paper/figures/fairfax/map_fairfax_", yr, ".png"),

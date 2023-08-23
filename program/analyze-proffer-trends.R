@@ -55,14 +55,15 @@ dt_top <- dt[FY < 2022]
 dt_top <- dt_top[, .(`Cash Proffer Revenue` = sum(`Cash Proffer Revenue`),
     `Local Revenue` = sum(`Local Revenue`)), by = .(Name, Post, isTown)]
 
-dt_top[, `Proffer Share (%)` := `Cash Proffer Revenue` / `Local Revenue` * 100]
-setorder(dt_top, -`Proffer Share (%)`)
+dt_top[, `Proffer Revenue Share (%)` := `Cash Proffer Revenue` / `Local Revenue` * 100]
+setorder(dt_top, -`Proffer Revenue Share (%)`)
 dt_top <- dt_top[isTown == FALSE & Post == FALSE]
 dt_top[, Rank := .I]
 
 xt_top <- xtable(dt_top[isTown == FALSE & Post == FALSE & Rank <= 10,
-              .(Rank, Name, `Cash Proffer Revenue`, `Local Revenue`,
-                `Proffer Share (%)`)],
-       digits = c(0, 0, 0, 0, 0, 1))
+              .(Rank, Name, `Proffer Revenue Share (%)`)],
+       digits = c(0, 0, 0, 1))
 
-print.xtable(xt_top, type = "html", file = here("paper", "tables", "top_proffer_localities.html"))
+print.xtable(xt_top, type = "html",
+    file = here("paper", "tables", "top_proffer_localities.html"),
+    include.rownames = FALSE)
