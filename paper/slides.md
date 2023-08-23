@@ -51,11 +51,11 @@ SFD|Transportation|16,780|
 
 ---
 
-![bg cover 100%](figures/proffer_revenues.png)
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/proffer_revenues.png)
 
 ---
 
-![bg cover 100%](figures/proffer_share.png)
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/proffer_share.png)
 
 ---
 
@@ -83,15 +83,15 @@ SFD|Transportation|16,780|
 
 ---
 
-![bg cover 70%](figures/fairfax/map_fairfax_2010-2020.png)
+![bg cover 70%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/map_fairfax_2010-2020.png)
 
 ---
 
-![bg cover 100%](figures/fairfax/plot_fairfax_exempt_counts.png)
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/plot_fairfax_exempt_counts.png)
 
 ---
 
-![bg cover 100%](figures/fairfax/plot_fairfax_exempt_areas.png)
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/plot_fairfax_exempt_areas.png)
 
 ---
 # Discussion
@@ -124,11 +124,11 @@ where
 Optimum characterized by $J$ inequalities: 
 $$a_j = 1 \iff p_j + v_{j}q_j > C(q_j + Q_{-j}) - C(Q_{-j})$$
 
-Assume $v_j \sim N(0, \sigma^2)$ and $C(q) = k_1 q + k_2 q^2$
+Assume $v_j \sim N(0, \sigma^2)$ and $C(q) = k_1 q + k_2 q^2$.
 
 ### Assumptions
 - Ignores dynamics (upzoning is irreversible)
-- Hard to know $p_j$ for parcels that are not upzoned
+- Hard (impossible?) to know $p_j$ for parcels that are not upzoned
 - Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
 
 ---
@@ -136,4 +136,5 @@ Assume $v_j \sim N(0, \sigma^2)$ and $C(q) = k_1 q + k_2 q^2$
 # Next Steps
 
 1. Collect systematic data on proffers ($p_j$) and upzonings ($a_j$) for VA counties
-2. Is this IO paper? Ask IO faculty how to model developer demand, municipality supply of upzoning
+2. Ask IO faculty how to model developer demand, municipality supply of upzoning
+3. Are there more typical Public Econ questions here?
