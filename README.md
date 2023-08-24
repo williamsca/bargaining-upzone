@@ -31,9 +31,11 @@ Chesapeake City
 - BoS Minutes archive begins in 2020
 
 Chesterfield County
+- Applications: https://aca-prod.accela.com/CHESTERFIELD/Cap/CapHome.aspx?module=Planning&TabName=Planning&TabList=Home%7C0%7CBuilding%7C1%7CEnforcement%7C2%7CEnvEngineering%7C3%7CPlanning%7C4%7CUtilities%7C5%7CeReview%7C6%7CCurrentTabIndex%7C4
+- Scraped GIS rezoning data from website
 - Archive: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
 - Downloaded all 'Summary' files for 2014-2019. May need to download 'Minutes' for further information. 
-- Parsed 'Summary' files to get rezoning cases (see '.../derived/BoS Summary Raw Rezonings.csv'). TODO: filter to actual rezonings and manually input relevant details: old and new zoning codes, acreage, proffers, etc.
+- Parsed 'Summary' files to get rezoning cases (see '.../derived/BoS Summary Raw Rezonings.csv')
 
 Fairfax City
 - Archive: https://www.fairfaxva.gov/services/about-us/city-meetings
