@@ -6,6 +6,7 @@ paginate: true
 backgroundColor: #fff
 title: Taxing the Upzone
 author: Colin Williams
+math: mathjax
 ---
 # **Municipal Responses to Zoning Reform:**
 
