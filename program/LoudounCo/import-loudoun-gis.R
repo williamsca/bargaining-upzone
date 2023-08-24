@@ -5,10 +5,17 @@
 # https://www.loudoun.gov/3362/LOLA
 
 rm(list = ls())
-pacman::p_load(here, data.table, sf, ggplot2, lubridate)
+library(here)
+library(data.table)
+library(sf)
+library(ggplot2)
+library(lubridate)
+library(stringr)
 
 # Import ----
-sf <- st_read("data/LoudonCo/GIS/Zoning_Shp_20230809/ZONING_POLY.shp")
+sf <- st_read(here("data", "LoudounCo",
+    "GIS", "Zoning_Shp_20230809", "ZONING_POLY.shp")
+)
 
 # Clean ----
 names(sf) <- c("zone", "ordinance", "spec_code", "project_number",
@@ -18,6 +25,9 @@ names(sf) <- c("zone", "ordinance", "spec_code", "project_number",
 
 sf$approval_quarter <- floor_date(sf$approval_date, "quarter")
 
+sf$year_zmap <- str_extract(sf$project_number, "\\d{4}")
+
+View(subset(sf, select = c("project_number", "year_zmap", "approval_date")))
 
 # Inspect ----
 
@@ -48,5 +58,3 @@ ggplot(data = sf) +
     ) +
     labs(y = "Number of Approved Rezonings", x = "Approval Date") +
     theme_light()
-
-

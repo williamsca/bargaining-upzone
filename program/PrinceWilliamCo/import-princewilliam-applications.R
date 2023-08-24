@@ -3,35 +3,24 @@
 # https://egcss.pwcgov.org/SelfService#/search?m=1&fm=1&ps=10&pn=1&em=true&st=rezoning
 
 rm(list = ls())
-
 library(here)
 library(data.table)
 library(lubridate)
 
 # Import ----
-l_files <- list.files("data/PrinceWilliamCo/Applications",
-    pattern = "*.csv", full.names = TRUE)
+dt_pwc <- fread(here(
+    "data", "PrinceWilliamCo",
+    "Applications", "Rezoning1-1000.csv"
+))
 
-read_application <- function(file) {
-    dt <- read.csv(file)
-    dt$path <- file
-    return(dt)
-}
+names(dt_pwc) <- gsub(" ", ".", names(dt_pwc))
 
-dt <- rbindlist(lapply(l_files, read_application), fill = TRUE)
+dt_pwc[, FIPS := 51153]
 
-# Clean ----
-# Drop minor modifications, comp plan amendments, proffer amendments
-v_types <- c("Rezoning - Mixed Use", "Rezoning - Non-Residential",
-    "Rezoning - Residential")
-dt <- dt[Type %in% v_types]
-
-dt[, isResi := (Type != "Rezoning - Non-Residential")]
-dt[, isApproved := (Status == "Approved")]
-
-dt[, submit_date := mdy(Applied.Date)]
-nrow(dt[is.na(submit_date)]) == 0
+dt_pwc[, submit_date := mdy(Applied.Date)]
 
 # Save ----
-saveRDS(dt, paste0("derived/PrinceWilliamCo/Rezoning Applications (",
-    paste(range(year(dt$submit_date)), collapse = "-"), ").Rds"))
+saveRDS(dt_pwc, here(
+    "derived", "PrinceWilliamCo",
+    "Rezoning Applications.Rds"
+))

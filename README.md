@@ -68,6 +68,7 @@ Loudoun County
 - BoS Minutes: https://www.loudoun.gov/3426/Board-of-Supervisors-Meetings-Packets
 - GIS data: https://www.loudoun.gov/3362/LOLA
 - 8/7/2023: Emailed Loudoun Co Office of Mapping and GIS to request zoning map amendment database. Downloaded budget documents that map proffer revenue to rezoning cases. Conveniently, it looks like they track whether a zoning application is exempt from the 2016 reform or not, but need to confirm.
+- Applications: https://loudouncountyvaeg.tylerhost.net/prod/selfservice#/search
 
 Manasses City
 
