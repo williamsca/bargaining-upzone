@@ -52,11 +52,12 @@ Frederick County
 - Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
 - Downloaded all "Rezoning" resolutions for FY2014-2020
 - Downloaded BOS minutes for 2014 and 2015
-- TODO: use 'tesseract' to parse pdfs, see ".../program/Parse FrederickCo Rezonings (2023.07.28).R'
+- TODO: hand parse resolutions (see '.../derived/FrederickCo/resolutions.csv')
 
 Goochland County
 - Archive: https://goochlandcountyva.iqm2.com/Citizens/calendar.aspx?From=1%2f1%2f2023&To=12%2f31%2f2023
 - Downloaded BoS minutes for 2014-2019
+- TODO: import GIS files and check if it has link to application archived application PDFs
 
 Hanover County
 - Archive: http://weblink.mccinnovations.com/WebLink/?dbid=5
