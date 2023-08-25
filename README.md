@@ -4,7 +4,7 @@ How does bargaining between local governments and residential developers affect 
 # Proffer Reform Act of 2016
 Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
 
-# GOAL
+# Goal
 Create a panel of all rezoning applications in Virginia counties. Each rezoning should, at minimum, include:
 - Submission date
 - Type (residential, commercial, etc.)
@@ -12,84 +12,15 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
-- Weight regressions by 2010 population
-- Consider Ring Method (Diamond & McQuade (2019)) using location of large upzonings. Compare results to Hector Fernandez and Noemie Sportiche (2023).
+- Determine whether Loudoun rezonings are in exempt areas using GIS file
+- hand parse Frederick resolutions (see '.../derived/FrederickCo/resolutions.csv')
 
+# Done
+- Add Fairfax to combined application file
 
 ## Data:
-Albemarle County
-- Archive: https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle
-- Downloaded all ZMA files (staff reports, correspondence, and ordinances) 
 
-Caroline County
-- Archive: https://co.caroline.va.us/AgendaCenter/Board-of-Supervisors-2
-- No BoS minutes
-- Can get Planning Commission Actions: https://co.caroline.va.us/636/2014-Summary-of-Actions
-
-Chesapeake City
-- Archive: https://www.cityofchesapeake.net/1162/Agendas-Video
-- BoS Minutes archive begins in 2020
-
-Chesterfield County
-- Applications: https://aca-prod.accela.com/CHESTERFIELD/Cap/CapHome.aspx?module=Planning&TabName=Planning&TabList=Home%7C0%7CBuilding%7C1%7CEnforcement%7C2%7CEnvEngineering%7C3%7CPlanning%7C4%7CUtilities%7C5%7CeReview%7C6%7CCurrentTabIndex%7C4
-- Scraped GIS rezoning data from website
-- Archive: https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch
-- Downloaded all 'Summary' files for 2014-2019. May need to download 'Minutes' for further information. 
-- Parsed 'Summary' files to get rezoning cases (see '.../derived/BoS Summary Raw Rezonings.csv')
-
-Fairfax City
-- Archive: https://www.fairfaxva.gov/services/about-us/city-meetings
-- Downloaded "Reporter" html files for 2014-2020m2
-- TODO: "Reporter" files are parsed in '.../derived/FairfaxCity/BoS Reporter Raw Rezonings'. There are only five. Details are scant --> need to look in official minutes.
-- NOTE: Only comprehensive for 'Regular Meetings'. May need to go back for 'Special Meetings'.
-
-Fairfax County
-- Rezoning Applications Archive: https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx. See '.../program/Scrape Rezoning Applications (2023.07.12).py'
-- Downloaded BoS minutes for 2013-2020m2: https://www.fairfaxcounty.gov/boardofsupervisors/board-meeting-summaries
-- Downloaded Rezoning GIS files: https://www.fairfaxcounty.gov/maps/open-geospatial-data
-
-Frederick County
-- Archive: https://fclfweblinkpub.fcva.us/WebLink/?dbid=0&repo=Frederick-County-Admin
-- Downloaded all "Rezoning" resolutions for FY2014-2020
-- Downloaded BOS minutes for 2014 and 2015
-- TODO: hand parse resolutions (see '.../derived/FrederickCo/resolutions.csv')
-
-Goochland County
-- Archive: https://goochlandcountyva.iqm2.com/Citizens/calendar.aspx?From=1%2f1%2f2023&To=12%2f31%2f2023
-- Downloaded BoS minutes for 2014-2019
-- TODO: import GIS files and check if it has link to application archived application PDFs
-
-Hanover County
-- Archive: http://weblink.mccinnovations.com/WebLink/?dbid=5
-- Downloaded BoS minutes for 2014-2019
-
-Isle of Wight County
-- Archive: https://lfweb.isleofwightus.net/WebLink/Browse.aspx?id=422&dbid=1&repo=CountyAdministration
-- Downloaded BoS minutes for 2013-2019
-
-Loudoun County
-- BoS Minutes: https://www.loudoun.gov/3426/Board-of-Supervisors-Meetings-Packets
-- GIS data: https://www.loudoun.gov/3362/LOLA
-- 8/7/2023: Emailed Loudoun Co Office of Mapping and GIS to request zoning map amendment database. Downloaded budget documents that map proffer revenue to rezoning cases. Conveniently, it looks like they track whether a zoning application is exempt from the 2016 reform or not, but need to confirm.
-- Applications: https://loudouncountyvaeg.tylerhost.net/prod/selfservice#/search
-
-Manasses City
-
-Manasses Park City
-
-Prince George County
-
-Prince William County
-- Archive: https://www.pwcva.gov/department/planning-office/proffer-administration
-- Suggested cash proffers (2014): https://eservice.pwcgov.org/documents/bocs/agendas/2014/0617/11-A.pdf
-- Zoning: https://gisdata-pwcgov.opendata.arcgis.com/datasets/PWCGOV::zoning/about
-
-Stafford County 
-- Rezonings: https://pob.staffordcountyva.gov/PublicAccess/
-- Search "Planning Department (Conditional Use Permits.....)" 
-- Care: date filter appears not to work properly
-
-Williamsburg City
+See [Data Notes](notes/rezoning-data-notes.md) for details on how I collected the data.
 
 # Abstract
 > Statewide zoning reforms may fail to increase housing supply if local governments can respond along unregulated margins. I study the policy response of Virginia counties to a 2016 statewide reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of housing units allowed through residential upzonings fell by [X]\%. In counties which were partially exempted from the reform, however, total activity remained constant as localities substituted upzoning from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should directly subsidize the number of newly-permitted housing units.

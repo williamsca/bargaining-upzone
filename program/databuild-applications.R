@@ -9,12 +9,15 @@ rm(list = ls())
 library(here)
 library(data.table)
 library(lubridate)
+library(sf)
+library(units)
 
 v_cols <- c(
     "FIPS", "Case.Number", "submit_date",
-    "Project.Name", "Status", "Acres", "Address", "Main.Parcel",
+    "Project.Name", "Status", "Area", "Address", "Main.Parcel",
     "Description", "final_date", "isResi", "zoning_old",
-    "zoning_new", "hasCashProffer", "isExempt"
+    "zoning_new", "hasCashProffer", "isExempt",
+    "Coordinates", "gis_object"
 )
 
 # Import ----
@@ -58,6 +61,8 @@ dt_chesterfield <-
         by.y = c("Record Number", "Status")
   )
 
+dt_chesterfield[, Area := set_units(Acres, acres)]
+
 dt_chesterfield[, FIPS := "51041"]
 
 dt_chesterfield[, submit_date := mdy(Date)]
@@ -90,19 +95,55 @@ setnames(
 
 dt_chesterfield <- dt_chesterfield[, ..v_cols]
 
-
-# TODO: define 'isResi' based on zoning_new
-
 uniqueN(dt_chesterfield$Case.Number) == nrow(dt_chesterfield)
 nrow(dt_chesterfield[is.na(submit_date)]) == 0
 
+# Fairfax County
+sf_ff <- readRDS(here("derived", "FairfaxCo",
+    "Rezoning GIS (2010-2020).Rds"))
+
+sf_ff$Area <- set_units(st_area(sf_ff), acres)
+sf_ff$FIPS <- "51059"
+
+dt_ff <- as.data.table(sf_ff)
+dt_ff <- dt_ff[!is.na(submit_date)]
+
+dt_ff[is.na(`Exact Address`)]
+
+setnames(dt_ff,
+    c("ZONECODE", "Unique ID", "Exact Address",
+      "OBJECTID.x"),
+    c("zoning_new", "Case.Number", "Address",
+      "gis_object"))
+
+uniqueN(dt_ff[, .(Case.Number, gis_object)]) == nrow(dt_ff)
+nrow(dt_ff[is.na(submit_date)]) == 0
+
 # Combine ----
-dt <- rbindlist(list(dt_loudoun, dt_pwc, dt_chesterfield), fill = TRUE)
+dt <- rbindlist(list(
+    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff
+), fill = TRUE, use.names = TRUE)
 
 # Filter to standard columns
 dt <- dt[, ..v_cols]
 
 dt[, isApproved := grepl("Approved", Status)]
 
+dt[is.na(isExempt), isExempt := FALSE]
 
-saveRDS(dt, here("derived", "County Rezonings.Rds"))
+# Sanity Checks & Coverage ----
+nrow(dt[is.na(submit_date)]) == 0
+uniqueN(dt[, .(Case.Number, gis_object)]) == nrow(dt)
+
+count_missing <- function(x) {
+    if (class(x) %in% c("units", "Date")) {
+        x <- as.numeric(x)
+    }
+
+    return((1 - sum(is.na(x) | x == "") / length(x)) * 100)
+}
+
+dt_missing <- dt[, lapply(.SD, count_missing)]
+dt_missing <- melt(dt_missing, value.name = "pct_populated")
+
+saveRDS(dt, here("derived", "county-rezonings.Rds"))

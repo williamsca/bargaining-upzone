@@ -13,48 +13,26 @@ library(lubridate)
 library(stringr)
 
 # Import ----
-sf <- st_read(here("data", "LoudounCo",
+sf_zone <- st_read(here("data", "LoudounCo",
     "GIS", "Zoning_Shp_20230809", "ZONING_POLY.shp")
 )
 
-# Clean ----
-names(sf) <- c("zone", "ordinance", "spec_code", "project_number",
-    "update_number", "approval_date", "zone_ord", "maint_task_id",
-    "gis_start_date", "gis_end_date", "upd_sou", "upd_use", "upd_date",
-    "shape_star", "shape_stle", "geometry")
+sf_sap <- st_union(st_read(here(
+    "data", "LoudounCo", "GIS",
+    "Loudoun_Small_Area_Plans",
+    "Loudoun_Small_Area_Plans.shp"
+)))
 
-sf$approval_quarter <- floor_date(sf$approval_date, "quarter")
+sf_sap <- st_transform(sf_sap, st_crs(sf_zone))
+sf_sap <- st_sf(Name = "Loudoun Small Area Plans",
+    geometry = sf_sap)
 
-sf$year_zmap <- str_extract(sf$project_number, "\\d{4}")
+sf <- st_join(sf_zone, st_buffer(sf_sap, dist = 200),
+    join = st_covered_by)
 
-View(subset(sf, select = c("project_number", "year_zmap", "approval_date")))
+# Exempt after Loudoun Small Area Plans adopted
+# on 12/6/2016
+sf$isExempt <- (!is.na(sf$Name))
 
-# Inspect ----
-
-# Map
-ggplot() +
-    geom_sf(data = sf, fill = "lightgray") +
-    theme(
-        axis.text.x = element_blank(), axis.text.y = element_blank(),
-        axis.ticks.x = element_blank(), axis.ticks.y = element_blank(),
-        panel.background = element_blank()
-    )
-
-# Unique ID (none)
-dt <- as.data.table(sf)
-dt[, c("geometry", "shape_star", "shape_stle") := NULL]
-
-uniqueN(dt)
-nrow(sf)
-
-# Approval Date Histogram
-ggplot(data = sf) +
-    geom_bar(aes(x = approval_quarter)) +
-    scale_x_date(limits = c(ymd("2010/01/01", "2023/08/09")),
-        date_breaks = "1 year", date_labels = "%Y") +
-    geom_vline(
-        xintercept = as.numeric(ymd("2016-07-01")),
-        color = "gray", linewidth = 1, linetype = "dashed"
-    ) +
-    labs(y = "Number of Approved Rezonings", x = "Approval Date") +
-    theme_light()
+saveRDS(sf, here("derived", "LoudounCo",
+                 "Rezoning GIS.Rds"))

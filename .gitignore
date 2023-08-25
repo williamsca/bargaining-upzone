@@ -1,4 +1,4 @@
-# Geodatabase files
+# Large raw data files (see OneDrive)
 data/Virginia_Parcel_Dataset_LocalSchemas_2023Q1.gdb/
 data/Virginia_Parcel_Dataset_2023Q1.gdb/
 data/AlbemarleCo/
@@ -13,6 +13,10 @@ data/LoudonCo/
 
 # Output files
 *.pdf
+
+# I expect this to change often as
+# I add more counties and process more data
+derived/county-rezonings.Rds
 
 # History files
 .Rhistory
