@@ -1,14 +1,40 @@
-Case.Number,Project.Name,Status,final_date,Acres,Address,Main.Parcel,zoning_old,zoning_new,isResi,hasCashProffer,submit_date,Description,Type
-02-15,Blue Ridge Youth Soccer Association,Approved,07/08/15,20.54,,77-A-26A,B2,RA,0,,04/07/15,,Rezoning
-03-17,Rutherford Crossing,Approved,07/12/17,22.16,,43-A-99,M1,B2,0,1,05/09/17,,Rezoning
-05-17,O-N Minerals/dba CARMEUSE LIME & STONE AMENDMENT TO REZONING #03-06,Denied,07/25/18,394.2,,"83-A-109, 90-A-23",EM,EM,0,1,10/17/17,,Amend Proffers
-01-18,STONEWALL IV,Approved,08/08/18,88.91,,"43-A-21, 43-A-21B, 43-A-24",RA,M1,0,1,04/20/19,,Rezoning
-01-14,COWPERWOOD FEMA,Approved,08/13/14,1.24,,,RA,B2,0,,06/20/14,,Rezoning
-05-17,O-N Minerals/dba CARMEUSE LIME & STONE AMENDMENT TO REZONING #03-06,Approved,09/12/18,394.2,,"83-A-109, 90-A-23",EM,EM,0,1,10/17/17,,Amend Proffers
-02-18,ST. PAUL’S ON THE HILL,Approved,09/12/18,4.971,,,RP,RP,0,,07/20/18,,Unknown
-02-19,"CB Ventures, LLC",Approved,09/11/19,1.04,,43-A-48E,B2,B3,0,1,07/03/17,,Rezoning
-05-15,"Hiatt Run Condos, LLC",Approved,08/28/15,3,,44-A-17,RA,RP,0,0,09/11/15,,Rezoning
-08-15,McCann Office Park,Approved,11/12/15,154.923,,"44-A-25A, 44-A-25B, 44-A-40",RA,RA,0,1,09/23/15,,Rezoning
-08-15,McCann Office Park,Approved,11/12/15,6.18,,"44-A-25A, 44-A-25B, 44-A-40",RA,B2,0,1,09/23/15,,Rezoning
-08-15,McCann Office Park,Approved,11/12/15,11.729,,"44-A-25A, 44-A-25B, 44-A-40",RA,M1,0,1,09/23/15,,Rezoning
-08-15,McCann Office Park,Approved,11/12/15,93.246,,"44-A-25A, 44-A-25B, 44-A-40",RA,OM,0,1,09/23/15,,Rezoning
+Case.Number,Part,Project.Name,Status,final_date,Acres,Address,Main.Parcel,zoning_old,zoning_new,isResi,hasCashProffer,submit_date,Description,Type,bos_votes_for,bos_votes_against
+02-15,1,Blue Ridge Youth Soccer Association,Approved,07/08/15,20.54,,77-A-26A,B2,RA,0,,04/07/15,,Rezoning,,
+03-17,1,Rutherford Crossing,Approved,07/12/17,22.16,,43-A-99,M1,B2,0,1,05/09/17,,Rezoning,,
+05-17,1,O-N Minerals/dba CARMEUSE LIME & STONE AMENDMENT TO REZONING #03-06,Denied,07/25/18,394.2,,"83-A-109, 90-A-23",EM,EM,0,1,10/17/17,,Amend Proffers,,
+01-18,1,STONEWALL IV,Approved,08/08/18,88.91,,"43-A-21, 43-A-21B, 43-A-24",RA,M1,0,1,04/20/19,,Rezoning,,
+01-14,1,COWPERWOOD FEMA,Approved,08/13/14,1.24,,,RA,B2,0,,06/20/14,,Rezoning,,
+05-17,1,O-N Minerals/dba CARMEUSE LIME & STONE AMENDMENT TO REZONING #03-06,Approved,09/12/18,394.2,,"83-A-109, 90-A-23",EM,EM,0,1,10/17/17,,Amend Proffers,,
+02-18,1,ST. PAUL’S ON THE HILL,Approved,09/12/18,4.971,,,RP,RP,0,,07/20/18,,Other,,
+02-19,1,"CB Ventures, LLC",Approved,09/11/19,1.04,,43-A-48E,B2,B3,0,1,07/03/17,,Rezoning,,
+05-15,1,"Hiatt Run Condos, LLC",Approved,08/28/15,3,,44-A-17,RA,RP,0,0,09/11/15,,Rezoning,,
+08-15,1,McCann Office Park,Approved,11/12/15,154.923,,"44-A-25A, 44-A-25B, 44-A-40",RA,RA,0,1,09/23/15,,Rezoning,,
+08-15,2,McCann Office Park,Approved,11/12/15,6.18,,"44-A-25A, 44-A-25B, 44-A-40",RA,B2,0,1,09/23/15,,Rezoning,,
+08-15,3,McCann Office Park,Approved,11/12/15,11.729,,"44-A-25A, 44-A-25B, 44-A-40",RA,M1,0,1,09/23/15,,Rezoning,,
+08-15,4,McCann Office Park,Approved,11/12/15,93.246,,"44-A-25A, 44-A-25B, 44-A-40",RA,OM,0,1,09/23/15,,Rezoning,,
+09-15,1,Artillery Business Center,Approved,12/09/15,,,,,,,,09/28/15,,Amend Proffers,,
+04-18,1,Tasker Road & Warrior Drive Commercial Properties,Approved,02/13/19,20.24,,"75-A-104, 75-A-104E",B2,B2,0,1,10/18/18,,Amend Proffers,,
+04-18,2,Tasker Road & Warrior Drive Commercial Properties,Approved,02/13/19,0.62,,"75-A-104, 75-A-104E",RP,RP,0,1,10/18/18,,Amend Proffers,,
+04-19,1,"Perry Properties, LLC",Approved,01/08/20,6.18,,64-A-158,M1,B2,0,1,10/22/19,,Rezoning,,
+07-15,1,"Woodside Land Company, LLC",Approved,12/09/15,20,,34-A-6D,RA,M2,0,1,09/24/15,,Rezoning,7,0
+04-17,1,Carbaugh Business Center,Approved,12/13/17,107.21,831 Shady Elm Road,"74-A-68, 74-A-69",RA,M1,0,1,10/06/17,,Rezoning,7,0
+06-15,1,Opequon Crossing,Approved,12/09/15,177.71,,"55-A-201, 55-A-212, 55-A-212A",,,1,,,Seeking to establish credit values reflective of the extensive transportation improvements previously proffered with the Haggerty property (14-05 and revision 04-07) and the Opequon Crossing (rezoning 12-07) rezoning applications.,Amend Proffers,6,0
+10-15,1,Heritage Commons,Approved,12/09/15,96.28,,"64-A-10, 64-A-12, 64-A-150",B2,R4,1,1,10/23/15,,Rezoning,7,0
+10-15,2,Heritage Commons,Approved,12/09/15,54,,"64-A-10, 64-A-12, 64-A-150",RP,R4,1,1,10/23/15,,Rezoning,7,0
+10-15,3,Heritage Commons,Approved,12/09/15,0.31,,"64-A-10, 64-A-12, 64-A-150",RA,R4,1,1,10/23/15,,Rezoning,7,0
+03-18,1,Carpers Valley Industrial Park,Denied,03/13/19,122.18,,"64-A-86, 64-A-87",R4,M1,0,1,10/12/18,,Rezoning,2,5
+11-15,1,Freedom Manor,Approved,01/13/16,33.6819,,"64-A-23, 64-A-20, 64-A-19",RP,RP,1,1,11/06/15,,Amend Proffers,6,0
+11-15,2,Freedom Manor,Approved,01/13/16,13.8596,,"64-A-23, 64-A-20, 64-A-19",RA,RP,1,1,11/06/15,,Rezoning,6,0
+07-19,1,"Gentle Harvest, LC",Denied,02/12/20,1.204,,64-A-1C,B2,B3,0,1,11/21/19,,Rezoning,0,7
+06-17,1,"K&J Investments, LC",Approved,02/14/18,2.459,,"43-A-147, 43-A-148, 43-A-149, 43-A-151C",RA,B2,0,1,12/21/17,,Rezoning,7,0
+06-17,2,"K&J Investments, LC",Approved,02/14/18,0.936,,"43-A-147, 43-A-148, 43-A-149, 43-A-151C",RP,B2,0,1,12/21/17,,Rezoning,7,0
+06-17,3,"K&J Investments, LC",Approved,02/14/18,0.488,,"43-A-147, 43-A-148, 43-A-149, 43-A-151C",M1,B2,0,1,12/21/17,,Rezoning,7,0
+06-19,1,"Winchester Medical Center, Inc",Denied,03/11/20,,,,,,,,10/25/19,,Amend Proffers,2,5
+02-16,1,I-81 West Business Park,Approved,04/27/16,36.676,,"33-A-113, 33-A-124, 33-A-114B",RA,B2,0,1,02/22/16,,Rezoning,7,0
+02-16,2,I-81 West Business Park,Approved,04/27/16,45.453,,"33-A-113, 33-A-124, 33-A-114B",RA,B3,0,1,02/22/16,,Rezoning,7,0
+02-16,3,I-81 West Business Park,Approved,04/27/16,73.36,,"33-A-113, 33-A-124, 33-A-114B",RA,M1,0,1,02/22/16,,Rezoning,7,0
+03-16,1,"Shawnee Canning Company, Inc",Approved,05/25/16,2.1,,,RA,B2,0,1,01/20/16,,Rezoning,7,0
+01-15,1,Blackburn Commerce Center,Approved,05/13/15,92.066,,63-A-80I,RA,M1,0,1,03/09/15,,Rezoning,7,0
+06-16,1,Sempeles Property,Approved,06/22/16,,,,,,0,,06/03/16,,Amend Proffers,5,0
+03-15,1,"MBC, LC",Approved,06/10/15,2.36,,,B3,B2,0,1,05/08/15,,Rezoning,7,0
+03-15,2,"MBC, LC",Approved,06/10/15,0.6,,,MH1,B2,0,1,05/08/15,,Rezoning,7,0

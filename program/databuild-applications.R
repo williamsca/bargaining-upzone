@@ -13,11 +13,11 @@ library(sf)
 library(units)
 
 v_cols <- c(
-    "FIPS", "Case.Number", "submit_date",
+    "FIPS", "Case.Number", "Part", "submit_date",
     "Project.Name", "Status", "Area", "Address", "Main.Parcel",
     "Description", "final_date", "isResi", "zoning_old",
     "zoning_new", "hasCashProffer", "isExempt",
-    "Coordinates", "gis_object"
+    "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against"
 )
 
 # Import ----
@@ -67,6 +67,7 @@ dt_chesterfield[, FIPS := "51041"]
 
 dt_chesterfield[, submit_date := mdy(Date)]
 
+# TODO: assign Part := {1,2} based on Part column
 dt_chesterfield[, nObs := .N, by = CaseNum]
 dt_chesterfield <- dt_chesterfield[
     nObs == 1 | Part %in% c("1 OF 2", "Part 1")
@@ -119,9 +120,17 @@ setnames(dt_ff,
 uniqueN(dt_ff[, .(Case.Number, gis_object)]) == nrow(dt_ff)
 nrow(dt_ff[is.na(submit_date)]) == 0
 
+# Frederick County
+dt_fred <- fread(here("derived", "FrederickCo", "resolutions.csv"))
+
+dt_fred[, `:=`(final_date = mdy(final_date),
+               submit_date = mdy(submit_date))]
+
+dt_fred[, FIPS := "51069"]
+
 # Combine ----
 dt <- rbindlist(list(
-    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff
+    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff, dt_fred
 ), fill = TRUE, use.names = TRUE)
 
 # Filter to standard columns
@@ -133,7 +142,7 @@ dt[is.na(isExempt), isExempt := FALSE]
 
 # Sanity Checks & Coverage ----
 nrow(dt[is.na(submit_date)]) == 0
-uniqueN(dt[, .(Case.Number, gis_object)]) == nrow(dt)
+uniqueN(dt[, .(Case.Number, gis_object, Part)]) == nrow(dt)
 
 count_missing <- function(x) {
     if (class(x) %in% c("units", "Date")) {
