@@ -127,6 +127,9 @@ dt_fred[, `:=`(final_date = mdy(final_date),
                submit_date = mdy(submit_date))]
 
 dt_fred[, FIPS := "51069"]
+dt_fred[, Area := set_units(Acres, acres)]
+
+dt_fred <- dt_fred[Type == "Rezoning"]
 
 # Combine ----
 dt <- rbindlist(list(
@@ -152,7 +155,17 @@ count_missing <- function(x) {
     return((1 - sum(is.na(x) | x == "") / length(x)) * 100)
 }
 
-dt_missing <- dt[, lapply(.SD, count_missing)]
-dt_missing <- melt(dt_missing, value.name = "pct_populated")
+dt_missing <- dt[, lapply(.SD, count_missing), by = FIPS]
+dt_range <- dt[, .(`First Submit` = year(min(submit_date)),
+                   `Last Submit` = year(max(submit_date))), by = FIPS]
+dt_missing <- merge(dt_missing, dt_range, by = "FIPS")
+
+dt_missing <- melt(dt_missing, id.vars = c("FIPS"),
+    value.name = "pct_populated")
+
+dt_missing <- dcast(dt_missing, variable ~ FIPS,
+    value.var = "pct_populated")
+print(dt_missing)
+
 
 saveRDS(dt, here("derived", "county-rezonings.Rds"))
