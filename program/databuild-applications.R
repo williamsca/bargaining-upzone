@@ -5,6 +5,8 @@
 # TODO: parse 'Description' field for Loudoun, PWC to determine
 # old and new zoning code
 
+# NOTE: 'final_date' for Loudoun is not confirmed
+
 rm(list = ls())
 library(here)
 library(data.table)
@@ -20,14 +22,21 @@ v_cols <- c(
     "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against"
 )
 
+dt_cw <- fread(here("crosswalks", "va-counties.csv"),
+    keepLeadingZeros = TRUE)
+dt_cw[, FIPS := paste0("51", FIPS)]
+
 # Import ----
 # Loudoun County
 dt_loudoun <- readRDS(here("derived", "LoudounCo",
-    "Rezoning Applications.Rds"))
+    "Rezoning GIS.Rds"))
 
 dt_loudoun <- dt_loudoun[Type == "Zoning Map Amendment - ZCASE"]
+dt_loudoun$geometry <- NULL
 
-uniqueN(dt_loudoun$Case.Number) == nrow(dt_loudoun)
+# TODO: check that 'Description' is consistent with 'zoning_new'
+
+uniqueN(dt_loudoun[, .(Case.Number, Part)]) == nrow(dt_loudoun)
 nrow(dt_loudoun[is.na(submit_date)]) == 0
 
 # Prince William County
@@ -94,8 +103,6 @@ setnames(
       "Description", "hasCashProffer", "Project.Name")
 )
 
-dt_chesterfield <- dt_chesterfield[, ..v_cols]
-
 uniqueN(dt_chesterfield$Case.Number) == nrow(dt_chesterfield)
 nrow(dt_chesterfield[is.na(submit_date)]) == 0
 
@@ -139,7 +146,13 @@ dt <- rbindlist(list(
 # Filter to standard columns
 dt <- dt[, ..v_cols]
 
+# Merge in county names + population
+dt <- merge(dt, dt_cw, by = "FIPS", all.x = TRUE)
+
 dt[, isApproved := grepl("Approved", Status)]
+
+dt[, FY := year(submit_date) +
+    fifelse(month(submit_date) >= 7, 1, 0)]
 
 dt[is.na(isExempt), isExempt := FALSE]
 
@@ -155,17 +168,17 @@ count_missing <- function(x) {
     return((1 - sum(is.na(x) | x == "") / length(x)) * 100)
 }
 
-dt_missing <- dt[, lapply(.SD, count_missing), by = FIPS]
+dt_missing <- dt[, lapply(.SD, count_missing), by = County]
 dt_range <- dt[, .(`First Submit` = year(min(submit_date)),
-                   `Last Submit` = year(max(submit_date))), by = FIPS]
-dt_missing <- merge(dt_missing, dt_range, by = "FIPS")
+                   `Last Submit` = year(max(submit_date))), by = County]
+dt_missing <- merge(dt_missing, dt_range, by = "County")
 
-dt_missing <- melt(dt_missing, id.vars = c("FIPS"),
+dt_missing <- melt(dt_missing, id.vars = c("County"),
     value.name = "pct_populated")
 
-dt_missing <- dcast(dt_missing, variable ~ FIPS,
+dt_missing <- dcast(dt_missing, variable ~ County,
     value.var = "pct_populated")
-print(dt_missing)
+View(dt_missing)
 
 
 saveRDS(dt, here("derived", "county-rezonings.Rds"))

@@ -3,20 +3,41 @@
 # proffers.
 
 rm(list = ls())
-pacman::p_load(here, data.table, ggplot2, lubridate, units, sf)
+library(data.table)
+library(ggplot2)
+library(units)
+library(here)
 
 # Import ----
-dt_chesterfield <- readRDS(
-    "derived/ChesterfieldCo/GIS Rezonings (2023.07.28).RDS"
-)
-sf_fairfax <- readRDS(
-    "derived/FairfaxCo/Rezoning GIS (2010-2020).Rds"
-)
+dt <- readRDS(here("derived", "county-rezonings.Rds"))
 
-dt_pwc <- readRDS(here(
-    "derived", "PrinceWilliamCo", "Rezoning Applications (1958-2023).Rds"
-    )
-)
+# Aggregate over parcels to application level
+dt_app <- dt[,
+    .(Area = sum(Area), isResi = max(isResi), isExempt = max(isExempt)),
+    by = .(FIPS, Case.Number, Status,
+           County, submit_date, County, Population2022,
+           isApproved, FY)]
+
+uniqueN(dt_app$Case.Number) == nrow(dt_app)
+
+
+# Plots ----
+v_counties <- unique(dt$County)
+
+# Approved Residential Rezonings by Application Year
+ggplot(
+    dt[isApproved == TRUE & FY %between% c(2010, 2020) & isResi == TRUE],
+    aes(x = FY, group = isExempt)) +
+    geom_bar(aes(fill = isExempt), position = "stack") +
+    geom_vline(xintercept = 2016, color = "gray",
+        linetype = "dashed") +
+    labs(
+        y = "Number of Approved Rezonings",
+        x = "Submission Fiscal Year"
+    ) +
+    scale_x_continuous(breaks = seq(2010, 2020, 2))
+    theme_light()
+
 
 # Prince William County ----
 dt_pwc[, FY := year(submit_date) +

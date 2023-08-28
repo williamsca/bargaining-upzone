@@ -5,51 +5,36 @@
 rm(list = ls())
 library(here)
 library(data.table)
+library(sf)
+library(units)
 
 # Import ----
 sf <- readRDS(here("derived", "LoudounCo",
-                   "Rezoning GIS.Rds"))
+                   "Zoning GIS.Rds"))
 
-dt <- readRDS("Rezoning Applications.Rds")
+sf$Area <- set_units(st_area(sf), acres)
+
+dt <- readRDS(here("derived", "LoudounCo", "Rezoning Applications.Rds"))
 
 # Merge ----
-# TODO!
+dt <- merge(dt, sf, by.x = "Case.Number", by.y = "ZO_PROJ_NU",
+    all.x = TRUE)
 
-# Reference ----
-# Clean ----
-names(sf) <- c(
-    "zone", "ordinance", "spec_code", "project_number",
-    "update_number", "approval_date", "zone_ord", "maint_task_id",
-    "gis_start_date", "gis_end_date", "upd_sou", "upd_use", "upd_date",
-    "shape_star", "shape_stle", "geometry"
-)
+dt[, diffZONE_DA := as.numeric(max(ZO_ZONE_DA) - min(ZO_ZONE_DA)),
+    by = Case.Number]
+dt[, diffUPD_DAT := as.numeric(max(ZO_UPD_DAT) - min(ZO_UPD_DAT)),
+    by = Case.Number]
 
-sf$approval_quarter <- floor_date(sf$approval_date, "quarter")
+summary(dt$diffZONE_DA)
+summary(dt$diffUPD_DAT)
 
-sf$year_zmap <- str_extract(sf$project_number, "\\d{4}")
+dt[, final_date := ZO_UPD_DAT]
 
-View(subset(sf, select = c("project_number", "year_zmap", "approval_date")))
+setnames(dt, c("ZO_ZONE"), c("zoning_new"))
 
-# Inspect ----
+nrow(dt[final_date < submit_date]) == 0
 
+dt[, Part := rowid(Case.Number)]
 
-# Unique ID (none)
-dt <- as.data.table(sf)
-dt[, c("geometry", "shape_star", "shape_stle") := NULL]
-
-uniqueN(dt)
-nrow(sf)
-
-# Approval Date Histogram
-ggplot(data = sf) +
-    geom_bar(aes(x = approval_quarter)) +
-    scale_x_date(
-        limits = c(ymd("2010/01/01", "2023/08/09")),
-        date_breaks = "1 year", date_labels = "%Y"
-    ) +
-    geom_vline(
-        xintercept = as.numeric(ymd("2016-07-01")),
-        color = "gray", linewidth = 1, linetype = "dashed"
-    ) +
-    labs(y = "Number of Approved Rezonings", x = "Approval Date") +
-    theme_light()
+saveRDS(dt, here("derived", "LoudounCo",
+                 "Rezoning GIS.Rds"))

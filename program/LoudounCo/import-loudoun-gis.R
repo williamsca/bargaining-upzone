@@ -35,4 +35,4 @@ sf <- st_join(sf_zone, st_buffer(sf_sap, dist = 200),
 sf$isExempt <- (!is.na(sf$Name))
 
 saveRDS(sf, here("derived", "LoudounCo",
-                 "Rezoning GIS.Rds"))
+                 "Zoning GIS.Rds"))
