@@ -2,10 +2,15 @@
 # of counties and cities in Virginia. It then standardizes
 # the columns and exports a combined binary file for analysis.
 
-# TODO: parse 'Description' field for Loudoun, PWC to determine
-# old and new zoning code
+# TODO
+# Loudoun
+# - check that 'Description' is consistent with 'zoning_new'
+# - parse 'Description' to determine old zoning code
+# - check that 'isResi' classifications are accurate
+# - confirm 'final_date' for Loudoun (email outstanding)
 
-# NOTE: 'final_date' for Loudoun is not confirmed
+# PWC
+# - parse 'Description' to determine old, new zoning code
 
 rm(list = ls())
 library(here)
@@ -34,7 +39,10 @@ dt_loudoun <- readRDS(here("derived", "LoudounCo",
 dt_loudoun <- dt_loudoun[Type == "Zoning Map Amendment - ZCASE"]
 dt_loudoun$geometry <- NULL
 
-# TODO: check that 'Description' is consistent with 'zoning_new'
+dt_loudoun[, isResi := grepl("R[0-9|C]|PDH|AAAR|MUB", zoning_new)]
+table(dt_loudoun$zoning_new)
+table(dt_loudoun[isResi == TRUE, zoning_new])
+
 
 uniqueN(dt_loudoun[, .(Case.Number, Part)]) == nrow(dt_loudoun)
 nrow(dt_loudoun[is.na(submit_date)]) == 0
