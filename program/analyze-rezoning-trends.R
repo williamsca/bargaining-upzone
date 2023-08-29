@@ -21,14 +21,8 @@ dt_app <- dt[,
 uniqueN(dt_app$Case.Number) == nrow(dt_app)
 
 # Plots ----
-v_counties <- unique(dt$County)
 
 # Approved Rezonings by Application Year
-
-data <- dt
-resi <- TRUE
-county <- "Fairfax County"
-
 sum_to_fy <- function(county, data, resi = TRUE) {
     if (resi == TRUE) {
         dt_graph <- subset(data, isResi == TRUE)
@@ -50,7 +44,7 @@ sum_to_fy <- function(county, data, resi = TRUE) {
     )
 
     dt_graph <- dt_graph[
-        , .(nApproved = .N, Area = sum(Area)),
+        , .(nApproved = .N, Area = drop_units(sum(Area))),
         by = .(FY, comparison)
     ]
 
@@ -65,6 +59,11 @@ sum_to_fy <- function(county, data, resi = TRUE) {
     return(dt_yr)
 }
 
+dt_yr <- sum_to_fy("Fairfax County", dt_app, resi = FALSE)
+outcome <- "Area"
+resi <- FALSE
+county <- "Fairfax County"
+
 plot_rezonings <- function(county, data, outcome = "nApproved",
     resi = TRUE) {
 
@@ -73,7 +72,7 @@ plot_rezonings <- function(county, data, outcome = "nApproved",
     y_lab <- fifelse(
         outcome == "nApproved",
         "Rezonings [#]",
-        "Rezonings"
+        "Rezonings [acres]"
     )
 
     if (resi == TRUE) {
@@ -89,21 +88,20 @@ plot_rezonings <- function(county, data, outcome = "nApproved",
             color = comparison
         )
     ) +
+        geom_rect(aes(xmin = 2017, xmax = 2019, ymin = -Inf, ymax = Inf),
+            fill = "lightgray", alpha = .2, color = "gray"
+        ) +    
         geom_line(linetype = "dashed") +
         geom_point(size = 3) +
         scale_x_continuous(breaks = seq(2010, 2020, 2)) +
         labs(
             y = y_lab,
             x = "Submit FY",
-            title = county
-        ) +
-        geom_vline(
-            xintercept = 2017, color = "gray",
-            linetype = "dashed"
-        ) +
+            title = county) +
+        
         scale_color_discrete(name = "", labels = comp_labels) +
-        theme_light(base_size = 11) +
-        theme(legend.pos = c(.1, .88))
+        theme_light(base_size = 12) +
+        theme(legend.pos = c(.1, .9))
 
     return(g)
 }
@@ -111,11 +109,13 @@ plot_rezonings <- function(county, data, outcome = "nApproved",
 plot_rezonings("Fairfax County", dt,
     outcome = "nApproved", resi = TRUE)
 
+v_counties <- unique(dt$County)
+
 # Counts
 # * Residential
 l_counts_resi <- lapply(v_counties, plot_rezonings,
     data = dt_app, outcome = "nApproved", resi = TRUE)
-g_counts_resi <- do.call(grid.arrange, l_counts)
+g_counts_resi <- do.call(grid.arrange, l_counts_resi)
 
 # * All
 l_counts_all <- lapply(v_counties, plot_rezonings,
@@ -123,11 +123,17 @@ l_counts_all <- lapply(v_counties, plot_rezonings,
 g_counts_all <- do.call(grid.arrange, l_counts_all)
 
 
+ggsave(here("paper", "figures", "plot_rezonings_exempt_counts.png"),
+    width = 8, height = 4.25)
+
+ggsave(here("paper", "figures", "plot_rezonings_exempt_counts.png"),
+    width = 8, height = 4.25)
+
 # Areas
 # * Residential
-l_areas <- lapply(v_counties, plot_rezonings,
+l_areas_resi <- lapply(v_counties, plot_rezonings,
     data = dt_app, outcome = "Area")
-g_areas <- do.call(grid.arrange, l_areas)
+g_areas_resi <- do.call(grid.arrange, l_areas_resi)
 
 # * All
 l_areas_all <- lapply(v_counties, plot_rezonings,

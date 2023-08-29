@@ -12,11 +12,13 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
-- Determine whether Loudoun rezonings are in exempt areas using GIS file
-- hand parse Frederick resolutions (see '.../derived/FrederickCo/resolutions.csv')
 
 # Done
 - Add Fairfax to combined application file
+- hand parse Frederick resolutions (see '.../derived/FrederickCo/resolutions.csv')
+- Determine whether Loudoun rezonings are in exempt areas using GIS file
+
+
 
 ## Data:
 
