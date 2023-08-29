@@ -8,8 +8,11 @@ data/FairfaxCo/BoS Minutes/
 data/FrederickCo/
 data/GoochlandCo/
 data/HanoverCo/
+data/HenricoCo/
 data/IsleOfWightCo/
 data/LoudonCo/
+
+
 
 # Output files
 *.pdf

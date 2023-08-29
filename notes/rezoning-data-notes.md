@@ -12,9 +12,10 @@ author: Colin Williams
  - GIS: the current zoning map, which sometimes has information on the zoning history
  - Rezoning App: rezoning application submitted by developers
  - Rezoning Docs: documents (proffers, plans, planning department reports, etc.) related to a rezoning application
+ - Rezoning GIS: polygons with associated zoning case numbers
 
- |County|Data|Span|Method|Link|
- |-|-|-|-|-|
+ |County|Data|Span|Method|Link|Notes|
+ |-|-|-|-|-|-|
  Albemarle|Rezoning Docs|Manual|2014-2019|[Archive](https://lfweb.albemarle.org/WebLink/Browse.aspx?id=107543&dbid=0&repo=CountyofAlbemarle)
  Caroline|BoS Minutes|Unavailable
  Chesterfield|Rezoning App|2009-2023 YTD|Manual|[Archive](https://aca-prod.accela.com/CHESTERFIELD/Cap/CapHome.aspx?module=Planning&TabName=Planning&TabList=Home%7C0%7CBuilding%7C1%7CEnforcement%7C2%7CEnvEngineering%7C3%7CPlanning%7C4%7CUtilities%7C5%7CeReview%7C6%7CCurrentTabIndex%7C4)
@@ -38,6 +39,11 @@ author: Colin Williams
  Prince William|Rezoning App|2006m9-2023m7|Manual|[Archive](https://egcss.pwcgov.org/SelfService#/search)
  Prince William|GIS||Manual|[Archive](https://gisdata-pwcgov.opendata.arcgis.com/datasets/PWCGOV::zoning/about)
  Stafford|Rezoning App|||[Archive](https://pob.staffordcountyva.gov/PublicAccess/)
+ Henrico|Rezoning GIS|1962-2023|Manual|[Archive](https://data-henrico.opendata.arcgis.com/datasets/Henrico::planning-department-cases/about)
+ Stafford County|Rezoning App|||[Archive](https://staffordcountyva.gov/government/departments_p-z/planning_and_zoning/development_review/current_development_projects/index.php)
+ Spotsylvania County|Rezoning App|||[Pending](https://www.spotsylvania.va.us/2074/Status-of-Applications)|
+ Spotsylvania County|BoS Minutes|||[Archive](https://www.spotsylvania.va.us/DocumentCenter/Index/574)
+ Hanover County|Rezoning App|||[Archive](https://communitydevelopment.hanovercounty.gov/eTRAKiT/Search/project.aspx)
  Williamsburg City|
  Prince George County|
  Manassas Park City|
