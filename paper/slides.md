@@ -19,10 +19,6 @@ Statewide zoning reforms may fail to increase housing supply if local government
 
 ---
 
-![bg cover 70%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/images/rezoning-news.png)
-
----
-
 # Virginia Proffer Reform Act of 2016
 
 Impact fees broadly illegal in VA $\implies$ municipalities rely on "voluntary" proffers tied to a rezoning application
@@ -45,6 +41,16 @@ Loudoun, Assistant Director of Planning and Zoning:
 &nbsp;
 Portsmouth, Planning Director:
 > "If you want to submit proffers, we’re not discussing it."
+
+---
+
+# Before 2016:
+
+![bg right:75% 90%](figures/images/rezoning-news.png)
+
+---
+
+# After 2016:
 
 ---
 
@@ -104,8 +110,8 @@ Fairfax cares about **proffer revenues** and **total approved units**, not where
 &nbsp;
 
 Consider state mandated **upzoning near transit** (e.g., NY Housing Compact, CA SB50):
-- What happens to total upzoning? Will municipalities cut back on upzoning in other areas?
-- What happens to proffer rates and revenues? As supply of buildable land increase, will builders pay less for upzoning?
+- What happens to total upzoning? Will municipalities substitute away from upzoning other areas?
+- What happens to proffer rates and revenues? If supply of buildable land increases, will builders pay less for upzoning?
 - What is resident welfare loss?
 
 Need a model!
@@ -139,8 +145,8 @@ Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
 ---
 
 # Poor Man's Model #2
-Cournot game between municipalities:
-$$\max_{q_i} P(Q)q_i - c(q_i)$$
+## Differentiated products Bertrand
+- Municipalities supply **land use rights** to developers
 
 ---
 
@@ -150,7 +156,13 @@ $$\max_{q_i} P(Q)q_i - c(q_i)$$
 |-|-|-|-|-|-|-|
 |2016|Fairfax|01|1|$5,000/unit|12|SFD|
 |2018|Fairfax|02|0|$5,000/unit|
+
 ---
+
+# Appendix
+
+---
+
 # Proffer Administration
 - Proffers often paid out **as building permits are issued** $\implies$ reform's impact on revenues will be **gradual**, especially for single family dwellings
 - Payments **indexed to CPI/PPI (!)**
@@ -183,5 +195,3 @@ $$\max_{q_i} P(Q)q_i - c(q_i)$$
   <tr> <td align="right"> 9 </td> <td> Hanover County </td> <td align="right"> 0.8 </td> </tr>
   <tr> <td align="right"> 10 </td> <td> Williamsburg City </td> <td align="right"> 0.8 </td> </tr>
    </table>
-
----
