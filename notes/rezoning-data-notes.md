@@ -41,9 +41,10 @@ author: Colin Williams
  Stafford|Rezoning App|||[Archive](https://pob.staffordcountyva.gov/PublicAccess/)
  Henrico|Rezoning GIS|1962-2023|Manual|[Archive](https://data-henrico.opendata.arcgis.com/datasets/Henrico::planning-department-cases/about)
  Stafford County|Rezoning App|||[Archive](https://staffordcountyva.gov/government/departments_p-z/planning_and_zoning/development_review/current_development_projects/index.php)
- Spotsylvania County|Rezoning App|||[Pending](https://www.spotsylvania.va.us/2074/Status-of-Applications)|
- Spotsylvania County|BoS Minutes|||[Archive](https://www.spotsylvania.va.us/DocumentCenter/Index/574)
+ Spotsylvania County|Rezoning App|||[Pending](https://www.spotsylvania.va.us/2074/Status-of-Applications)|Evidence that counties care about proffer legislation
+ Spotsylvania County|BoS Minutes|||[Archive](https://www.spotsylvania.va.us/DocumentCenter/Index/574)|Only source for rezonings (see email)
  Hanover County|Rezoning App|||[Archive](https://communitydevelopment.hanovercounty.gov/eTRAKiT/Search/project.aspx)
+ Montgomery County|BoS Minutes|||[Archive](https://go.boarddocs.com/va/montva/Board.nsf/Public)
  Williamsburg City|
  Prince George County|
  Manassas Park City|
