@@ -59,17 +59,17 @@ plot_rezonings <- function(county, data, outcome = "nApproved") {
             color = isExempt
         )
     ) +
+        geom_rect(aes(xmin = 2017, xmax = 2019, ymin = -Inf, ymax = Inf),
+            fill = "lightgray", alpha = .2
+        ) +    
         geom_line(linetype = "dashed") +
         geom_point(size = 3) +
         scale_x_continuous(breaks = seq(2010, 2020, 2)) +
         labs(
             y = y_lab,
-            x = "Submission Fiscal Year",
+            x = "Submit FY",
             title = county) +
-        geom_vline(
-            xintercept = 2017, color = "gray",
-            linetype = "dashed"
-        ) +
+        
         scale_color_discrete(name = "", labels = c("Affected", "Exempt")) +
         theme_light(base_size = 12) +
         theme(legend.pos = c(.1, .9))
@@ -82,6 +82,9 @@ l_counts <- lapply(v_counties, plot_rezonings,
     data = dt_app, outcome = "nApproved")
 
 g_counts <- do.call(grid.arrange, l_counts)
+
+ggsave(here("paper", "figures", "plot_rezonings_exempt_counts.png"),
+    width = 8, height = 4.25)
 
 # Areas
 l_areas <- lapply(v_counties, plot_rezonings,
