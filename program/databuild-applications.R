@@ -13,11 +13,11 @@
 # - parse 'Description' to determine old, new zoning code
 
 rm(list = ls())
-library(here)
 library(data.table)
 library(lubridate)
 library(sf)
 library(units)
+library(here)
 
 v_cols <- c(
     "FIPS", "Case.Number", "Part", "submit_date",
@@ -51,6 +51,9 @@ nrow(dt_loudoun[is.na(submit_date)]) == 0
 dt_pwc <- readRDS(here("derived", "PrinceWilliamCo",
     "Rezoning Applications.Rds"))
 
+dt_pwc[Case.Number == "REZ2017-00013"]
+dt_pwc[Case.Number == "REZ2017-00024"]
+
 dt_pwc[, Type := gsub("\"", "", Type)]
 dt_pwc <- dt_pwc[
     Type %in% c(
@@ -60,6 +63,8 @@ dt_pwc <- dt_pwc[
     )
 ]
 dt_pwc[, isResi := (Type != "Rezoning - Non-Residential")]
+
+View(dt_pwc[isResi == TRUE & submit_date > ymd("2016-07-01") & Status == "Approved"])
 
 uniqueN(dt_pwc$Case.Number) == nrow(dt_pwc)
 nrow(dt_pwc[is.na(submit_date)]) == 0

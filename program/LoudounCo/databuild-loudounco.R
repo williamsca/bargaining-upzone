@@ -20,14 +20,7 @@ dt <- readRDS(here("derived", "LoudounCo", "Rezoning Applications.Rds"))
 dt <- merge(dt, sf, by.x = "Case.Number", by.y = "ZO_PROJ_NU",
     all.x = TRUE)
 
-dt[, diffZONE_DA := as.numeric(max(ZO_ZONE_DA) - min(ZO_ZONE_DA)),
-    by = Case.Number]
-dt[, diffUPD_DAT := as.numeric(max(ZO_UPD_DAT) - min(ZO_UPD_DAT)),
-    by = Case.Number]
-
-summary(dt$diffZONE_DA)
-summary(dt$diffUPD_DAT)
-
+# See email 8/29/2023 from C. Brian Patrick
 dt[, final_date := ZO_UPD_DAT]
 
 setnames(dt, c("ZO_ZONE"), c("zoning_new"))

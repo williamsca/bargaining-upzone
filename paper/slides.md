@@ -15,20 +15,36 @@ math: mathjax
 ---
 
 # Abstract
-Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of new units allowed by residential upzonings fell by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remained constant as localities substituted from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
+Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remained constant as localities substituted from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
+
+---
+
+![bg cover 70%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/images/rezoning-news.png)
 
 ---
 
 # Virginia Proffer Reform Act of 2016
 
-Impact fees broadly illegal in VA $\implies$ municipalities rely on "voluntary" proffers (i.e., prices) tied to a rezoning application
+Impact fees broadly illegal in VA $\implies$ municipalities rely on "voluntary" proffers tied to a rezoning application
 &nbsp;
 
 In 2016, developers were uphappy with large cash proffers, lobbied state legislature for reform:
 - Proffers must address impacts which are *specifically attributable* to the proposed development $\implies$ **no standard proffer schedule**
 - Applies to all **residential** rezoning applications filed after **July 1, 2016**
-- Exemptions for parcels **near transit** in NOVA
-- Reform is partially unwound in **2019**
+- Parcel exempt if **high-density** or **near transit** (NOVA)
+- Reform partially unwound in **2019**
+
+---
+
+# Municipality Response
+
+Loudoun, Assistant Director of Planning and Zoning:
+
+> "Where the new legislation applies, we will in fact **not accept cash or offsite proffers**, completely eliminating the discussion or the **potential risk** of the county accepting the unreasonable or wrong types of proffers."
+
+&nbsp;
+Portsmouth, Planning Director:
+> "If you want to submit proffers, we’re not discussing it."
 
 ---
 
@@ -44,6 +60,96 @@ SFD|Transportation|16,780|
 **Townhouse**|**Total**|**39,837**
 **MFD**|**Total**|**26,778**
 
+---
+
+## Prince William County Suggested Proffers (2017)
+
+|Unit| Service | Amount ($)|
+|---|---|---:|
+SFD|Schools|?|
+SFD|Parks & Libraries|?|
+SFD|Fire and Rescue|?|
+SFD|Transportation|?|
+**SFD**|**Total**|**?**
+**Townhouse**|**Total**|**?**
+**MFD**|**Total**|**?**
+
+---
+
+## Prince William County
+*Inside NOVA* (12/6/2018):
+> The county hasn’t approved any rezoning applications for houses for applications submitted after 2016, board Chairman Corey Stewart said.
+> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
+
+---
+
+# Case Study: Fairfax County
+
+---
+
+![bg cover 70%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/map_fairfax_2010-2020.png)
+
+---
+
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/plot_fairfax_exempt_counts.png)
+
+---
+
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/plot_fairfax_exempt_areas.png)
+
+---
+# Discussion
+Fairfax cares about **proffer revenues** and **total approved units**, not where development occurs.
+
+&nbsp;
+
+Consider state mandated **upzoning near transit** (e.g., NY Housing Compact, CA SB50):
+- What happens to total upzoning? Will municipalities cut back on upzoning in other areas?
+- What happens to proffer rates and revenues? As supply of buildable land increase, will builders pay less for upzoning?
+- What is resident welfare loss?
+
+Need a model!
+
+---
+
+# Poor Man's Model #1
+Locality chooses vector $\vec{a}$ of upzonings over parcels $j \in \{1, ..., J\}$ to maximize welfare: 
+$$U = \max_{\vec{a}} \sum_{j=1}^J a_jq_j(p_j + v_{j}) - C\left(\sum_{j=1}^Ja_jq_j\right)$$
+
+where 
+- $p_j$ is proffer amount,
+- $v_{j}$ is idiosyncratic value of upzoning parcel $j$,
+- $q_j$ is number of approved units, and
+- $C(\cdot)$ is a disutility function with $C'(\cdot) > 0$
+
+---
+
+# Optimal Upzoning
+Optimum characterized by $J$ inequalities: 
+$$a_j = 1 \iff q_j(p_j + v_{j}) > C(q_j + Q_{-j}) - C(Q_{-j})$$
+
+Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
+
+### Assumptions
+- Ignores dynamics (upzoning is irreversible)
+- Hard (impossible?) to know value of in-kind proffers (e.g., land dedication, road improvements)
+- Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
+- Collapse heterogeneity in zoning codes to single dimension: # of newly allowed housing units
+
+---
+
+# Poor Man's Model #2
+Cournot game between municipalities:
+$$\max_{q_i} P(Q)q_i - c(q_i)$$
+
+---
+
+# Potential Data
+
+|Year|County|Parcel|$a_j$|$p_j$|$q_j$|Type|
+|-|-|-|-|-|-|-|
+|2016|Fairfax|01|1|$5,000/unit|12|SFD|
+|2018|Fairfax|02|0|$5,000/unit|
 ---
 # Proffer Administration
 - Proffers often paid out **as building permits are issued** $\implies$ reform's impact on revenues will be **gradual**, especially for single family dwellings
@@ -79,63 +185,3 @@ SFD|Transportation|16,780|
    </table>
 
 ---
-
-# Case Study: Fairfax County
-
----
-
-![bg cover 70%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/map_fairfax_2010-2020.png)
-
----
-
-![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/plot_fairfax_exempt_counts.png)
-
----
-
-![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/fairfax/plot_fairfax_exempt_areas.png)
-
----
-# Discussion
-Fairfax cares about **proffer revenues** and **total approved units**, not where development occurs.
-
-&nbsp;
-
-What happens if state mandates **upzoning near transit** (e.g., NY Housing Compact, CA SB50)?
-- Municipalities substitute away from upzoning in other areas?
-- More places to build $\implies$ proffer rates fall?
-
-Need a model!
-
-
----
-
-# Poor Man's Model
-Locality chooses vector $\vec{a}$ of upzonings over parcels $j \in \{1, ..., J\}$ to maximize welfare: 
-$$U = \max_{\vec{a}} \sum_{j=1}^J a_jq_j(p_j + v_{j}) - C\left(\sum_{j=1}^Ja_jq_j\right)$$
-
-where 
-- $p_j$ is proffer amount,
-- $v_{j}$ is idiosyncratic value of upzoning parcel $j$,
-- $q_j$ is parcel area, and
-- $C(\cdot)$ is a disutility function with $C'(\cdot) > 0$
-
----
-
-# Optimal Upzoning
-Optimum characterized by $J$ inequalities: 
-$$a_j = 1 \iff p_j + v_{j}q_j > C(q_j + Q_{-j}) - C(Q_{-j})$$
-
-Assume $v_j \sim N(0, \sigma^2)$ and $C(q) = k_1 q + k_2 q^2$.
-
-### Assumptions
-- Ignores dynamics (upzoning is irreversible)
-- Hard (impossible?) to know $p_j$ for parcels that are not upzoned
-- Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
-
----
-
-# Next Steps
-
-1. Collect systematic data on proffers ($p_j$) and upzonings ($a_j$) for VA counties
-2. Ask IO faculty how to model developer demand, municipality supply of upzoning
-3. Are there more typical Public Econ questions here?
