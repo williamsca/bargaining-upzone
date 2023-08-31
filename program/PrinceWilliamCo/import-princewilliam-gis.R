@@ -2,10 +2,13 @@
 # https://gisdata-pwcgov.opendata.arcgis.com/datasets/PWCGOV::zoning/about
 
 rm(list = ls())
-pacman::p_load(here, data.table, sf, ggplot2)
+library(data.table)
+library(sf)
+library(here)
 
 # Import ----
-sf <- st_read("data\\PrinceWilliamCo\\GIS\\Zoning\\Zoning.shp")
+sf <- st_read(here("data", "PrinceWilliamCo", "GIS",
+    "Zoning", "Zoning.shp"))
 
 # Clean ----
 sf$application_year <- as.numeric(substr(gsub("\\D", "", sf$ZONECASE1), 1, 4))

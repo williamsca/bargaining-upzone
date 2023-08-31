@@ -13,7 +13,7 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 # TODO
 - Figure out how 'Applied.Date' can different from the date the rezoning request was recieved for PWC, Loudoun (e.g., see PWC Case.Number == REZ2017-00024 and read the Description)
-- Need to parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.)
+- Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
 
 # Done
 - Add Fairfax to combined application file

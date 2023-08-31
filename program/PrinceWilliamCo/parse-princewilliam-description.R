@@ -33,13 +33,18 @@ dt_app[, Description := str_to_lower(Description)]
 
 # Parse ----
 # Area
-pattern <- "(?<=^|[^0-9.])([0-9.]+)(?=\\s*(ac|acre)s?\\b)"
+pattern <- "(?<=^|[^0-9.])([0-9.]+)(?:-?\\s*(ac|acre)s?\\b)"
 dt_app[, acres := str_extract(Description, pattern)]
-dt_app[, acres_num := as.numeric(acres)]
+dt_app[, acres := as.numeric(gsub("[^0-9.]", "", acres))]
 dt_app[, Area := set_units(acres, "acres")]
 
-View(dt_app[is.na(acres_num)])
+# View(dt_app[is.na(acres)])
 
+# Former zoning
+pattern <- "(?i)from\\s+(\\w+(?:-\\w+)?)"
+dt_app[, zoning_old := str_extract(Description, pattern)]
+dt_app[, zoning_old := gsub("from ", "", zoning_old)]
+table(dt_app$zoning_old)
 
 # API_URL <- "https://api.openai.com/v1/engines/davinci-codex/completions"
 MODEL <- "text-davinci-003"
