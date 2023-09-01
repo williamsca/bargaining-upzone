@@ -12,6 +12,9 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
+- Power calculations?
+- Import Loudoun value of in-kind proffer data, look at trends and compare to cash proffers
+- Literature review. Connect PRA16 to other policies to buttress part one results.
 - Figure out how 'Applied.Date' can different from the date the rezoning request was recieved for PWC, Loudoun (e.g., see PWC Case.Number == REZ2017-00024 and read the Description)
 - Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
 
@@ -42,7 +45,7 @@ $$p_j + v_{j}q_j > C(q_j + Q_{-j}) - C(Q_{-j})$$
 Estimate by GMM where $p_j$, $q_j$ are data, $v_j$ is T1EV, and assume a parametric form for $C(\cdot)$. (See IO notes on inequality estimation.)
 
 Simplifications:
-- Myopic planner ignores dynamics. Upzoning is irreversible $\implies$ option value to waiting
+- Myopic planner ignores dynamics. Land uses are exhaustible resource $\implies$ Hotelling Rule: planner indifferent to upzoning parcel now or later. To avoid, assume large endowment of agricultural land such that long-run considerations are irrelevant (there is always somewhere new to upzone).
 - Can't observe $p_j$ for parcels that are not upzoned (but might look at denied applications)
 - Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
 
@@ -54,6 +57,13 @@ This paper may be a useful reference for outcomes:
 - https://ishanbhatt42.github.io/files/paper_adu.pdf
 
 ## Meetings
+Lee (9/1/2023)
+1. Do power calculations to make sure "part one" results will be convincing
+2. Tie PRA16 to other policies and tap into the research on the effects of those policies -- this will help if results are more suggestive than definitive
+3. Check how value of in-kind proffers compares to cash and how it changes after PRA16 in Loudoun (need to import data)
+
+Probably best to refer to cash proffers as a price, not a tax. Taxes usually refer to payments to a 3rd party that are proportional to the value of the transaction.
+
 Leora (8/15/2023)
 - Is this a first-stage for something?
 - Try to write an abstract, research question (not just "Effect of Policy on ...")

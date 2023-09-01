@@ -15,7 +15,7 @@ math: mathjax
 ---
 
 # Abstract
-Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remained constant as localities substituted from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
+Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that the supply of residential land uses is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remains constant as localities substitute from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
 
 ---
 
@@ -28,7 +28,7 @@ In 2016, developers were uphappy with large cash proffers, lobbied state legisla
 - Proffers must address impacts which are *specifically attributable* to the proposed development $\implies$ **no standard proffer schedule**
 - Applies to all **residential** rezoning applications filed after **July 1, 2016**
 - Parcel exempt if **high-density** or **near transit** (NOVA)
-- Reform partially unwound in **2019**
+- Partially unwound in **2019**
 
 ---
 
@@ -44,13 +44,9 @@ Portsmouth, Planning Director:
 
 ---
 
-# Before 2016:
+# Bargaining for the Rezone
 
-![bg right:75% 90%](figures/images/rezoning-news.png)
-
----
-
-# After 2016:
+![bg right:65% 90%](figures/images/rezoning-news.png)
 
 ---
 
@@ -65,20 +61,6 @@ SFD|Transportation|16,780|
 **SFD**|**Total**|**44,930**
 **Townhouse**|**Total**|**39,837**
 **MFD**|**Total**|**26,778**
-
----
-
-## Prince William County Suggested Proffers (2017)
-
-|Unit| Service | Amount ($)|
-|---|---|---:|
-SFD|Schools|?|
-SFD|Parks & Libraries|?|
-SFD|Fire and Rescue|?|
-SFD|Transportation|?|
-**SFD**|**Total**|**?**
-**Townhouse**|**Total**|**?**
-**MFD**|**Total**|**?**
 
 ---
 
@@ -138,15 +120,9 @@ Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
 
 ### Assumptions
 - Ignores dynamics (upzoning is irreversible)
-- Hard (impossible?) to know value of in-kind proffers (e.g., land dedication, road improvements)
+- Hard (impossible?) to know value of in-kind proffers (e.g., land dedication, road improvements), which will load into $v_j$
 - Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
-- Collapse heterogeneity in zoning codes to single dimension: # of newly allowed housing units
-
----
-
-# Poor Man's Model #2
-## Differentiated products Bertrand
-- Municipalities supply **land use rights** to developers
+- Collapses heterogeneity in zoning codes to single dimension ($q_j$)
 
 ---
 
@@ -155,7 +131,8 @@ Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
 |Year|County|Parcel|$a_j$|$p_j$|$q_j$|Type|
 |-|-|-|-|-|-|-|
 |2016|Fairfax|01|1|$5,000/unit|12|SFD|
-|2018|Fairfax|02|0|$5,000/unit|
+|2018|Fairfax|02|0|$3,000/unit|10|MFD|
+|2017|Prince William|01|1|$10,000/unit|20|SFD|
 
 ---
 

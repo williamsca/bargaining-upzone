@@ -24,7 +24,9 @@ v_cols <- c(
     "Project.Name", "Status", "Area", "Address", "Main.Parcel",
     "Description", "final_date", "isResi", "zoning_old",
     "zoning_new", "hasCashProffer", "isExempt",
-    "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against"
+    "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against",
+    "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_affordable",
+    "n_age_restrict", "n_units"
 )
 
 dt_cw <- fread(here("crosswalks", "va-counties.csv"),
@@ -49,24 +51,14 @@ nrow(dt_loudoun[is.na(submit_date)]) == 0
 
 # Prince William County
 dt_pwc <- readRDS(here("derived", "PrinceWilliamCo",
-    "Rezoning Applications.Rds"))
+    "Rezoning GIS.Rds"))
 
-dt_pwc[Case.Number == "REZ2017-00013"]
-dt_pwc[Case.Number == "REZ2017-00024"]
-
-dt_pwc[, Type := gsub("\"", "", Type)]
-dt_pwc <- dt_pwc[
-    Type %in% c(
-        "Rezoning - Mixed Use",
-        "Rezoning - Non-Residential",
-        "Rezoning - Residential"
-    )
-]
 dt_pwc[, isResi := (Type != "Rezoning - Non-Residential")]
+setnames(dt_pwc, c("OBJECTID"), c("gis_object"))
 
 View(dt_pwc[isResi == TRUE & submit_date > ymd("2016-07-01") & Status == "Approved"])
 
-uniqueN(dt_pwc$Case.Number) == nrow(dt_pwc)
+uniqueN(dt_pwc[, .(Case.Number, gis_object, Part)]) == nrow(dt_pwc)
 nrow(dt_pwc[is.na(submit_date)]) == 0
 
 # Chesterfield County
@@ -192,6 +184,5 @@ dt_missing <- melt(dt_missing, id.vars = c("County"),
 dt_missing <- dcast(dt_missing, variable ~ County,
     value.var = "pct_populated")
 View(dt_missing)
-
 
 saveRDS(dt, here("derived", "county-rezonings.Rds"))
