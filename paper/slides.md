@@ -70,6 +70,11 @@ SFD|Transportation|16,780|
 > "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
 
 ---
+# A Simple Model of Land Development
+
+TODO
+
+---
 
 # Case Study: Fairfax County
 
@@ -137,6 +142,8 @@ Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
 ---
 
 # Appendix
+
+---
 
 ---
 

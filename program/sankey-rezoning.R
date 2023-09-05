@@ -2,12 +2,13 @@
 # flows of land use over time
 
 # See the following for details:
-# https://plotly.com/r/sankey-diagram/
+# https://cran.r-project.org/web/packages/ggalluvial/vignettes/ggalluvial.html
 
 rm(list = ls())
 library(here)
 library(data.table)
-library(networkD3)
+library(networkD3) #sankeyNetwork
+library(ggalluvial)
 
 # Import ----
 dt <- readRDS(here("derived", "county-rezonings.Rds"))
@@ -40,13 +41,23 @@ dt_sankey <- dt_pwc[, .(Area = sum(Area, na.rm = TRUE)),
                     by = .(zoning_old, zoning_new)]
 
 v_nodes <- c("O", "M", "B", "SR", "R", "Mixed", "A-1")
-dt_nodes <- data.table(name = v_nodes)
+dt_nodes <- data.table(name = rep(v_nodes, 2))
 
 dt_sankey[, source_index := match(zoning_old, v_nodes) - 1]
-dt_sankey[, target_index := match(zoning_new, v_nodes) - 1]
+dt_sankey[, target_index := match(zoning_new, v_nodes) - 1 + length(v_nodes)]
 
+# networkD3 ----
 sankey <- sankeyNetwork(Links = dt_sankey, Nodes = dt_nodes,
     Source = "source_index", Target = "target_index", NodeID = "name",
     Value = "Area", units = "Acres")
 
 sankey
+
+# ggalluvial ----
+is_alluvia_form(dt_sankey)
+
+ggplot(dt_sankey, aes(y = Area, axis1 = zoning_old, axis2 = zoning_new)) +
+    geom_alluvium() +
+    geom_stratum(width = 1 / 12, fill = axis1, color = "grey") +
+    geom_label(stat = "stratum", aes(label = after_stat(stratum)))
+

@@ -88,6 +88,8 @@ dt <- merge(dt, dt_miss,
 )
 
 # Note: 'n_affordable' overlaps with other categories
+# Note: need to distinguish between '0' (no change in units) and NA
+# (unknown change, might impute based on zoning code change)
 dt[, n_units := rowSums(.SD, na.rm = TRUE), .SDcols = c(
   "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict"
 )]
