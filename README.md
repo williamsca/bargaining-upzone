@@ -57,7 +57,21 @@ This paper may be a useful reference for outcomes:
 - https://ishanbhatt42.github.io/files/paper_adu.pdf
 
 ## Meetings
+Julie (9/6/2023)
+"All durable goods monopolist papers wind up being about intertemporal price discrimination."
+
+Reform bites due to "stochastic court enforcement"
+
+Dynamics are key -- need to explain why upzoning happens when it does, or make a strong case why a static analysis is sufficient.
+
+1. Need to know if commercial/office/industrial uses are complements or substitutes for residential. Check what happens after PRA16 and see Matt Gentzkow.
+2. Draft questions for Cailinn Slattery to fix ideas; once you are further along, consider asking for a meeting.
+3. See [Souza-Rodriguez (2018)](https://doi.org/10.1093/restud/rdy070) for ideas.
+
+
 Lee (9/1/2023)
+Seems OK to focus on a static analysis by assuming an endowment of undeveloped land large enough that the planner does not worry about boundary conditions.
+
 1. Do power calculations to make sure "part one" results will be convincing
 2. Tie PRA16 to other policies and tap into the research on the effects of those policies -- this will help if results are more suggestive than definitive
 3. Check how value of in-kind proffers compares to cash and how it changes after PRA16 in Loudoun (need to import data)
