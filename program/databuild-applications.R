@@ -4,13 +4,9 @@
 
 # TODO
 # Loudoun
-# - check that 'Description' is consistent with 'zoning_new'
-# - parse 'Description' to determine old zoning code
 # - check that 'isResi' classifications are accurate
-# - confirm 'final_date' for Loudoun (email outstanding)
 
 # PWC
-# - parse 'Description' to determine old, new zoning code
 
 rm(list = ls())
 library(data.table)
@@ -38,7 +34,6 @@ dt_cw[, FIPS := paste0("51", FIPS)]
 dt_loudoun <- readRDS(here("derived", "LoudounCo",
     "Rezoning GIS.Rds"))
 
-dt_loudoun <- dt_loudoun[Type == "Zoning Map Amendment - ZCASE"]
 dt_loudoun$geometry <- NULL
 
 dt_loudoun[, isResi := grepl("R[0-9|C]|PDH|AAAR|MUB", zoning_new)]
