@@ -7,6 +7,7 @@
 rm(list = ls())
 library(here)
 library(data.table)
+library(units)
 library(networkD3) #sankeyNetwork
 library(ggalluvial)
 

@@ -50,3 +50,8 @@ author: Colin Williams
  Manassas Park City|
  Manassas City|
  Chesapeake City|
+
+ # Details
+
+ ## Loudoun County
+  A large number of Loudoun rezonings are 'Zoning Conversions' (ZRTD), which evidently update the parcel from the 1972 Zoning Ordinance to a Revised 1993 Ordinance while preserving the same zone code. It is not clear whether this is a significant change. A superset of these cases are identified when 'zoning_old' == 'zoning_new'. 
