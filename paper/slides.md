@@ -13,6 +13,34 @@ math: mathjax
 ### **Evidence from Virginia's Proffer Reform Act of 2016**
 
 ---
+## A model of residential land supply
+- municipality acts as **durable goods monopolist**
+- each extra unit **decreases** the price of all prior units
+- homeowners control **zoning**, demand compensation to allow more development
+- See [Fischel (2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en) for a version with perfectly competitive municipalities and increasing marginal congestion costs
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-01.png)
+
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-02.png)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-03.png)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-04.png)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-05.png)
+
+---
 
 # Abstract
 Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that the supply of residential land uses is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remains constant as localities substitute from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
