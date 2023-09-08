@@ -97,6 +97,11 @@ dt[, n_units := rowSums(.SD, na.rm = TRUE), .SDcols = c(
 dt[is.na(Part), Part := 1]
 dt[, Area := set_units(as.numeric(acres), "acres")]
 
+# The 'Description' indicates that these applications are
+# "NOT SUBJECT TO SB549"
+dt[Case.Number == "REZ2017-00013", submit_date := ymd("2016-06-30")]
+dt[Case.Number == "REZ2017-00011", submit_date := ymd("2016-06-29")]
+
 # Sanity Checks ----
 v_codes <- c(unique(dt_gis$CLASS), "", "PMR-HIGH")
 

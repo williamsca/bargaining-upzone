@@ -22,7 +22,8 @@ v_cols <- c(
     "zoning_new", "hasCashProffer", "isExempt",
     "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against",
     "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_affordable",
-    "n_age_restrict", "n_units"
+    "n_age_restrict", "n_units", "res_cash_proffer", "other_cash_proffer",
+    "planning_hearing_date"
 )
 
 dt_cw <- fread(here("crosswalks", "va-counties.csv"),
@@ -30,16 +31,20 @@ dt_cw <- fread(here("crosswalks", "va-counties.csv"),
 dt_cw[, FIPS := paste0("51", FIPS)]
 
 # Import ----
+# Goochland County
+dt_gooch <- readRDS(here("derived", "GoochlandCo",
+    "Rezoning Approvals.Rds"))
+
+# Assume planning hearing is close enough to the submission date
+dt_gooch[, submit_date := planning_hearing_date]
+
+uniqueN(dt_gooch$Case.Number) == nrow(dt_gooch)
+
 # Loudoun County
 dt_loudoun <- readRDS(here("derived", "LoudounCo",
     "Rezoning GIS.Rds"))
 
 dt_loudoun$geometry <- NULL
-
-dt_loudoun[, isResi := grepl("R[0-9|C]|PDH|AAAR|MUB", zoning_new)]
-table(dt_loudoun$zoning_new)
-table(dt_loudoun[isResi == TRUE, zoning_new])
-
 
 uniqueN(dt_loudoun[, .(Case.Number, Part)]) == nrow(dt_loudoun)
 nrow(dt_loudoun[is.na(submit_date)]) == 0
@@ -50,8 +55,6 @@ dt_pwc <- readRDS(here("derived", "PrinceWilliamCo",
 
 dt_pwc[, isResi := (Type != "Rezoning - Non-Residential")]
 setnames(dt_pwc, c("OBJECTID"), c("gis_object"))
-
-View(dt_pwc[isResi == TRUE & submit_date > ymd("2016-07-01") & Status == "Approved"])
 
 uniqueN(dt_pwc[, .(Case.Number, gis_object, Part)]) == nrow(dt_pwc)
 nrow(dt_pwc[is.na(submit_date)]) == 0
@@ -140,7 +143,7 @@ dt_fred <- dt_fred[Type == "Rezoning"]
 
 # Combine ----
 dt <- rbindlist(list(
-    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff, dt_fred
+    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff, dt_fred, dt_gooch
 ), fill = TRUE, use.names = TRUE)
 
 # Filter to standard columns

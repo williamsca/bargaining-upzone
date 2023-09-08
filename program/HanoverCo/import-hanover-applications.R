@@ -10,6 +10,6 @@ library(data.table)
 # Import ----
 l_files <- list.files(here(
     "data", "HanoverCo", "Applications"),
-    pattern = ".*.csv", full.names = TRUE)
+    pattern = "*.csv", full.names = TRUE)
 
 dt <- rbindlist(lapply(l_files, fread))

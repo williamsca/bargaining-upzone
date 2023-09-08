@@ -34,6 +34,7 @@ See [Data Notes](notes/rezoning-data-notes.md) for details on how I collected th
 
 
 # Model
+## Version 1
 Locality chooses vector $\vec{a}$ of upzonings over parcels $j \in \{1, ..., J\}$ to maximize welfare: 
 $$U = \max_{\vec{a}} \sum_{j=1}^J a_j(p_j + v_{j}q_j) - C\left(\sum_{j=1}^Ja_jq_j\right)$$
 
@@ -48,6 +49,9 @@ Simplifications:
 - Myopic planner ignores dynamics. Land uses are exhaustible resource $\implies$ Hotelling Rule: planner indifferent to upzoning parcel now or later. To avoid, assume large endowment of agricultural land such that long-run considerations are irrelevant (there is always somewhere new to upzone).
 - Can't observe $p_j$ for parcels that are not upzoned (but might look at denied applications)
 - Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
+
+## Version 2
+Differentiated products Nash-Bertrand. Products are land use rights on a particular parcel. Characteristics include coordinates, adjacent uses, the zoning code, and the county itself (the "brand"). Estimate markups to assess locality market power.
 
 # Data
 GIS Data:
