@@ -20,17 +20,21 @@ ExtractRezonings <- function(file_path) {
     pdf_lines <- unlist(toupper(pdf_lines))
 
     dt <- data.table(
-        line = pdf_lines, final_date = mdy(pdf_lines[1]),
+        final_date = mdy(pdf_lines[1]),
         zoning_old = NA, zoning_new = NA, acres = NA,
         Status = "", bos_votes_for = NA, bos_votes_against = NA,
         n_sfd = NA, n_unknown = NA,
         n_mfd = NA, n_age_restrict = NA, res_cash_proffer = NA,
         other_cash_proffer = NA, submit_date = "",
-        planning_hearing_date = "", Type = "", Description = ""
+        planning_hearing_date = "", Type = "", Description = "",
+        line = pdf_lines
     )
 
     dt[, Case.Number := substr(trimws(line), 1, 13)]
     dt[, Case.Number := gsub(" ", "", Case.Number)]
+
+    # Move the column "Case.Number" to the front of the data.table
+    setcolorder(dt, c("Case.Number", names(dt)[names(dt) != "Case.Number"]))
 
     dt <- dt[grepl("REQUEST(?:\\(S\\)|S)? TO REZONE", line)]
 
@@ -48,4 +52,4 @@ if (!file.exists(here("data", "HanoverCo", "rezonings.csv"))) {
 # <manually parse BoS PDFs>
 
 # Read in manually parsed rezonings
-dt <- fread(here("derived", "HanoverCo", "rezonings.csv"))
+   dt <- fread(here("derived", "HanoverCo", "rezonings.csv"))
