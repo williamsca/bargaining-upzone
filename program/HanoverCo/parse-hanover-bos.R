@@ -32,7 +32,7 @@ ExtractRezonings <- function(file_path) {
     dt[, Case.Number := substr(trimws(line), 1, 13)]
     dt[, Case.Number := gsub(" ", "", Case.Number)]
 
-    dt <- dt[grepl("REQUESTS? TO REZONE", line)]
+    dt <- dt[grepl("REQUEST(?:\\(S\\)|S)? TO REZONE", line)]
 
     return(dt)
 
@@ -40,5 +40,12 @@ ExtractRezonings <- function(file_path) {
 
 dt <- rbindlist(lapply(l_minutes, ExtractRezonings))
 
-test <- ExtractRezonings(l_minutes[4])
+if (!file.exists(here("data", "HanoverCo", "rezonings.csv"))) {
+    fwrite(dt, here("data", "HanoverCo", "rezonings.csv"))
+}
 
+# <copy ".../data/HanoverCo/rezonings.csv", to ".../derived/HanoverCo/rezonings.csv"
+# <manually parse BoS PDFs>
+
+# Read in manually parsed rezonings
+dt <- fread(here("derived", "HanoverCo", "rezonings.csv"))
