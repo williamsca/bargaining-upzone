@@ -60,6 +60,7 @@ GIS Data:
 This paper may be a useful reference for outcomes:
 - https://ishanbhatt42.github.io/files/paper_adu.pdf
 
+
 ## Meetings
 Julie (9/6/2023)
 "All durable goods monopolist papers wind up being about intertemporal price discrimination."

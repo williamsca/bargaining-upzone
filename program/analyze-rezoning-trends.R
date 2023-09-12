@@ -6,6 +6,7 @@ rm(list = ls())
 library(data.table)
 library(ggplot2)
 library(gridExtra)
+library(grid)
 library(units)
 library(here)
 
@@ -14,7 +15,7 @@ dt <- readRDS(here("derived", "county-rezonings.Rds"))
 
 # Aggregate over parcels to application level
 dt_app <- dt[,
-    .(Area = sum(Area), isResi = any(isResi), isExempt = any(isExempt),
+    .(Area = sum(Area), isResi = any(isResi), isExempt = FALSE, # any(isExempt)
     n_units = sum(n_units)),
     by = .(FIPS, Case.Number, County, submit_date,
     Population2022, isApproved, FY)]
@@ -68,11 +69,6 @@ sum_to_fy <- function(county, data, resi = TRUE) {
     return(dt_yr)
 }
 
-dt_yr <- sum_to_fy("Frederick County", dt_app, resi = TRUE)
-outcome <- "Area"
-resi <- FALSE
-county <- "Fairfax County"
-
 plot_rezonings <- function(county, data, outcome = "nApproved",
     resi = TRUE) {
 
@@ -112,13 +108,13 @@ plot_rezonings <- function(county, data, outcome = "nApproved",
         scale_color_discrete(name = "", labels = comp_labels,
             breaks = c(TRUE, FALSE)) +
         theme_light(base_size = 12) +
-        theme(legend.pos = c(.1, .9))
+        theme(legend.pos = "none") # c(.1, .9)
 
     return(g)
 }
 
-plot_rezonings("Fairfax County", dt_app,
-    outcome = "nApproved", resi = FALSE)
+plot_rezonings("Prince William County", dt_app,
+    outcome = "n_units", resi = TRUE)
 
 v_counties <- unique(dt$County)
 
@@ -132,10 +128,6 @@ g_counts_resi <- do.call(grid.arrange, l_counts_resi)
 l_counts_all <- lapply(v_counties, plot_rezonings,
     data = dt_app, outcome = "nApproved", resi = FALSE)
 g_counts_all <- do.call(grid.arrange, l_counts_all)
-
-
-ggsave(here("paper", "figures", "plot_rezonings_exempt_counts.png"),
-    width = 8, height = 4.25)
 
 ggsave(here("paper", "figures", "plot_rezonings_exempt_counts.png"),
     width = 8, height = 4.25)
@@ -152,6 +144,7 @@ l_areas_all <- lapply(v_counties, plot_rezonings,
 g_areas_all <- do.call(grid.arrange, l_areas_all)
 
 # Units
+v_counties <- c("Goochland County", "Prince William County", "Loudoun County")
 l_units_resi <- lapply(v_counties, plot_rezonings,
     data = dt_app, outcome = "n_units")
 g_units_resi <- do.call(grid.arrange, l_units_resi)

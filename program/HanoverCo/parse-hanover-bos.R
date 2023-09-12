@@ -20,10 +20,10 @@ ExtractRezonings <- function(file_path) {
     pdf_lines <- unlist(toupper(pdf_lines))
 
     dt <- data.table(
-        final_date = mdy(pdf_lines[1]),
-        zoning_old = NA, zoning_new = NA, acres = NA,
+        Part = "", final_date = mdy(pdf_lines[1]),
+        zoning_old = NA, zoning_new = NA, acres = NA, Address = "",
         Status = "", bos_votes_for = NA, bos_votes_against = NA,
-        n_sfd = NA, n_unknown = NA,
+        n_sfd = NA, n_sfa = NA, n_unknown = NA,
         n_mfd = NA, n_age_restrict = NA, res_cash_proffer = NA,
         other_cash_proffer = NA, submit_date = "",
         planning_hearing_date = "", Type = "", Description = "",

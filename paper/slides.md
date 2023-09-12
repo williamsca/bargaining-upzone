@@ -15,9 +15,9 @@ math: mathjax
 ---
 ## A model of residential land supply
 - municipality acts as **durable goods monopolist**
-- each extra unit **decreases** the price of all prior units
+- an extra unit **decreases** the price of all prior units
 - homeowners control **zoning**, demand compensation to allow more development
-- See [Fischel (2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en) for a version with perfectly competitive municipalities and increasing marginal congestion costs
+- (See [Fischel (2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en) for a version with perfectly competitive municipalities and increasing marginal congestion costs)
 
 ---
 
@@ -39,6 +39,49 @@ math: mathjax
 ---
 
 ![bg cover 100%](figures/model-durable-monopolist/dgm-05.png)
+
+---
+
+## Prince William County Suggested Proffers (2014)
+
+|Unit| Service | Amount ($)|
+|---|---|---:|
+SFD|Schools|20,649|
+SFD|Parks & Libraries|6,403|
+SFD|Fire and Rescue|1,053|
+SFD|Transportation|16,780|
+**SFD**|**Total**|**44,930**
+**Townhouse**|**Total**|**39,837**
+**MFD**|**Total**|**26,778**
+
+---
+
+## Prince William County
+*Inside NOVA* (12/6/2018):
+> The county hasn’t approved any rezoning applications for houses for applications submitted after 2016, board Chairman Corey Stewart said.
+> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
+
+---
+
+![bg center 75%](figures/plot_rezonings_resi_units.svg)
+
+---
+## Interpretation
+- Reform imposed large **transaction costs** on rezonings (legal uncertainty or "stochastic court enforcement")
+- Municipalities respond by stopping rezonings in 2017
+- Some recovery in 2018, possibly related to municipal relationships with developers (in repeated game, developer unlikely to defect) or more legal clarity
+
+
+## Next Steps:
+- **Power calculations**: How many counties do I need to observe an effect of X%?
+- **Empirical Model**: DiD is natural method, but who is the control group?
+  - Non-residential rezonings
+  - Continuous treatment (intensity proportional to pre-reform proffer rates)
+- **Data!**
+
+---
+
+# Old Stuff
 
 ---
 
@@ -75,32 +118,6 @@ Portsmouth, Planning Director:
 # Bargaining for the Rezone
 
 ![bg right:65% 90%](figures/images/rezoning-news.png)
-
----
-
-## Prince William County Suggested Proffers (2014)
-
-|Unit| Service | Amount ($)|
-|---|---|---:|
-SFD|Schools|20,649|
-SFD|Parks & Libraries|6,403|
-SFD|Fire and Rescue|1,053|
-SFD|Transportation|16,780|
-**SFD**|**Total**|**44,930**
-**Townhouse**|**Total**|**39,837**
-**MFD**|**Total**|**26,778**
-
----
-
-## Prince William County
-*Inside NOVA* (12/6/2018):
-> The county hasn’t approved any rezoning applications for houses for applications submitted after 2016, board Chairman Corey Stewart said.
-> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
-
----
-# A Simple Model of Land Development
-
-TODO
 
 ---
 
