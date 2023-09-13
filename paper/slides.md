@@ -13,82 +13,13 @@ math: mathjax
 ### **Evidence from Virginia's Proffer Reform Act of 2016**
 
 ---
-## A model of residential land supply
-- municipality acts as **durable goods monopolist**
-- an extra unit **decreases** the price of all prior units
-- homeowners control **zoning**, demand compensation to allow more development
-- (See [Fischel (2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en) for a version with perfectly competitive municipalities and increasing marginal congestion costs)
+
+# Selling the Upzone
+
+![bg right:70% 90%](figures/images/rezoning-news.png)
 
 ---
 
-![bg cover 100%](figures/model-durable-monopolist/dgm-01.png)
-
-
----
-
-![bg cover 100%](figures/model-durable-monopolist/dgm-02.png)
-
----
-
-![bg cover 100%](figures/model-durable-monopolist/dgm-03.png)
-
----
-
-![bg cover 100%](figures/model-durable-monopolist/dgm-04.png)
-
----
-
-![bg cover 100%](figures/model-durable-monopolist/dgm-05.png)
-
----
-
-## Prince William County Suggested Proffers (2014)
-
-|Unit| Service | Amount ($)|
-|---|---|---:|
-SFD|Schools|20,649|
-SFD|Parks & Libraries|6,403|
-SFD|Fire and Rescue|1,053|
-SFD|Transportation|16,780|
-**SFD**|**Total**|**44,930**
-**Townhouse**|**Total**|**39,837**
-**MFD**|**Total**|**26,778**
-
----
-
-## Prince William County
-*Inside NOVA* (12/6/2018):
-> The county hasn’t approved any rezoning applications for houses for applications submitted after 2016, board Chairman Corey Stewart said.
-> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
-
----
-
-![bg center 75%](figures/plot_rezonings_resi_units.svg)
-
----
-## Interpretation
-- Reform imposed large **transaction costs** on rezonings (legal uncertainty or "stochastic court enforcement")
-- Municipalities respond by stopping rezonings in 2017
-- Some recovery in 2018, possibly related to municipal relationships with developers (in repeated game, developer unlikely to defect) or more legal clarity
-
-
-## Next Steps:
-- **Power calculations**: How many counties do I need to observe an effect of X%?
-- **Empirical Model**: DiD is natural method, but who is the control group?
-  - Non-residential rezonings
-  - Continuous treatment (intensity proportional to pre-reform proffer rates)
-- **Data!**
-
----
-
-# Old Stuff
-
----
-
-# Abstract
-Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that the supply of residential land uses is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remains constant as localities substitute from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
-
----
 
 # Virginia Proffer Reform Act of 2016
 
@@ -113,13 +44,119 @@ Loudoun, Assistant Director of Planning and Zoning:
 Portsmouth, Planning Director:
 > "If you want to submit proffers, we’re not discussing it."
 
----
-
-# Bargaining for the Rezone
-
-![bg right:65% 90%](figures/images/rezoning-news.png)
 
 ---
+
+## Prince William County
+*Inside NOVA* (12/6/2018):
+> The county hasn’t approved any rezoning applications for houses for applications submitted after 2016, board Chairman Corey Stewart said.
+> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
+
+---
+
+## Prince William County Suggested Proffers (2014)
+
+|Unit| Service | Amount ($)|
+|---|---|---:|
+SFD|Schools|20,649|
+SFD|Parks & Libraries|6,403|
+SFD|Fire and Rescue|1,053|
+SFD|Transportation|16,780|
+**SFD**|**Total**|**44,930**
+**Townhouse**|**Total**|**39,837**
+**MFD**|**Total**|**26,778**
+
+---
+
+## A model of residential land supply
+- municipality acts as **durable goods monopolist**
+- an extra unit **decreases** the price of all prior units
+- homeowners control **housing supply** through zoning, demand compensation to allow more development
+- see [Fischel (2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-01.png)
+
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-02.png)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-03.png)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-04.png)
+
+---
+
+![bg cover 100%](figures/model-durable-monopolist/dgm-05.png)
+
+
+
+---
+
+![bg center 75%](figures/plot_rezonings_resi_units.svg)
+
+---
+## Interpretation
+- Reform imposed large **transaction costs** on rezonings (legal uncertainty or "stochastic court enforcement")
+- Municipalities respond by stopping rezonings in 2017
+- Some recovery in 2018, possibly related to municipal relationships with developers (in repeated game, developer unlikely to defect) or more legal clarity
+
+
+## Next Steps:
+- **Power calculations**: How many counties do I need to observe an effect of X%?
+- **Empirical Model**: DiD is natural method, but who is the control group?
+  - Continuous treatment (intensity proportional to pre-reform proffer rates)
+  - Many zeros - PPML? **(Looking for a reference)**
+- **Data!**
+
+---
+
+# What can we learn?
+From reduced-form analysis of reform act:
+- The "elasticity" of residential land use supply
+
+&nbsp;
+
+From a structural model of municipality behavior:
+- Do municipalities act to maximize **average housing prices** or **total land value**?
+- How much market power do municipalities have?
+- What are the **welfare effects** of proposed zoning reforms?
+  - Mandatory upzoning near transit (e.g., NY Housing Compact, CA SB50)
+  - Legal restrictions on proffers/impact fees (e.g., *Koontz v. St. Johns River Water Management District*)
+
+---
+
+# Potential Data
+
+|Year|County|Parcel|$a_j$|$p_j$|$q_j$|Type|
+|-|-|-|-|-|-|-|
+|2016|Fairfax|01|1|$5,000/unit|12|SFD|
+|2018|Fairfax|02|0|$3,000/unit|10|MFD|
+|2017|Prince William|01|1|$10,000/unit|20|SFD|
+
+where
+- $a_j$ indicates whether the application is approved
+- $p_j$ is the proffer amount
+- $q_j$ is the number of (incremental) allowed units
+
+---
+
+# Old Stuff
+
+---
+
+# Abstract
+Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that the supply of residential land uses is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remains constant as localities substitute from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
+
+
+---
+
 
 # Case Study: Fairfax County
 
@@ -176,19 +213,7 @@ Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
 
 ---
 
-# Potential Data
-
-|Year|County|Parcel|$a_j$|$p_j$|$q_j$|Type|
-|-|-|-|-|-|-|-|
-|2016|Fairfax|01|1|$5,000/unit|12|SFD|
-|2018|Fairfax|02|0|$3,000/unit|10|MFD|
-|2017|Prince William|01|1|$10,000/unit|20|SFD|
-
----
-
 # Appendix
-
----
 
 ---
 
