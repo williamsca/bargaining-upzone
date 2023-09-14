@@ -1,147 +1,123 @@
-Case.Number,Part,final_date,zoning_old,zoning_new,acres,Address,Status,bos_votes_for,bos_votes_against,n_sfd,s_sfa,n_unknown,n_mfd,n_age_restrict,res_cash_proffer,other_cash_proffer,submit_date,planning_hearing_date,Type,Description,line
-C-13-13(C),,2/26/2014,A-1,AR-6(c),4.86,,Approved,7,0,1,,,,,2306,0,,,,,"              C -13- 13( C) — SANDRA B. AND MICHAEL A. JALBERT, REQUEST TO REZONE FROM A- 1,     AGRICULTURAL"
-C-16-13(C,,3/12/2014,R-1,B-1(c),1.25,,Approved,7,0,,,,,,0,0,,,,,"    C- 16- 13 ( C) PLEASANT GROVE INVESTORS, L.L.C., REQUEST TO REZONE FROM R- 1,          SINGLE -"
-C-15-13(C),,3/12/2014,A-1,RS(c),17.71,,Approved,7,0,49,,,,,2306,0,,,,,"C -15- 13( C) HANOVER LAND, L.L.C. ( HANKY, L.L.C.), REQUESTS TO REZONE FROM A- 1,"
-C-25-08(C),,5/28/2014,A-1,B-1(c),1.47,,Approved,7,0,,,,,,0,0,,,,,"C- 25- 08( C) AM. 1- 14 — THE BARNES PLACE, L.L.C., REQUESTS TO REZONE FROM B -3( C), GENERAL BUSINESS"
-C-2-14(C),,6/25/2014,A-1,AR-6(c),6.18,,Approved,7,0,1,,,,,0,0,,,,,
-C-9-13(C),,6/25/2014,A-1,"RM(c), B-1(c)",25.45,,Approved,7,0,48,73,,,,2306,0,,,,,"     C -9- 13( C) HANOVER LAND INVESTORS, L.L.C., REQUEST TO REZONE FROM A- 1, AGRICULTURAL"
-C-6-14,,7/23/2014,B-1,M-2,0.89,,Approved,6,0,,,,,,0,0,,,,,"    C- 6- 14 - SAM E. ENGLISH FAMILY TRUST, REQUESTS TO REZONE FROM B- 1, NEIGHBORHOOD"
-C-12-13(C),,9/24/2014,A-1,AR-6(c),22.7,,Approved,7,0,3,,,,,2306,0,,,,,"C -12- 13( C) - ALVA STUCKEY, JR., REQUESTS TO REZONE FROM A- 1, AGRICULTURAL DISTRICT TO AR -6( C),"
-C-9-14(C),,9/24/2014,A-1,AR-6(c),14.9,,Approved,7,0,1,,,,,2306,0,,,,,"REQUEST TO REZONE FROM R- 1, SINGLE -FAMILY RESIDENTIAL DISTRICT TO B -1( C), NEIGHBORHOOD BUSINESS"
-C-11-14(C),,9/24/2014,R-1,B-1(c),4.14,,Approved,7,0,,,,,106,0,0,,,,,
-C-12-14(C),,10/22/2014,A-1,B-3,4.82,,Approved,7,0,,,,,,0,0,,,,,
-C-10-14(C),,10/22/2014,A-1,B-1(c),1.36,,Approved,7,0,,,,,,0,0,,,,,"C -10- 14( C) — HANOVER LAND, L.L.C., REQUESTS TO REZONE FROM A- 1, AGRICULTURAL DISTRICT, TO B -1( C),"
-C-3-14(C),,10/22/2014,A-1,RS(c),62.04,,Approved,5,2,142,,,,,2306,0,,,,,"C -3- 14( C) — WILLIAM H. GARRISON, ET AL. ( MERIDIAN LAND COMPANY), REQUEST TO REZONE FROM A- 1,"
-C-7-14(C),,10/22/2014,A-1,RS(c),41.94,,Denied,3,4,68,,,,,6671,0,,,,,"      C -7- 14( C) - E. TYREE CHAPPELL, ESTATE, REQUESTS TO REZONE FROM A- 1, AGRICULTURAL DISTRICT, TO RS( C),"
-C-16-14(C),,12/10/2014,A-1,"AR-6(c), M-2(c)",9.07,,Approved,7,0,1,,,,,2306,0,,,,,"     C -16- 14( C) - FOMIN CONSTRUCTION, INC., REQUESTS TO REZONE FROM A- 1, AGRICULTURAL DISTRICT, TO AR -"
-C-15-14(C),,12/10/2014,A-1,AR-6(c),23.49,,Approved,7,0,2,,,,,2306,0,,,,,"     C -15- 14( C) — BARBARA AND PAUL BROWN, SR., REQUEST TO REZONE FROM A- 1,      AGRICULTURAL DISTRICT, TO"
-C-7-14(C),,12/10/2014,A-1,RS(c),41.94,,Approved,5,2,68,,,,,6671,0,,,,,
-C-20-14(C),,1/28/2015,A-1,AR-6(c),4,,Approved,6,0,1,,,,,0,0,,,,,"C -20- 14( C) — BRENDA A. AND RONALD N. MAY, REQUEST TO REZONE FROM A- 1,      AGRICULTURAL DISTRICT, TO"
-C-8-14(C),,1/28/2015,A-1,RS(c),39.6,,Approved,6,0,,,,,130,2306,0,,,,,"     C -8- 14( C) — CAROLYN L. KING (ROGERS- CHENAULT, INC.), REQUESTS TO REZONE FROM A- 1, AGRICULTURAL"
-C-1-15(C),,4/22/2015,B-3,AR-6(c),4.07,,Approved,7,0,2,,,,,2306,0,,,,,"C- 1- 15 ( C) — CALVIN L. STANLEY, REQUESTS TO REZONE FROM B- 3,     GENERAL BUSINESS DISTRICT TO AR -6( C),"
-C-3-15(C),,4/22/2015,M-1,M-2(c),10.85,,Approved,6,0,,,,,,0,0,,,,,"C- 3- 15 ( C) — WAYNE T. HAZZARD, ET AL., REQUEST TO REZONE FROM M- 1, LIMITED INDUSTRIAL DISTRICT, TO"
-C-2-15(C),,4/22/2015,A-1,M-2(c),95.93,Ashcake Road and Long Road,Approved,7,0,,,,,,0,0,,,,,"C- 2- 15 ( C) — BALDWIN FAMILY PARTNERSHIP, ET AL., REQUEST TO REZONE FROM A- 1,   AGRICULTURAL DISTRICT,"
-C-17-14(C),,4/22/2015,"A-1, R-1","RS(c), B-2(c)",11.7,Chamberlayne Road and McKenzie Drive,Approved,7,0,40,,,,,2306,0,,,,,
-C-18-14(C),,5/27/2015,A-1,AR-6(c),8.9,Rocketts Mill Road and Little Bridge Drive,Approved,6,0,1,,,,,0,0,,,,,
-C-24-14(C),,5/27/2015,A-1,B-3(c),2.62,Sujen Court and Mechanicsville Turnpike,Approved,6,0,,,,,,0,0,,,,,
-C-5-15(C),,6/24/2015,A-1,AR-6(c),13.32,Studley Road and Mechanicsville Turnpike,Approved,7,0,1,,,,,0,0,,,,,"B. C -5- 15( C) — SUZANNE L. AND CAMERON L. WOOD, REQUEST TO REZONE FROM A- 1, AGRICULTURAL"
-C-7-15(C),,7/22/2015,A-1,AR-6(c),25,Woodville Lane and Hanover Courthouse Road,Approved,7,0,0,,,,,0,0,,,,,
-C-9-15(C),,7/22/2015,A-1,AR-6(c),10.2,Rhyne Lane and Mountain Road,Approved,7,0,1,,,,,0,0,,,,,
-C-10-15(C),,7/22/2015,A-1,RS(c),4.88,Ashcake Road and Egypt Road,Approved,7,0,1,,,,,0,0,,,,,
-C-15-15(C),,7/22/2015,"A-1, B-3",M-2(c),118,Cedar Lane and Washington Highway,Approved,6,1,,,,,,0,0,,,,,
-C-14-14(C),1,7/22/2015,A-1,"RS(c), B-3(c)",103.66,Chamberlayne Road and New Ashcake Road,Approved,5,2,115,,,,,5709.56,0,,,,,
-C-14-14(C),2,7/22/2015,A-1,"RS(c), B-3(c)",103.66,Chamberlayne Road and New Ashcake Road,Approved,5,2,,131,,,,3485.01,0,,,,,
-C-14-14(C),3,7/22/2015,A-1,"RS(c), B-3(c)",103.66,Chamberlayne Road and New Ashcake Road,Approved,5,2,,,,286,,4086.73,0,,,,,
-C-11-15(C),,8/26/2015,A-1,AR-6(c),10,Brown Pleasants Road and Mountain Road,Approved,5,0,1,,,,,0,0,,,,,
-C-13-15(C),,8/26/2015,A-1,AR-6(c),4.2,Piping Tree Ferry Road and Old Church Road,Approved,5,0,1,,,,,0,0,,,,,
-C-14-15(C),,8/26/2015,"R-1, B-3",B-1(C),0.55,Lee Avenue and Atlee Road,Approved,5,0,,,,,,0,0,,,,,
-C-6-15,,8/26/2015,A-1,M-2,27.11,Hanover County Airport,Approved,5,0,,,,,,0,0,,,,,
-C-16-15(C),,9/23/2015,A-1,AR-6(c),8.37,Dogwood Trail Road and Watkins Road,Approved,6,0,1,,,,,0,0,,,,,
-C-17-15(C),,9/23/2015,A-1,AR-6(c),8.3,St. Peter's Church Road and Auburn Mill Road,Approved,6,0,1,,,,,0,0,,,,,
-C-18-15(C),,9/23/2015,A-1,AR-6(c),19.76,Douglas Farm Lane and McClellan Road,Approved,6,0,0,,,,,0,0,,,,,
-C-20-15,,9/23/2015,A-1,RS,2.05,Cedar Lane and Karen Drive,Approved,6,0,0,,,,,0,0,,,,,
-C-4-15(C),,9/23/2015,"A-1, B-3(c)",B-3(c),15,Mechanicsville Turnpike and Compass Point Drive,Approved,6,0,,,,,,0,0,,,,,
-C-23-15(C),,10/28/2015,A-1,AR-6(c),20,Toad Hollow Court and Mount Hermon Road,Approved,7,0,1,,,,,2306,0,,,,,"       REQUESTS TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT"
-C-24-15(C),,11/24/2015,A-1,AR-6(c),14.56,Verdon Road and Sleepy Hollow Lane,Approved,7,0,1,,,,,2306,0,,,,,"        REQUESTS TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT"
-C-25-15(C),,12/9/2015,B-O,B-1(c),0.5,Mechanicsville Turnpike and Woodbridge Road,Approved,7,0,,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM B-O, BUSINESS OFFICE DISTRICT, TO B-1(C), NEIGHBORHOOD BUSINESS DISTRICT"
-C-27-15(C),,12/9/2015,A-1,AR-6(c),7.6,Westwood Road and Hidden Lake Estate Drive,Approved,7,0,1,,,,,2306,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-19-15(C),,12/9/2015,A-1,RC(c),264.38,West Patrick Henry Road and Independence Road,Approved,7,0,42,,,,,2306,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO RC(C), RURAL CONSERVATION DISTRICT WITH"
-C-29-15(C),,1/27/2016,A-1,AR-6(c),5.77,Watkins Road and Dogwood Trail Road,Approved,7,0,1,,,,,0,0,,,,,"B.      C-29-15(C), SHEILA FLEMING - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C),"
-C-31-15(C),,1/27/2016,A-1,AR-6(c),5.97,Goshen Road and Geese Lake Lane,Approved,7,0,1,,,,,2306,0,,,,,"C.      C-31-15(C), IDA M. AND EDWARD E. PRICE - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL"
-C-22-15(C),,1/27/2016,A-1,RS(c),39.57,Pole Green Road and Rural Point Road,Approved,7,0,103,,,,,6537,0,,,,,      THE APPLICANT REQUESTS TO REZONE TO B-3 SO THAT THE PARCEL MAY BE PERMITTED COMMERCIAL USES
-C-21-15(C),,3/23/2016,"RC(c), A-1",AR-6(c),410.67,Hopewell Road and Figuly Road,Approved,7,0,8,,,,,2306,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-C-12-15(C),,3/23/2016,A-1,M-2(c),92.83,Cold Harbor Road and Market Road,Approved,6,1,,,,,,0,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-C-28-15(C),,3/23/2016,A-1,"RS(c), RM(c)",179.49,Cedar Lane and Holly Hill Road,Approved,7,0,,,104,,300,0,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO M-2(C), LIGHT INDUSTRIAL DISTRICT WITH"
-C-4-16(C),,5/25/2016,A-1,AR-6(c),20,Woodman Meadows Drive and Woodman Hall Road,Approved,7,0,1,,,,,0,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-C-5-16(C),,5/25/2016,A-1,AR-6(c),11.64,Cypress Creek Lane and Horseshoe Bridge Road,Approved,7,0,1,,,,,0,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-C-6-16(C),,5/25/2016,A-1,M-2(c),2,Bullfield Road,Approved,7,0,,,,,,0,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO M-2(C), LIGHT INDUSTRIAL DISTRICT WITH"
-C-3-16(C),,6/22/2016,A-1,AR-6(c),10.39,,Approved,7,0,1,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6, AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-2-16(C),,6/22/2016,A-1,RS(c),17.47,Providence Church Road and East Patrick Henry Road,Approved,7,0,51,,,,,3080,0,,,,,      THIS REQUEST TO REZONE THE 10.39 ACRE PARCEL WILL ALLOW THE CREATION OF 1 ADDITIONAL LOT FOR A
-C-8-16(C),,7/27/2016,A-1,B-1(c),1.47,Chamberlayne Road and Pine Ridge Road,Approved,7,0,-1,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO B-1(C), NEIGHBORHOOD BUSINESS DISTRICT WITH"
-C-1-16(C),,7/27/2016,A-1,RS(c),15.21,Rural Point Road and Chamberlayne Road,Approved,7,0,30,,,,,2306,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO RS(C), SINGLE FAMILY RESIDENTIAL DISTRICT WITH"
-C-9-16(C),,8/24/2016,A-1,AR-6(c),10.03,,Approved,5,0,1,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-11-16(C),,8/24/2016,A-1,AR-6(c),19.51,,Approved,5,0,0,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-12-16(C),,9/28/2016,A-1,AR-6(c),33,Verdon Road and Napier Drive,Approved,6,0,1,,,,,0,0,,,,,"       REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-C-10-16(C),,10/26/2016,A-1,AR-6(c),5,,Approved,7,0,1,,,,,2306,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-C-13-16(C),,10/26/2016,A-1,RS(c),1,,Approved,7,0,1,,,,,0,0,,,,,      PROPOSED REQUEST TO REZONE THE 5.0 ACRE PARCEL TO CREATE:
-C-26-15(C),,10/26/2016,"A-1, B-1, R-1",RS(c),24.72,West Patrick Henry Road and Country Club Drive,Approved,7,0,22,,,,,2306,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO RS(C), SINGLE FAMILY RESIDENTIAL DISTRICT"
-C-15-16(C),,11/22/2016,A-1,M-3(c),48.9,Washington Highway and Verdon Road,Approved,7,0,,,,,,0,0,,,,,"       REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO M-3(C), HEAVY INDUSTRIAL DISTRICT WITH"
-C-16-16(C),,11/22/2016,A-1,B-1(c),2,Mountain Road and Brown Pleasants Road,Approved,7,0,,,,,,0,0,,,,,"        REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO B-1(C), NEIGHBORHOOD BUSINESS DISTRICT"
-C-21-16(C),,2/22/2017,A-1,AR-6(c),5.09,,Approved,7,0,1,,,,,0,0,,,,,OF ITS INTERSECTION WITH BELL CREEK ROAD. THE CURRENT APPLICATION INDICATES A REQUEST TO REZONE FROM A-
-C-22-16(C),,2/22/2017,A-1,AR-6(c),34,,Deferred,7,0,,,,,,0,0,,,,,
-C-14-16(C),,2/22/2017,A-1,B-1(c),6,Mechanicsville Turnpike and Adams Farm Road,Approved,7,0,,,,,,0,0,,,,,
-C-34-15(C),,2/22/2017,A-1,RS(c),42.73,Honey Meadows Road and Atlee Station Road,Deferred,7,0,87,60,,,,0,0,,,,,
-C-24-16(C),,3/22/2017,A-1,AR-6(c),10,,Approved,7,0,1,,,,,0,0,,,,,
-C-22-16(C),,3/22/2017,A-1,AR-6(c),34,Pole Green Road and Knight Drive,Approved,7,0,5,,,,,0,0,,,,,
-C-23-16(C),,4/26/2017,A-1,AR-6(c),37.53,Waltons Tavern Road and Iron Hill Drive,Approved,7,0,6,,,,,0,0,,,,,
-C-2-17(C),,4/26/2017,A-1,AR-6(c),39.66,,Approved,7,0,1,,,,,0,0,,,,,
-C-3-17(C),,4/26/2017,A-1,AR-6(c),9.57,,Approved,7,0,1,,,,,0,0,,,,,
-C-1-17(C),,4/26/2017,A-1,B-3(c),7.84,Pouncey Tract Road and Ashland Road,Approved,7,0,,,,,,0,0,,,,,
-C-5-17(C),,5/24/2017,A-1,AR-6(c),4.97,,Approved,7,0,1,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-4-17(C),,5/24/2017,"B-3, R-6",B-3(c),2.12,,Approved,7,0,,,,,,0,0,,,,,"REQUEST(S) TO REZONE FROM B-3, GENERAL BUSINESS DISTRICT AND R-6, RESIDENTIAL MOBILE HOMES DISTRICT,"
-C-34-15(C),,5/24/2017,A-1,RS(c),42.73,Honey Meadows Road and Atlee Station Road,Approved,5,2,85,40,,,,0,0,,,,"In lieu of a cash contribution for road improvements in the amount of Eight Thousand Four Hundred Ninety-one and 00/100 dollars ($8,491.00) per single family detached structure, and Five Thousand Seven Hundred Ninety-five and 00/100 dollars ($5,795.00) per single family attached structure, the Property Owner agrees to construct the improvements to Honey Meadows Road and Atlee Station Road in accordance with sheets �7A� and �7B� contained within the conceptual plan and more specifically described as follows:","REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO RS(C), SINGLE FAMILY RESIDENTIAL DISTRICT WITH"
-C-9-17(C),,6/28/2017,A-1,AR-6(c),10.69,,Approved,7,0,1,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-8-17(C),,7/26/2017,A-1,AR-6(c),11.2,,Approved,7,0,1,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C-10-17(C),,8/23/2017,A-1,RS(c),2.98,,Approved,6,0,1,,,,,,,,,,,
-C-13-17,,8/23/2017,B-1,A-1,15.12,,Approved,6,0,1,,,,,,,,,,,"C. C-13-17, ALBERT L. RICHARDSON, ET AL. - REQUEST(S) TO REZONE FROM B-1, NEIGHBORHOOD BUSINESS"
-,,,,,,,,,,,,,,,,,,,,,
-See Minutes (17),,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,
-REQUEST(S)TO,,9/27/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO RS(C), SINGLE-FAMILY RESIDENTIAL DISTRICT"
-REQUEST(S)TO,,10/25/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO B-3(C), GENERAL BUSINESS DISTRICT WITH"
-REQUEST(S)TO,,10/25/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM B-2, COMMUNITY BUSINESS DISTRICT, AND R-5, MULTIPLE-FAMILY"
-A.C-16-17(C),,11/21/2017,,,,,,,,,,,,,,,,,,,"A. C-16-17(C), MARGARET JONES BOST - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO"
-B.C-17-17(C),,11/21/2017,,,,,,,,,,,,,,,,,,,"B. C-17-17(C), STELLA M. AND STEVEN M. CLARY - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL"
-C.C-19-17(C),,11/21/2017,,,,,,,,,,,,,,,,,,,"C. C-19-17(C), HANOVER HABITAT FOR HUMANITY, INC. - REQUEST(S) TO REZONE FROM R-1, SINGLE-"
-REQUEST(S)TO,,2/22/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-REQUEST(S)TO,,2/22/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-REQUEST(S)TO,,2/22/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO B-1(C), NEIGHBORHOOD BUSINESS DISTRICT WITH"
-REQUEST(S)TO,,3/22/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-REQUEST(S)TO,,3/22/2017,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-A.C-23-1,,4/26/2017,,,,,,,,,,,,,,,,,,,"A.     C-23-16(C), BLUE RIDGE CUSTOM HOMES - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO"
-B.C-2-1,,4/26/2017,,,,,,,,,,,,,,,,,,,"B.      C-2-17(C), KEVIN C. BEALE - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C),"
-C.C-3-1,,4/26/2017,,,,,,,,,,,,,,,,,,,"C.      C-3-17(C), TAMMY B. HILL AND DEBRA G. BROOKS - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL"
-D.C-1-1,,4/26/2017,,,,,,,,,,,,,,,,,,,"D.      C-1-17(C), FRESH START GROUP, L.L.C. - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO"
-REQUEST(S)TO,,1/24/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-C.C-4-1,,5/23/2018,,,,,,,,,,,,,,,,,,,"C.      C-4-18(C), IPSON FAMILY REVOCABLE TRUST (RONNY T. IPSON) - REQUEST(S) TO REZONE FROM M-"
-E.C-25-1,,5/23/2018,,,,,,,,,,,,,,,,,,,"E.     C-25-17(C), VIRGINIA T. AND WILLIAM C. JOYCE - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL"
-"A.C-7-18(C),",,8/22/2018,,,,,,,,,,,,,,,,,,,"   A. C-7-18(C), EUGENE T. COMBS TRUST - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO"
-"D.C-9-18(C),",,9/26/2018,,,,,,,,,,,,,,,,,,,"D. C-9-18(C), TRUSTEES OF HILLCREST BAPTIST CHURCH REQUEST(S) TO REZONE FROM AR-2, AGRICULTURAL"
-G.C-9-18,,10/24/2018,,,,,,,,,,,,,,,,,,,"G.     C-9-18(C), TRUSTEES OF HILLCREST BAPTIST CHURCH REQUEST(S) TO REZONE FROM AR-2,"
-A.C-11-1,,10/24/2018,,,,,,,,,,,,,,,,,,,"A.     C-11-18(C), WLB HOLDINGS, L.L.C. REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, AND"
-B.C-13-1,,11/14/2018,,,,,,,,,,,,,,,,,,,"B.     C-13-18(C), HEIRFIELD PROPERTIES, L.L.C., - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL"
-C.C-1-1,,11/14/2018,,,,,,,,,,,,,,,,,,,"C.      C-1-18(C), LEWISTOWN COMMERCE CENTER, L.L.C., - REQUEST(S) TO REZONE FROM M-2(C), LIGHT"
-REQUEST(S)TO,,12/12/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, AND B-3, GENERAL BUSINESS DISTRICT, TO MX(C),"
-REQUEST(S)TO,,12/12/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM AR-2, AGRICULTURAL RESIDENTIAL DISTRICT, TO A-1, AGRICULTURAL DISTRICT WITH"
-REQUEST(S)TO,,12/12/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-REQUEST(S)TO,,12/12/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM M-2(C), LIGHT INDUSTRIAL DISTRICT WITH CONDITIONS, AND B-3(C), GENERAL"
-REQUEST(S)TO,,2/28/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-REQUEST(S)TO,,2/28/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR-6(C), AGRICULTURAL RESIDENTIAL DISTRICT"
-REQUEST(S)TO,,2/28/2018,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-6(C), AGRICULTURAL RESIDENTIAL"
-B.C-14-1,,4/25/2018,,,,,,,,,,,,,,,,,,,"B.     C-14-17(C), PEARL J. HARRIS - REQUEST TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO RS(C),"
-C.C-27-1,,4/25/2018,,,,,,,,,,,,,,,,,,," C.     C-27-17(C), STEPHANIE W. ROEDER AND DEBORAH S. BAIRD - REQUEST(S) TO REZONE FROM A-1,"
-REQUEST(S)TO,,1/23/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM B-1, NEIGHBORHOOD BUSINESS DISTRICT, TO B-3(C), GENERAL BUSINESS DISTRICT"
-REQUEST(S)TO,,1/23/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM AR-2, AGRICULTURAL RESIDENTIAL DISTRICT, TO A-1, AGRICULTURAL DISTRICT WITH"
-REQUEST(S)TO,,5/22/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO RS(C), SINGLE FAMILY RESIDENTIAL DISTRICT WITH"
-REQUEST(S)TO,,5/22/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, AND M-1(C), LIMITED INDUSTRIAL DISTRICT WITH"
-THISISAR,,5/22/2019,,,,,,,,,,,,,,,,,,,      THIS IS A REQUEST TO REZONE TO:
-F.C-6-19,,7/24/2019,,,,,,,,,,,,,,,,,,,"F.     C-6-19(C), SANDY VALLEY, L.L.C. - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO AR-"
-REZ2019-000,,7/24/2019,,,,,,,,,,,,,,,,,,,"    REZ2019-00016, WAYNE E. FORD, IS A REQUEST TO REZONE 0.13 ACRES FROM B-3, GENERAL BUSINESS"
-REQUEST(S)TO,,8/28/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, AND B-3, GENERAL BUSINESS DISTRICT, TO MX(C),"
-REQUEST(S)TO,,8/28/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO RS(C), SINGLE FAMILY RESIDENTIAL DISTRICT WITH"
-THISISAR,,8/28/2019,,,,,,,,,,,,,,,,,,,    THIS IS A REQUEST TO REZONE TO RS(C) TO ALLOW THE APPLICANT TO CREATE 1 ADDITIONAL LOT FOR A FAMILY
-REQUEST(S)TO,,8/28/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT TO AR6(C), AGRICULTURAL RESIDENTIAL DISTRICT WITH"
-THISISAR,,8/28/2019,,,,,,,,,,,,,,,,,,,      THIS IS A REQUEST TO REZONE TO AR-6(C) TO PERMIT THE CREATION OF 1 ADDITIONAL BUILDING LOT
-A.REZ20,,10/23/2019,,,,,,,,,,,,,,,,,,,"A.      REZ2019-00016, WAYNE E. FORD - REQUEST(S) TO REZONE FROM B-3, GENERAL BUSINESS DISTRICT,"
-B.REZ20,,10/23/2019,,,,,,,,,,,,,,,,,,,"B.      REZ2019-00020, JOAN BATIAO AND WILLIAM M. THORNBURG, SR. - REQUEST(S) TO REZONE FROM B-"
-"A.C-2-19(C),",,11/13/2019,,,,,,,,,,,,,,,,,,,"A. C-2-19(C), JAMES P. RAWLS - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT, TO RC(C), RURAL"
-"B.C-5-19(C),",,11/13/2019,,,,,,,,,,,,,,,,,,,"B. C-5-19(C), HWS WEST L.L.C. - REQUEST(S) TO REZONE FROM B-2(C), COMMUNITY BUSINESS WITH"
-C.REZ20,,11/13/2019,,,,,,,,,,,,,,,,,,,"C.      REZ2019-00014, D. TODD VANDERPOL - REQUEST(S) TO REZONE FROM A-1, AGRICULTURAL DISTRICT,"
-D.REZ20,,11/13/2019,,,,,,,,,,,,,,,,,,,"D.      REZ2019-00021, NORMAN L. PURYEAR AND WILLIAM A. PURYEAR - REQUEST(S) TO REZONE FROM"
-THISISAR,,11/13/2019,,,,,,,,,,,,,,,,,,,         THIS IS A REQUEST TO REZONE TO RS(C) TO ALLOW THE APPLICANT TO CREATE 1 ADDITIONAL LOT FOR A
-REQUEST(S)TO,,2/27/2019,,,,,,,,,,,,,,,,,,,"REQUEST(S) TO REZONE FROM B-3, GENERAL BUSINESS DISTRICT, TO M-2(C), LIGHT INDUSTRIAL DISTRICT WITH"
-THISISAR,,2/27/2019,,,,,,,,,,,,,,,,,,,      THIS IS A REQUEST TO REZONE TO M-2(C) TO DEVELOP THE SITE FOR DISTRIBUTION USES
-A.REZ2,,12/11/2019,,,,,,,,,,,,,,,,,,,"A.       REZ2019-00026, PATSY M. AND CHARLES C. SMITH - REQUEST(S) TO REZONE FROM A-1,"
-B.REZ20,,12/11/2019,,,,,,,,,,,,,,,,,,,"B.      REZ2019-00025, TAB OF VIRGINIA, L.L.C. REQUEST(S) TO REZONE FROM B-3, GENERAL BUSINESS"
-"C.C-3-19(C),",,12/11/2019,,,,,,,,,,,,,,,,,,,"C. C-3-19(C), PRUITT PROPERTIES, INC. AND NORTH GAYTON COMPANY - REQUEST(S) TO REZONE FROM"
-D.REZ2019-00,,12/11/2019,,,,,,,,,,,,,,,,,,,"D. REZ2019-00027, CD RESTAURANTS, INC. - REQUEST(S) TO REZONE FROM B-2, COMMUNITY BUSINESS"
+Case.Number,Part,final_date,zoning_old,zoning_new,acres,Address,Status,bos_votes_for,bos_votes_against,n_sfd,n_sfa,n_unknown,n_mfd,n_age_restrict,res_cash_proffer,other_cash_proffer,submit_date,planning_hearing_date,Type,Description
+C-13-13(C),,2/26/2014,A-1,AR-6(c),4.86,,Approved,7,0,1,,,,,2306,0,,,,
+C-16-13(C,,3/12/2014,R-1,B-1(c),1.25,,Approved,7,0,,,,,,0,0,,,,
+C-15-13(C),,3/12/2014,A-1,RS(c),17.71,,Approved,7,0,49,,,,,2306,0,,,,
+C-25-08(C),,5/28/2014,A-1,B-1(c),1.47,,Approved,7,0,,,,,,0,0,,,,
+C-2-14(C),,6/25/2014,A-1,AR-6(c),6.18,,Approved,7,0,1,,,,,0,0,,,,
+C-9-13(C),,6/25/2014,A-1,"RM(c), B-1(c)",25.45,,Approved,7,0,48,73,,,,2306,0,,,,
+C-6-14,,7/23/2014,B-1,M-2,0.89,,Approved,6,0,,,,,,0,0,,,,
+C-12-13(C),,9/24/2014,A-1,AR-6(c),22.7,,Approved,7,0,3,,,,,2306,0,,,,
+C-9-14(C),,9/24/2014,A-1,AR-6(c),14.9,,Approved,7,0,1,,,,,2306,0,,,,
+C-11-14(C),,9/24/2014,R-1,B-1(c),4.14,,Approved,7,0,,,,,106,0,0,,,,
+C-12-14(C),,10/22/2014,A-1,B-3,4.82,,Approved,7,0,,,,,,0,0,,,,
+C-10-14(C),,10/22/2014,A-1,B-1(c),1.36,,Approved,7,0,,,,,,0,0,,,,
+C-3-14(C),,10/22/2014,A-1,RS(c),62.04,,Approved,5,2,142,,,,,2306,0,,,,
+C-7-14(C)a,,10/22/2014,A-1,RS(c),41.94,,Denied,3,4,68,,,,,6671,0,,,,
+C-16-14(C),,12/10/2014,A-1,"AR-6(c), M-2(c)",9.07,,Approved,7,0,1,,,,,2306,0,,,,
+C-15-14(C),,12/10/2014,A-1,AR-6(c),23.49,,Approved,7,0,2,,,,,2306,0,,,,
+C-7-14(C)b,,12/10/2014,A-1,RS(c),41.94,,Approved,5,2,68,,,,,6671,0,,,,
+C-20-14(C),,1/28/2015,A-1,AR-6(c),4,,Approved,6,0,1,,,,,0,0,,,,
+C-8-14(C),,1/28/2015,A-1,RS(c),39.6,,Approved,6,0,,,,,130,2306,0,,,,
+C-1-15(C),,4/22/2015,B-3,AR-6(c),4.07,,Approved,7,0,2,,,,,2306,0,,,,
+C-3-15(C),,4/22/2015,M-1,M-2(c),10.85,,Approved,6,0,,,,,,0,0,,,,
+C-2-15(C),,4/22/2015,A-1,M-2(c),95.93,Ashcake Road and Long Road,Approved,7,0,,,,,,0,0,,,,
+C-17-14(C),,4/22/2015,"A-1, R-1","RS(c), B-2(c)",11.7,Chamberlayne Road and McKenzie Drive,Approved,7,0,40,,,,,2306,0,,,,
+C-18-14(C),,5/27/2015,A-1,AR-6(c),8.9,Rocketts Mill Road and Little Bridge Drive,Approved,6,0,1,,,,,0,0,,,,
+C-24-14(C),,5/27/2015,A-1,B-3(c),2.62,Sujen Court and Mechanicsville Turnpike,Approved,6,0,,,,,,0,0,,,,
+C-5-15(C),,6/24/2015,A-1,AR-6(c),13.32,Studley Road and Mechanicsville Turnpike,Approved,7,0,1,,,,,0,0,,,,
+C-7-15(C),,7/22/2015,A-1,AR-6(c),25,Woodville Lane and Hanover Courthouse Road,Approved,7,0,0,,,,,0,0,,,,
+C-9-15(C),,7/22/2015,A-1,AR-6(c),10.2,Rhyne Lane and Mountain Road,Approved,7,0,1,,,,,0,0,,,,
+C-10-15(C),,7/22/2015,A-1,RS(c),4.88,Ashcake Road and Egypt Road,Approved,7,0,1,,,,,0,0,,,,
+C-15-15(C),,7/22/2015,"A-1, B-3",M-2(c),118,Cedar Lane and Washington Highway,Approved,6,1,,,,,,0,0,,,,
+C-14-14(C),1,7/22/2015,A-1,"RS(c), B-3(c)",103.66,Chamberlayne Road and New Ashcake Road,Approved,5,2,115,,,,,5709.56,0,,,,
+C-14-14(C),2,7/22/2015,A-1,"RS(c), B-3(c)",103.66,Chamberlayne Road and New Ashcake Road,Approved,5,2,,131,,,,3485.01,0,,,,
+C-14-14(C),3,7/22/2015,A-1,"RS(c), B-3(c)",103.66,Chamberlayne Road and New Ashcake Road,Approved,5,2,,,,286,,4086.73,0,,,,
+C-11-15(C),,8/26/2015,A-1,AR-6(c),10,Brown Pleasants Road and Mountain Road,Approved,5,0,1,,,,,0,0,,,,
+C-13-15(C),,8/26/2015,A-1,AR-6(c),4.2,Piping Tree Ferry Road and Old Church Road,Approved,5,0,1,,,,,0,0,,,,
+C-14-15(C),,8/26/2015,"R-1, B-3",B-1(C),0.55,Lee Avenue and Atlee Road,Approved,5,0,,,,,,0,0,,,,
+C-6-15,,8/26/2015,A-1,M-2,27.11,Hanover County Airport,Approved,5,0,,,,,,0,0,,,,
+C-16-15(C),,9/23/2015,A-1,AR-6(c),8.37,Dogwood Trail Road and Watkins Road,Approved,6,0,1,,,,,0,0,,,,
+C-17-15(C),,9/23/2015,A-1,AR-6(c),8.3,St. Peter's Church Road and Auburn Mill Road,Approved,6,0,1,,,,,0,0,,,,
+C-18-15(C),,9/23/2015,A-1,AR-6(c),19.76,Douglas Farm Lane and McClellan Road,Approved,6,0,0,,,,,0,0,,,,
+C-20-15,,9/23/2015,A-1,RS,2.05,Cedar Lane and Karen Drive,Approved,6,0,0,,,,,0,0,,,,
+C-4-15(C),,9/23/2015,"A-1, B-3(c)",B-3(c),15,Mechanicsville Turnpike and Compass Point Drive,Approved,6,0,,,,,,0,0,,,,
+C-23-15(C),,10/28/2015,A-1,AR-6(c),20,Toad Hollow Court and Mount Hermon Road,Approved,7,0,1,,,,,2306,0,,,,
+C-24-15(C),,11/24/2015,A-1,AR-6(c),14.56,Verdon Road and Sleepy Hollow Lane,Approved,7,0,1,,,,,2306,0,,,,
+C-25-15(C),,12/9/2015,B-O,B-1(c),0.5,Mechanicsville Turnpike and Woodbridge Road,Approved,7,0,,,,,,0,0,,,,
+C-27-15(C),,12/9/2015,A-1,AR-6(c),7.6,Westwood Road and Hidden Lake Estate Drive,Approved,7,0,1,,,,,2306,0,,,,
+C-19-15(C),,12/9/2015,A-1,RC(c),264.38,West Patrick Henry Road and Independence Road,Approved,7,0,42,,,,,2306,0,,,,
+C-29-15(C),,1/27/2016,A-1,AR-6(c),5.77,Watkins Road and Dogwood Trail Road,Approved,7,0,1,,,,,0,0,,,,
+C-31-15(C),,1/27/2016,A-1,AR-6(c),5.97,Goshen Road and Geese Lake Lane,Approved,7,0,1,,,,,2306,0,,,,
+C-22-15(C),,1/27/2016,A-1,RS(c),39.57,Pole Green Road and Rural Point Road,Approved,7,0,103,,,,,6537,0,,,,
+C-21-15(C),,3/23/2016,"RC(c), A-1",AR-6(c),410.67,Hopewell Road and Figuly Road,Approved,7,0,8,,,,,2306,0,,,,
+C-12-15(C),,3/23/2016,A-1,M-2(c),92.83,Cold Harbor Road and Market Road,Approved,6,1,,,,,,0,0,,,,
+C-28-15(C),,3/23/2016,A-1,"RS(c), RM(c)",179.49,Cedar Lane and Holly Hill Road,Approved,7,0,,,104,,300,0,0,,,,
+C-4-16(C),,5/25/2016,A-1,AR-6(c),20,Woodman Meadows Drive and Woodman Hall Road,Approved,7,0,1,,,,,0,0,,,,
+C-5-16(C),,5/25/2016,A-1,AR-6(c),11.64,Cypress Creek Lane and Horseshoe Bridge Road,Approved,7,0,1,,,,,0,0,,,,
+C-6-16(C),,5/25/2016,A-1,M-2(c),2,Bullfield Road,Approved,7,0,,,,,,0,0,,,,
+C-3-16(C),,6/22/2016,A-1,AR-6(c),10.39,,Approved,7,0,1,,,,,0,0,,,,
+C-2-16(C),,6/22/2016,A-1,RS(c),17.47,Providence Church Road and East Patrick Henry Road,Approved,7,0,51,,,,,3080,0,,,,
+C-8-16(C),,7/27/2016,A-1,B-1(c),1.47,Chamberlayne Road and Pine Ridge Road,Approved,7,0,-1,,,,,0,0,,,,
+C-1-16(C),,7/27/2016,A-1,RS(c),15.21,Rural Point Road and Chamberlayne Road,Approved,7,0,30,,,,,2306,0,,,,
+C-9-16(C),,8/24/2016,A-1,AR-6(c),10.03,,Approved,5,0,1,,,,,0,0,,,,
+C-11-16(C),,8/24/2016,A-1,AR-6(c),19.51,,Approved,5,0,0,,,,,0,0,,,,
+C-12-16(C),,9/28/2016,A-1,AR-6(c),33,Verdon Road and Napier Drive,Approved,6,0,1,,,,,0,0,,,,
+C-10-16(C),,10/26/2016,A-1,AR-6(c),5,,Approved,7,0,1,,,,,2306,0,,,,
+C-13-16(C),,10/26/2016,A-1,RS(c),1,,Approved,7,0,1,,,,,0,0,,,,
+C-26-15(C),,10/26/2016,"A-1, B-1, R-1",RS(c),24.72,West Patrick Henry Road and Country Club Drive,Approved,7,0,22,,,,,2306,0,,,,
+C-15-16(C),,11/22/2016,A-1,M-3(c),48.9,Washington Highway and Verdon Road,Approved,7,0,,,,,,0,0,,,,
+C-16-16(C),,11/22/2016,A-1,B-1(c),2,Mountain Road and Brown Pleasants Road,Approved,7,0,,,,,,0,0,,,,
+C-21-16(C),,2/22/2017,A-1,AR-6(c),5.09,,Approved,7,0,1,,,,,0,0,,,,
+C-14-16(C),,2/22/2017,A-1,B-1(c),6,Mechanicsville Turnpike and Adams Farm Road,Approved,7,0,,,,,,0,0,,,,
+C-24-16(C),,3/22/2017,A-1,AR-6(c),10,,Approved,7,0,1,,,,,0,0,,,,
+C-22-16(C),,3/22/2017,A-1,AR-6(c),34,Pole Green Road and Knight Drive,Approved,7,0,5,,,,,0,0,,,,
+C-23-16(C),,4/26/2017,A-1,AR-6(c),37.53,Waltons Tavern Road and Iron Hill Drive,Approved,7,0,6,,,,,0,0,,,,
+C-2-17(C),,4/26/2017,A-1,AR-6(c),39.66,,Approved,7,0,1,,,,,0,0,,,,
+C-3-17(C),,4/26/2017,A-1,AR-6(c),9.57,,Approved,7,0,1,,,,,0,0,,,,
+C-1-17(C),,4/26/2017,A-1,B-3(c),7.84,Pouncey Tract Road and Ashland Road,Approved,7,0,,,,,,0,0,,,,
+C-5-17(C),,5/24/2017,A-1,AR-6(c),4.97,,Approved,7,0,1,,,,,0,0,,,,
+C-4-17(C),,5/24/2017,"B-3, R-6",B-3(c),2.12,,Approved,7,0,,,,,,0,0,,,,
+C-34-15(C),,5/24/2017,A-1,RS(c),42.73,Honey Meadows Road and Atlee Station Road,Approved,5,2,85,40,,,,0,0,,,,"In lieu of a cash contribution for road improvements in the amount of Eight Thousand Four Hundred Ninety-one and 00/100 dollars ($8,491.00) per single family detached structure, and Five Thousand Seven Hundred Ninety-five and 00/100 dollars ($5,795.00) per single family attached structure, the Property Owner agrees to construct the improvements to Honey Meadows Road and Atlee Station Road in accordance with sheets �7A� and �7B� contained within the conceptual plan and more specifically described as follows:"
+C-9-17(C),,6/28/2017,A-1,AR-6(c),10.69,,Approved,7,0,1,,,,,0,0,,,,
+C-8-17(C),,7/26/2017,A-1,AR-6(c),11.2,,Approved,7,0,1,,,,,0,0,,,,
+C-10-17(C),,8/23/2017,A-1,RS(c),2.98,,Approved,6,0,1,,,,,0,0,,,,
+C-13-17,,8/23/2017,B-1,A-1,15.12,,Approved,6,0,1,,,,,0,0,,,,
+C-12-17(C),,9/27/2017,A-1,RS(c),2.52,,Approved,7,0,1,,,,,0,0,,,,
+C-15-17(C),,10/25/2017,A-1,B-3(c),1,Lewistown Road and Washington Highway,Approved,6,0,,,,,,0,0,,,,
+C-11-17(C),,10/25/2017,"B-2, R-5",RM(c),20.37,Brandy Run Drive and Brandy Hill Terrace,Approved,5,1,,,,207,,0,0,,,,
+C-16-17(C),,11/21/2017,A-1,AR-6(c),26.1,Glebe Hill Road and Colwick Trace,Approved,7,0,3,,,,,0,0,,,,
+C-17-17(C),,11/21/2017,A-1,AR-6(c),8.9,Hanover Courthouse Road and Cadys Mill Road,Approved,6,1,2,,,,,0,0,,,,
+C-19-17(C),,11/21/2017,R-1,RS(c),3.6,Hanover Avenue and Beverly Road,Approved,7,0,6,,,,,0,0,,,,
+C-21-17(C),,1/24/2018,A-1,AR-6(c),14.71,,Approved,6,0,1,,,,,0,0,,,,
+C-20-17(C),,2/28/2018,A-1,AR-6,14.7,,Approved,7,0,1,,,,,0,0,,,,
+C-14-17(C),,4/25/2018,A-1,RS(c),1,,Approved,7,0,1,,,,,0,0,,,,
+C-27-17(C),,4/25/2018,A-1,AR-6(c),4.98,,Approved,7,0,1,,,,,0,0,,,,
+C-3-18(C),,5/23/2018,A-1,AR-6(c),6.93,,Approved,6,0,1,,,,,0,0,,,,
+C-4-18(C),,5/23/2018,M-2(c),M-3(c),19.98,Old Telegraph Road and Washington Highway,Approved,6,0,,,,,,0,0,,,,
+C-25-17(C),,5/23/2018,A-1,B-3(c),16.73,Mountain Road and Brown Pleasants Road,Approved,6,0,,,,,,0,0,,,,
+C-5-18(C),,6/27/2018,A-1,AR-6(c),56.9,East Patrick Henry Road and Cedon Road,Approved,7,0,9,,,,,0,0,,,,
+C-6-18(C),,7/25/2018,A-1,RS(c),1.38,,Approved,7,0,1,,,,,0,0,,,,
+"C-7-18(C),",,8/22/2018,A-1,AR-6(c),4.74,,Approved,7,0,1,,,,,0,0,,,,
+C-11-18(C),,10/24/2018,"A-1, B-3","B-3(c), M-2(c)",4.4,Washington Highway and Old Ridge Road,Approved,7,0,,,,,,0,0,,,,
+C-13-18(C),,11/14/2018,"A-1, B-3",B-3(c),3,Moutain Road and Double Cedar Road,Approved,7,0,,,,,,0,0,,,,
+C-24-17(C),,12/12/2018,"A-1, B-3",MX(c),323.29,,Deferred,6,1,129,1103,,970,,0,0,,,,
+C-14-18(C),,12/12/2018,A-1,AR-6(c),9.98,,Deferred,7,0,1,,,,,0,0,,,,
+C-1-18(C),,12/12/2018,"M-2(c), B-3(c)","RM(c), M-2(c)",9.06,,Approved,4,3,,85,,,,0,0,,,,
+C-15-18(C),,1/23/2019,B-1,B-3(c),1.74,Old Hickory Drive and Mechanicsville Turnpike,Approved,6,0,,,,,,0,0,,,,
+C-12-89(C),,2/27/2019,B-3,M-2(c),31.44,Washington Highway and North Lakeridge Parkway,Approved,7,0,,,,,,0,0,,,,
+C-16-18(C),,3/27/2019,A-1,AR-6(c),20,,Approved,7,0,2,,,,,0,0,,,,
+C-1-19(C),,5/22/2019,A-1,RS(c),8.8,Walnut Grove Road and Cold Harbor Road,Approved,7,0,19,,,,,0,0,,,,
+C-8-18(C),,5/22/2019,"A-1, M-1(c)","B-3(c), M-2(c)",113.26,Pole Green Road and AMF Drive,Approved,6,1,,,,,,0,20000,,,,"Proffers of $20,000/acre of land which is used for uses exempt from local property taxes (e.g., ABC store)"
+C-6-19(C),,7/24/2019,A-1,AR-6(c),70.26,Sandy Valley Road and Little Florida Road,Approved,7,0,4,,,,,0,0,,,,
+C-8-19(C),,8/28/2019,A-1,RS(c),3.37,,Approved,7,0,1,,,,,0,0,,,,
+C-9-19(C),,8/28/2019,A-1,AR-6(c),4.91,,Approved,7,0,1,,,,,0,0,,,,
+REZ2019-00016,,10/23/2019,"B-3, R-1",RS(c),0.34,,Approved,7,0,0,,,,,0,0,,,,
+REZ2019-00030,,10/23/2019,B-O,RS(c),0.9,,Approved,7,0,0,,,,,0,0,,,,
+C-2-19(C),,11/13/2019,A-1,RC(c),94,Summer Hill Road and River Road,Approved,7,0,12,,,,,0,0,,,,
+C-5-19(C),,11/13/2019,B-2(c),MX(c),6.08,Sherwood Crossing Place and Old Hickory Drive,Approved,5,2,,,,90,,0,0,,,,
+REZ2019-00014,,11/13/2019,A-1,M-2(c),3.12,Mountain Road and Winns Church Road,Approved,7,0,,,,,,0,0,,,,
+REZ2019-00021,,11/13/2019,A-1,AR-6(c),8.88,,Approved,7,0,1,,,,,0,0,,,,
+REZ2019-00026,,12/11/2019,A-1,AR-6(c),21.5,,Approved,6,0,1,,,,,0,0,,,,
+REZ2019-00025,,12/11/2019,B-3,M-2(c),50,Washington Highway and Knotty Pine Lane,Approved,6,0,,,,,,0,0,,,,
+C-3-19(C),,12/11/2019,"A-1, B-3, M-2","B-3(c), M-2(c)",19.79,Washington Highway and Lewistown Road,Approved,6,0,,,,,,0,0,,,,
+REZ2019-00027,,12/11/2019,B-2,B-3(c),2,Mechanicsville Turnpike and Meadow Drive,Approved,6,0,,,,,,0,0,,,,

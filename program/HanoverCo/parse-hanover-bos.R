@@ -52,4 +52,25 @@ if (!file.exists(here("data", "HanoverCo", "rezonings.csv"))) {
 # <manually parse BoS PDFs>
 
 # Read in manually parsed rezonings
-   dt <- fread(here("derived", "HanoverCo", "rezonings.csv"))
+dt <- fread(here("derived", "HanoverCo", "rezonings.csv"))
+
+# Clean ----
+dt[, final_date := mdy(final_date)]
+dt[, Area := set_units(acres, acres)]
+dt[, FIPS := "51085"]
+dt[, planning_hearing_date := as.Date(planning_hearing_date)]
+dt[, n_units := rowSums(.SD, na.rm = TRUE),
+    .SDcols = c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict")]
+
+v_codes_old <- unique(str_split_1(paste0(unique(dt$zoning_old),
+    collapse = ", "
+), ", "))
+v_codes_new <- unique(str_split_1(paste0(unique(dt$zoning_new),
+    collapse = ", "
+), ", "))
+
+dt[, isResi := grepl("R|MX|A", zoning_new)]
+
+uniqueN(dt[, .(Case.Number, Part)]) == nrow(dt)
+
+saveRDS(dt, here("derived", "HanoverCo", "Rezoning Approvals.Rds"))

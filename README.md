@@ -34,21 +34,6 @@ See [Data Notes](notes/rezoning-data-notes.md) for details on how I collected th
 
 
 # Model
-## Version 1
-Locality chooses vector $\vec{a}$ of upzonings over parcels $j \in \{1, ..., J\}$ to maximize welfare: 
-$$U = \max_{\vec{a}} \sum_{j=1}^J a_j(p_j + v_{j}q_j) - C\left(\sum_{j=1}^Ja_jq_j\right)$$
-
-where $p_j$ is the dollar value of the proffer, $v_{j}$ is a stochastic shock to the value of upzoning the parcel, $q_j$ is the area of the parcel, and $C(\cdot)$ is a cost function that is increasing in the total area of upzoned land across the locality.
-
-Let $Q_{-j}$ be the total area of upzoned land not counting parcel $j$. The optimum is characterized by $J$ inequalities: 
-$$p_j + v_{j}q_j > C(q_j + Q_{-j}) - C(Q_{-j})$$
-
-Estimate by GMM where $p_j$, $q_j$ are data, $v_j$ is T1EV, and assume a parametric form for $C(\cdot)$. (See IO notes on inequality estimation.)
-
-Simplifications:
-- Myopic planner ignores dynamics. Land uses are exhaustible resource $\implies$ Hotelling Rule: planner indifferent to upzoning parcel now or later. To avoid, assume large endowment of agricultural land such that long-run considerations are irrelevant (there is always somewhere new to upzone).
-- Can't observe $p_j$ for parcels that are not upzoned (but might look at denied applications)
-- Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
 
 ## Version 2
 Differentiated products Nash-Bertrand. Products are land use rights on a particular parcel. Characteristics include coordinates, adjacent uses, the zoning code, and the county itself (the "brand"). Estimate markups to assess locality market power.
@@ -62,12 +47,13 @@ This paper may be a useful reference for outcomes:
 
 
 ## Meetings
+Kyle Butts (9/14/2023)
+- Not impressed with DiD with continuous treatment (pre-reform proffer rates) because it will be correlated with unobservable county characteristics. What about pre-reform area of agricultural land?
+
 Julie (9/6/2023)
-"All durable goods monopolist papers wind up being about intertemporal price discrimination."
-
-Reform bites due to "stochastic court enforcement"
-
-Dynamics are key -- need to explain why upzoning happens when it does, or make a strong case why a static analysis is sufficient.
+- "All durable goods monopolist papers wind up being about intertemporal price discrimination."
+- Reform bites due to "stochastic court enforcement"
+- Dynamics are key -- need to explain why upzoning happens when it does, or make a strong case why a static analysis is sufficient.
 
 1. Need to know if commercial/office/industrial uses are complements or substitutes for residential. Check what happens after PRA16 and see Matt Gentzkow.
 2. Draft questions for Cailinn Slattery to fix ideas; once you are further along, consider asking for a meeting.
@@ -75,7 +61,7 @@ Dynamics are key -- need to explain why upzoning happens when it does, or make a
 
 
 Lee (9/1/2023)
-Seems OK to focus on a static analysis by assuming an endowment of undeveloped land large enough that the planner does not worry about boundary conditions.
+- Seems OK to focus on a static analysis by assuming an endowment of undeveloped land large enough that the planner does not worry about boundary conditions.
 
 1. Do power calculations to make sure "part one" results will be convincing
 2. Tie PRA16 to other policies and tap into the research on the effects of those policies -- this will help if results are more suggestive than definitive

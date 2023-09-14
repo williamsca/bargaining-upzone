@@ -3,10 +3,7 @@
 # the columns and exports a combined binary file for analysis.
 
 # TODO
-# Loudoun
-# - check that 'isResi' classifications are accurate
 
-# PWC
 
 rm(list = ls())
 library(data.table)
@@ -31,6 +28,14 @@ dt_cw <- fread(here("crosswalks", "va-counties.csv"),
 dt_cw[, FIPS := paste0("51", FIPS)]
 
 # Import ----
+# Hanover County
+dt_han <- readRDS(here("derived", "HanoverCo", "Rezoning Approvals.Rds"))
+
+# Assume BoS hearing is close-ish to submission date
+dt_han[, submit_date := final_date]
+
+uniqueN(dt_han[, .(Case.Number, Part)]) == nrow(dt_han)
+
 # Goochland County
 dt_gooch <- readRDS(here("derived", "GoochlandCo",
     "Rezoning Approvals.Rds"))
@@ -143,7 +148,8 @@ dt_fred <- dt_fred[Type == "Rezoning"]
 
 # Combine ----
 dt <- rbindlist(list(
-    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff, dt_fred, dt_gooch
+    dt_loudoun, dt_pwc, dt_chesterfield, dt_ff, dt_fred, dt_gooch,
+    dt_han
 ), fill = TRUE, use.names = TRUE)
 
 # Filter to standard columns
@@ -181,6 +187,6 @@ dt_missing <- melt(dt_missing, id.vars = c("County"),
 
 dt_missing <- dcast(dt_missing, variable ~ County,
     value.var = "pct_populated")
-View(dt_missing)
+# View(dt_missing)
 
 saveRDS(dt, here("derived", "county-rezonings.Rds"))

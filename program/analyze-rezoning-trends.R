@@ -20,7 +20,7 @@ dt_app <- dt[,
     by = .(FIPS, Case.Number, County, submit_date,
     Population2022, isApproved, FY)]
 
-uniqueN(dt_app$Case.Number) == nrow(dt_app)
+uniqueN(dt_app[, .(FIPS, Case.Number)]) == nrow(dt_app)
 
 # Plots ----
 
@@ -113,7 +113,7 @@ plot_rezonings <- function(county, data, outcome = "nApproved",
     return(g)
 }
 
-plot_rezonings("Prince William County", dt_app,
+plot_rezonings("Hanover County", dt_app,
     outcome = "n_units", resi = TRUE)
 
 v_counties <- unique(dt$County)
@@ -144,7 +144,7 @@ l_areas_all <- lapply(v_counties, plot_rezonings,
 g_areas_all <- do.call(grid.arrange, l_areas_all)
 
 # Units
-v_counties <- c("Goochland County", "Prince William County", "Loudoun County")
+v_counties <- c("Goochland County", "Prince William County", "Loudoun County", "Hanover County")
 l_units_resi <- lapply(v_counties, plot_rezonings,
     data = dt_app, outcome = "n_units")
 g_units_resi <- do.call(grid.arrange, l_units_resi)
