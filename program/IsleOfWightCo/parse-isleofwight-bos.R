@@ -1,16 +1,14 @@
-# This script parses the Hanover County minutes
-# into a CSV file for further manual processing.
+# This script parses the Isle of Wight County Board of Supervisors
+# meeting minutes to determine each rezoning case's outcome.
 
 rm(list = ls())
 library(here)
 library(data.table)
 library(pdftools)
-library(units)
-library(stringr)
 library(lubridate)
 
-# Read in PDFs
-l_minutes <- list.files(here("data", "HanoverCo", "BoS Minutes"),
+# Read in PDFs ----
+l_minutes <- list.files(here("data", "IsleOfWightCo", "BoS Minutes"),
     pattern = "*.pdf", full.names = TRUE, recursive = TRUE
 )
 
@@ -39,38 +37,21 @@ ExtractRezonings <- function(file_path) {
     dt <- dt[grepl("REQUEST(?:\\(S\\)|S)? TO REZONE", line)]
 
     return(dt)
-
 }
 
 dt <- rbindlist(lapply(l_minutes, ExtractRezonings))
 
-if (!file.exists(here("data", "HanoverCo", "rezonings.csv"))) {
-    fwrite(dt, here("data", "HanoverCo", "rezonings.csv"))
+if (!file.exists(here("data", "IsleOfWightCo", "rezonings.csv"))) {
+    fwrite(dt, here("data", "IsleOfWightCo", "rezonings.csv"))
 }
 
 # <copy ".../data/HanoverCo/rezonings.csv", to ".../derived/HanoverCo/rezonings.csv"
 # <manually parse BoS PDFs>
 
 # Read in manually parsed rezonings
-dt <- fread(here("derived", "HanoverCo", "rezonings.csv"))
+dt <- fread(here("derived", "IsleOfWightCo", "rezonings.csv"))
 
 # Clean ----
-dt[, final_date := mdy(final_date)]
-dt[, Area := set_units(acres, acres)]
-dt[, FIPS := "51085"]
-dt[, planning_hearing_date := as.Date(planning_hearing_date)]
-dt[, n_units := rowSums(.SD, na.rm = TRUE),
-    .SDcols = c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict")]
 
-v_codes_old <- unique(str_split_1(paste0(unique(dt$zoning_old),
-    collapse = ", "
-), ", "))
-v_codes_new <- unique(str_split_1(paste0(unique(dt$zoning_new),
-    collapse = ", "
-), ", "))
-
-dt[, isResi := grepl("R|MX|A", zoning_new)]
-
-uniqueN(dt[, .(Case.Number, Part)]) == nrow(dt)
-
-saveRDS(dt, here("derived", "HanoverCo", "Rezoning Approvals.Rds"))
+# Save ----
+saveRDS(dt, here("derived", "IsleOfWightCo", "Approved Rezonings.rds"))

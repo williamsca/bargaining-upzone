@@ -4,6 +4,8 @@ How does bargaining between local governments and residential developers affect 
 # Proffer Reform Act of 2016
 Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
 
+Note: VA counties have special assessments for agriculture, horticultural, forest, and open space lands. If land is converted to a non-qualifying use through a rezoning, the owner is subject to roll-back taxes based on the difference between the land's fair market value and its value under the special assessment for a period of up to six years plus simple interest!
+
 # Goal
 Create a panel of all rezoning applications in Virginia counties. Each rezoning should, at minimum, include:
 - Submission date

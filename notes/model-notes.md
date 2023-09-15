@@ -1,7 +1,11 @@
 # Models of Land Use
 Aside from adapting the language of each model to my setting, I do not make any material edits.
 
-## Souza-Rodrigues (2019)
+## Dynamic
+
+
+## Static
+### Souza-Rodrigues (2019)
 For parcel $i$, on a subdivision of size $s$, in municipality $m$:
 
 | Variable | Description |

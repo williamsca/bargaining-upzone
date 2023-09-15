@@ -23,7 +23,7 @@ math: mathjax
 
 # Virginia Proffer Reform Act of 2016
 
-Impact fees broadly illegal in VA $\implies$ municipalities rely on "voluntary" proffers tied to a rezoning application
+VA allows municipalities to collect "voluntary" proffers tied to a rezoning application
 &nbsp;
 
 In 2016, developers were uphappy with large cash proffers, lobbied state legislature for reform:
@@ -40,18 +40,12 @@ Loudoun, Assistant Director of Planning and Zoning:
 
 > "Where the new legislation applies, we will in fact **not accept cash or offsite proffers**, completely eliminating the discussion or the **potential risk** of the county accepting the unreasonable or wrong types of proffers."
 
-&nbsp;
 Portsmouth, Planning Director:
-> "If you want to submit proffers, we’re not discussing it."
+> "If you want to submit proffers, **we’re not discussing it**."
 
-
----
-
-## Prince William County
-*Inside NOVA* (12/6/2018):
-> The county hasn’t approved any rezoning applications for houses for applications submitted after 2016, board Chairman Corey Stewart said.
-> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law."
-
+Prince William, Board Chairman:
+> "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law." (12/6/2018)
+> 
 ---
 
 ## Prince William County Suggested Proffers (2014)
@@ -68,7 +62,7 @@ SFD|Transportation|16,780|
 
 ---
 
-## A model of residential land supply
+## A toy model of residential land supply
 - municipality acts as **durable goods monopolist**
 - an extra unit **decreases** the price of all prior units
 - homeowners control **housing supply** through zoning, demand compensation to allow more development
@@ -95,40 +89,44 @@ SFD|Transportation|16,780|
 
 ![bg cover 100%](figures/model-durable-monopolist/dgm-05.png)
 
-
-
 ---
 
-![bg center 75%](figures/plot_rezonings_resi_units.svg)
+![bg cover 85%](figures/plot_rezonings_resi_units.svg)
 
 ---
-## Interpretation
+# Discussion
 - Reform imposed large **transaction costs** on rezonings (legal uncertainty or "stochastic court enforcement")
-- Municipalities respond by stopping rezonings in 2017
+- Municipalities respond by halting residential rezonings in 2017
 - Some recovery in 2018, possibly related to municipal relationships with developers (in repeated game, developer unlikely to defect) or more legal clarity
 
-
-## Next Steps:
-- **Power calculations**: How many counties do I need to observe an effect of X%?
-- **Empirical Model**: DiD is natural method, but who is the control group?
-  - Continuous treatment (intensity proportional to pre-reform proffer rates)
-  - Many zeros - PPML? **(Looking for a reference)**
-- **Data!**
 
 ---
 
 # What can we learn?
-From reduced-form analysis of reform act:
+Reduced-form analysis:
 - The "elasticity" of residential land use supply
 
-&nbsp;
 
-From a structural model of municipality behavior:
-- Do municipalities act to maximize **average housing prices** or **total land value**?
-- How much market power do municipalities have?
+A structural model of municipality behavior:
+- Do municipalities act to maximize **average housing prices** or **total land value**? Is there interesting heterogeneity by rural/suburban/urban?
+- How much **market power** do municipalities have?
 - What are the **welfare effects** of proposed zoning reforms?
   - Mandatory upzoning near transit (e.g., NY Housing Compact, CA SB50)
   - Legal restrictions on proffers/impact fees (e.g., *Koontz v. St. Johns River Water Management District*)
+
+---
+
+# What I Need Help With
+- **Empirical Strategy**: DiD is natural method, but no obvious control group
+  - Continuous treatment (intensity proportional to pre-reform proffer rates)
+  - Would take logs, but many zeros - PPML? **(Looking for a reference)**
+- **Models of Land Use**, especially that feature imperfect competition or an upstream regulatory authority
+- **How to think about results** given evidence that reform (and its partial repeal) were anticipated
+  - Intertemporal substitution of rezoning
+
+---
+
+# Thank you!
 
 ---
 
