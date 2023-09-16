@@ -20,7 +20,7 @@ v_cols <- c(
     "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against",
     "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_affordable",
     "n_age_restrict", "n_units", "res_cash_proffer", "other_cash_proffer",
-    "planning_hearing_date"
+    "inkind_proffer", "planning_hearing_date"
 )
 
 dt_cw <- fread(here("crosswalks", "va-counties.csv"),
@@ -28,6 +28,10 @@ dt_cw <- fread(here("crosswalks", "va-counties.csv"),
 dt_cw[, FIPS := paste0("51", FIPS)]
 
 # Import ----
+# Spotsylvania County
+dt_spot <- readRDS(here("derived", "SpotsylvaniaCo",
+    "Rezoning Approvals.Rds"))
+
 # Hanover County
 dt_han <- readRDS(here("derived", "HanoverCo", "Rezoning Approvals.Rds"))
 
@@ -149,7 +153,7 @@ dt_fred <- dt_fred[Type == "Rezoning"]
 # Combine ----
 dt <- rbindlist(list(
     dt_loudoun, dt_pwc, dt_chesterfield, dt_ff, dt_fred, dt_gooch,
-    dt_han
+    dt_han, dt_spot
 ), fill = TRUE, use.names = TRUE)
 
 # Filter to standard columns
@@ -187,6 +191,6 @@ dt_missing <- melt(dt_missing, id.vars = c("County"),
 
 dt_missing <- dcast(dt_missing, variable ~ County,
     value.var = "pct_populated")
-# View(dt_missing)
+View(dt_missing)
 
 saveRDS(dt, here("derived", "county-rezonings.Rds"))
