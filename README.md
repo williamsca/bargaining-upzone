@@ -14,13 +14,17 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
+- Update units time series: show labels for 2017, 2019 and aggregate counties
+- How long does it take from submission to approval?
 - Power calculations?
-- Import Loudoun value of in-kind proffer data, look at trends and compare to cash proffers (See 'Proffer Fund' or 'PUBLIC FACILITIES FUND' [here](https://www.loudoun.gov/1474/Budget-Archives))
-- Literature review. Connect PRA16 to other policies to buttress part one results. See [Bethany Berger (2009)](https://proxy1.library.virginia.edu/login?url=https://heinonline.org/HOL/P?h=hein.journals/flr78&i=1287) on Measure 37, an Oregon initiative that called for compensation for land regulations (Fischel 2005, 6.14-15)
+- Literature review / policy context
+  - WLURI trends 
+  - Related policies -- see [Bethany Berger (2009)](https://proxy1.library.virginia.edu/login?url=https://heinonline.org/HOL/P?h=hein.journals/flr78&i=1287) on Measure 37, an Oregon initiative that called for compensation for land regulations (Fischel 2005, 6.14-15)
 - Figure out how 'Applied.Date' can different from the date the rezoning request was recieved for PWC, Loudoun (e.g., see PWC Case.Number == REZ2017-00024 and read the Description)
-- Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
+
 
 # Done
+- Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
 - Add Fairfax to combined application file
 - hand parse Frederick resolutions (see '.../derived/FrederickCo/resolutions.csv')
 - Determine whether Loudoun rezonings are in exempt areas using GIS file
@@ -49,6 +53,9 @@ This paper may be a useful reference for outcomes:
 
 
 ## Meetings
+Writing Class (9/18/2023)
+- Use MD counties as control group (perhaps just switch back to looking at building permits and exclude Fairfax, Loudoun for being partially exempt)
+
 Kyle Butts (9/14/2023)
 - Not impressed with DiD with continuous treatment (pre-reform proffer rates) because it will be correlated with unobservable county characteristics. What about pre-reform area of agricultural land?
 
