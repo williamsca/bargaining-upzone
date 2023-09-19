@@ -1,8 +1,10 @@
 rm(list = ls())
-pacman::p_load(here, data.table, censusapi)
 
-# Add key to .Renviron
-Sys.setenv(CENSUS_KEY = "1cc02abe8c0e40482642650aaf4f230e511c650c")
+library(data.table)
+library(here)
+library(censusapi)
+
+# Sys.setenv(CENSUS_KEY = "")
 
 # Reload .Renviron
 readRenviron("~/.Renviron")
@@ -17,11 +19,12 @@ getDecCensus <- function(year) {
         vars = c("PCT001001")
     )
 
-    df$year <- year
+    df$Year <- year
     return(as.data.table(df))
 }
 
 dt <- getDecCensus(2010)
-dt[, FIPS := as.numeric(paste0(state, county))]
+dt[, FIPS := paste0(state, county)]
+dt <- dt[, .(FIPS, PCT001001)]
 
-saveRDS(dt, "derived/County Populations (2010).RDS")
+saveRDS(dt, "derived/county-populations-2010.Rds")

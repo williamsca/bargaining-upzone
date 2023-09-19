@@ -4,7 +4,9 @@
 
 rm(list = ls())
 
-pacman::p_load(data.table, lubridate, here, readxl)
+library(data.table)
+library(here)
+library(lubridate)
 
 CONSTANT_YEAR <- 2015
 
@@ -12,13 +14,10 @@ CONSTANT_YEAR <- 2015
 dt_bp <- readRDS(
     "derived/County Residential Building Permits by Month (2000-2021).Rds"
 )
-dt_zhvi <- readRDS("derived/Housing Price Index (Zillow).Rds")
-dt_cp <- readRDS("derived/Cash Proffer Revenues (2004-2022).Rds")
-dt_rev <- readRDS("derived/Revenues (2014-2016).Rds")
-dt_cpi <- as.data.table(read_xlsx(
-    "crosswalks/CPI/CUUR0000SA0 CPI-U (1995-2022).xlsx", skip = 10
-))
-dt_pop <- readRDS("derived/County Populations (2010).RDS")
+dt_hpi <- readRDS("derived/hpi-zillow.Rds")
+dt_rev <- readRDS("derived/Revenues (2004-2022).Rds")
+dt_pop <- readRDS("derived/county-populations-2010.Rds")
+dt_rezon <- readRDS("derived/county-rezonings.Rds")
 
 # Building Permits ----
 # Bedford City became a town on July 1, 2013.
@@ -47,71 +46,28 @@ dt_bp[, Name := gsub("\\s*\\(.*", " City", Name)]
 # The VA fiscal year runs from July 1 to June 30
 dt_bp[, FY := Year4 + fifelse(Month >= 7, 1, 0)]
 
+# Rezonings ----
+
+
 # Note: some proffer-collecting jurisdictions are not
 # covered in the county building permits survey
-# TODO: construct balanced panel using CJ()?
-dt <- merge(dt_bp, dt_cp[, FIPS.Code.State := "51"],
-    by.x = c("Name", "FY", "FIPS.Code.State"),
-    by.y = c("Jurisdiction", "FY", "FIPS.Code.State"),
+dt <- merge(dt_bp, dt_rev,
+    by = c("Name", "FY", "FIPS.Code.State"),
     all.x = TRUE
 )
 
-dt[is.na(`Cash Proffer Revenue`), `Cash Proffer Revenue` := 0]
-
-dt <- merge(dt, dt_rev,
-    by = c("Name", "FY", "FIPS.Code.State"),
-    all.x = TRUE, UE
-)
-table(dt[is.na(`Cash Proffer Revenue`), locality_type])
-View(dt[FIPS.Code.State == "51"])
-
 dt[, Date := make_date(year = Year4, month = Month)]
-dt[, FIPS := as.numeric(FIPS.Code.State) * 1000 +
-    as.numeric(FIPS.Code.County)
-]
-dt <- merge(
-    dt, dt_zhvi[, .(Date, FIPS, ZHVI, RegionName)],
-    by = c("Date", "FIPS"), all.x = TRUE
-)
+dt[, FIPS := paste0(FIPS.Code.State, FIPS.Code.County)]
+
+dt <- merge(dt, dt_hpi, by = c("Date", "FIPS"), all.x = TRUE)
 
 dt <- merge(dt, dt_pop, by = c("FIPS"), all.x = TRUE)
 
-# TRUE --> merge of ZHVI is consistent with data
-nrow(dt[RegionName != Name]) == 0
-dt$RegionName <- NULL
-
-# Treatment Intensity ----
-# Cash proffer revenues per housing value before treatment
-YEAR_RANGE <- c(2012, 2016)
-
-# filter to VA counties
-dt_VA <- dt[FIPS.Code.State == "51" & FY %between% YEAR_RANGE]
-
-dt_VA[, Value := as.numeric(Value1 + Value2 + `Value3-4` + `Value5+`)]
-
-dt_VA <- dt_VA[, .(Value = sum(Value), Units1 = sum(Units1)),
-    by = .(FIPS.Code.State, FIPS.Code.County, Name, `Cash Proffer Revenue`, FY)
-]
-
-dt_VA <- dt_VA[, .(
-    Value = sum(Value), Units1 = sum(Units1),
-    cpRev = sum(`Cash Proffer Revenue`)
-), by = .(FIPS.Code.State, FIPS.Code.County, Name)]
-
-dt_VA[, intensity12_16 := cpRev / Value]
-# ggplot(dt_VA, aes(x = intensity12_16)) +
-#     geom_histogram() +
-#     scale_x_log10()
-
-
-dt <- merge(dt, dt_VA[, .(FIPS.Code.State, FIPS.Code.County, intensity12_16)],
-    by = c("FIPS.Code.State", "FIPS.Code.County"), all.x = TRUE
-)
-dt[is.na(intensity12_16), intensity12_16 := 0]
+dt <- merge(dt, dt_rezon, by = c("FIPS", "Date"), all.x = TRUE)
 
 # Filter ----
 # exclude Alaska and Hawaii
-dt <- dt[!(FIPS.Code.State %in% c("02", "15"))] 
+dt <- dt[!(FIPS.Code.State %in% c("02", "15"))]
 
 # drop 24 duplicate entries
 dt <- unique(dt, by = c("FIPS", "Date", "Units1"))
@@ -122,4 +78,4 @@ dt <- dt[!is.na(PCT001001)]
 # Sanity Checks ----
 nrow(dt) == uniqueN(dt[, .(Date, FIPS)])
 
-saveRDS(dt, "derived/Sample.Rds")
+saveRDS(dt, "derived/sample.Rds")

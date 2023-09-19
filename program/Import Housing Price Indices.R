@@ -4,29 +4,38 @@
 
 rm(list = ls())
 
-dir <- dirname(dirname(rstudioapi::getSourceEditorContext()$path))
-setwd(dir)
+library(data.table)
+library(here)
+library(readxl)
 
-pacman::p_load(data.table, lubridate, ggplot2) 
+CONSTANT_YEAR <- 2015
 
+# Import ----
 dt <- fread("data/Housing Prices/Zillow Home Value Index.csv")
 
-dt <- dt[State == "VA"]
+dt_cpi <- as.data.table(read_xlsx(
+     "crosswalks/CPI/CUUR0000SA0 CPI-U (1995-2022).xlsx",
+     skip = 10
+))
 
-v.measure <- grep("-", names(dt), value = TRUE)
-dt.l <- melt(dt, id.vars = c("RegionName", "RegionType", "State", "StateCodeFIPS", 
-                             "MunicipalCodeFIPS"), measure.vars = v.measure,
+# Clean ----
+v_measure <- grep("-", names(dt), value = TRUE)
+
+dt_l <- melt(dt, measure.vars = v_measure, variable.factor = FALSE,
              variable.name = "Date", value.name = "ZHVI")
 
-dt.l[, Date := ymd(Date) + 1][, FIPS := StateCodeFIPS * 1000 + MunicipalCodeFIPS]
+dt_l[, FIPS := sprintf("%02d%03d", StateCodeFIPS, MunicipalCodeFIPS)]
+dt_l[, Date := ymd(Date) + 1]
 
-saveRDS(dt.l, file = "derived/Housing Price Index (Zillow).Rds")
+dt_l[, Year := year(Date)]
 
-# When does ZHVI start to be recorded? ----
-ggplot(dt.l[!is.na(ZHVI)], aes(x = year(Date))) + 
-  geom_histogram(binwidth = 1) +
-  scale_x_continuous() +
-  labs(title = "", # Distribution of Bond Elections by Vote Share
-       x = "", y = "Frequency of Observed ZHVI",
-       caption = paste0("N = ", nrow(dt.hist), "")) +
-  theme_light() + theme(plot.caption = element_text(hjust = 0)) # left-align caption
+# Convert to 2015 dollars
+dt_cpi[, Annual := Annual / dt_cpi[Year == CONSTANT_YEAR, Annual]]
+
+dt_l <- merge(dt_l, dt_cpi[, .(Year, Annual)], by = "Year", all.x = TRUE)
+dt_l[, ZHVI := ZHVI / Annual]
+
+v_cols <- c("Date", "FIPS", "ZHVI")
+dt_l <- dt_l[, ..v_cols]
+
+saveRDS(dt_l, file = "derived/hpi-zillow.Rds")

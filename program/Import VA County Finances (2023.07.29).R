@@ -5,9 +5,11 @@
 # https://rga.lis.virginia.gov/Published/
 
 rm(list = ls())
-pacman::p_load(here, data.table, readxl)
 
-pacman::p_load(data.table, pdftools, readxl)
+library(here)
+library(data.table)
+library(readxl)
+library(pdftools)
 
 YEAR_MIN <- 2004
 YEAR_MAX <- 2022
