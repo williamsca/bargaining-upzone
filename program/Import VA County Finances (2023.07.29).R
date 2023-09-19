@@ -185,7 +185,10 @@ nrow(dt[is.na(Annual)]) == 0
 v_dollars <- grep("Revenue", names(dt), value = TRUE)
 dt[, (v_dollars) := lapply(.SD, "/", Annual), .SDcols = v_dollars]
 
+setnames(dt, c("Total Revenue", "Local Revenue", "Cash Proffer Revenue"),
+         c("rev_tot", "rev_loc", "rev_cp"))
+
 # Save ----
-saveRDS(dt, paste0("derived/Revenues (",
-    paste(range(dt$FY), collapse = "-"), ").Rds")
+saveRDS(dt, paste0("derived/county-revenues-",
+    paste(range(dt$FY), collapse = "-"), ".Rds")
 )

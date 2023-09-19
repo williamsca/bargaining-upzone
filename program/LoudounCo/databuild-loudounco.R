@@ -63,6 +63,12 @@ dt_miss <- fread(here("derived", "LoudounCo",
     "missing-zoning-2009-2023.csv"))
 dt_miss$Description <- NULL
 
+# Assume that no indication in the description of more units
+# means that the rezoning did not add units
+v_units <- grep("n_", names(dt_miss), value = TRUE)
+dt_miss[, (v_units) := lapply(.SD, function(x) fifelse(is.na(x), 0, x)),
+    .SDcols = v_units]
+
 dt <- merge(dt, dt_miss,
     by = c("Case.Number", "Part"),
     all.x = TRUE, all.y = TRUE
@@ -75,7 +81,7 @@ uniqueN(dt[, .(Case.Number, Part)]) == nrow(dt)
 dt[is.na(Area), Area := set_units(acres, acres)]
 dt[, zoning_new := fifelse(is.na(zoning_new.x),
     zoning_new.y, zoning_new.x)]
-dt[, n_units := rowSums(.SD, na.rm = TRUE), .SDcols = c(
+dt[, n_units := rowSums(.SD), .SDcols = c(
     "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict"
 )]
 nrow(dt[n_units < n_affordable]) == 0

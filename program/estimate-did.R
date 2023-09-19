@@ -5,64 +5,55 @@
 
 rm(list = ls())
 
-pacman::p_load(
-  data.table, stargazer, ggplot2,
-  fixest, devtools, lubridate, here
-)
+library(data.table)
+library(stargazer)
+library(fixest)
+library(ggplot2)
+library(devtools)
+library(lubridate)
+library(here)
 
-INTENSITY_THRESHOLD <- 0.001
-
-dt <- readRDS("derived/Sample.Rds")
+dt <- readRDS("derived/sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 
+# Exclude Fairfax, Loudoun for partial exemption
+dt <- dt[!(FIPS %in% c("51059", "51107"))]
+
 # Treatment indicators ----
+dt[, cp_share_local := rev_cp / rev_loc]
+
+INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
+
 dt[FY == 2016, everTreated := fifelse(
-  intensity12_16 > INTENSITY_THRESHOLD, 1, 0
+  cp_share_local > INTENSITY_THRESHOLD, 1, 0
 )]
-# dt[grepl("City", Name), everTreated := 0]
 
 dt[is.na(everTreated), everTreated := 0]
 dt[, everTreated := max(everTreated), by = FIPS]
 
-dt[, Post := fifelse(Date >= as.Date("2017-01-01"), 1, 0)]
+dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
+dt[, State := substr(FIPS, 1, 2)]
 
-# total units in multi-family buildings
+# Total units in multi-family buildings
 dt[, Units2p := Units2 + `Units3-4` + `Units5+`]
 
 dt_qtr <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p),
-  ZHVI = mean(ZHVI), Units5p = sum(`Units5+`)
+  ZHVI = mean(ZHVI), n_units = sum(n_units)
 ),
-by = .(FIPS, PCT001001, FIPS.Code.State,
-  Date = quarter(Date, type = "date_first"), `Cash Proffer Revenue`,
-  everTreated, Post, FY, intensity12_16
+by = .(FIPS, PCT001001, State,
+  Date = quarter(Date, type = "date_first"), rev_cp,
+  everTreated, Post, FY
 )
 ]
 
 # TRUE --> data are unique on FIPS and quarter
 nrow(dt_qtr) == uniqueN(dt_qtr[, .(FIPS, Date)])
 
-# Summary statistics by treatment status ----
-dt_fig1 <- dt[everTreated == 1 & Units1 <= 400]
-ggplot(dt_fig1, aes(x = Units1)) +
-  geom_histogram() +
-  scale_x_continuous() +
-  labs(title = "Distribution of Monthly Building Permits: Treated Counties",
-       subtitle = paste0(min(year(dt_fig1$Date)), " - ",
-       max(year(dt_fig1$Date))),
-       x = "Single-Unit Permits", y = "Frequency",
-       caption = paste0("Permits censored at ", max(dt_fig1$Units1),
-       ". N = ", nrow(dt_fig1), "")) +
-  theme_light() + theme(plot.caption = element_text(hjust = 0)) 
-# ggsave("", device = "pdf")
-
 # DiD ----
 RHS_DID <- " ~ -1 + Post*everTreated | as.factor(Date) + as.factor(FIPS)"
-RHS_DID_CONT <- " ~ -1 + Post*Intensity | as.factor(Date) + as.factor(FIPS)"
-
 fmla.dd <- as.formula(paste0("Units1", RHS_DID))
-fmla.dd_cont <- as.formula(paste0("Units1", RHS_DID_CONT))
 
 # * Monthly ----
 # ** Binary Treatment ----
@@ -72,14 +63,6 @@ fepois.did <- feglm(fmla.dd,
   family = "quasipoisson"
 )
 etable(fepois.did)
-
-# ** Continuous Treatment ----
-fepois.did <- feglm(fmla.dd_cont,
-  cluster = "as.factor(FIPS)", data = dt[FY %between% c(2010, 2019)],
-  family = "quasipoisson"
-)
-etable(fepois.did)
-
 
 # Quarterly ----
 # (Nearly identical to monthly results)
@@ -91,20 +74,10 @@ fepois.did <- feglm(fmla.dd,
 )
 etable(fepois.did)
 
-# ** Continuous Treatment ----
-fepois.did <- feglm(fmla.dd_cont,
-  cluster = "as.factor(FIPS)",
-  data = dt_qtr[FY %between% c(2010, 2019)],
-  family = "quasipoisson"
-)
-etable(fepois.did)
-
-
-
 # Event Study ----
 RHS_ES <- paste0(
   " ~ -1 + i(Date, everTreated, ref = \"2016-04-01\")",
-  " + FIPS.Code.State:as.numeric(Date)",
+  " + State:as.numeric(Date)",
   " | Date + FIPS"
 )
 fmla.es <- as.formula(paste0("Units1", RHS_ES))
@@ -150,8 +123,9 @@ pdf(file = "paper/figures/eventstudy_units1.pdf")
 iplot(feols.es, lab.fit = "simple")
 dev.off()
 
-feols.zhvi_qtr <- feols(as.formula(paste0("log(ZHVI)", RHS)), 
-                 cluster = "as.factor(FIPS)", data = dt_qtr)
+feols.zhvi_qtr <- feols(as.formula(paste0("log(ZHVI)", RHS_ES)),
+                 cluster = "as.factor(FIPS)", data = dt_qtr,
+                 weights = ~PCT001001)
 # etable(feols.un1_qtr)
 iplot(feols.zhvi_qtr, lab.fit = "simple")
 
@@ -168,7 +142,7 @@ dt.synthdid <- dt.synthdid[
   Date %between% as.Date(c("2009-01-01", "2019-06-01")),
   .(
     FIPS = as.factor(FIPS), Date, Units1,
-    arcsinhUnits1 = arcsinh(Units1), logUnits5p = log(Units5p + 1),
+    arcsinhUnits1 = arcsinh(Units1), logZHVI = log(ZHVI),
     logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
     everTreated, isTreated = as.logical(isTreated)
   )
@@ -181,8 +155,7 @@ RunSynthDid <- function(dt, LHS) {
 }
 
 # * Quantities ----
-dt.synthdid[, nObs := sum(!is.infinite(logsUnits1)), by = .(FIPS)]
-# dt.synthdid[, nObs := sum(!is.na(Units1)), by = .(FIPS)]
+dt.synthdid[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
 
@@ -210,13 +183,12 @@ sprintf("90%% CI (%1.2f, %1.2f)", tau_hat_inhs - 1.64 * se, tau_hat_inhs + 1.64 
 
 
 # * Prices ----
-dt.synthdid[, nObs := sum(!is.na(lnZHVI)), by = .(FIPS)]
+# VA HPI falls after reform?
+dt.synthdid[, nObs := sum(!is.na(logZHVI)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "lnZHVI")
-plot(tau.hat, se.method = "jackknife")
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logZHVI")
+plot(tau.hat, se.method = "jackknife", overlay = 1)
 
 se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
-sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96*se, tau.hat + 1.96*se)
-
-# Superseded ----
+sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
