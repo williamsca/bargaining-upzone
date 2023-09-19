@@ -55,6 +55,8 @@ This paper may be a useful reference for outcomes:
 ## Meetings
 Writing Class (9/18/2023)
 - Use MD counties as control group (perhaps just switch back to looking at building permits and exclude Fairfax, Loudoun for being partially exempt)
+- See Topalova (2010) for diff-in-diff with continuous treatment
+- See Scott Cunningham's [Substack](https://causalinf.substack.com/p/continuous-treatment-did) for a nice treatment of continuous DiD
 
 Kyle Butts (9/14/2023)
 - Not impressed with DiD with continuous treatment (pre-reform proffer rates) because it will be correlated with unobservable county characteristics. What about pre-reform area of agricultural land?
