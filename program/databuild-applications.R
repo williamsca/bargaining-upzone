@@ -17,7 +17,7 @@ v_cols <- c(
     "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against",
     "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_affordable",
     "n_age_restrict", "n_units", "res_cash_proffer", "other_cash_proffer",
-    "inkind_proffer", "planning_hearing_date"
+    "inkind_proffer", "planning_hearing_date", "first_obs", "last_obs"
 )
 
 dt_cw <- fread(here("crosswalks", "va-counties.csv"),
@@ -161,6 +161,8 @@ dt[is.na(isExempt), isExempt := FALSE]
 # Sanity Checks & Coverage ----
 nrow(dt[is.na(submit_date)]) == 0
 uniqueN(dt[, .(Case.Number, gis_object, Part)]) == nrow(dt)
+
+sum(unique(dt[, .(County, Population2022)]$Population2022)) / 8683619
 
 count_missing <- function(x) {
     if (class(x) %in% c("units", "Date")) {

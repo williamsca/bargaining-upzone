@@ -1,134 +1,134 @@
-County,FIPS,Population2022
-Accomack County,001,33191
-Albemarle County,003,114534
-Alleghany County,005,14835
-Amelia County,007,13455
-Amherst County,009,31589
-Appomattox County,011,16748
-Arlington County,013,234000
-Augusta County,015,78064
-Bath County,017,4049
-Bedford County,019,80848
-Bland County,021,6148
-Botetourt County,023,34135
-Brunswick County,025,15921
-Buchanan County,027,19352
-Buckingham County,029,16982
-Campbell County,031,55141
-Caroline County,033,31957
-Carroll County,035,29147
-Charles City County,036,6605
-Charlotte County,037,11475
-Chesterfield County,041,378408
-Clarke County,043,15266
-Craig County,045,4847
-Culpeper County,047,54381
-Cumberland County,049,9746
-Dickenson County,051,13725
-Dinwiddie County,053,28161
-Essex County,057,10630
-Fairfax County,059,1138331
-Fauquier County,061,74664
-Floyd County,063,15619
-Fluvanna County,065,28159
-Franklin County,067,55074
-Frederick County,069,95051
-Giles County,071,16453
-Gloucester County,073,39493
-Goochland County,075,26109
-Grayson County,077,15343
-Greene County,079,21107
-Greensville County,081,11226
-Halifax County,083,33644
-Hanover County,085,112938
-Henrico County,087,333962
-Henry County,089,49906
-Highland County,091,2301
-Isle of Wight County,093,40151
-James City County,095,81199
-King and Queen County,097,6718
-King George County,099,27856
-King William County,101,18492
-Lancaster County,103,10750
-Lee County,105,21982
-Loudoun County,107,432085
-Louisa County,109,40116
-Lunenburg County,111,12031
-Madison County,113,14000
-Mathews County,115,8490
-Mecklenburg County,117,30508
-Middlesex County,119,10943
-Montgomery County,121,98915
-Nelson County,125,14652
-New Kent County,127,24986
-Northampton County,131,11900
-Northumberland County,133,12302
-Nottoway County,135,15559
-Orange County,137,37991
-Page County,139,23750
-Patrick County,141,17643
-Pittsylvania County,143,59952
-Powhatan County,145,31489
-Prince Edward County,147,21927
-Prince George County,149,43134
-Prince William County,153,486943
-Pulaski County,155,33706
-Rappahannock County,157,7502
-Richmond County,159,9080
-Roanoke County,161,96914
-Rockbridge County,163,22593
-Rockingham County,165,85397
-Russell County,167,25448
-Scott County,169,21476
-Shenandoah County,171,44968
-Smyth County,173,29449
-Southampton County,175,17932
-Spotsylvania County,177,146688
-Stafford County,179,163380
-Surry County,181,6527
-Sussex County,183,10680
-Tazewell County,185,39821
-Warren County,187,41440
-Washington County,191,53958
-Westmoreland County,193,18712
-Wise County,195,35421
-Wythe County,197,28111
-York County,199,71341
-Alexandria,510,155525
-Bristol,520,16975
-Buena Vista,530,6591
-Charlottesville,540,45373
-Chesapeake,550,252488
-Colonial Heights,570,18294
-Covington,580,5679
-Danville,590,42229
-Emporia,595,5481
-Fairfax,600,24835
-Falls Church,610,14586
-Franklin,620,8247
-Fredericksburg,630,28757
-Galax,640,6730
-Hampton,650,138037
-Harrisonburg,660,51158
-Hopewell,670,22962
-Lexington,678,7457
-Lynchburg,680,79287
-Manassas,683,42642
-Manassas Park,685,16703
-Martinsville,690,13725
-Newport News,700,184306
-Norfolk,710,232995
-Norton,720,3609
-Petersburg,730,33394
-Poquoson,735,12582
-Portsmouth,740,96700
-Radford,750,16738
-Richmond,760,229395
-Roanoke,770,97847
-Salem,775,25523
-Staunton,790,25904
-Suffolk,800,99179
-Virginia Beach,810,455618
-Waynesboro,820,22808
-Williamsburg,830,15909
-Winchester,840,27936
+County,FIPS,Population2022,first_obs,last_obs
+Accomack County,1,33191,,
+Albemarle County,3,114534,,
+Alleghany County,5,14835,,
+Amelia County,7,13455,,
+Amherst County,9,31589,,
+Appomattox County,11,16748,,
+Arlington County,13,234000,,
+Augusta County,15,78064,,
+Bath County,17,4049,,
+Bedford County,19,80848,,
+Bland County,21,6148,,
+Botetourt County,23,34135,,
+Brunswick County,25,15921,,
+Buchanan County,27,19352,,
+Buckingham County,29,16982,,
+Campbell County,31,55141,,
+Caroline County,33,31957,,
+Carroll County,35,29147,,
+Charles City County,36,6605,,
+Charlotte County,37,11475,,
+Chesterfield County,41,378408,,
+Clarke County,43,15266,,
+Craig County,45,4847,,
+Culpeper County,47,54381,,
+Cumberland County,49,9746,,
+Dickenson County,51,13725,,
+Dinwiddie County,53,28161,,
+Essex County,57,10630,,
+Fairfax County,59,1138331,,
+Fauquier County,61,74664,,
+Floyd County,63,15619,,
+Fluvanna County,65,28159,,
+Franklin County,67,55074,,
+Frederick County,69,95051,07/01/13,06/30/20
+Giles County,71,16453,,
+Gloucester County,73,39493,,
+Goochland County,75,26109,01/01/14,06/10/20
+Grayson County,77,15343,,
+Greene County,79,21107,,
+Greensville County,81,11226,,
+Halifax County,83,33644,,
+Hanover County,85,112938,01/01/14,12/31/19
+Henrico County,87,333962,,
+Henry County,89,49906,,
+Highland County,91,2301,,
+Isle of Wight County,93,40151,,
+James City County,95,81199,,
+King and Queen County,97,6718,,
+King George County,99,27856,,
+King William County,101,18492,,
+Lancaster County,103,10750,,
+Lee County,105,21982,,
+Loudoun County,107,432085,,
+Louisa County,109,40116,,
+Lunenburg County,111,12031,,
+Madison County,113,14000,,
+Mathews County,115,8490,,
+Mecklenburg County,117,30508,,
+Middlesex County,119,10943,,
+Montgomery County,121,98915,,
+Nelson County,125,14652,,
+New Kent County,127,24986,,
+Northampton County,131,11900,,
+Northumberland County,133,12302,,
+Nottoway County,135,15559,,
+Orange County,137,37991,,
+Page County,139,23750,,
+Patrick County,141,17643,,
+Pittsylvania County,143,59952,,
+Powhatan County,145,31489,,
+Prince Edward County,147,21927,,
+Prince George County,149,43134,,
+Prince William County,153,486943,,
+Pulaski County,155,33706,,
+Rappahannock County,157,7502,,
+Richmond County,159,9080,,
+Roanoke County,161,96914,,
+Rockbridge County,163,22593,,
+Rockingham County,165,85397,,
+Russell County,167,25448,,
+Scott County,169,21476,,
+Shenandoah County,171,44968,,
+Smyth County,173,29449,,
+Southampton County,175,17932,,
+Spotsylvania County,177,146688,01/01/09,01/29/14
+Stafford County,179,163380,,
+Surry County,181,6527,,
+Sussex County,183,10680,,
+Tazewell County,185,39821,,
+Warren County,187,41440,,
+Washington County,191,53958,,
+Westmoreland County,193,18712,,
+Wise County,195,35421,,
+Wythe County,197,28111,,
+York County,199,71341,,
+Alexandria,510,155525,,
+Bristol,520,16975,,
+Buena Vista,530,6591,,
+Charlottesville,540,45373,,
+Chesapeake,550,252488,,
+Colonial Heights,570,18294,,
+Covington,580,5679,,
+Danville,590,42229,,
+Emporia,595,5481,,
+Fairfax,600,24835,,
+Falls Church,610,14586,,
+Franklin,620,8247,,
+Fredericksburg,630,28757,,
+Galax,640,6730,,
+Hampton,650,138037,,
+Harrisonburg,660,51158,,
+Hopewell,670,22962,,
+Lexington,678,7457,,
+Lynchburg,680,79287,,
+Manassas,683,42642,,
+Manassas Park,685,16703,,
+Martinsville,690,13725,,
+Newport News,700,184306,,
+Norfolk,710,232995,,
+Norton,720,3609,,
+Petersburg,730,33394,,
+Poquoson,735,12582,,
+Portsmouth,740,96700,,
+Radford,750,16738,,
+Richmond,760,229395,,
+Roanoke,770,97847,,
+Salem,775,25523,,
+Staunton,790,25904,,
+Suffolk,800,99179,,
+Virginia Beach,810,455618,,
+Waynesboro,820,22808,,
+Williamsburg,830,15909,,
+Winchester,840,27936,,

@@ -24,6 +24,11 @@ uniqueN(dt_app[, .(FIPS, Case.Number)]) == nrow(dt_app)
 
 # Plots ----
 
+# TODO: combine all counties into a single plot:
+# 1. index the # of approved units + acres each year to the county's
+# average across its observation period
+# 2. plot
+
 # Approved Rezonings by Application Year
 sum_to_fy <- function(county, data, resi = TRUE) {
     if (resi == TRUE) {
@@ -98,8 +103,8 @@ plot_rezonings <- function(county, data, outcome = "nApproved",
         ) +
         geom_line(linetype = "dashed") +
         geom_point(size = 3) +
-        scale_x_continuous(breaks = seq(2010, 2020, 2),
-            limits = c(2010, 2020)) +
+        scale_x_continuous(breaks = seq(2009, 2019, 2),
+            limits = c(2009, 2020)) +
         labs(
             y = y_lab,
             x = "Submit FY",
