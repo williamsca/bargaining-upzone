@@ -2,9 +2,6 @@
 # of counties and cities in Virginia. It then standardizes
 # the columns and exports a combined binary file for analysis.
 
-# TODO
-
-
 rm(list = ls())
 library(data.table)
 library(lubridate)
@@ -140,15 +137,7 @@ uniqueN(dt_ff[, .(Case.Number, gis_object)]) == nrow(dt_ff)
 nrow(dt_ff[is.na(submit_date)]) == 0
 
 # Frederick County
-dt_fred <- fread(here("derived", "FrederickCo", "resolutions.csv"))
-
-dt_fred[, `:=`(final_date = mdy(final_date),
-               submit_date = mdy(submit_date))]
-
-dt_fred[, FIPS := "51069"]
-dt_fred[, Area := set_units(Acres, acres)]
-
-dt_fred <- dt_fred[Type == "Rezoning"]
+dt_fred <- readRDS(here("derived", "FrederickCo", "rezoning-applications.Rds"))
 
 # Combine ----
 dt <- rbindlist(list(

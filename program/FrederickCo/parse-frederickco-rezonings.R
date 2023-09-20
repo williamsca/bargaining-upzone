@@ -1,25 +1,53 @@
-# This file parses the Rezoning Resolutions made by the
-# Frederick County Board of Supervisors.
+# This file cleans the hand-parsed Frederick County Rezoning Resolutions
 
 rm(list = ls())
-pacman::p_load(here, data.table, pdftools, stringr, lubridate, tesseract)
 
-l_files <- list.files("data/FrederickCo/Resolutions",
-    pattern = "*.pdf",
-    full.names = TRUE, recursive = TRUE
-)
+library(data.table)
+library(here)
+library(lubridate)
+library(units)
 
-pdf_bitmap <- pdf_convert(l_files[3])
+# Import ----
+dt <- fread(here("derived", "FrederickCo", "resolutions.csv"))
 
-pdf_text <- pdf_text(l_files[3])
-pdf_lines <- unlist(str_split(pdf_text, pattern = "\n"))
+# Note: the 'isResi' tag indicates the proposed use, so it can be FALSE
+# even when 'zoning_new' allows residential uses.
 
-pdf_lines[1:100]
+# Clean ----
+dt[, `:=`(
+    final_date = mdy(final_date),
+    submit_date = mdy(submit_date)
+)]
 
-pdf_text[112]
+dt[, FIPS := "51069"]
+dt[, Area := set_units(Acres, acres)]
 
-pdf_text[grepl("Denied", pdf_text)]
+dt <- dt[Type == "Rezoning"]
 
-pdf_text[1:3]
+# Impute the change in allowed units
+if (!file.exists(here("data", "FrederickCo", "zoning-densities.csv"))) {
+    dt_zon <- data.table(
+        zoning = unique(c(dt$zoning_new, dt$zoning_old)),
+        density_per_acre = NA_real_
+    )
+    fwrite(dt_zon, here("data", "FrederickCo", "zoning-densities.csv"))
+}
 
-length(pdf_text)
+# <copy ".../zoning-densities.csv" to "derived/FrederickCo/zoning-densities.csv">
+# <add densities from https://ecode360.com/8707728>
+# Note: the 'RP' code allowed density varies by lot size and the specific
+# type of housing. Current value is for garden apartments and townhouses;
+# multifamily and age-restricted can go higher.
+
+dt_zon <- fread(here("derived", "FrederickCo", "zoning-densities.csv"))
+
+dt <- merge(dt, dt_zon, by.x = "zoning_old", by.y = "zoning", all.x = TRUE)
+dt[, old_units := Acres * density_per_acre]
+dt$density_per_acre <- NULL
+dt <- merge(dt, dt_zon, by.x = "zoning_new", by.y = "zoning", all.x = TRUE)
+dt[, new_units := Acres * density_per_acre]
+dt[, n_unknown := new_units - old_units]
+dt[, n_units := n_unknown]
+
+# Save ----
+saveRDS(dt, here("derived", "FrederickCo", "rezoning-applications.Rds"))
