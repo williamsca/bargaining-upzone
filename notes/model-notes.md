@@ -33,6 +33,37 @@ Scott, Paul. "Dynamic discrete choice estimation of agricultural land use." (201
 
 
 ## Static
+### Quigley (2007)
+Consider a monocentric city such that $N$ identical households located at various distances $x$ from the city center must pay commuting costs $t$ dollars per mile to their employment location.
+
+Households consume housing $q[x]$ and a numeraire good. Utility is
+
+$$U(y - p[x]q[x] - tx, q[x]) = \bar{u}$$
+
+where $p[x]$ is the price of housing.
+
+Firms produce housing with a constant returns to scale production technology $h(\cdot)$. Let $S(x) = K(x) / L(x)$ be the capital to land ratio. The firm's problem is 
+
+$$\max_{S(x)} \pi(x) = p[x]h(S(x)) - iS(x)$$
+
+where $i$ is the cost of capital. Profit maximization implies
+
+$$p(x)h'(S[x]) = i$$
+
+A zero-profit condition pins down the price of land $r(x)$:
+
+$$p(x)h(S[x]) - i(S[x]) = r(x)$$
+
+The size of the city $\bar{x}$ is pinned down by the exogenous return to agricultural land
+
+$$r(\bar{x}) = r_a$$
+
+Housing market clearing then implies
+
+$$\int_0^{\bar{x}} 2\pi x\left[\frac{h(s[x])}{q(x)}\right]dx = N$$
+
+Zoning regulations may enter the model as a constraint on the amount of land available for development. See the paper for comparative statics.
+
 ### Souza-Rodrigues (2019)
 For parcel $i$, on a subdivision of size $s$, in municipality $m$:
 

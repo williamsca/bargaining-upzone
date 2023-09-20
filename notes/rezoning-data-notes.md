@@ -7,6 +7,8 @@ author: Colin Williams
 
  All data should (eventually) be uploaded to OneDrive.
 
+## Virginia
+
  The table describes where and how I collected data on rezoning applications in Virginia counties. There are several types of data:
  - BoS Minutes/Summaries/Resolutions: details about the Board of Supervisor's decision on rezoning application
  - GIS: the current zoning map, which sometimes has information on the zoning history
@@ -51,6 +53,11 @@ author: Colin Williams
  Manassas Park City|
  Manassas City|
  Chesapeake City|
+
+ ## Maryland
+|County|Type|Link|
+|-|-|-|
+|Montgomery|Council Actions|[Archive](https://www.montgomerycountymd.gov/OZAH/Zoning_council_actions.html)|
 
  # Details
 
