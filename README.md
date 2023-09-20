@@ -15,7 +15,11 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 # TODO
 - Update units time series: show labels for 2017, 2019 and aggregate counties
-- How long does it take from submission to approval?
+- Create rezoning timeline, graphic
+  - How long does it take from submission to approval?
+- Regression(?) analysis of proffer rates
+
+- Review static models of neighborhood choice / housing demand
 - Literature review / policy context
   - WLURI trends 
   - Related policies -- see [Bethany Berger (2009)](https://proxy1.library.virginia.edu/login?url=https://heinonline.org/HOL/P?h=hein.journals/flr78&i=1287) on Measure 37, an Oregon initiative that called for compensation for land regulations (Fischel 2005, 6.14-15)
