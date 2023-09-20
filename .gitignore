@@ -20,6 +20,7 @@ data/LoudonCo/
 # I expect this to change often as
 # I add more counties and process more data
 derived/county-rezonings.Rds
+derived/sample.Rds
 
 # History files
 .Rhistory
