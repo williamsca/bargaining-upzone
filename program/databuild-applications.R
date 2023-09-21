@@ -189,6 +189,7 @@ View(dt_missing)
 saveRDS(dt, here("derived", "county-rezonings.Rds"))
 
 # Create Monthly Panel ----
+# TODO: bring in average proffer rate
 min_date <- ymd("2010-01-01")
 max_date <- ymd("2020-06-30")
 

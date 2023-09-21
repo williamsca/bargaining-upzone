@@ -17,7 +17,7 @@ dt_bp <- readRDS(
 dt_hpi <- readRDS("derived/hpi-zillow.Rds")
 dt_rev <- readRDS("derived/county-revenues-2004-2022.Rds")
 dt_pop <- readRDS("derived/county-populations-2010.Rds")
-dt_rezon <- readRDS("derived/county-rezonings.Rds")
+dt_rezon <- readRDS("derived/county-rezonings-panel.Rds")
 
 # Building Permits ----
 # Bedford City became a town on July 1, 2013.
@@ -46,18 +46,6 @@ dt_bp[, Name := gsub("\\s*\\(.*", " City", Name)]
 # The VA fiscal year runs from July 1 to June 30
 dt_bp[, FY := Year4 + fifelse(Month >= 7, 1, 0)]
 
-# Rezonings ----
-dt_rezon <- dt_rezon[isApproved == TRUE]
-
-# Aggregate by 'final_date' or 'submit_date'?
-dt_rezon[, Date := floor_date(submit_date, "month")]
-
-dt_rezon <- dt_rezon[, .(n_units = sum(n_units),
-                         Area = sum(Area * isResi),
-                         cash_proffer = sum(res_cash_proffer * n_units) /
-                            sum(n_units)),
-                    by = .(FIPS, Date, FY, County)]
-
 # Note: some proffer-collecting jurisdictions are not
 # covered in the county building permits survey
 dt <- merge(dt_bp, dt_rev,
@@ -72,7 +60,8 @@ dt <- merge(dt, dt_hpi, by = c("Date", "FIPS"), all.x = TRUE)
 
 dt <- merge(dt, dt_pop, by = c("FIPS"), all.x = TRUE)
 
-dt <- merge(dt, dt_rezon, by = c("FIPS", "Date", "FY"), all.x = TRUE)
+dt <- merge(dt, dt_rezon, by.x = c("FIPS", "Date"),
+            by.y = c("FIPS", "date"), all.x = TRUE)
 
 # Filter ----
 # exclude Alaska and Hawaii
