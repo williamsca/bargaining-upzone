@@ -184,4 +184,72 @@ dt_missing <- dcast(dt_missing, variable ~ County,
     value.var = "pct_populated")
 View(dt_missing)
 
+# Save Applications ----
+
 saveRDS(dt, here("derived", "county-rezonings.Rds"))
+
+# Create Monthly Panel ----
+min_date <- ymd("2010-01-01")
+max_date <- ymd("2020-06-30")
+
+dt_res <- dt[isApproved == TRUE & isResi == TRUE]
+dt_res[, `:=`(first_submit = min(submit_date), last_submit = max(submit_date)),
+    by = FIPS
+]
+dt_res[is.na(first_final), `:=`(first_final = min(final_date),
+    last_final = max(final_date)), by = FIPS]
+
+dt_panel <- CJ(
+    County = unique(dt_res$County),
+    date = seq(min_date, max_date, by = "month")
+)
+
+dt_interval <- unique(dt_res[, .(
+    FIPS, County, first_submit, last_submit,
+    first_final, last_final, Population2022
+)])
+v_intervals <- c("first_final", "last_final", "first_submit", "last_submit")
+dt_interval[, (v_intervals) := lapply(.SD, floor_date, "month"),
+    .SDcols = v_intervals
+]
+
+dt_panel <- merge(dt_panel, dt_interval, by = c("County"), all.x = TRUE)
+
+dt_submit <- dt_res[, .(Area = sum(Area), n_units = sum(n_units)),
+    by = .(FIPS, date = floor_date(submit_date, "month"))
+]
+dt_submit <- merge(dt_panel, dt_submit,
+    by = c("FIPS", "date"),
+    all.x = TRUE
+)
+dt_submit$type <- "submit"
+dt_submit <- dt_submit[!is.na(first_submit)]
+dt_submit <- dt_submit[date >= first_submit & date <= last_submit]
+
+# TODO: impute 0s for missing 'n_units' and 'Area' when those values are
+# observed in any year for that county
+
+dt_final <- dt_res[, .(Area = sum(Area), n_units = sum(n_units)),
+    by = .(FIPS, date = floor_date(final_date, "month"))
+]
+dt_final <- merge(dt_panel, dt_final,
+    by = c("FIPS", "date"),
+    all.x = TRUE
+)
+dt_final$type <- "final"
+dt_final <- dt_final[!is.na(first_final)]
+dt_final <- dt_final[date >= first_final & date <= last_final]
+
+dt_panel <- rbindlist(list(dt_submit, dt_final),
+    fill = TRUE,
+    use.names = TRUE
+)
+
+dt_panel[, has_units := any(!is.na(n_units)), by = FIPS]
+dt_panel[is.na(n_units) & has_units, n_units := 0]
+
+dt_panel[, has_area := any(!is.na(Area)), by = FIPS]
+dt_panel[is.na(Area) & has_area, Area := 0]
+
+# Save Panel ----
+saveRDS(dt_panel, here("derived", "county-rezonings-panel.Rds"))
