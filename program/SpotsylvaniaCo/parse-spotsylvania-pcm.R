@@ -63,12 +63,12 @@ pdf_proffers <- unlist(str_split(pdf_text[32:33], pattern = "\n"))
 pdf_proffers <- gsub("SFD Shown", "SFD|Shown", pdf_proffers)
 pdf_proffers <- gsub("Rt 1", "Route One", pdf_proffers)
 pdf_proffers <- gsub("\\+", "", pdf_proffers)
-pdf_proffers <- gsub("\\s{2,}", "|", pdf_proffers[12:82])
+pdf_proffers <- gsub("\\s{2,}", "|", pdf_proffers[12:85])
 pdf_proffers <- gsub("(\\d)\\s", "\\1|", pdf_proffers)
 
 dt_prof <- fread(paste0(pdf_proffers, collapse = "\n"),
     sep = "|", header = FALSE,
-    fill = TRUE
+    fill = TRUE, nrows = 
 )
 
 dt_prof <- dt_prof[!(V1 %in% c("", "Case #")) & V2 != ""]
@@ -80,6 +80,7 @@ dt_prof[, inkind_proffer := as.numeric(
     gsub("[^0-9]", "", inkind_proffer))
 ]
 dt_prof[is.na(inkind_proffer), inkind_proffer := 0]
+dt_prof[V11 == "Unknown", inkind_proffer := NA]
 
 setnames(dt_prof, c("V1", "V11"),
     c("Case.Number", "total_proffer")
@@ -102,7 +103,6 @@ dt[, inkind_proffer := inkind_proffer / n_units]
 
 dt[is.na(n_affordable), n_affordable := 0]
 dt[is.na(res_cash_proffer), res_cash_proffer := 0]
-dt[is.na(inkind_proffer), inkind_proffer := 0]
 
 v_cols <- c("Case.Number", "Project.Name", "n_sfd", "n_sfa", "n_mfd",
     "n_age_restrict", "n_affordable", "n_units", "final_date", "inkind_proffer",

@@ -8,10 +8,17 @@ library(here)
 
 dt <- readRDS("derived/sample.Rds")
 
+dt_app <- readRDS(here("derived", "county-rezonings.Rds"))
+
 arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
+
+# Proffer Covariates ----
+dt_prof <- dt_app[!is.na(res_cash_proffer) & isApproved == TRUE & n_units > 5]
+lm_prof <- 
+
 
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
