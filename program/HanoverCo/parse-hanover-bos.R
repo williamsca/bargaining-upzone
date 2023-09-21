@@ -59,6 +59,7 @@ dt[, final_date := mdy(final_date)]
 dt[, Area := set_units(acres, acres)]
 dt[, FIPS := "51085"]
 dt[, planning_hearing_date := as.Date(planning_hearing_date)]
+dt[, submit_date := as.Date(submit_date)]
 dt[, n_units := rowSums(.SD, na.rm = TRUE),
     .SDcols = c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict")]
 

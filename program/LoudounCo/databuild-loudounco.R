@@ -32,7 +32,7 @@ nrow(dt[!is.na(Area) & Status != "Approved"]) == 0
 
 # See email 8/29/2023 (C. Brian Patrick)
 # Note: only approved applications have a final_date
-dt[, final_date := ZO_UPD_DAT]
+dt[, final_date := ZO_ZONE_DA]
 
 # A few records have a final date before the submit date
 nrow(dt[final_date < submit_date])

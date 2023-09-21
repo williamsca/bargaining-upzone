@@ -42,6 +42,7 @@ author: Colin Williams
  Prince William|GIS||Manual|[Archive](https://gisdata-pwcgov.opendata.arcgis.com/datasets/PWCGOV::zoning/about)
  Stafford|Rezoning App|||[Archive](https://pob.staffordcountyva.gov/PublicAccess/)
  Henrico|Rezoning GIS|1962-2023|Manual|[Archive](https://data-henrico.opendata.arcgis.com/datasets/Henrico::planning-department-cases/about)
+ Henrico|Approved Proffers|1978-2023||[Archive](https://henrico.us/planning/downloadable-proffers/)
  Stafford County|Rezoning App|||[Archive](https://staffordcountyva.gov/government/departments_p-z/planning_and_zoning/development_review/current_development_projects/index.php)
  Spotsylvania County|Rezoning App|||[Pending](https://www.spotsylvania.va.us/2074/Status-of-Applications)|Evidence that counties care about proffer legislation
  Spotsylvania County|BoS Minutes|||[Archive](https://www.spotsylvania.va.us/DocumentCenter/Index/574)|Only source for rezonings (see email), but no proffer details

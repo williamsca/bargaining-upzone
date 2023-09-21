@@ -20,17 +20,30 @@ math: mathjax
 
 ---
 
+## Prince William County Suggested Proffers (2014)
+
+|Unit| Service | Amount ($)|
+|---|---|---:|
+SFD|Schools|20,649|
+SFD|Parks & Libraries|6,403|
+SFD|Fire and Rescue|1,053|
+SFD|Transportation|16,780|
+**SFD**|**Total**|**44,930**
+**Townhouse**|**Total**|**39,837**
+**MFD**|**Total**|**26,778**
+
+---
 
 # Virginia Proffer Reform Act of 2016
 
-VA allows municipalities to collect "voluntary" proffers tied to a rezoning application
-&nbsp;
+Developers were uphappy with large cash proffers, lobbied state legislature for reform:
 
-In 2016, developers were uphappy with large cash proffers, lobbied state legislature for reform:
-- Proffers must address impacts which are *specifically attributable* to the proposed development $\implies$ **no standard proffer schedule**
+- Proffers must address impacts *specifically attributable* to proposed development
 - Applies to all **residential** rezoning applications filed after **July 1, 2016**
 - Parcel exempt if **high-density** or **near transit** (NOVA)
-- Partially unwound in **2019**
+- Increases ability of developers **to contest rezoning decisions** in court
+
+Substantial uncertainty over how courts will interpret the law; reform will be partially unwound in **2019**
 
 ---
 
@@ -46,19 +59,6 @@ Portsmouth, Planning Director:
 Prince William, Board Chairman:
 > "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law." (12/6/2018)
 > 
----
-
-## Prince William County Suggested Proffers (2014)
-
-|Unit| Service | Amount ($)|
-|---|---|---:|
-SFD|Schools|20,649|
-SFD|Parks & Libraries|6,403|
-SFD|Fire and Rescue|1,053|
-SFD|Transportation|16,780|
-**SFD**|**Total**|**44,930**
-**Townhouse**|**Total**|**39,837**
-**MFD**|**Total**|**26,778**
 
 ---
 
@@ -88,6 +88,17 @@ SFD|Transportation|16,780|
 ---
 
 ![bg cover 100%](figures/model-durable-monopolist/dgm-05.png)
+
+---
+
+# Data
+A novel dataset containing **1,578** rezoning applications across 8 counties in Virginia (~1/3 of state by population):
+- Outcome (approved, denied, withdrawn)
+- Parcel address and area
+- Current and proposed zoning codes
+- Submission and/or approval date
+- Incremental housing units (single family, townhouse, multifamily)
+- Proffer details (cash, affordable units, value of in-kind proffers)
 
 ---
 

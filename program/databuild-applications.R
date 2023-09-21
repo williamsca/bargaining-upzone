@@ -3,6 +3,7 @@
 # the columns and exports a combined binary file for analysis.
 
 rm(list = ls())
+
 library(data.table)
 library(lubridate)
 library(sf)
@@ -17,12 +18,14 @@ v_cols <- c(
     "Coordinates", "gis_object", "bos_votes_for", "bos_votes_against",
     "n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_affordable",
     "n_age_restrict", "n_units", "res_cash_proffer", "other_cash_proffer",
-    "inkind_proffer", "planning_hearing_date", "first_obs", "last_obs"
+    "inkind_proffer", "planning_hearing_date"
 )
 
 dt_cw <- fread(here("crosswalks", "va-counties.csv"),
     keepLeadingZeros = TRUE)
-dt_cw[, FIPS := paste0("51", FIPS)]
+dt_cw[, FIPS := paste0("51", sprintf("%03d", FIPS))]
+dt_cw[, `:=`(first_final = mdy(first_obs), last_final = mdy(last_obs))]
+dt_cw[, c("first_obs", "last_obs") := NULL]
 
 # Import ----
 # Spotsylvania County
@@ -32,9 +35,6 @@ dt_spot <- readRDS(here("derived", "SpotsylvaniaCo",
 # Hanover County
 dt_han <- readRDS(here("derived", "HanoverCo", "Rezoning Approvals.Rds"))
 
-# Assume BoS hearing is close-ish to submission date
-dt_han[, submit_date := final_date]
-
 uniqueN(dt_han[, .(Case.Number, Part)]) == nrow(dt_han)
 
 # Goochland County
@@ -42,7 +42,7 @@ dt_gooch <- readRDS(here("derived", "GoochlandCo",
     "Rezoning Approvals.Rds"))
 
 # Assume planning hearing is close enough to the submission date
-dt_gooch[, submit_date := planning_hearing_date]
+# dt_gooch[, submit_date := planning_hearing_date]
 
 uniqueN(dt_gooch$Case.Number) == nrow(dt_gooch)
 

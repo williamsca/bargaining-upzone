@@ -14,15 +14,70 @@ library(here)
 dt <- readRDS(here("derived", "county-rezonings.Rds"))
 
 # Aggregate over parcels to application level
+# Note: A Loudoun County rezonings application can be associated
+# with distinct 'final_date' values, perhaps because the original proffers
+# were later amended.
 dt_app <- dt[,
     .(Area = sum(Area), isResi = any(isResi), isExempt = FALSE, # any(isExempt)
-    n_units = sum(n_units)),
+    n_units = sum(n_units), final_date = min(final_date)),
     by = .(FIPS, Case.Number, County, submit_date,
-    Population2022, isApproved, FY)]
+    Population2022, isApproved, FY, first_final, last_final)]
 
 uniqueN(dt_app[, .(FIPS, Case.Number)]) == nrow(dt_app)
 
+# Average time from submission to approval
+dt_app[, time_to_approval := final_date - submit_date]
+table(dt_app[!is.na(time_to_approval), County])
+
+median(dt_app[isApproved == TRUE & time_to_approval >= 0]$time_to_approval, na.rm = TRUE)
+
+# Construct panel ----
+v_counties <- unique(dt_app$County)
+
+dt_res <- dt_app[isApproved == TRUE & isResi == TRUE]
+dt_res[, `:=`(first_submit = min(submit_date), last_submit = max(submit_date)),
+    by = FIPS]
+
+min_date <- ymd("2000-01-01")
+max_date <- ymd("2020-06-30")
+
+dt_panel <- CJ(
+    County = v_counties,
+    date = seq(min_date, max_date, by = "month")
+)
+
+dt_interval <- unique(dt_res[, .(FIPS, County, first_submit, last_submit,
+                                 first_final, last_final, Population2022)])
+v_intervals <- c("first_final", "last_final", "first_submit", "last_submit")
+dt_interval[, (v_intervals) := lapply(.SD, floor_date, "month"),
+            .SDcols = v_intervals]
+
+dt_panel <- merge(dt_panel, dt_interval, by = c("County"), all.x = TRUE)
+
+dt_submit <- dt_res[, .(Area = sum(Area), n_units = sum(n_units)),
+    by = .(FIPS, date = floor_date(submit_date, "month"))]
+dt_submit$type <- "submit"
+dt_submit <- merge(dt_panel, dt_submit, by = c("FIPS", "date"),
+    all.x = TRUE)
+dt_submit <- dt_submit[!is.na(first_submit)]
+dt_submit <- dt_submit[date >= first_submit & date <= last_submit]
+# TODO: impute 0s for missing 'n_units' and 'Area' when those values are
+# observed in any year for that county
+
+dt_final <- dt_res[, .(Area = sum(Area), n_units = sum(n_units)),
+    by = .(FIPS, date = floor_date(final_date, "month"))]
+dt_final$type <- "final"
+dt_final <- merge(dt_panel, dt_final, by = c("FIPS", "date"),
+    all.x = TRUE)
+dt_final <- dt_final[!is.na(first_final)]
+dt_final <- dt_final[date >= first_final & date <= last_final]
+
+dt_panel <- rbindlist(list(dt_submit, dt_final), fill = TRUE,
+    use.names = TRUE)
+
 # Plots ----
+
+
 
 # TODO: combine all counties into a single plot:
 # 1. index the # of approved units + acres each year to the county's
