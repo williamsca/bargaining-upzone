@@ -34,6 +34,16 @@ SFD|Transportation|16,780|
 
 ---
 
+# Research Questions
+
+### How do restrictions on the use of proffers affect **the supply of residential land uses**?
+
+&nbsp;
+
+### What are the **welfare impacts** of a market for land use regulation?
+
+---
+
 # Virginia Proffer Reform Act of 2016
 
 Developers were uphappy with large cash proffers, lobbied state legislature for reform:
@@ -106,7 +116,7 @@ A novel dataset containing **1,578** rezoning applications across 8 counties in 
 
 ---
 # Discussion
-- Reform imposed large **transaction costs** on rezonings (legal uncertainty or "stochastic court enforcement")
+- Reform imposed large **transaction costs** on rezonings due to legal uncertainty
 - Municipalities respond by halting residential rezonings in 2017
 - Some recovery in 2018, possibly related to municipal relationships with developers (in repeated game, developer unlikely to defect) or more legal clarity
 
@@ -114,8 +124,9 @@ A novel dataset containing **1,578** rezoning applications across 8 counties in 
 ---
 
 # What can we learn?
-Reduced-form analysis:
-- The "elasticity" of residential land use supply
+Reduced-form analysis is not (very) informative:
+- Rezonings are highly elastic across time and space
+- Long-run impacts are elusive: proffer reform is both anticipated and short-lived
 
 
 A structural model of municipality behavior:
@@ -128,12 +139,8 @@ A structural model of municipality behavior:
 ---
 
 # What I Need Help With
-- **Empirical Strategy**: DiD is natural method, but no obvious control group
-  - Continuous treatment (intensity proportional to pre-reform proffer rates)
-  - Would take logs, but many zeros - PPML? **(Looking for a reference)**
 - **Models of Land Use**, especially that feature imperfect competition or an upstream regulatory authority
-- **How to think about results** given evidence that reform (and its partial repeal) were anticipated
-  - Intertemporal substitution of rezoning
+
 
 ---
 

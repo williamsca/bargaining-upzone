@@ -16,6 +16,7 @@ arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
 # Proffer Covariates ----
+# TODO: in-kind value as % of total proffer value histogram
 dt_prof <- dt_app[!is.na(res_cash_proffer) & isApproved == TRUE & n_units > 5]
 lm_prof <- 
 
