@@ -33,6 +33,51 @@ Scott, Paul. "Dynamic discrete choice estimation of agricultural land use." (201
 
 
 ## Static
+### Diamond (2017)
+Consider a large number $N$ of cities indexed by $j = 1, \ldots, N$. The government of each city produces a public good according to 
+
+$$Y_j^G = \alpha_jG_j$$
+
+where $\alpha_j$ is an exogenous productivity and $G_j$ is the number of government employees. Let the average level of government services per household be denoted 
+
+$$s_j = \alpha_jG_j/N_j$$
+
+where $N_j$ is the number of households in city $j$. The Leviathan government maximizes its profits:
+
+$$\max_{\tau_j, s_j} \tau_jN_j - \frac{w_js_jN_j}{\alpha_j}$$
+
+where $\tau_j$ is a lump-sum tax rate and $w_j$ is the local wage.
+
+Household utility is given by
+
+$$U_j = w_j - r_j + A_j + g(s_j) - \tau_j = \bar{U}$$
+
+where $r_j$ is the rental rate of housing, $A_j$ is the numeraire good, and $g(\cdot)$ is a concave function. Given homogenous households, spatial indifference implies that utility is the same in all cities.
+
+Firms produce a numeraire good according to 
+
+$$Y_j = (\theta_j + b(s_j))N_j^P$$
+
+where $\theta_j$ is an exogenous productivity and $N_j^P$ is the number of private-sector employees. Note that labor demand is perfectly elastic. Labor market clearing implies $N_j = N_j^P + G_j$.
+
+Under perfect competition, the wage is equal to the marginal product of labor:
+
+$$w_j = \theta_j + b(s_j)$$
+
+Housing supply is assumed to take the form 
+
+$$r_j = a_j + \gamma x_j^{house}\log(N_j)$$
+
+where $x_j^{house}$ is a vector of exogenous city characteristics, like topography, that affect the elasticity of housing supply. See Saiz (2010) for a microfoundation.
+
+**Equilibrium**. Substitute in labor demand and housing supply to the worker's indifference condition to obtain
+
+$$\theta_j + b(s_j) - a_j - \gamma x_j^{house}\log(N_j)+A_j+g(s_j) = \bar{U}$$
+
+The government maximizes its profits subject to the above.
+
+Diamond, Rebecca. "Housing supply elasticity and rent extraction by state and local governments." *American Economic Journal: Economic Policy* 9, no. 1 (2017): 74-111.
+
 ### Quigley (2007)
 Consider a monocentric city such that $N$ identical households located at various distances $x$ from the city center must pay commuting costs $t$ dollars per mile to their employment location.
 
