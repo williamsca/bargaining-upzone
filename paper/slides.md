@@ -16,7 +16,7 @@ math: mathjax
 
 # Selling the Upzone
 
-![bg right:70% 90%](figures/images/rezoning-news.png)
+![bg right:74% 100%](figures/images/rezoning-news.png)
 
 ---
 
@@ -36,11 +36,49 @@ SFD|Transportation|16,780|
 
 # Research Questions
 
-### How do restrictions on the use of proffers affect **the supply of residential land uses**?
+### How do proffers affect the supply of **residential land**?
 
 &nbsp;
 
 ### What are the **welfare impacts** of a market for land use regulation?
+
+---
+
+# Research Questions
+
+### How do proffers affect the supply of **residential land**?
+**Today**: descriptive evidence from Virginia's Proffer Reform Act of 2016
+
+&nbsp;
+
+### What are the **welfare impacts** of a market for land use regulation?
+
+---
+# Contributions
+
+### Determinants of Land Use Regulations
+- legacy political institutions [(Fischel 2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en), black migration [(Cui 2023)](https://www.tom-cui.com/assets/pdfs/LotsEZ_Latest.pdf), municipal monopoly power [(Quigley 2007, Diamond 2017)](https://escholarship.org/content/qt5692w323/qt5692w323.pdf), congestible public goods [(Krimmel 2021)](https://static1.squarespace.com/static/5f75531c54380e4fb4b0f839/t/620320d5ce8b010bca2552af/1644372186832/Krimmel_HousingSupply_SchoolFinance_draft_mostrecent.pdf)
+
+
+### Housing Supply Curves 
+- [Saiz 2010, Baum-Snow and Han 2019](https://academic.oup.com/qje/article-abstract/125/3/1253/1903664)
+
+&nbsp;
+
+**New**: empirical evidence on the elasticity of residential land supply
+
+
+
+---
+
+
+# National Background
+
+Impact fees (exactions) widespread in US: **~48% of suburban communities** [(Gyourko, Hartley, and Krimmel 2021)](https://www-sciencedirect-com.proxy1.library.virginia.edu/science/article/pii/S009411902100019X)
+
+&nbsp;
+
+Impact fees 
 
 ---
 
@@ -53,7 +91,7 @@ Developers were uphappy with large cash proffers, lobbied state legislature for 
 - Parcel exempt if **high-density** or **near transit** (NOVA)
 - Increases ability of developers **to contest rezoning decisions** in court
 
-Substantial uncertainty over how courts will interpret the law; reform will be partially unwound in **2019**
+Substantial uncertainty over how courts would interpret the law; reform will be partially unwound in **2019**
 
 ---
 
@@ -75,8 +113,8 @@ Prince William, Board Chairman:
 ## A toy model of residential land supply
 - municipality acts as **durable goods monopolist**
 - an extra unit **decreases** the price of all prior units
-- homeowners control **housing supply** through zoning, demand compensation to allow more development
-- see [Fischel (2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en)
+- homeowners control **housing supply** through zoning, demand compensation to allow more development  [(Fischel 2015)](https://www.google.com/books/edition/Zoning_Rules/rRIfswEACAAJ?hl=en)
+- reform will impose a **price ceiling** on proffers
 
 ---
 
@@ -102,13 +140,13 @@ Prince William, Board Chairman:
 ---
 
 # Data
-A novel dataset containing **1,578** rezoning applications across 8 counties in Virginia (~1/3 of state by population):
+In-progress dataset containing **1,578** rezoning applications across 8 counties in Virginia (~1/3 of state by population):
 - Outcome (approved, denied, withdrawn)
 - Parcel address and area
 - Current and proposed zoning codes
 - Submission and/or approval date
 - Incremental housing units (single family, townhouse, multifamily)
-- Proffer details (cash, affordable units, value of in-kind proffers)
+- Proffer details* (cash, affordable units, value of in-kind proffers)
 
 ---
 
