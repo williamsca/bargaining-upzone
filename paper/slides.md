@@ -81,7 +81,7 @@ Impact fees (exactions) are land or cash in exchange for development rights
 Impact fees occupy precarious legal ground:
 - illegal taxes? regulatory takings?
 - federal courts have ruled land exactions must be **proportional** and **reasonably related** to development impacts
-- doctrine is expanded in 2014 to include **cash** exactions (*Koontz v. St. Johns River Water Management District*)
+- doctrine expanded in 2014 to include cash exactions (*Koontz v. St. Johns River Water Management District*)
 
 ---
 
@@ -153,35 +153,21 @@ In-progress dataset containing **1,578** rezoning applications across 8 counties
 
 ---
 
-![bg cover 85%](figures/plot_rezonings_resi_units.svg)
+![bg contain](figures/plot_rezonings_submit.png)
+
+---
+
+![bg contain](figures/plot_rezonings_final.png)
 
 ---
 # Discussion
-- Reform imposed large **transaction costs** on rezonings due to legal uncertainty
-- Municipalities respond by halting residential rezonings in 2017
-- Some recovery in 2018, possibly related to municipal relationships with developers (in repeated game, developer unlikely to defect) or more legal clarity
+Reform imposes large **transaction costs** on rezonings due to legal uncertainty
 
+Reform is both **anticipated** and **short-lived**
 
----
+$\implies$ municipalities respond by substituting rezonings across time
 
-# What can we learn?
-Reduced-form analysis is not (very) informative:
-- Rezonings are highly elastic across time and space
-- Long-run impacts are elusive: proffer reform is both anticipated and short-lived
-
-
-A structural model of municipality behavior:
-- Do municipalities act to maximize **average housing prices** or **total land value**? Is there interesting heterogeneity by rural/suburban/urban?
-- How much **market power** do municipalities have?
-- What are the **welfare effects** of proposed zoning reforms?
-  - Mandatory upzoning near transit (e.g., NY Housing Compact, CA SB50)
-  - Legal restrictions on proffers/impact fees (e.g., *Koontz v. St. Johns River Water Management District*)
-
----
-
-# What I Need Help With
-- **Models of Land Use**, especially that feature imperfect competition or an upstream regulatory authority
-
+&nbsp;
 
 ---
 

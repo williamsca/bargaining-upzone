@@ -8,7 +8,10 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 library(units)
+library(lubridate)
 library(here)
+
+v_palette <- c("#0072B2", "#D55E00", "#009E73", "#F0E460")
 
 # Import ----
 dt <- readRDS(here("derived", "county-rezonings-panel.Rds"))
@@ -21,18 +24,26 @@ dt_hy_units <- dt[has_units == TRUE & County != "Spotsylvania County",
 dt_hy_units[, n_units_pct := (n_units / sum(n_units)) * 100, by = type]
 
 # Plots ----
+unique(dt[has_units == TRUE & type == "final", County])
+unique(dt[has_units == TRUE & type == "submit", County])
+
 ggplot(dt_hy_units[type == "submit"],
        aes(x = date, y = n_units)) +
     geom_rect(aes(xmin = ymd("2016/07/01"), xmax = ymd("2018/07/01"),
                   ymin = -Inf, ymax = Inf),
             fill = "lightgray", alpha = .2, color = "gray"
     ) +
-    geom_line() +
-    geom_point() +
+    geom_hline(yintercept = 0, color = "gray") +
+    geom_line(color = v_palette[1], linetype = "dashed") +
+    geom_point(size = 3, color = v_palette[1]) +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     labs(y = "Approved Units (#)", x = "Submission Date",
-         caption = "Source: ") +
-    theme_light(base_size = 12)
+         caption = "Source: Frederick, Loudoun, and Prince William Counties",
+         title = "Approved Units by Submission Date") +
+    theme_light(base_size = 12) +
+    theme(plot.caption = element_text(hjust = 0, size = 10))
+ggsave(here("paper", "figures", "plot_rezonings_submit.png"),
+    width = 8, height = 4)
 
 ggplot(
     dt_hy_units[type == "final" &
@@ -46,15 +57,20 @@ ggplot(
         ),
         fill = "lightgray", alpha = .2, color = "gray"
     ) +
-    geom_line() +
-    geom_point() +
+    geom_hline(yintercept = 0, color = "gray") +
+    geom_line(color = v_palette[1], linetype = "dashed") +
+    geom_point(size = 3, color = v_palette[1]) +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+    scale_y_continuous(limits = c(0, 1200)) +
     labs(
         y = "Approved Units (#)", x = "Approval Date",
-        caption = "Source: "
+        caption = "Source: Frederick, Goochland, Hanover, and Loudoun Counties",
+        title = "Approved Units by Approval Date"
     ) +
-    theme_light(base_size = 12)
-
+    theme_light(base_size = 12) +
+    theme(plot.caption = element_text(hjust = 0, size = 10))
+ggsave(here("paper", "figures", "plot_rezonings_final.png"),
+    width = 8, height = 4)
 
 # Superseded ----
 # Aggregate over parcels to application level
