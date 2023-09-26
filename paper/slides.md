@@ -12,6 +12,7 @@ math: mathjax
 
 ### **Evidence from Virginia's Proffer Reform Act of 2016**
 
+
 ---
 
 # Selling the Upzone
@@ -71,27 +72,29 @@ SFD|Transportation|16,780|
 
 ---
 
-
 # National Background
 
-Impact fees (exactions) widespread in US: **~48% of suburban communities** [(Gyourko, Hartley, and Krimmel 2021)](https://www-sciencedirect-com.proxy1.library.virginia.edu/science/article/pii/S009411902100019X)
+Impact fees (exactions) are land or cash in exchange for development rights
 
-&nbsp;
+- Widespread in US: **~48% of suburban communities** in 2018 [(Gyourko, Hartley, and Krimmel 2021)](https://www-sciencedirect-com.proxy1.library.virginia.edu/science/article/pii/S009411902100019X)
 
-Impact fees 
+Impact fees occupy precarious legal ground:
+- illegal taxes? regulatory takings?
+- federal courts have ruled land exactions must be **proportional** and **reasonably related** to development impacts
+- doctrine is expanded in 2014 to include **cash** exactions (*Koontz v. St. Johns River Water Management District*)
 
 ---
 
 # Virginia Proffer Reform Act of 2016
 
-Developers were uphappy with large cash proffers, lobbied state legislature for reform:
+Developers were uphappy with large impact fees ("proffers"), lobbied state legislature for reform:
 
 - Proffers must address impacts *specifically attributable* to proposed development
 - Applies to all **residential** rezoning applications filed after **July 1, 2016**
 - Parcel exempt if **high-density** or **near transit** (NOVA)
 - Increases ability of developers **to contest rezoning decisions** in court
 
-Substantial uncertainty over how courts would interpret the law; reform will be partially unwound in **2019**
+Substantial uncertainty over how courts would interpret the law; reform partially unwound in **2019**
 
 ---
 
