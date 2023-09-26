@@ -17,9 +17,9 @@ data/LoudonCo/
 # Output files
 *.pdf
 
-# I expect this to change often as
-# I add more counties and process more data
+# I expect these data change often
 derived/county-rezonings.Rds
+derived/county-wrluri.Rds
 derived/sample.Rds
 
 # History files

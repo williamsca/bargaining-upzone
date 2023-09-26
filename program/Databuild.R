@@ -18,6 +18,7 @@ dt_hpi <- readRDS("derived/hpi-zillow.Rds")
 dt_rev <- readRDS("derived/county-revenues-2004-2022.Rds")
 dt_pop <- readRDS("derived/county-populations-2010.Rds")
 dt_rezon <- readRDS("derived/county-rezonings-panel.Rds")
+dt_wrluri <- readRDS("derived/county-wrluri.Rds")
 
 # Building Permits ----
 # Bedford City became a town on July 1, 2013.

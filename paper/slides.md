@@ -87,7 +87,7 @@ Impact fees occupy precarious legal ground:
 
 # Virginia Proffer Reform Act of 2016
 
-Developers were uphappy with large impact fees ("proffers"), lobbied state legislature for reform:
+Developers uphappy with large impact fees ("proffers"), lobbied state legislature for reform:
 
 - Proffers must address impacts *specifically attributable* to proposed development
 - Applies to all **residential** rezoning applications filed after **July 1, 2016**
@@ -153,6 +153,11 @@ In-progress dataset containing **1,578** rezoning applications across 8 counties
 
 ---
 
+![bg 100%](figures/images/rezoning_goochland_2.png)
+![bg 100%](figures/images/rezoning_goochland_1.png)
+
+---
+
 ![bg contain](figures/plot_rezonings_submit.png)
 
 ---
@@ -167,11 +172,69 @@ Reform is both **anticipated** and **short-lived**
 
 $\implies$ municipalities respond by substituting rezonings across time
 
+$\implies$ long-run effects of reform on building permits, prices are muted
+
+
+---
+
+# Where to next?
+
+Exploit variation in development timing as a first-stage
+
 &nbsp;
+
+Focus on variation in proffer rates across **counties** and by **development characteristics** (e.g., density, location, type)
+
+&nbsp;
+
+Search for similar, more persistent reforms in other states
 
 ---
 
 # Thank you!
+
+---
+
+# Appendix
+
+---
+
+# Proffer Administration
+- Proffers often paid out **as building permits are issued** $\implies$ reform's impact on revenues will be **gradual**, especially for single family dwellings
+- Payments **indexed to CPI/PPI (!)**
+
+
+---
+
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/proffer_revenues.png)
+
+---
+
+![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/proffer_share.png)
+
+---
+
+### Top Proffer Counties (2004-2015)
+
+<!-- html table generated in R 4.2.1 by xtable 1.8-4 package -->
+<!-- Wed Aug 23 15:39:50 2023 -->
+<table border=1>
+<tr> <th> Rank </th> <th> Name </th> <th> Proffer Revenue Share (%) </th>  </tr>
+  <tr> <td align="right"> 1 </td> <td> Manassas Park City </td> <td align="right"> 4.2 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> Loudoun County </td> <td align="right"> 2.4 </td> </tr>
+  <tr> <td align="right"> 3 </td> <td> Prince William County </td> <td align="right"> 2.0 </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> Chesterfield County </td> <td align="right"> 1.2 </td> </tr>
+  <tr> <td align="right"> 5 </td> <td> Goochland County </td> <td align="right"> 0.9 </td> </tr>
+  <tr> <td align="right"> 6 </td> <td> Caroline County </td> <td align="right"> 0.9 </td> </tr>
+  <tr> <td align="right"> 7 </td> <td> Powhatan County </td> <td align="right"> 0.8 </td> </tr>
+  <tr> <td align="right"> 8 </td> <td> Frederick County </td> <td align="right"> 0.8 </td> </tr>
+  <tr> <td align="right"> 9 </td> <td> Hanover County </td> <td align="right"> 0.8 </td> </tr>
+  <tr> <td align="right"> 10 </td> <td> Williamsburg City </td> <td align="right"> 0.8 </td> </tr>
+   </table>
+
+---
+
+# Old Stuff
 
 ---
 
@@ -187,15 +250,6 @@ where
 - $a_j$ indicates whether the application is approved
 - $p_j$ is the proffer amount
 - $q_j$ is the number of (incremental) allowed units
-
----
-
-# Old Stuff
-
----
-
-# Abstract
-Statewide zoning reforms may fail to increase housing supply if local governments respond along unregulated margins. I study the policy response of Virginia municipalities to a reform that restricted their ability to charge developers for residential upzonings. I find that the supply of residential land uses is highly price elastic: after the reform, the number of new units allowed by residential upzonings falls by [X]\%. In counties which were partially exempted from the reform, however, aggregate rezoning remains constant as localities substitute from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should subsidize the number of newly-permitted housing units to increase housing supply.
 
 
 ---
@@ -254,41 +308,3 @@ Assume $v_j \sim N(0, \sigma^2)$ and parameterize $C(q) = ...$.
 - Locality may have market power $\implies$ $p_j$ is endogenous to $\vec{a}$
 - Collapses heterogeneity in zoning codes to single dimension ($q_j$)
 
----
-
-# Appendix
-
----
-
-# Proffer Administration
-- Proffers often paid out **as building permits are issued** $\implies$ reform's impact on revenues will be **gradual**, especially for single family dwellings
-- Payments **indexed to CPI/PPI (!)**
-
-
----
-
-![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/proffer_revenues.png)
-
----
-
-![bg cover 100%](https://raw.githubusercontent.com/williamsca/bargaining-upzone/main/paper/figures/proffer_share.png)
-
----
-
-### Top Proffer Counties (2004-2015)
-
-<!-- html table generated in R 4.2.1 by xtable 1.8-4 package -->
-<!-- Wed Aug 23 15:39:50 2023 -->
-<table border=1>
-<tr> <th> Rank </th> <th> Name </th> <th> Proffer Revenue Share (%) </th>  </tr>
-  <tr> <td align="right"> 1 </td> <td> Manassas Park City </td> <td align="right"> 4.2 </td> </tr>
-  <tr> <td align="right"> 2 </td> <td> Loudoun County </td> <td align="right"> 2.4 </td> </tr>
-  <tr> <td align="right"> 3 </td> <td> Prince William County </td> <td align="right"> 2.0 </td> </tr>
-  <tr> <td align="right"> 4 </td> <td> Chesterfield County </td> <td align="right"> 1.2 </td> </tr>
-  <tr> <td align="right"> 5 </td> <td> Goochland County </td> <td align="right"> 0.9 </td> </tr>
-  <tr> <td align="right"> 6 </td> <td> Caroline County </td> <td align="right"> 0.9 </td> </tr>
-  <tr> <td align="right"> 7 </td> <td> Powhatan County </td> <td align="right"> 0.8 </td> </tr>
-  <tr> <td align="right"> 8 </td> <td> Frederick County </td> <td align="right"> 0.8 </td> </tr>
-  <tr> <td align="right"> 9 </td> <td> Hanover County </td> <td align="right"> 0.8 </td> </tr>
-  <tr> <td align="right"> 10 </td> <td> Williamsburg City </td> <td align="right"> 0.8 </td> </tr>
-   </table>

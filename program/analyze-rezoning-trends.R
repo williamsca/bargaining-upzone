@@ -3,6 +3,7 @@
 # proffers.
 
 rm(list = ls())
+
 library(data.table)
 library(ggplot2)
 library(gridExtra)
@@ -52,7 +53,7 @@ ggplot(
 ) +
     geom_rect(
         aes(
-            xmin = ymd("2016/07/01"), xmax = ymd("2018/01/01"),
+            xmin = ymd("2016/07/01"), xmax = ymd("2018/07/01"),
             ymin = -Inf, ymax = Inf
         ),
         fill = "lightgray", alpha = .2, color = "gray"

@@ -14,11 +14,9 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
-- Update units time series: show labels for 2017, 2019 and aggregate counties
-- Create rezoning timeline, graphic
-  - How long does it take from submission to approval?
-- Regression(?) analysis of proffer rates
-
+- Incorporate WRLURI data to 'Databuild.R'
+- Perform DiD analysis of Koontz decision impact on housing permits
+- Regression analysis of proffer rates against size, density of development
 - Review static models of neighborhood choice / housing demand
 - Literature review / policy context
   - WLURI trends 
@@ -27,6 +25,7 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 
 # Done
+- Update units time series: show labels for 2017, 2019 and aggregate counties
 - Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
 - Add Fairfax to combined application file
 - hand parse Frederick resolutions (see '.../derived/FrederickCo/resolutions.csv')
