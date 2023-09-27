@@ -64,13 +64,20 @@ dt <- merge(dt, dt_pop, by = c("FIPS"), all.x = TRUE)
 dt <- merge(dt, dt_rezon, by.x = c("FIPS", "Date"),
             by.y = c("FIPS", "date"), all.x = TRUE)
 
+# Note: many WRLURI counties are not covered in the building permits survey
+dt <- merge(dt, dt_wrluri, by = c("FIPS"), all.x = TRUE)
+
+# Sample is mostly EI=1 counties
+# Will need to do balance tests
+table(unique(dt[, .(FIPS, EI)])$EI)
+
 # Filter ----
 # exclude Alaska and Hawaii
 dt <- dt[!(FIPS.Code.State %in% c("02", "15"))]
 
 v_cols <- c("FIPS", "Date", "FY", "Name", "PCT001001", "rev_cp",
     "rev_loc", "rev_tot", "Units1", "Units2", "Units3-4", "Units5+",
-    "ZHVI", "n_units", "Area", "cash_proffer")
+    "ZHVI", "n_units", "Area", "EI")
 dt <- dt[, ..v_cols]
 
 # drop 24 duplicate entries

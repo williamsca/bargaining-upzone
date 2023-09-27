@@ -17,6 +17,31 @@ dt <- readRDS("derived/sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 
+# Koontz v. St. Johns River Water Management District (2013)
+# Case decided on June 25, 2013
+dt_koontz <- dt[!is.na(EI)]
+dt_koontz[, Post := fifelse(Date >= ymd("2013-06-01"), 1, 0)]
+
+nrow(dt_koontz[Units1 == 0]) / nrow(dt_koontz)
+
+RHS_ES <- paste0(
+  " ~ -1 + i(Date, EI, ref = \"2013-06-01\")",
+  # " + State:as.numeric(Date)",
+  " | Date + FIPS"
+)
+fmla.es <- as.formula(paste0("Units1", RHS_ES))
+
+# * Monthly ----
+# OLS
+feols.es <- feols(fmla.es,
+  cluster = "as.factor(FIPS)", data = dt_koontz[FY %between% c(2009, 2019)]
+)
+iplot(feols.es,
+  lab.fit = "simple",
+  value.lab = "", main = "Effect on single-family housing permits"
+)
+
+
 # Exclude Fairfax, Loudoun for partial exemption
 dt <- dt[!(FIPS %in% c("51059", "51107"))]
 

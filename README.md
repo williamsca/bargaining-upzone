@@ -14,6 +14,11 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
+- Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask about:
+  - Data on proffers
+  - *Koontz* decision
+  - 2019 Proffer Update
+  - Other noteworthy proffer reforms
 - Incorporate WRLURI data to 'Databuild.R'
 - Perform DiD analysis of Koontz decision impact on housing permits
 - Regression analysis of proffer rates against size, density of development
@@ -56,6 +61,17 @@ This paper may be a useful reference for outcomes:
 
 
 ## Meetings
+Labor/Public Workshop (9/27/2023)
+- Lee: impact of price ceiling depends on who controls the municipality. If landowners, and not households, then a ceiling could actually induce additional quantity for the same reason that a minimum wage could increase employment when employers have monopsony power
+- Kerem: need to distinguish between incumebt residents and landlords
+- Lee: Did we lose an interesting choice from the budget set?
+- Kerem: how does municipality problem depend on downstream housing supply elasticity?
+
+Leora Group (9/26/2023)
+- Pitched idea of program analysis of *Koontz* decision.
+- Worried about treatment heterogeneity across states (e.g., VA completely unaffected). Prefer to limit to a single state to avoid cross-state policy variation. "Keep looking for the right state"
+- Need to clarify what is policy treatment. Talk to someone who would know: county planner, lawyer, etc.
+
 Writing Class (9/18/2023)
 - Use MD counties as control group (perhaps just switch back to looking at building permits and exclude Fairfax, Loudoun for being partially exempt)
 - See Topalova (2010) for diff-in-diff with continuous treatment

@@ -66,7 +66,7 @@ SFD|Transportation|16,780|
 
 &nbsp;
 
-**New**: empirical evidence on the elasticity of residential land supply
+**New**: evidence on the elasticity of key input to housing supply: the right to build
 
 
 
