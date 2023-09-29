@@ -29,10 +29,10 @@ RHS_ES <- paste0(
   # " + State:as.numeric(Date)",
   " | Date + FIPS"
 )
-fmla.es <- as.formula(paste0("Units1", RHS_ES))
+fmla.es <- as.formula(paste0("log(Units1+1)", RHS_ES))
 
-# * Monthly ----
-# OLS
+# Event Studies ----
+# Housing Permits
 feols.es <- feols(fmla.es,
   cluster = "as.factor(FIPS)", data = dt_koontz[FY %between% c(2009, 2019)]
 )
@@ -41,6 +41,15 @@ iplot(feols.es,
   value.lab = "", main = "Effect on single-family housing permits"
 )
 
+# Prices
+fmla_koontz_zhvi <- as.formula(paste0("log(ZHVI)", RHS_ES))
+feols_koontz_zhvi <- feols(fmla_koontz_zhvi,
+  cluster = "as.factor(FIPS)", data = dt_koontz[FY %between% c(2009, 2019)]
+)
+iplot(feols_koontz_zhvi,
+  lab.fit = "simple",
+  value.lab = "", main = "Effect on single-family housing permits"
+)
 
 # Exclude Fairfax, Loudoun for partial exemption
 dt <- dt[!(FIPS %in% c("51059", "51107"))]

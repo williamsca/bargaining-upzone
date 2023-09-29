@@ -16,6 +16,9 @@ arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
+# Koontz DiD ----
+
+
 # Proffer Regressions ----
 # Proffer against density
 # TODO: in-kind value as % of total proffer value histogram
