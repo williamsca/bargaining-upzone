@@ -17,47 +17,14 @@ dt <- readRDS("derived/sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 
-# Koontz v. St. Johns River Water Management District (2013)
-# Case decided on June 25, 2013
-dt_koontz <- dt[!is.na(EI)]
-dt_koontz[, Post := fifelse(Date >= ymd("2013-06-01"), 1, 0)]
-
-nrow(dt_koontz[Units1 == 0]) / nrow(dt_koontz)
-
-RHS_ES <- paste0(
-  " ~ -1 + i(Date, EI, ref = \"2013-06-01\")",
-  # " + State:as.numeric(Date)",
-  " | Date + FIPS"
-)
-fmla.es <- as.formula(paste0("log(Units1+1)", RHS_ES))
-
-# Event Studies ----
-# Housing Permits
-feols.es <- feols(fmla.es,
-  cluster = "as.factor(FIPS)", data = dt_koontz[FY %between% c(2009, 2019)]
-)
-iplot(feols.es,
-  lab.fit = "simple",
-  value.lab = "", main = "Effect on single-family housing permits"
-)
-
-# Prices
-fmla_koontz_zhvi <- as.formula(paste0("log(ZHVI)", RHS_ES))
-feols_koontz_zhvi <- feols(fmla_koontz_zhvi,
-  cluster = "as.factor(FIPS)", data = dt_koontz[FY %between% c(2009, 2019)]
-)
-iplot(feols_koontz_zhvi,
-  lab.fit = "simple",
-  value.lab = "", main = "Effect on single-family housing permits"
-)
-
 # Exclude Fairfax, Loudoun for partial exemption
-dt <- dt[!(FIPS %in% c("51059", "51107"))]
+# dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
 
 INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
+INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.25, na.rm = TRUE)
 
 dt[FY == 2016, everTreated := fifelse(
   cp_share_local > INTENSITY_THRESHOLD, 1, 0
@@ -65,6 +32,8 @@ dt[FY == 2016, everTreated := fifelse(
 
 dt[is.na(everTreated), everTreated := 0]
 dt[, everTreated := max(everTreated), by = FIPS]
+
+table(dt[everTreated == 1, Name])
 
 dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
 dt[, State := substr(FIPS, 1, 2)]
@@ -81,36 +50,14 @@ by = .(FIPS, PCT001001, State,
   everTreated, Post, FY
 )
 ]
+dt_qtr[, Units1_cum := cumsum(Units1), by = .(FIPS)]
 
 # TRUE --> data are unique on FIPS and quarter
 nrow(dt_qtr) == uniqueN(dt_qtr[, .(FIPS, Date)])
 
-# DiD ----
-RHS_DID <- " ~ -1 + Post*everTreated | as.factor(Date) + as.factor(FIPS)"
-fmla.dd <- as.formula(paste0("Units1", RHS_DID))
-
-# * Monthly ----
-# ** Binary Treatment ----
-fepois.did <- feglm(fmla.dd,
-  cluster = "as.factor(FIPS)",
-  data = dt[FY %between% c(2010, 2019)],
-  family = "quasipoisson"
-)
-etable(fepois.did)
-
-# Quarterly ----
-# (Nearly identical to monthly results)
-# ** Binary Treatment ----
-fepois.did <- feglm(fmla.dd,
-  cluster = "as.factor(FIPS)",
-  data = dt_qtr[FY %between% c(2010, 2019)],
-  family = "quasipoisson"
-)
-etable(fepois.did)
-
 # Event Study ----
 RHS_ES <- paste0(
-  " ~ -1 + i(Date, everTreated, ref = \"2016-04-01\")",
+  " ~ -1 + i(Date, everTreated, ref = I(ymd(\"2016-04-01\")))",
   " + State:as.numeric(Date)",
   " | Date + FIPS"
 )
@@ -120,7 +67,7 @@ fmla.es <- as.formula(paste0("Units1", RHS_ES))
 # Poisson QMLE
 fepois.es <- feglm(fmla.es,
   cluster = "as.factor(FIPS)",
-  data = dt[FY %between% c(2010, 2019)], family = "quasipoisson"
+  data = dt[FY %between% c(2010, 2019)], family = "quasipoisson" #, weights = ~PCT001001
 )
 etable(fepois.es)
 iplot(fepois.es,
@@ -141,7 +88,7 @@ iplot(feols.es,
 # Quarterly ----
 # Poisson QMLE
 fepois.es <- feglm(as.formula(paste0("Units1", RHS_ES)),
-  cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2012, 2019)],
+  cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2010, 2019)],
   family = "quasipoisson", weights = ~PCT001001
 )
 etable(fepois.es)
@@ -149,7 +96,7 @@ iplot(fepois.es, lab.fit = "simple")
 
 # OLS
 feols.es <- feols(as.formula(paste0("log(Units1 + 1)", RHS_ES)),
-  cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2011, 2019)],
+  cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2010, 2019)],
   weights = ~PCT001001
 )
 etable(feols.es)
@@ -173,7 +120,7 @@ dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
 dt.synthdid <- dt.synthdid[
-  Date %between% as.Date(c("2009-01-01", "2019-06-01")),
+  Date %between% as.Date(c("2012-01-01", "2019-06-01")),
   .(
     FIPS = as.factor(FIPS), Date, Units1,
     arcsinhUnits1 = arcsinh(Units1), logZHVI = log(ZHVI),

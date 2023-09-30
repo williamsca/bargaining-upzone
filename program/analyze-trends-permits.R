@@ -1,12 +1,12 @@
 rm(list = ls())
 
-pacman::p_load(
-    data.table, stargazer, ggplot2,
-    fixest, devtools, lubridate, here
-)
+library(data.table)
+library(here)
+library(lubridate)
+library(ggplot)
 
 # Import ----
-dt <- readRDS("derived/Sample.Rds")
+dt <- readRDS("derived/sample.Rds")
 dt_fairfax <- readRDS("derived/FairfaxCo/Building Permits (2012-2019).Rds")
 
 # lower bound on multi-family units

@@ -16,18 +16,17 @@ arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
-# Koontz DiD ----
-
-
 # Proffer Regressions ----
 # Proffer against density
 # TODO: in-kind value as % of total proffer value histogram
-dt_prof <- dt_app[!is.na(res_cash_proffer) & isApproved == TRUE & n_units > 5]
+dt_prof <- dt_app[!is.na(res_cash_proffer) &
+    !is.na(density) & isApproved == TRUE & n_units > 5]
 
-
-ggplot(dt_prof, aes(x = log(density), y = res_cash_proffer)) +
+ggplot(dt_prof, aes(x = log(density),
+                    y = res_cash_proffer)) +
     geom_point() +
-    geom_smooth(method = 'lm')
+    scale_x_continuous() +
+    geom_smooth(method = "lm", formula = y ~ x + x^2)
 
 
 # Treatment indicators ----
