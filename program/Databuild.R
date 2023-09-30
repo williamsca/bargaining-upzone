@@ -75,7 +75,8 @@ table(unique(dt[, .(FIPS, EI)])$EI)
 # exclude Alaska and Hawaii
 dt <- dt[!(FIPS.Code.State %in% c("02", "15"))]
 
-v_cols <- c("FIPS", "Date", "FY", "Name", "PCT001001", "rev_cp",
+v_cols <- c("FIPS", "Date", "FY", "Name", "FIPS.Code.State",
+    "PCT001001", "rev_cp",
     "rev_loc", "rev_tot", "Units1", "Units2", "Units3-4", "Units5+",
     "ZHVI", "n_units", "Area", "EI")
 dt <- dt[, ..v_cols]
