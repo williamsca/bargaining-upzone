@@ -3,12 +3,14 @@
 rm(list = ls())
 
 library(data.table)
-library(stargazer)
 library(fixest)
 library(ggplot2)
 library(devtools)
 library(lubridate)
 library(here)
+
+# devtools::install_github("synth-inference/synthdid")
+library(synthdid)
 
 dt <- readRDS("derived/sample.Rds")
 dt <- dt[!is.na(EI)]
@@ -64,11 +66,11 @@ iplot(feols_zhvi,
 # (can be done by jurisdiction, no need to aggregate to county)
 
 # Synthetic DiD ----
-dt.synthdid <- dt_qtr[Date <= as.Date("2013-06-01"), isTreated := 0]
-dt.synthdid[is.na(isTreated), isTreated := EI]
+dt_synth <- dt_qtr[Date <= as.Date("2013-06-01"), isTreated := 0]
+dt_synth[is.na(isTreated), isTreated := EI]
 
-dt.synthdid <- dt.synthdid[
-    Date %between% as.Date(c("2010-01-01", "2019-06-01")),
+dt_synth <- dt_synth[
+    Date %between% as.Date(c("2009-01-01", "2020-01-01")),
     .(
         FIPS = as.factor(FIPS), Date, Units1,
         logZHVI = log(ZHVI),
@@ -86,9 +88,9 @@ RunSynthDid <- function(dt, LHS) {
 }
 
 # * Quantities ----
-dt.synthdid[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
+dt_synth[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
+tau.hat <- RunSynthDid(dt_synth[nObs == max(nObs)], "logUnits1")
 
 
 plot(tau.hat, se.method = "jackknife", overlay = 1)
@@ -100,10 +102,9 @@ sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
 sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64 * se, tau.hat + 1.64 * se)
 
 # * Prices ----
-# VA HPI falls after reform?
-dt.synthdid[, nObs := sum(!is.na(logZHVI)), by = .(FIPS)]
+dt_synth[, nObs := sum(!is.na(logZHVI)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logZHVI")
+tau.hat <- RunSynthDid(dt_synth[nObs == max(nObs)], "logZHVI")
 plot(tau.hat, se.method = "jackknife", overlay = 1)
 
 se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
