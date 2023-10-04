@@ -1,6 +1,14 @@
 # bargaining-upzone
 How does bargaining between local governments and residential developers affect the housing market?
 
+# Memo
+Synthetic DiD regressions suggest a decline in permits *and* prices that begin about a year after PRA16. This pattern is consistent with a negative demand shock for single-family housing and not any story related to proffers.
+
+I find an imprecise increase in the number of 2+ unit dwellings. Is it possible that the reform had differential effects on single and multi-family units? Yes:
+- For SFD, proffers are transfer to existing homeowners to compensate for lower housing prices
+- For MFD, PRA16 is binding price ceiling that forces county to expand output? Effect is economically large but imprecise.
+
+
 # Proffer Reform Act of 2016
 Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
 
@@ -19,8 +27,7 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
   - *Koontz* decision
   - 2019 Proffer Update
   - Other noteworthy proffer reforms
-- Incorporate WRLURI data to 'Databuild.R'
-- Perform DiD analysis of Koontz decision impact on housing permits
+  - Development characteristics that affect proffers, approvals
 - Regression analysis of proffer rates against size, density of development
 - Review static models of neighborhood choice / housing demand
 - Literature review / policy context
@@ -37,7 +44,8 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Determine whether Loudoun rezonings are in exempt areas using GIS file
 - Power calculations
 - Compare building permits to units approved via rezoning
-
+- Incorporate WRLURI data to 'Databuild.R'
+- Perform DiD analysis of Koontz decision impact on housing permits
 
 ## Data:
 
@@ -47,15 +55,8 @@ See [Data Notes](notes/rezoning-data-notes.md) for details on how I collected th
 > Statewide zoning reforms may fail to increase housing supply if local governments can respond along unregulated margins. I study the policy response of Virginia counties to a 2016 statewide reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of housing units allowed through residential upzonings fell by [X]\%. In counties which were partially exempted from the reform, however, total activity remained constant as localities substituted upzoning from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should directly subsidize the number of newly-permitted housing units.
 
 
-# Model
-
-## Version 2
-Differentiated products Nash-Bertrand. Products are land use rights on a particular parcel. Characteristics include coordinates, adjacent uses, the zoning code, and the county itself (the "brand"). Estimate markups to assess locality market power.
 
 # Data
-GIS Data:
-- Parcel boundaries: https://vgin.vdem.virginia.gov/datasets/virginia-parcels/about
-
 This paper may be a useful reference for outcomes:
 - https://ishanbhatt42.github.io/files/paper_adu.pdf
 

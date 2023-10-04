@@ -17,23 +17,26 @@ dt <- readRDS("derived/sample.Rds")
 
 arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 
-# Exclude Fairfax, Loudoun for partial exemption
-# dt <- dt[!(FIPS %in% c("51059", "51107"))]
-
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
 
 INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
-INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.25, na.rm = TRUE)
+INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.8, na.rm = TRUE)
 
 dt[FY == 2016, everTreated := fifelse(
   cp_share_local > INTENSITY_THRESHOLD, 1, 0
 )]
 
+table(dt[everTreated == 1, Name])
+
 dt[is.na(everTreated), everTreated := 0]
 dt[, everTreated := max(everTreated), by = FIPS]
 
-table(dt[everTreated == 1, Name])
+# Exclude Fairfax, Loudoun for partial exemption
+dt <- dt[!(FIPS %in% c("51059", "51107"))]
+
+# Exclude untreated VA counties to avoid spillovers
+dt <- dt[!(everTreated == 0 & FIPS.Code.State == "51")]
 
 dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
 dt[, State := substr(FIPS, 1, 2)]
@@ -46,19 +49,26 @@ dt_qtr <- dt[, .(
   ZHVI = mean(ZHVI), n_units = sum(n_units)
 ),
 by = .(FIPS, PCT001001, State,
-  Date = quarter(Date, type = "date_first"), rev_cp,
-  everTreated, Post, FY
-)
+  Date = floor_date(Date, unit = "quarter"), rev_cp,
+  everTreated, Post, FY)
 ]
-dt_qtr[, Units1_cum := cumsum(Units1), by = .(FIPS)]
+
+dt_hy <- dt[, .(
+  Units1 = sum(Units1), Units2p = sum(Units2p),
+  ZHVI = mean(ZHVI), n_units = sum(n_units)
+),
+by = .(FIPS, PCT001001, State,
+  Date = floor_date(Date, unit = "halfyear") + months(3), rev_cp,
+  everTreated, Post, FY)]
 
 # TRUE --> data are unique on FIPS and quarter
 nrow(dt_qtr) == uniqueN(dt_qtr[, .(FIPS, Date)])
+nrow(dt_hy) == uniqueN(dt_hy[, .(FIPS, Date)])
 
 # Event Study ----
 RHS_ES <- paste0(
   " ~ -1 + i(Date, everTreated, ref = I(ymd(\"2016-04-01\")))",
-  " + State:as.numeric(Date)",
+  # " + State:as.numeric(Date)",
   " | Date + FIPS"
 )
 fmla.es <- as.formula(paste0("Units1", RHS_ES))
@@ -116,11 +126,12 @@ devtools::install_github("synth-inference/synthdid")
 library(synthdid)
 
 # Define treatment indicator for synthdid
-dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
+# dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
+dt.synthdid <- dt_hy[Date <= as.Date("2016-06-01"), isTreated := 0]
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
 dt.synthdid <- dt.synthdid[
-  Date %between% as.Date(c("2012-01-01", "2019-06-01")),
+  Date %between% as.Date(c("2012-01-01", "2021-10-01")),
   .(
     FIPS = as.factor(FIPS), Date, Units1,
     arcsinhUnits1 = arcsinh(Units1), logZHVI = log(ZHVI),
@@ -136,9 +147,9 @@ RunSynthDid <- function(dt, LHS) {
 }
 
 # * Quantities ----
-dt.synthdid[, nObs := sum(!is.infinite(logUnits1)), by = .(FIPS)]
+dt.synthdid[, nObs := sum(!is.infinite(logUnits2p)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits2p")
 
 
 plot(tau.hat, se.method = "jackknife", overlay = 1)
@@ -173,3 +184,4 @@ plot(tau.hat, se.method = "jackknife", overlay = 1)
 se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
+
