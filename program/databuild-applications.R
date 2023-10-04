@@ -164,6 +164,8 @@ uniqueN(dt[, .(Case.Number, gis_object, Part)]) == nrow(dt)
 
 sum(unique(dt[, .(County, Population2022)]$Population2022)) / 8683619
 
+nrow(dt[n_units != n_sfd + n_sfa + n_mfd + n_unknown + n_age_restrict]) == 0
+
 count_missing <- function(x) {
     if (class(x) %in% c("units", "Date")) {
         x <- as.numeric(x)
@@ -216,7 +218,9 @@ dt_interval[, (v_intervals) := lapply(.SD, floor_date, "month"),
 
 dt_panel <- merge(dt_panel, dt_interval, by = c("County"), all.x = TRUE)
 
-dt_submit <- dt_res[, .(Area = sum(Area), n_units = sum(n_units)),
+dt_submit <- dt_res[, .(Area = sum(Area), n_units = sum(n_units),
+                        n_sfd = sum(n_sfd),
+                        n_other = sum(n_sfa + n_mfd + n_unknown)),
     by = .(FIPS, date = floor_date(submit_date, "month"))
 ]
 dt_submit <- merge(dt_panel, dt_submit,
@@ -230,7 +234,9 @@ dt_submit <- dt_submit[date >= first_submit & date <= last_submit]
 # TODO: impute 0s for missing 'n_units' and 'Area' when those values are
 # observed in any year for that county
 
-dt_final <- dt_res[, .(Area = sum(Area), n_units = sum(n_units)),
+dt_final <- dt_res[, .(Area = sum(Area), n_units = sum(n_units),
+                       n_sfd = sum(n_sfd),
+                       n_other = sum(n_sfa + n_mfd + n_unknown)),
     by = .(FIPS, date = floor_date(final_date, "month"))
 ]
 dt_final <- merge(dt_panel, dt_final,
@@ -246,8 +252,11 @@ dt_panel <- rbindlist(list(dt_submit, dt_final),
     use.names = TRUE
 )
 
+# TODO: fix this so that the panel has 0s and NAs as appropriate
 dt_panel[, has_units := any(!is.na(n_units)), by = FIPS]
 dt_panel[is.na(n_units) & has_units, n_units := 0]
+dt_panel[is.na(n_sfd) & has_units, n_sfd := 0]
+dt_panel[is.na(n_other) & has_units, n_other := 0]
 
 dt_panel[, has_area := any(!is.na(Area)), by = FIPS]
 dt_panel[is.na(Area) & has_area, Area := 0]

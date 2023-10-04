@@ -20,23 +20,29 @@ dt <- readRDS(here("derived", "county-rezonings-panel.Rds"))
 uniqueN(dt[, .(FIPS, date, type)]) == nrow(dt)
 
 dt_hy_units <- dt[has_units == TRUE & County != "Spotsylvania County",
-    .(n_units = sum(n_units)),
+    .(tot_units = sum(n_units), n_sfd = sum(n_sfd), n_other = sum(n_other)),
     by = .(date = floor_date(date, "halfyear") + months(3), type)]
-dt_hy_units[, n_units_pct := (n_units / sum(n_units)) * 100, by = type]
+dt_hy_units[, n_units_pct := (tot_units / sum(tot_units)) * 100, by = type]
+dt_hy_units <- melt(dt_hy_units, measure.vars = c("n_sfd", "n_other"),
+                    variable.name = "type_units", value.name = "n_units")
 
 # Plots ----
 unique(dt[has_units == TRUE & type == "final", County])
 unique(dt[has_units == TRUE & type == "submit", County])
 
 ggplot(dt_hy_units[type == "submit"],
-       aes(x = date, y = n_units)) +
+       aes(x = date, y = n_units, color = type_units)) +
     geom_rect(aes(xmin = ymd("2016/07/01"), xmax = ymd("2018/07/01"),
                   ymin = -Inf, ymax = Inf),
             fill = "lightgray", alpha = .2, color = "gray"
     ) +
     geom_hline(yintercept = 0, color = "gray") +
-    geom_line(color = v_palette[1], linetype = "dashed") +
-    geom_point(size = 3, color = v_palette[1]) +
+    geom_line(linetype = "dashed") + # color = v_palette[1]
+    geom_point(size = 3) + # color = v_palette[1]
+    scale_color_manual(values = v_palette,
+                       breaks = c("n_sfd", "n_other"),
+                       labels = c("Single-Family", "Other"),
+                       name = "") +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     labs(y = "Approved Units (#)", x = "Submission Date",
          caption = "Source: Frederick, Loudoun, and Prince William Counties",
@@ -49,7 +55,7 @@ ggsave(here("paper", "figures", "plot_rezonings_submit.png"),
 ggplot(
     dt_hy_units[type == "final" &
         date %between% c(ymd("2014/01/01", "2019/07/01"))],
-    aes(x = date, y = n_units)
+    aes(x = date, y = n_units, color = type_units)
 ) +
     geom_rect(
         aes(
@@ -59,8 +65,12 @@ ggplot(
         fill = "lightgray", alpha = .2, color = "gray"
     ) +
     geom_hline(yintercept = 0, color = "gray") +
-    geom_line(color = v_palette[1], linetype = "dashed") +
-    geom_point(size = 3, color = v_palette[1]) +
+    geom_line(linetype = "dashed") +
+    geom_point(size = 3) +
+    scale_color_manual(values = v_palette,
+                       breaks = c("n_sfd", "n_other"),
+                       labels = c("Single-Family", "Other"),
+                       name = "") +
     scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     scale_y_continuous(limits = c(0, 1200)) +
     labs(
