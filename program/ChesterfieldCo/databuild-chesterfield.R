@@ -58,7 +58,5 @@ setnames(
 # Download Zoning Case information here:
 # https://documents.chesterfield.gov/Weblink_BOS/Welcome.aspx
 
-
-
 # Save ----
 saveRDS(dt, here("derived", "ChesterfieldCo", "rezoning-applications.Rds"))
