@@ -10,9 +10,17 @@ I find an imprecise increase in the number of 2+ unit dwellings. Is it possible 
 
 
 # Proffer Reform Act of 2016
-Great background article: https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
+Great background article: 
+- https://www.williamsmullen.com/news/dissecting-proffer-reform-bill
+
+Details about the 2019 update:
+- https://www.fairfaxcounty.gov/boardofsupervisors/sites/boardofsupervisors/files/assets/meeting-materials/2019/jan18-legislative-handout-proffer-legislation-overview.pdf
+
+Note that after July 1, 2019, developers could choose whether their application was evaluated under the old or the new act. This change was anticipated by January 2019 and likely affected the number of applications submitted in the first half of 2019.
 
 Note: VA counties have special assessments for agriculture, horticultural, forest, and open space lands. If land is converted to a non-qualifying use through a rezoning, the owner is subject to roll-back taxes based on the difference between the land's fair market value and its value under the special assessment for a period of up to six years plus simple interest!
+
+
 
 # Goal
 Create a panel of all rezoning applications in Virginia counties. Each rezoning should, at minimum, include:

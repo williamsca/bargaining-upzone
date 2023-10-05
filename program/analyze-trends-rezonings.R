@@ -32,7 +32,7 @@ unique(dt[has_units == TRUE & type == "submit", County])
 
 ggplot(dt_hy_units[type == "submit"],
        aes(x = date, y = n_units, color = type_units)) +
-    geom_rect(aes(xmin = ymd("2016/07/01"), xmax = ymd("2018/07/01"),
+    geom_rect(aes(xmin = ymd("2016/07/01"), xmax = ymd("2019/07/01"),
                   ymin = -Inf, ymax = Inf),
             fill = "lightgray", alpha = .2, color = "gray"
     ) +
@@ -59,7 +59,7 @@ ggplot(
 ) +
     geom_rect(
         aes(
-            xmin = ymd("2016/07/01"), xmax = ymd("2018/07/01"),
+            xmin = ymd("2016/07/01"), xmax = ymd("2019/07/01"),
             ymin = -Inf, ymax = Inf
         ),
         fill = "lightgray", alpha = .2, color = "gray"

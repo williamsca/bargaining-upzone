@@ -78,7 +78,7 @@ dt <- dt[!(FIPS.Code.State %in% c("02", "15"))]
 v_cols <- c("FIPS", "Date", "FY", "Name", "FIPS.Code.State",
     "PCT001001", "rev_cp",
     "rev_loc", "rev_tot", "Units1", "Units2", "Units3-4", "Units5+",
-    "ZHVI", "n_units", "Area", "EI")
+    "ZHVI", "ZHVI_SFD", "n_units", "Area", "EI")
 dt <- dt[, ..v_cols]
 
 # drop 24 duplicate entries
@@ -90,4 +90,4 @@ dt <- dt[!is.na(PCT001001)]
 # Sanity Checks ----
 nrow(dt) == uniqueN(dt[, .(Date, FIPS)])
 
-saveRDS(dt, "derived/sample.Rds")
+saveRDS(dt, here("derived", "sample.Rds"))

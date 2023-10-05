@@ -46,7 +46,7 @@ dt[, Units2p := Units2 + `Units3-4` + `Units5+`]
 
 dt_qtr <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p),
-  ZHVI = mean(ZHVI), n_units = sum(n_units)
+  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
 ),
 by = .(FIPS, PCT001001, State,
   Date = floor_date(Date, unit = "quarter"), rev_cp,
@@ -55,7 +55,7 @@ by = .(FIPS, PCT001001, State,
 
 dt_hy <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p),
-  ZHVI = mean(ZHVI), n_units = sum(n_units)
+  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
 ),
 by = .(FIPS, PCT001001, State,
   Date = floor_date(Date, unit = "halfyear") + months(3), rev_cp,
@@ -127,14 +127,15 @@ library(synthdid)
 
 # Define treatment indicator for synthdid
 # dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
-dt.synthdid <- dt_hy[Date <= as.Date("2016-06-01"), isTreated := 0]
+dt.synthdid <- dt_hy[Date <= as.Date("2016-06-30"), isTreated := 0]
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
 dt.synthdid <- dt.synthdid[
-  Date %between% as.Date(c("2012-01-01", "2021-10-01")),
+  Date %between% as.Date(c("2010-01-01", "2019-07-01")),
   .(
     FIPS = as.factor(FIPS), Date, Units1,
     arcsinhUnits1 = arcsinh(Units1), logZHVI = log(ZHVI),
+    logZHVI_SFD = log(ZHVI_SFD),
     logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
     everTreated, isTreated = as.logical(isTreated)
   )
@@ -149,10 +150,12 @@ RunSynthDid <- function(dt, LHS) {
 # * Quantities ----
 dt.synthdid[, nObs := sum(!is.infinite(logUnits2p)), by = .(FIPS)]
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits2p")
-
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logUnits1")
+summary(tau.hat)
 
 plot(tau.hat, se.method = "jackknife", overlay = 1)
+synthdid_placebo_plot(tau.hat, overlay = 0)
+
 ggsave("paper/figures/synthdid_overlay.pdf", device = "pdf")
 
 plot(tau.hat, se.method = "jackknife")
@@ -164,24 +167,21 @@ sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
 sprintf("90%% CI (%1.2f, %1.2f)", tau.hat - 1.64 * se, tau.hat + 1.64 * se)
 
-
-tau_hat_inhs <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "arcsinhUnits1")
-plot(tau_hat_inhs, se.method = "jackknife", overlay = 0)
-
-se <- sqrt(vcov(tau_hat_inhs, method = "jackknife")) # this should be a bootstrap
-sprintf("Point estimate: %1.2f", tau_hat_inhs)
-sprintf("95%% CI (%1.2f, %1.2f)", tau_hat_inhs - 1.96 * se, tau_hat_inhs + 1.96 * se)
-sprintf("90%% CI (%1.2f, %1.2f)", tau_hat_inhs - 1.64 * se, tau_hat_inhs + 1.64 * se)
-
-
 # * Prices ----
-# VA HPI falls after reform?
+# HPI falls after reform?
 dt.synthdid[, nObs := sum(!is.na(logZHVI)), by = .(FIPS)]
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], "logZHVI")
+
 plot(tau.hat, se.method = "jackknife", overlay = 1)
+
+p + scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+p + scale_x_date()
 
 se <- sqrt(vcov(tau.hat, method = "jackknife")) # this should be a bootstrap
 sprintf("Point estimate: %1.2f", tau.hat)
 sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
 
+top.controls <- synthdid_controls(tau.hat)[1:10, , drop = FALSE]
