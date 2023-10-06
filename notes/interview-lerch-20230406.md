@@ -1,4 +1,6 @@
-﻿* How much do local governments care about being eligible to accept cash proffers? 
+﻿# Questions for Joe Lerch of VaCo
+
+* How much do local governments care about being eligible to accept cash proffers? 
    * It looks like most cash proffer revenue is collected in and around Arlington County rather than the places that are gaining or losing eligibility based on their growth rates. For instance, Lexington loses eligibility in 2020, but they weren't collecting any revenue from cash proffers before then anyway. 
    * Have counties or cities complained about this restriction?
 
