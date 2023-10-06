@@ -43,15 +43,9 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Status (approved, denied, withdrawn, etc.)
 
 # TODO
-- Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask about:
-  - Data on proffers
-  - *Koontz* decision
-  - 2019 Proffer Update
-  - Other noteworthy proffer reforms
-  - Development characteristics that affect proffers, approvals
-  - Shift to multifamily construction
-  - Did reform have long-run effect on proffer rates?
-- Impact on ratio of single-family to multi-family housing permits
+- Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask [questions](notes/interview-vanderpool-20231006.md)
+- Import repeat-sale HPI to evaluate price effect while holding composition constant
+
 - Regression analysis of proffer rates against size, density of development
 - Review static models of neighborhood choice / housing demand
 - Literature review / policy context
@@ -61,6 +55,7 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 
 # Done
+- Impact on ratio of single-family to multi-family housing permits
 - Update units time series: show labels for 2017, 2019 and aggregate counties
 - Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
 - Add Fairfax to combined application file
