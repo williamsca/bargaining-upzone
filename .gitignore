@@ -16,6 +16,7 @@ data/housing-prices/contat-larson-hpi/
 
 # Output files
 *.pdf
+*.png
 
 # I expect these data change often
 derived/county-rezonings-panel.Rds

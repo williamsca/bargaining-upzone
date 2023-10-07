@@ -20,8 +20,8 @@ dt <- readRDS("derived/sample.Rds")
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
 
-# INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
-INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.8, na.rm = TRUE)
+INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
+# INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.8, na.rm = TRUE)
 
 dt[FY == 2016, everTreated := fifelse(
   cp_share_local > INTENSITY_THRESHOLD, 1, 0
@@ -36,7 +36,9 @@ dt[, everTreated := max(everTreated), by = FIPS]
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
 # Exclude untreated VA counties to avoid spillovers
-dt <- dt[!(everTreated == 0 & FIPS.Code.State == "51")]
+dt[, notTreatedVA := (max(cp_share_local, na.rm = TRUE) == 0 &
+                      FIPS.Code.State == "51")]
+table(dt[notTreatedVA == TRUE, Name])
 
 dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
 dt[, State := substr(FIPS, 1, 2)]
@@ -59,14 +61,15 @@ dt_hy <- dt[, .(
 ),
 by = .(FIPS, PCT001001, State,
   Date = floor_date(Date, unit = "halfyear") + months(3), rev_cp,
-  everTreated, Post, FY)]
+  everTreated, Post, FY, notTreatedVA, Name)]
 dt_hy[, FY := FY - (month(Date) - 10) / 12]
 
 dt_fy <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
   ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
 ),
-  by = .(FIPS, PCT001001, State, rev_cp, everTreated, Post, FY)
+  by = .(FIPS, PCT001001, State, rev_cp, everTreated, Post, FY,
+         notTreatedVA, Name)
 ]
 
 # TRUE --> data are unique on FIPS and quarter
@@ -77,19 +80,19 @@ nrow(dt_hy) == uniqueN(dt_hy[, .(FIPS, Date)])
 
 # Define treatment indicator for synthdid
 # dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
-dt.synthdid <- copy(dt_fy)
+dt.synthdid <- copy(dt_hy)
 dt.synthdid[FY < 2017, isTreated := 0]
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
 dt.synthdid <- dt.synthdid[
-  FY %between% c(2010, 2020),
+  FY %between% c(2010, 2022),
   .(
     FIPS = as.factor(FIPS), Date, FY, Units1,
     logZHVI = log(ZHVI), logZHVI_SFD = log(ZHVI_SFD),
     logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
     logUnits = log(Units1 + Units2p + 1), logUnits5 = log(Units5 + 1),
-    logR = log((Units1 + 1) / (Units2p + 1)),
-    everTreated, isTreated = as.logical(isTreated)
+    logR = log((Units1 + 1) / (Units2p + 1)), notTreatedVA,
+    everTreated, isTreated = as.logical(isTreated), Name
   )
 ]
 
@@ -101,22 +104,48 @@ RunSynthDid <- function(dt, LHS, period = "FY") {
   return(synthdid_estimate(setup$Y, setup$N0, setup$T0))
 }
 
-# * Quantities ----
-outcome <- "logR"
-dt.synthdid[, nObs := sum(!is.infinite(get(outcome))), by = .(FIPS)]
+# * Prices ----
+outcome <- "logZHVI"
+dt.synthdid[, nObs := sum(!is.infinite(get(outcome)) &
+                          !is.na(get(outcome))), by = .(FIPS)]
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
 
-summary(tau.hat)
-
-plot(tau.hat, overlay = 0) +
+plot(tau.hat, overlay = 1) +
   scale_x_continuous(breaks = seq(
     floor(min(dt.synthdid$FY)),
     ceiling(max(dt.synthdid$FY)), 1
   )) +
-    geom_vline(xintercept = 2016, linetype = "dashed") +
+    geom_vline(xintercept = 2016.5, linetype = "dashed") +
     theme_light(base_size = 14) +
-    theme(legend.position = "bottom")
+    theme(legend.position = c(0.85, 0.18)) +
+    labs(y = "Log House Price Index",
+         title = "The Effect of the Proffer Reform Act on Housing Prices")
+ggsave(here("paper", "figures", "synthdid_zhvi.png"),
+       width = 8, height = 4)
+
+# Placebo
+dt.synthdid[FY >= 2017, isTreated := notTreatedVA]
+table(dt.synthdid[isTreated == TRUE, Name])
+
+tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
+
+plot(tau.hat, overlay = 1) +
+  scale_x_continuous(breaks = seq(
+    floor(min(dt.synthdid$FY)),
+    ceiling(max(dt.synthdid$FY)), 1
+  )) +
+  geom_vline(xintercept = 2016.5, linetype = "dashed") +
+  theme_light(base_size = 14) +
+  theme(legend.position = c(0.85, 0.18)) +
+  labs(
+    y = "Log House Price Index",
+    title = "The Effect of the Proffer Reform Act on Housing Prices"
+  )
+ggsave(here("paper", "figures", "synthdid_zhvi.png"),
+  width = 8, height = 4
+)
+
 
 synthdid_placebo_plot(tau.hat, overlay = 0)
 
