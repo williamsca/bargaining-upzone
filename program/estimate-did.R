@@ -37,7 +37,8 @@ dt[, everTreated := max(everTreated), by = FIPS]
 
 # Exclude untreated VA counties to avoid spillovers
 dt[, notTreatedVA := (max(cp_share_local, na.rm = TRUE) == 0 &
-                      FIPS.Code.State == "51")]
+                      FIPS.Code.State == "51"), by = FIPS]
+
 table(dt[notTreatedVA == TRUE, Name])
 
 dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
