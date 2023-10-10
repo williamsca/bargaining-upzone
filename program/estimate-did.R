@@ -62,7 +62,7 @@ dt_hy <- dt[, .(
 ),
 by = .(FIPS, PCT001001, State,
   Date = floor_date(Date, unit = "halfyear") + months(3), rev_cp,
-  everTreated, Post, FY, notTreatedVA, Name)]
+  everTreated, Post, FY, notTreatedVA)]
 dt_hy[, FY := FY - (month(Date) - 10) / 12]
 
 dt_fy <- dt[, .(
@@ -70,18 +70,32 @@ dt_fy <- dt[, .(
   ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
 ),
   by = .(FIPS, PCT001001, State, rev_cp, everTreated, Post, FY,
-         notTreatedVA, Name)
+         notTreatedVA)
+]
+
+# Calendar year aggregation is messy (reform in effect on July 1) but
+# necessary to use Bogin et. al (2019) HPI
+# Note: calendar year is called 'FY' so code will run with minimal changes
+dt_y <- dt[, .(
+  Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
+  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units),
+  Post = min(Post), mean(rev_cp)
+),
+  by = .(FIPS, PCT001001, State, FY = year(Date), everTreated,
+         notTreatedVA)
 ]
 
 # TRUE --> data are unique on FIPS and quarter
 nrow(dt_qtr) == uniqueN(dt_qtr[, .(FIPS, Date)])
 nrow(dt_hy) == uniqueN(dt_hy[, .(FIPS, Date)])
+nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
+nrow(dt_y) == uniqueN(dt_y[, .(FIPS, Year)])
 
 # Synthetic Diff-in-Diff (Arkhangelsky et al (2019) ----
 
 # Define treatment indicator for synthdid
 # dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
-dt.synthdid <- copy(dt_hy)
+dt.synthdid <- copy(dt_y)
 dt.synthdid[FY < 2017, isTreated := 0]
 dt.synthdid[is.na(isTreated), isTreated := everTreated]
 
@@ -93,7 +107,7 @@ dt.synthdid <- dt.synthdid[
     logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
     logUnits = log(Units1 + Units2p + 1), logUnits5 = log(Units5 + 1),
     logR = log((Units1 + 1) / (Units2p + 1)), notTreatedVA,
-    everTreated, isTreated = as.logical(isTreated), Name
+    everTreated, isTreated = as.logical(isTreated)
   )
 ]
 

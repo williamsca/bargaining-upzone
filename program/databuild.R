@@ -15,7 +15,7 @@ dt_bp <- readRDS(
     "derived/County Residential Building Permits by Month (2000-2021).Rds"
 )
 dt_hpi <- readRDS("derived/hpi-zillow.Rds")
-dt_hpi_rs <- readRDS("derived/hpi-boginetal.Rds")
+dt_hpi_rs <- readRDS("derived/hpi-bogin-etal.Rds")
 dt_rev <- readRDS("derived/county-revenues-2004-2022.Rds")
 dt_pop <- readRDS("derived/county-populations-2010.Rds")
 dt_rezon <- readRDS("derived/county-rezonings-panel.Rds")
@@ -59,7 +59,7 @@ dt[, Date := make_date(year = Year4, month = Month)]
 dt[, FIPS := paste0(FIPS.Code.State, FIPS.Code.County)]
 
 dt <- merge(dt, dt_hpi, by = c("Date", "FIPS"), all.x = TRUE)
-dt <- merge(dt, dt_hpi_rs, by = c("Year", "FIPS"), all.x = TRUE)
+dt <- merge(dt, dt_hpi_rs, by = c("Year4", "FIPS"), all.x = TRUE)
 
 dt <- merge(dt, dt_pop, by = c("FIPS"), all.x = TRUE)
 
@@ -80,7 +80,7 @@ dt <- dt[!(FIPS.Code.State %in% c("02", "15"))]
 v_cols <- c("FIPS", "Date", "FY", "Name", "FIPS.Code.State",
     "PCT001001", "rev_cp",
     "rev_loc", "rev_tot", "Units1", "Units2", "Units3-4", "Units5+",
-    "ZHVI", "ZHVI_SFD", "n_units", "Area", "EI")
+    "ZHVI", "ZHVI_SFD", "HPI", "n_units", "Area", "EI")
 dt <- dt[, ..v_cols]
 
 # drop 24 duplicate entries
