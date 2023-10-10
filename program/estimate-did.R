@@ -79,10 +79,10 @@ dt_fy <- dt[, .(
 dt_y <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
   ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units),
-  Post = min(Post), mean(rev_cp)
+  Post = min(Post), rev_cp = mean(rev_cp)
 ),
   by = .(FIPS, PCT001001, State, FY = year(Date), everTreated,
-         notTreatedVA, HPI)
+         notTreatedVA, HPI, Date = floor_date(Date, "year"))
 ]
 
 # TRUE --> data are unique on FIPS and quarter
@@ -125,14 +125,18 @@ outcome <- "logHPI"
 dt.synthdid[, nObs := sum(!is.infinite(get(outcome)) &
                           !is.na(get(outcome))), by = .(FIPS)]
 
+uniqueN(dt.synthdid[nObs == max(nObs), FIPS])
+uniqueN(dt.synthdid$FIPS)
+table(dt.synthdid$isTreated)
+
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
 
-plot(tau.hat, overlay = 1) +
+plot(tau.hat, overlay = 0) +
   scale_x_continuous(breaks = seq(
     floor(min(dt.synthdid$FY)),
     ceiling(max(dt.synthdid$FY)), 1
   )) +
-    geom_vline(xintercept = 2016.5, linetype = "dashed") +
+    geom_vline(xintercept = 2015.5, linetype = "dashed") +
     theme_light(base_size = 14) +
     theme(legend.position = c(0.85, 0.18)) +
     labs(y = "Log House Price Index",
@@ -142,11 +146,11 @@ ggsave(here("paper", "figures", "synthdid_zhvi.png"),
 
 # Placebo
 dt.synthdid[FY >= 2017, isTreated := notTreatedVA]
-table(dt.synthdid[isTreated == TRUE, Name])
+table(dt.synthdid[isTreated == TRUE, FIPS])
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
 
-plot(tau.hat, overlay = 1) +
+plot(tau.hat, overlay = 0) +
   scale_x_continuous(breaks = seq(
     floor(min(dt.synthdid$FY)),
     ceiling(max(dt.synthdid$FY)), 1
@@ -195,8 +199,8 @@ exp(mean(dt.synthdid[isTreated == 1 & FY == 2017, logZHVI],
 
 
 
-top.controls <- synthdid_controls(tau.hat)[1:10, , drop = FALSE]
-
+top.controls <- synthdid_controls(tau.hat)[1:50, , drop = FALSE]
+top.controls
 
 # Event Study ----
 RHS_ES <- paste0(
@@ -230,7 +234,7 @@ iplot(feols.es,
 
 # Quarterly ----
 # Poisson QMLE
-fepois.es <- feglm(as.formula(paste0("Units1", RHS_ES)),
+fepois.es <- feglm(as.formula(paste0("ZHVI", RHS_ES)),
   cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2010, 2019)],
   family = "quasipoisson", weights = ~PCT001001
 )
@@ -238,7 +242,7 @@ etable(fepois.es)
 iplot(fepois.es, lab.fit = "simple")
 
 # OLS
-feols.es <- feols(as.formula(paste0("log(Units1 + 1)", RHS_ES)),
+feols.es <- feols(as.formula(paste0("log(ZHVI)", RHS_ES)),
   cluster = "as.factor(FIPS)", data = dt_qtr[FY %between% c(2010, 2019)],
   weights = ~PCT001001
 )
