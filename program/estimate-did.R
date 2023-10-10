@@ -82,14 +82,14 @@ dt_y <- dt[, .(
   Post = min(Post), mean(rev_cp)
 ),
   by = .(FIPS, PCT001001, State, FY = year(Date), everTreated,
-         notTreatedVA)
+         notTreatedVA, HPI)
 ]
 
 # TRUE --> data are unique on FIPS and quarter
 nrow(dt_qtr) == uniqueN(dt_qtr[, .(FIPS, Date)])
 nrow(dt_hy) == uniqueN(dt_hy[, .(FIPS, Date)])
 nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
-nrow(dt_y) == uniqueN(dt_y[, .(FIPS, Year)])
+nrow(dt_y) == uniqueN(dt_y[, .(FIPS, FY)])
 
 # Synthetic Diff-in-Diff (Arkhangelsky et al (2019) ----
 
@@ -104,6 +104,7 @@ dt.synthdid <- dt.synthdid[
   .(
     FIPS = as.factor(FIPS), Date, FY, Units1,
     logZHVI = log(ZHVI), logZHVI_SFD = log(ZHVI_SFD),
+    logHPI = log(HPI),
     logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
     logUnits = log(Units1 + Units2p + 1), logUnits5 = log(Units5 + 1),
     logR = log((Units1 + 1) / (Units2p + 1)), notTreatedVA,
@@ -120,7 +121,7 @@ RunSynthDid <- function(dt, LHS, period = "FY") {
 }
 
 # * Prices ----
-outcome <- "logZHVI"
+outcome <- "logHPI"
 dt.synthdid[, nObs := sum(!is.infinite(get(outcome)) &
                           !is.na(get(outcome))), by = .(FIPS)]
 

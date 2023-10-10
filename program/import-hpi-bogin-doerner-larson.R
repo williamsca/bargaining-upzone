@@ -16,6 +16,7 @@ dt <- as.data.table(read_xlsx(here("data",
     "HPI_AT_BDL_county.xlsx"), skip = 6))
 
 dt[, Year := as.numeric(Year)]
+dt[, HPI := as.numeric(Year)]
 
 # Deflate ----
 dt_cpi <- as.data.table(read_xlsx(
