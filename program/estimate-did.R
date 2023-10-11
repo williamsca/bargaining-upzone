@@ -23,23 +23,30 @@ dt[, cp_share_local := rev_cp / rev_loc]
 INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
 # INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.8, na.rm = TRUE)
 
-dt[FY == 2016, everTreated := fifelse(
+dt[FY == 2016, high_proffer := fifelse(
   cp_share_local > INTENSITY_THRESHOLD, 1, 0
 )]
+dt[FY == 2016, low_proffer := fifelse(
+  cp_share_local <= INTENSITY_THRESHOLD & cp_share_local > 0, 1, 0
+)]
 
-table(dt[everTreated == 1, Name])
+dt[is.na(high_proffer), high_proffer := 0]
+dt[is.na(low_proffer), low_proffer := 0]
+dt[, high_proffer := max(high_proffer), by = FIPS]
+dt[, low_proffer := max(low_proffer), by = FIPS]
 
-dt[is.na(everTreated), everTreated := 0]
-dt[, everTreated := max(everTreated), by = FIPS]
+dt[, no_proffer := (max(cp_share_local, na.rm = TRUE) == 0 &
+  FIPS.Code.State == "51"), by = FIPS]
+dt[is.na(no_proffer), no_proffer := 0]
+
+table(dt[high_proffer == 1, Name])
+table(dt[low_proffer == 1, Name])
+table(dt[no_proffer == 1, Name])
 
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
-# Exclude untreated VA counties to avoid spillovers
-dt[, notTreatedVA := (max(cp_share_local, na.rm = TRUE) == 0 &
-                      FIPS.Code.State == "51"), by = FIPS]
-
-table(dt[notTreatedVA == TRUE, Name])
+table(dt[no_proffer == TRUE, Name])
 
 dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
 dt[, State := substr(FIPS, 1, 2)]
@@ -51,26 +58,27 @@ dt_qtr <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
   ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
 ),
-by = .(FIPS, PCT001001, State,
+by = .(FIPS, PCT001001, State, HPI,
   Date = floor_date(Date, unit = "quarter"), rev_cp,
-  everTreated, Post, FY)
+  high_proffer, low_proffer, Post, FY)
 ]
 
 dt_hy <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
   ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
 ),
-by = .(FIPS, PCT001001, State,
+by = .(FIPS, PCT001001, State, HPI,
   Date = floor_date(Date, unit = "halfyear") + months(3), rev_cp,
-  everTreated, Post, FY, notTreatedVA)]
+  high_proffer, low_proffer, Post, FY, no_proffer)]
 dt_hy[, FY := FY - (month(Date) - 10) / 12]
 
 dt_fy <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
-  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
+  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units),
+  HPI = mean(HPI)
 ),
-  by = .(FIPS, PCT001001, State, rev_cp, everTreated, Post, FY,
-         notTreatedVA)
+  by = .(FIPS, PCT001001, State, rev_cp, high_proffer, Post, FY,
+         no_proffer, low_proffer)
 ]
 
 # Calendar year aggregation is messy (reform in effect on July 1) but
@@ -81,8 +89,8 @@ dt_y <- dt[, .(
   ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units),
   Post = min(Post), rev_cp = mean(rev_cp)
 ),
-  by = .(FIPS, PCT001001, State, FY = year(Date), everTreated,
-         notTreatedVA, HPI, Date = floor_date(Date, "year"))
+  by = .(FIPS, PCT001001, State, FY = year(Date), high_proffer,
+         no_proffer, low_proffer, HPI, Date = floor_date(Date, "year"))
 ]
 
 # TRUE --> data are unique on FIPS and quarter
@@ -95,9 +103,9 @@ nrow(dt_y) == uniqueN(dt_y[, .(FIPS, FY)])
 
 # Define treatment indicator for synthdid
 # dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
-dt.synthdid <- copy(dt_y)
+dt.synthdid <- copy(dt_hy)
 dt.synthdid[FY < 2017, isTreated := 0]
-dt.synthdid[is.na(isTreated), isTreated := everTreated]
+dt.synthdid[is.na(isTreated), isTreated := no_proffer]
 
 dt.synthdid <- dt.synthdid[
   FY %between% c(2010, 2022),
@@ -107,8 +115,8 @@ dt.synthdid <- dt.synthdid[
     logHPI = log(HPI),
     logUnits1 = log(Units1 + 1), logUnits2p = log(Units2p + 1),
     logUnits = log(Units1 + Units2p + 1), logUnits5 = log(Units5 + 1),
-    logR = log((Units1 + 1) / (Units2p + 1)), notTreatedVA,
-    everTreated, isTreated = as.logical(isTreated)
+    logR = log((Units1 + 1) / (Units2p + 1)), no_proffer,
+    high_proffer, isTreated = as.logical(isTreated)
   )
 ]
 
@@ -121,7 +129,7 @@ RunSynthDid <- function(dt, LHS, period = "FY") {
 }
 
 # * Prices ----
-outcome <- "logHPI"
+outcome <- "logZHVI"
 dt.synthdid[, nObs := sum(!is.infinite(get(outcome)) &
                           !is.na(get(outcome))), by = .(FIPS)]
 
@@ -131,21 +139,27 @@ table(dt.synthdid$isTreated)
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
 
-plot(tau.hat, overlay = 0) +
+se <- sqrt(vcov(tau.hat, method = "jackknife"))
+sprintf("Point estimate: %1.2f", tau.hat)
+sprintf("95%% CI (%1.2f, %1.2f)", tau.hat - 1.96 * se, tau.hat + 1.96 * se)
+
+plot(tau.hat, overlay = 1) +
   scale_x_continuous(breaks = seq(
     floor(min(dt.synthdid$FY)),
     ceiling(max(dt.synthdid$FY)), 1
   )) +
-    geom_vline(xintercept = 2015.5, linetype = "dashed") +
+    geom_vline(xintercept = 2016.5, linetype = "dashed") +
     theme_light(base_size = 14) +
     theme(legend.position = c(0.85, 0.18)) +
     labs(y = "Log House Price Index",
-         title = "The Effect of the Proffer Reform Act on Housing Prices")
-ggsave(here("paper", "figures", "synthdid_zhvi.png"),
+         title = "Effects on Housing Prices: No Proffer") +
+    geom_text(aes(x = 2019, y = 12.4),
+              label = sprintf("Estimate: %1.2f\nSD: %1.2f", tau.hat, se))
+ggsave(here("paper", "figures", "synthdid_zhvi_no.png"),
        width = 8, height = 4)
 
 # Placebo
-dt.synthdid[FY >= 2017, isTreated := notTreatedVA]
+dt.synthdid[FY >= 2017, isTreated := no_proffer]
 table(dt.synthdid[isTreated == TRUE, FIPS])
 
 tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
@@ -160,7 +174,7 @@ plot(tau.hat, overlay = 0) +
   theme(legend.position = c(0.85, 0.18)) +
   labs(
     y = "Log House Price Index",
-    title = "The Effect of the Proffer Reform Act on Housing Prices"
+    title = "Effects on Housing Prices: High Proffer"
   )
 ggsave(here("paper", "figures", "synthdid_zhvi.png"),
   width = 8, height = 4
@@ -204,7 +218,7 @@ top.controls
 
 # Event Study ----
 RHS_ES <- paste0(
-  " ~ -1 + i(Date, everTreated, ref = I(ymd(\"2016-04-01\")))",
+  " ~ -1 + i(Date, high_proffer, ref = I(ymd(\"2016-04-01\")))",
   # " + State:as.numeric(Date)",
   " | Date + FIPS"
 )
