@@ -93,3 +93,4 @@ dt <- dt[!is.na(PCT001001)]
 nrow(dt) == uniqueN(dt[, .(Date, FIPS)])
 
 saveRDS(dt, here("derived", "sample.Rds"))
+

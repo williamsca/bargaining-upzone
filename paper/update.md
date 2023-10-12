@@ -18,7 +18,28 @@ Despite the evidence of intertemporal substitution around the reform, rezonings 
 ![final](figures/plot_rezonings_submit.png)
 
 ## Impacts on Prices
-I use a synthetic difference-in-differences method to estimate the effect of the reform on housing prices. I first classify Virginia counties into three groups based on the share of proffers in their own-source revenues in 2016. Counties with an above-average proffer share are "high proffer," those with below-average are "low proffer," and those with zero proffer revenues are "no proffer".
+I use a synthetic difference-in-differences method to estimate the effect of the reform on housing prices. I first classify Virginia counties into three groups based on the share of proffers in their own-source revenues in 2016. Counties with an above-average proffer share are "high proffer," those with below-average are "low proffer," and those with zero proffer revenues are "no proffer". Summary statistics are reported below.
+
+<!-- html table generated in R 4.3.1 by xtable 1.8-4 package -->
+<!-- Thu Oct 12 12:23:07 2023 -->
+<table border=1>
+<caption align="bottom"> Summary Statistics </caption>
+<tr> <th>  </th> <th> </th> <th> High Proffer </th> <th> Low Proffer </th> <th> No Proffer </th>  </tr>
+  <tr> <td align="right"> 1 </td> <td> Number of Counties </td> <td> 8 </td> <td> 2 </td> <td> 7 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> Population </td> <td> 270,294 </td> <td> 230,280 </td> <td> 176,365 </td> </tr>
+  <tr> <td align="right"> 3 </td> <td>  </td> <td> (332,371) </td> <td> (212,182) </td> <td> (91,709) </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> Zillow HVI ($) </td> <td> 355,762 </td> <td> 377,107 </td> <td> 249,253 </td> </tr>
+  <tr> <td align="right"> 5 </td> <td>  </td> <td> (91,102) </td> <td> (126,830) </td> <td> (138,233) </td> </tr>
+  <tr> <td align="right"> 6 </td> <td> Local Revenue ($/capita) </td> <td> 2,670 </td> <td> 3,615 </td> <td> 2,481 </td> </tr>
+  <tr> <td align="right"> 7 </td> <td>  </td> <td> (835) </td> <td> (1,318) </td> <td> (1,247) </td> </tr>
+  <tr> <td align="right"> 8 </td> <td> Proffer Revenue ($/capita) </td> <td> 24 </td> <td> 3 </td> <td> 0 </td> </tr>
+  <tr> <td align="right"> 9 </td> <td>  </td> <td> (30) </td> <td> (6) </td> <td> (0) </td> </tr>
+  <tr> <td align="right"> 10 </td> <td> Building Permits (Single-Family) </td> <td> 831 </td> <td> 325 </td> <td> 280 </td> </tr>
+  <tr> <td align="right"> 11 </td> <td>  </td> <td> (818) </td> <td> (301) </td> <td> (227) </td> </tr>
+  <tr> <td align="right"> 12 </td> <td> Building Permits (Multi-Family) </td> <td> 252 </td> <td> 256 </td> <td> 390 </td> </tr>
+  <tr> <td align="right"> 13 </td> <td>  </td> <td> (368) </td> <td> (342) </td> <td> (513) </td> </tr>
+   </table>
+
 
 I then estimate the effect of the reform on housing prices separately for each group using Zillow's Home Value Index (ZHVI). I construct the synthetic control from all counties in the continental US outside of Virginia. Results are depicted below.
 

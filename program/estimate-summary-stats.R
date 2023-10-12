@@ -5,6 +5,7 @@ library(stargazer)
 library(ggplot2)
 library(lubridate)
 library(here)
+library(xtable)
 
 dt <- readRDS("derived/sample.Rds")
 
@@ -37,6 +38,8 @@ dt[, low_proffer := max(low_proffer), by = FIPS]
 dt[FY == 2016 & cp_share_local == 0, no_proffer := 1]
 dt[is.na(no_proffer), no_proffer := 0]
 dt[, no_proffer := max(no_proffer), by = FIPS]
+dt[, group := fifelse(high_proffer == 1, "High Proffer",
+    fifelse(low_proffer == 1, "Low Proffer", "No Proffer"))]
 
 dt[, Post := fifelse(Date >= ymd("2016-07-01"), 1, 0)]
 dt[, State := substr(FIPS, 1, 2)]
@@ -50,46 +53,75 @@ dt_fy <- dt[, .(
     HPI = mean(HPI)
 ),
 by = .(
-    FIPS, PCT001001, State, rev_cp, rev_loc, high_proffer, Post, FY,
-    no_proffer, low_proffer
+    FIPS, PCT001001, State, rev_cp, rev_loc, group, Post, FY, high_proffer,
+    low_proffer, no_proffer
 )
 ]
 dt_fy[, `:=`(rev_loc_pc = rev_loc / PCT001001,
     rev_cp_pc = rev_cp / PCT001001)]
-dt_fy[, nObs := .N, by = .(FIPS)]
 
 # TRUE --> data are unique on FIPS and quarter
 nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 
 # Summary statistics ----
-dt_tab1 <- dt_fy[State == "51" & FY %between% c(2010, 2021) &
+# TODO: can make this more robust by passing a vector of variables
+# and using lapply plus .SD to compute means and std deviations
+dt_tab1 <- dt_fy[!is.na(ZHVI)]
+dt_tab1[, nObs := .N, by = .(FIPS)]
+dt_tab1 <- dt_tab1[State == "51" & FY %between% c(2010, 2021) &
                  nObs == max(nObs)]
 
 nrow(dt_tab1[high_proffer + no_proffer + low_proffer == 0]) == 0
 
 dt_tab1 <- dt_tab1[, .(
-    rev_loc_pc = mean(rev_loc_pc), rev_cp_pc = mean(rev_cp_pc),
-    Units1 = mean(Units1), Units2p = mean(Units2p), Units5 = mean(Units5),
-    ZHVI = mean(ZHVI, na.rm = TRUE), pop2010 = mean(PCT001001),
-    ZHVI_SFD = mean(ZHVI_SFD, na.rm = TRUE)),
-    by = .(high_proffer, no_proffer, low_proffer)
+        `Local Revenue ($/capita)` = mean(rev_loc_pc),
+        `Proffer Revenue ($/capita)` = mean(rev_cp_pc),
+        `Building Permits (Single-Family)` = mean(Units1),
+        `Building Permits (Multi-Family)` = mean(Units2p),
+        `Zillow HVI ($)` = mean(ZHVI),
+        `Population` = mean(PCT001001),
+        `Number of Counties` = uniqueN(FIPS),
+        `sd_loc_rev_pc` = sd(rev_loc_pc),
+        `sd_rev_cp_pc` = sd(rev_cp_pc),
+        `sd_units1` = sd(Units1),
+        `sd_units2p` = sd(Units2p),
+        `sd_zhvi` = sd(ZHVI),
+        `sd_pop2010` = sd(PCT001001)
+    ),
+    by = group
 ]
 
-dt_tab1 <- dcast(melt(dt_tab1, id.vars = c(
-        "high_proffer", "low_proffer", "no_proffer"
-    ), measure.vars = c(
-        "rev_loc_pc", "rev_cp_pc", "Units1", "Units2p",
-        "Units5", "ZHVI", "ZHVI_SFD", "pop2010"
-    )), variable ~ high_proffer + no_proffer + low_proffer,
+dt_tab1 <- dcast(melt(dt_tab1, id.vars = c("group"),
+    measure.vars = c(
+        "Number of Counties",
+        "Population", "sd_pop2010",
+        "Zillow HVI ($)", "sd_zhvi",
+        "Local Revenue ($/capita)", "sd_loc_rev_pc",
+        "Proffer Revenue ($/capita)", "sd_rev_cp_pc",
+        "Building Permits (Single-Family)", "sd_units1",
+        "Building Permits (Multi-Family)", "sd_units2p"
+    )), variable ~ group,
     value.var = "value"
 )
 
 setnames(dt_tab1, c("Variable", "High Proffer", "Low Proffer",
                     "No Proffer"))
 
-dt_tab1
+v_sum <- c("High Proffer", "Low Proffer", "No Proffer")
+dt_tab1[, (v_sum) := lapply(.SD, function(x) formatC(
+    x, format = "f", big.mark = ",", digits = 0)
+), .SDcols = v_sum]
 
-# TODO: print prettily
+dt_tab1[, (v_sum) := lapply(.SD, as.character), .SDcols = v_sum]
+
+dt_tab1[grepl("sd", Variable), (v_sum) := lapply(.SD, function(x) paste0(
+    "(", x, ")")), .SDcols = v_sum
+]
+
+dt_tab1[grepl("sd", Variable), Variable := ""]
+
+xtab1 <- xtable(dt_tab1, digits = 0, caption = "Summary Statistics")
+print.xtable(xtab1, type = "html", file = here("paper", "tables", "tab1.html"))
 
 # Proffer Regressions ----
 # Proffer against density
