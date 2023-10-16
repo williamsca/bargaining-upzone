@@ -19,25 +19,21 @@ arcsinh <- function(x) log(x + sqrt(x^2 + 1))
 
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
-
 INTENSITY_THRESHOLD <- mean(dt[FY == 2016, cp_share_local], na.rm = TRUE)
-# INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.8, na.rm = TRUE)
 
-dt[FY == 2016, high_proffer := fifelse(
-    cp_share_local > INTENSITY_THRESHOLD, 1, 0
-)]
-dt[FY == 2016, low_proffer := fifelse(
-    cp_share_local <= INTENSITY_THRESHOLD & cp_share_local > 0, 1, 0
-)]
+dt[FY == 2016 & cp_share_local >= INTENSITY_THRESHOLD, high_proffer := 1]
+dt[FY == 2016 & between(cp_share_local, 0, INTENSITY_THRESHOLD,
+    incbounds = FALSE), low_proffer := 1]
+dt[FY == 2016 & cp_share_local == 0, no_proffer := 1]
 
 dt[is.na(high_proffer), high_proffer := 0]
 dt[is.na(low_proffer), low_proffer := 0]
+dt[is.na(no_proffer), no_proffer := 0]
+
 dt[, high_proffer := max(high_proffer), by = FIPS]
 dt[, low_proffer := max(low_proffer), by = FIPS]
-
-dt[FY == 2016 & cp_share_local == 0, no_proffer := 1]
-dt[is.na(no_proffer), no_proffer := 0]
 dt[, no_proffer := max(no_proffer), by = FIPS]
+
 dt[, group := fifelse(high_proffer == 1, "High Proffer",
     fifelse(low_proffer == 1, "Low Proffer", "No Proffer"))]
 
@@ -66,10 +62,9 @@ nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 # Summary statistics ----
 # TODO: can make this more robust by passing a vector of variables
 # and using lapply plus .SD to compute means and std deviations
-dt_tab1 <- dt_fy[!is.na(ZHVI)]
+dt_tab1 <- dt_fy[!is.na(ZHVI) & between(FY, 2010, 20021)]
 dt_tab1[, nObs := .N, by = .(FIPS)]
-dt_tab1 <- dt_tab1[State == "51" & FY %between% c(2010, 2021) &
-                 nObs == max(nObs)]
+dt_tab1 <- dt_tab1[State == "51" & nObs == max(nObs)]
 
 nrow(dt_tab1[high_proffer + no_proffer + low_proffer == 0]) == 0
 
