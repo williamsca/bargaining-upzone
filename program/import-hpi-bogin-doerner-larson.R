@@ -30,7 +30,7 @@ dt <- merge(dt, dt_cpi[, .(Year, Annual)],
 )
 nrow(dt[is.na(Annual)]) == 0
 
-dt[, HPI := HPI / Annual]
+dt[, HPI := `HPI with 2000 base` / Annual]
 
 dt <- dt[, c("FIPS code", "Year", "HPI")]
 setnames(dt, c("FIPS", "Year4", "HPI"))

@@ -70,17 +70,26 @@ dt_va <- dt_fy[!is.na(ZHVI) & between(FY, PANEL_START, PANEL_END)]
 dt_va[, nObs := .N, by = .(FIPS)]
 dt_va <- dt_va[State == "51" & nObs == max(nObs)]
 
-dt_va <- merge(dt_va, sf_va, by.x = "FIPS", by.y = "GEOID")
+dt_va <- dt_va[, .(
+    `Local Revenue ($/capita)` = mean(rev_loc_pc),
+    `Proffer Revenue ($/capita)` = mean(rev_cp_pc),
+    `Building Permits (Single-Family)` = mean(Units1),
+    `Building Permits (Multi-Family)` = mean(Units2p),
+    `Zillow HVI ($)` = mean(ZHVI),
+    `Population` = mean(PCT001001)
+),
+    by = .(group, FIPS)
+]
 
-table(dt_va$group)
+dt_va <- merge(dt_va, sf_va, by.x = "FIPS", by.y = "GEOID")
 
 
 # Maps ----
 # * Virginia ----
-ggplot(sf.dist) +
-    geom_sf(aes(fill = as.factor(everElec))) +
-    scale_fill_manual(values = v.palette, labels = c("0", ">= 1")) +
-    labs(fill = "Bond Elections") +
+ggplot(dt_va) +
+    geom_sf(aes(fill = as.factor(group))) +
+    scale_fill_manual(values = v_palette) + # labels = c("0", ">= 1")
+    labs(fill = "Proffer Regime") +
     theme(
         axis.text.x = element_blank(), axis.text.y = element_blank(),
         axis.ticks.x = element_blank(), axis.ticks.y = element_blank(),

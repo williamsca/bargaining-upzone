@@ -62,7 +62,7 @@ nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 # Summary statistics ----
 # TODO: can make this more robust by passing a vector of variables
 # and using lapply plus .SD to compute means and std deviations
-dt_tab1 <- dt_fy[!is.na(ZHVI) & between(FY, 2010, 20021)]
+dt_tab1 <- dt_fy[!is.na(HPI) & between(FY, 2010, 2021)]
 dt_tab1[, nObs := .N, by = .(FIPS)]
 dt_tab1 <- dt_tab1[State == "51" & nObs == max(nObs)]
 
@@ -74,6 +74,7 @@ dt_tab1 <- dt_tab1[, .(
         `Building Permits (Single-Family)` = mean(Units1),
         `Building Permits (Multi-Family)` = mean(Units2p),
         `Zillow HVI ($)` = mean(ZHVI),
+        `HPI (2000 = 100)` = mean(HPI),
         `Population` = mean(PCT001001),
         `Number of Counties` = uniqueN(FIPS),
         `sd_loc_rev_pc` = sd(rev_loc_pc),
@@ -81,6 +82,7 @@ dt_tab1 <- dt_tab1[, .(
         `sd_units1` = sd(Units1),
         `sd_units2p` = sd(Units2p),
         `sd_zhvi` = sd(ZHVI),
+        `sd_hpi` = sd(HPI),
         `sd_pop2010` = sd(PCT001001)
     ),
     by = group
@@ -91,6 +93,7 @@ dt_tab1 <- dcast(melt(dt_tab1, id.vars = c("group"),
         "Number of Counties",
         "Population", "sd_pop2010",
         "Zillow HVI ($)", "sd_zhvi",
+        "HPI (2000 = 100)", "sd_hpi",
         "Local Revenue ($/capita)", "sd_loc_rev_pc",
         "Proffer Revenue ($/capita)", "sd_rev_cp_pc",
         "Building Permits (Single-Family)", "sd_units1",

@@ -17,6 +17,10 @@ library(synthdid)
 
 dt <- readRDS("derived/sample.Rds")
 
+v_groups <- c(high_proffer = "High Proffer",
+              low_proffer = "Low Proffer",
+              no_proffer = "No Proffer")
+
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
 
@@ -100,12 +104,23 @@ nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 nrow(dt_y) == uniqueN(dt_y[, .(FIPS, FY)])
 
 # Synthetic Diff-in-Diff (Arkhangelsky et al (2019) ----
+RunSynthDid <- function(dt, LHS, period = "FY") {
+  setup <- panel.matrices(dt,
+    unit = "FIPS", time = period,
+    outcome = LHS, treatment = "isTreated"
+  )
+  return(synthdid_estimate(setup$Y, setup$N0, setup$T0))
+}
 
-# Define treatment indicator for synthdid
-# dt.synthdid <- dt_qtr[Date <= as.Date("2016-06-01"), isTreated := 0]
+# Define treatment group
+# One of 'high_proffer', 'low_proffer', 'no_proffer'
+treatment_group <- "low_proffer"
+outcome <- "logHPI"
+
 dt.synthdid <- copy(dt_hy)
 dt.synthdid[FY < 2017, isTreated := 0]
-dt.synthdid[is.na(isTreated), isTreated := no_proffer]
+dt.synthdid[is.na(isTreated), isTreated := get(treatment_group)]
+# dt.synthdid[State != "51" | ]
 
 dt.synthdid <- dt.synthdid[
   FY %between% c(2010, 2022),
@@ -120,24 +135,15 @@ dt.synthdid <- dt.synthdid[
   )
 ]
 
-RunSynthDid <- function(dt, LHS, period = "FY") {
-  setup <- panel.matrices(dt,
-    unit = "FIPS", time = period,
-    outcome = LHS, treatment = "isTreated"
-  )
-  return(synthdid_estimate(setup$Y, setup$N0, setup$T0))
-}
-
-# * Prices ----
-outcome <- "logZHVI"
 dt.synthdid[, nObs := sum(!is.infinite(get(outcome)) &
                           !is.na(get(outcome))), by = .(FIPS)]
 
-uniqueN(dt.synthdid[nObs == max(nObs), FIPS])
-uniqueN(dt.synthdid$FIPS)
+dt.synthdid <- dt.synthdid[nObs == max(nObs)]
+
+unique(dt.synthdid[isTreated == 1, FIPS])
 table(dt.synthdid$isTreated)
 
-tau.hat <- RunSynthDid(dt.synthdid[nObs == max(nObs)], outcome)
+tau.hat <- RunSynthDid(dt.synthdid, outcome)
 
 se <- sqrt(vcov(tau.hat, method = "jackknife"))
 sprintf("Point estimate: %1.2f", tau.hat)
@@ -152,11 +158,14 @@ plot(tau.hat, overlay = 1) +
     theme_light(base_size = 14) +
     theme(legend.position = c(0.85, 0.18)) +
     labs(y = "Log House Price Index",
-         title = "Effects on Housing Prices: No Proffer") +
-    geom_text(aes(x = 2019, y = 12.4),
+         title = paste0("Effects on Housing Prices: ",
+                        v_groups[treatment_group])) +
+    geom_text(aes(x = 2018,
+                  y = mean(dt.synthdid[isTreated == 1, get(outcome)])),
               label = sprintf("Estimate: %1.2f\nSD: %1.2f", tau.hat, se))
-ggsave(here("paper", "figures", "synthdid_zhvi_no.png"),
-       width = 8, height = 4)
+ggsave(here("paper", "figures",
+            paste0("synthdid_", outcome, "_", treatment_group, ".png"),
+       width = 8, height = 4))
 
 # Placebo
 dt.synthdid[FY >= 2017, isTreated := no_proffer]

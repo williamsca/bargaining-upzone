@@ -23,8 +23,9 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 # TODO
 - Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask [questions](notes/interview-vanderpool-20231006.md)
-- Import repeat-sale HPI to evaluate price effect while holding composition constant
-
+- Show the relationship between proffer revenues, rates, and county characteristics (growth rates, size, incomes, property values, etc.)
+- Get CoreLogic data
+  - Check for differential impacts on new vs existing houses (test if proffers were used to fund amenities/infrastructure for the new development or were fungible with other revenue)
 - Regression analysis of proffer rates against size, density of development
 - Review static models of neighborhood choice / housing demand
 - Literature review / policy context
@@ -34,6 +35,7 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 
 # Done
+- Import repeat-sale HPI to evaluate price effect while holding composition constant
 - Impact on ratio of single-family to multi-family housing permits
 - Update units time series: show labels for 2017, 2019 and aggregate counties
 - Parse 'Description' for PWC and Loudoun to get zoning codes. (For PWC, Type == "Rezoning - Mixed Use" does not always include housing.) See TODO in 'databuild-princewilliam.R'
@@ -60,6 +62,11 @@ This paper may be a useful reference for outcomes:
 
 
 ## Meetings
+Leora (10/12/2023)
+- The incidence of proffers on all homeowners is a good economic question
+- Is there a property tax response?
+- Need to think about groupings: high/low/no proffer reflects both policy and exogenous demand. Is there a policy choice that distinguishes high and low proffer counties, or is it just a function of growth/income?
+
 Labor/Public Workshop (9/27/2023)
 - Lee: impact of price ceiling depends on who controls the municipality. If landowners, and not households, then a ceiling could actually induce additional quantity for the same reason that a minimum wage could increase employment when employers have monopsony power
 - Kerem: need to distinguish between incumebt residents and landlords

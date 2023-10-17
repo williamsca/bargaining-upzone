@@ -89,7 +89,7 @@ where $p[x]$ is the price of housing.
 
 Firms produce housing with a constant returns to scale production technology $h(\cdot)$. Let $S(x) = K(x) / L(x)$ be the capital to land ratio. The firm's problem is 
 
-$$\max_{S(x)} \pi(x) = p[x]h(S(x)) - iS(x)$$
+$$\max_{S(x)} \pi(x) = p(x)h(S[x]) - iS(x)$$
 
 where $i$ is the cost of capital. Profit maximization implies
 
