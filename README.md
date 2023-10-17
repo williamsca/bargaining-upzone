@@ -21,9 +21,15 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 - Address or polygon
 - Status (approved, denied, withdrawn, etc.)
 
+Estimate a hedonic regresion of proffer amounts on development characteristics with a dummy variable for post-2016.
+
+
+
 # TODO
-- Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask [questions](notes/interview-vanderpool-20231006.md)
-- Show the relationship between proffer revenues, rates, and county characteristics (growth rates, size, incomes, property values, etc.)
+- Write up Mike Vanderpool call notes
+- Show the relationship between proffer revenues, rates, and county avg yearly pop growth rate 2000-2016 (need ACS census data for 2016)
+- Download remaining Chesterfield BoS minutes (2017-2022)
+- Parse Chesterfield minutes
 - Get CoreLogic data
   - Check for differential impacts on new vs existing houses (test if proffers were used to fund amenities/infrastructure for the new development or were fungible with other revenue)
 - Regression analysis of proffer rates against size, density of development
@@ -35,6 +41,7 @@ Create a panel of all rezoning applications in Virginia counties. Each rezoning 
 
 
 # Done
+- Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask [questions](notes/interview-vanderpool-20231006.md)
 - Import repeat-sale HPI to evaluate price effect while holding composition constant
 - Impact on ratio of single-family to multi-family housing permits
 - Update units time series: show labels for 2017, 2019 and aggregate counties

@@ -60,7 +60,14 @@ dt[, Area := set_units(acres, acres)]
 dt[, FIPS := "51085"]
 dt[, planning_hearing_date := as.Date(planning_hearing_date)]
 dt[, submit_date := as.Date(submit_date)]
-dt[, n_units := rowSums(.SD, na.rm = TRUE),
+
+dt[, n_affordable := 0]
+v_units <- grep("n_", names(dt), value = TRUE)
+dt[, (v_units) := lapply(.SD, as.numeric), .SDcols = v_units]
+dt[, (v_units) := lapply(.SD, function(x)
+    fifelse(is.na(x), 0, x)), .SDcols = v_units]
+
+dt[, n_units := rowSums(.SD),
     .SDcols = c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict")]
 
 v_codes_old <- unique(str_split_1(paste0(unique(dt$zoning_old),

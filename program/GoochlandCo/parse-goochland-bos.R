@@ -61,11 +61,16 @@ dt[, Area := set_units(acres, acres)]
 dt[, FIPS := "51075"]
 dt[, submit_date := as.Date(submit_date)]
 
-# TODO: estimate change in units from zoning codes
+v_units <- grep("n_", names(dt), value = TRUE)
+dt[, (v_units) := lapply(.SD, as.numeric), .SDcols = v_units]
+dt[, (v_units) := lapply(.SD, function(x)
+    fifelse(is.na(x), 0, x)), .SDcols = v_units]
+dt[, n_affordable := 0]
+dt[, n_sfa := 0]
+
 dt[, n_units := rowSums(.SD, na.rm = TRUE),
     .SDcols = c("n_sfd", "n_mfd", "n_unknown")]
 
-# TODO: assign 'isResi' based on new zoning code
 dt[, isResi := grepl("R|A", zoning_new)]
 
 saveRDS(dt, here("derived", "GoochlandCo", "Rezoning Approvals.Rds"))

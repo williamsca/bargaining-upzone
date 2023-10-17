@@ -12,8 +12,6 @@ dt <- readRDS("derived/sample.Rds")
 dt_app <- readRDS(here("derived", "county-rezonings.Rds"))
 dt_app[, density := n_units / Area]
 
-arcsinh <- function(x) log(x + sqrt(x^2 + 1))
-
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
@@ -122,10 +120,20 @@ xtab1 <- xtable(dt_tab1, digits = 0, caption = "Summary Statistics")
 print.xtable(xtab1, type = "html", file = here("paper", "tables", "tab1.html"))
 
 # Proffer Regressions ----
-# Proffer against density
 # TODO: in-kind value as % of total proffer value histogram
-dt_prof <- dt_app[!is.na(res_cash_proffer) &
-    !is.na(density) & isApproved == TRUE & n_units > 5]
+dt_prof <- dt_app[!is.na(res_cash_proffer) & isApproved == TRUE &
+                  isResi == TRUE]
+dt_prof[, tot_proffer := res_cash_proffer * n_units]
+
+# TODO: remove 'n_units' from the RHS
+# TODO: add FE for <5 units?
+rhs_units <- paste0(grep("n_", names(dt_prof), value = TRUE),
+                    collapse = " + ")
+rhs <- paste0(rhs_units, " + FIPS")
+fmla <- as.formula(paste0("tot_proffer ~ ", rhs))
+
+lm_prof <- lm(fmla, data = dt_prof)
+summary(lm_prof)
 
 ggplot(dt_prof, aes(
     x = log(density),
