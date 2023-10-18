@@ -6,20 +6,36 @@ library(here)
 library(data.table)
 library(openai)
 library(pdftools)
+library(tesseract)
+library(stringr)
 
 # Sys.setenv(OPENAI_API_KEY = "")
 readRenviron("~/.Renviron") # Reload .Renviron
 Sys.getenv("OPENAI_API_KEY") # Check to see that the expected key is output in your R console
 
-# API_URL <- "https://api.openai.com/v1/engines/davinci-codex/completions"
-MODEL <- "text-davinci-003"
-PROMPT <- "The following string, enclosed in triple quotations, contains an approved rezoning application.
-Identify tax parcel ID, size, vote, and final zoning classification. Format your response as an R dictionary:
-c(ParcelID = '', Size = '', VotesFor = , VotesAgainst = , FinalZone = ''). No context."
-
-
-s <- create_completion(
-    model = MODEL,
-    prompt = paste0(PROMPT, "'''", pdf_text[1], "'''"),
-    max_tokens = 500
+# Import PDFs ----
+l_files <- list.files(here("data", "ChesterfieldCo", "BoS Minutes"),
+    recursive = TRUE, full.names = TRUE
 )
+
+file_path <- l_files[4]
+
+pdf_text <- pdf_text(file_path)
+pdf_text <- gsub("\\s{2,}", " ", pdf_text)
+
+pdf_lines <- unlist(str_split(pdf_text, pattern = "\n"))
+
+row_start <- grep("16. Requests", pdf_lines, ignore.case = TRUE)
+row_end <- max(grep("19. ", pdf_lines, ignore.case = TRUE))
+
+pdf_lines <- pdf_lines[row_start:row_end]
+
+line <- grep("In.*Magisterial.*District", pdf_lines, ignore.case = TRUE)
+
+v_cases <- seq(1, length(line) - 1)
+
+l_cases <- lapply(v_cases, function(x) pdf_lines[line[x]:line[x + 1]])
+
+# Combine relevant lines into a single string
+l_cases <- lapply(l_cases, paste0, collapse = " ")
+ 

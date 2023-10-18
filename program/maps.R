@@ -66,23 +66,20 @@ dt_fy[, `:=`(
 nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 
 # Identify counties in balanced panel ----
-dt_va <- dt_fy[!is.na(ZHVI) & between(FY, PANEL_START, PANEL_END)]
+dt_va <- dt_fy[!is.na(HPI) & between(FY, PANEL_START, PANEL_END)]
 dt_va[, nObs := .N, by = .(FIPS)]
-dt_va <- dt_va[State == "51" & nObs == max(nObs)]
+dt_va <- dt_va[State == "51" & nObs == max(nObs) & FY == 2016]
 
-dt_va <- dt_va[, .(
-    `Local Revenue ($/capita)` = mean(rev_loc_pc),
-    `Proffer Revenue ($/capita)` = mean(rev_cp_pc),
-    `Building Permits (Single-Family)` = mean(Units1),
-    `Building Permits (Multi-Family)` = mean(Units2p),
-    `Zillow HVI ($)` = mean(ZHVI),
-    `Population` = mean(PCT001001)
-),
-    by = .(group, FIPS)
-]
+v_variables <- c(rev_loc_pc = "Local Revenue ($/capita)",
+    rev_cp_pc = "Proffer Revenue ($/capita)",
+    Units1 = "Building Permits (Single-Family)",
+    Units2p = "Building Permits (Multi-Family)",
+    ZHVI = "Zillow HVI ($)",
+    HPI = "HPI (2000 = 100)",
+    PCT001001 = "Population"
+)
 
-dt_va <- merge(dt_va, sf_va, by.x = "FIPS", by.y = "GEOID")
-
+dt_va <- merge(sf_va, dt_va, by.y = "FIPS", by.x = "GEOID", all.x = TRUE)
 
 # Maps ----
 # * Virginia ----
