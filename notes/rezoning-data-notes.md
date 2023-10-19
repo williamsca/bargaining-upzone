@@ -23,6 +23,7 @@ author: Colin Williams
  Chesterfield|Rezoning App|2009-2023 YTD|Manual|[Archive](https://aca-prod.accela.com/CHESTERFIELD/Cap/CapHome.aspx?module=Planning&TabName=Planning&TabList=Home%7C0%7CBuilding%7C1%7CEnforcement%7C2%7CEnvEngineering%7C3%7CPlanning%7C4%7CUtilities%7C5%7CeReview%7C6%7CCurrentTabIndex%7C4)
  Chesterfield|GIS||Webscrape|
  Chesterfield|BoS Summary|2014-2018|Manual|[Archive](https://documents.chesterfield.gov/Weblink_BOS/CustomSearch.aspx?SearchName=BoardDocumentsSearch)
+ Chesterfield|BoS Minutes|2013-2020|Manual|[Archive](https://documents.chesterfield.gov/Weblink_BOS/Browse.aspx?startid=6999&dbid=0)
  Fairfax City|BoS Summary|2014-2020m2 (no Special Meetings)|Manual|[Archive](https://www.fairfaxva.gov/services/about-us/city-meetings)
  Fairfax|Rezoning App|2010-2020|Webscrape|[Archive](https://plus.fairfaxcounty.gov/CitizenAccess/Default.aspx)
  Fairfax|BoS Minutes|2013-2020m2|Manual|[Archive](https://www.fairfaxcounty.gov/boardofsupervisors/board-meeting-summaries)
