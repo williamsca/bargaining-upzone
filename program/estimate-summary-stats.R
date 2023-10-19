@@ -62,8 +62,10 @@ nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 # Summary statistics ----
 # TODO: can make this more robust by passing a vector of variables
 # and using lapply plus .SD to compute means and std deviations
-dt_tab1 <- dt_fy[!is.na(HPI) & between(FY, 2010, 2021)]
+dt_tab1 <- dt_fy[!is.na(ZHVI) & between(FY, 2010, 2021)]
 dt_tab1[, nObs := .N, by = .(FIPS)]
+dt_tab1[, `:=`(cum_units1 = cumsum(Units1), cum_units2 = cumsum(Units2p)),
+        by = FIPS]
 dt_tab1 <- dt_tab1[State == "51" & nObs == max(nObs) & FY == 2016]
 
 nrow(dt_tab1[high_proffer + no_proffer + low_proffer == 0]) == 0
@@ -71,8 +73,8 @@ nrow(dt_tab1[high_proffer + no_proffer + low_proffer == 0]) == 0
 dt_tab1 <- dt_tab1[, .(
         `Local Revenue ($/capita)` = mean(rev_loc_pc),
         `Proffer Revenue ($/capita)` = mean(rev_cp_pc),
-        `Building Permits (Single-Family)` = mean(Units1),
-        `Building Permits (Multi-Family)` = mean(Units2p),
+        `Single-Family Permits Per Capita (2010-2016)` = mean(Units1 / PCT001001),
+        `Multi-Family Permits Per Capita (2010-2016)` = mean(Units2p / PCT001001),
         `Zillow HVI ($)` = mean(ZHVI, na.rm = TRUE),
         `HPI (2000 = 100)` = mean(HPI),
         `Population` = mean(PCT001001),
