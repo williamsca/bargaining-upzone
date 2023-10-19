@@ -2,13 +2,9 @@
 How does bargaining between local governments and residential developers affect the housing market?
 
 # Memo
-Synthetic DiD regressions suggest a decline in permits *and* prices that begin about a year after PRA16. This pattern is consistent with a negative demand shock for single-family housing and possibly an increase in supply. Model sketch:
-- house prices pinned down by cost of marginal unit, i.e., cost of new construction
-- proffers are passed through nearly 1:1 to homebuyers, raising local housing prices
-- difficult to manipulate housing supply in short-run (zoning ordinance updates are a big push)
-- proffers are used to fund useful amenities
-- tax rates increase or public amenities decrease after lost proffer revenue
-- demand shifts in
+Questions
+- Are proffer used to fund valuable amenities? Is there a differential effect on prices of new and used homes after the reform?
+- What is the effect of the reform on cumulative building permits?
 
 I find an imprecise increase in the number of 2+ unit dwellings. Is it possible that the reform had differential effects on single and multi-family units? Yes:
 - Alchien-Allen theorem: removing specific tax causes substitution to lower-quality housing (this could also drive down price index)
@@ -26,14 +22,12 @@ Estimate a hedonic regresion of proffer amounts on development characteristics w
 
 
 # TODO
-- Write up Mike Vanderpool call notes
 - Show the relationship between proffer revenues, rates, and county avg yearly pop growth rate 2000-2016 (need ACS census data for 2016)
-- Download remaining Chesterfield BoS minutes (2017-2022)
+- Estimate impact on cumulative building permits
 - Parse Chesterfield minutes
 - Get CoreLogic data
   - Check for differential impacts on new vs existing houses (test if proffers were used to fund amenities/infrastructure for the new development or were fungible with other revenue)
-- Regression analysis of proffer rates against size, density of development
-- Review static models of neighborhood choice / housing demand
+- Estimate hedonic model of proffers against size, density of development, type of housing, and document post-2016 decline
 - Literature review / policy context
   - WLURI trends 
   - Related policies -- see [Bethany Berger (2009)](https://proxy1.library.virginia.edu/login?url=https://heinonline.org/HOL/P?h=hein.journals/flr78&i=1287) on Measure 37, an Oregon initiative that called for compensation for land regulations (Fischel 2005, 6.14-15)
@@ -41,6 +35,9 @@ Estimate a hedonic regresion of proffer amounts on development characteristics w
 
 
 # Done
+- Review static models of neighborhood choice / housing demand
+- Download remaining Chesterfield BoS minutes (2013-2020)
+- Write up Mike Vanderpool call notes
 - Call Mike Vanderpool (703-369-4738), real estate attorney working in Prince William and Manassas, to ask [questions](notes/interview-vanderpool-20231006.md)
 - Import repeat-sale HPI to evaluate price effect while holding composition constant
 - Impact on ratio of single-family to multi-family housing permits
@@ -60,13 +57,6 @@ See [Data Notes](notes/rezoning-data-notes.md) for details on how I collected th
 
 # Abstract
 > Statewide zoning reforms may fail to increase housing supply if local governments can respond along unregulated margins. I study the policy response of Virginia counties to a 2016 statewide reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of housing units allowed through residential upzonings fell by [X]\%. In counties which were partially exempted from the reform, however, total activity remained constant as localities substituted upzoning from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should directly subsidize the number of newly-permitted housing units.
-
-
-
-# Data
-This paper may be a useful reference for outcomes:
-- https://ishanbhatt42.github.io/files/paper_adu.pdf
-
 
 ## Meetings
 Leora (10/12/2023)
