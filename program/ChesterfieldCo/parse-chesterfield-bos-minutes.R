@@ -180,18 +180,10 @@ dt[
     (v_details) := tstrsplit(parcel_details, "\\|")
 ]
 
-# This data will be re-written after I've ironed out the
-# cash proffer detail parsing section
-saveRDS(dt, here("derived", "ChesterfieldCo", "bos-minutes-rezonings.Rds"))
-
-dt <- readRDS(here("derived", "ChesterfieldCo", "bos-minutes-rezonings.Rds"))
-
 # Cash proffer details
-# This prompt fails to return anything at all. Need to identify cases with
-# proffers and experiment with the language. There may be an issue
-# related to chunking the case into smaller pieces to fit into the
-# context window.
-prompt_proffer <- "The following string describes an approved rezoning case. Provide a brief summary of any cash proffer contributions made by the developer. If no cash proffers are described in the passage, respond with an empty string."
+# dt[, hasCashProffer := grepl("\\$", case_text)]
+
+prompt_proffer <- "The following string describes an approved rezoning case. Provide a brief summary of any cash proffer contributions made by the developer. If no cash proffers are described in the passage, respond with 'NA'."
 
 proffer_details <- function(case_text) {
 
@@ -224,6 +216,7 @@ proffer_details <- function(case_text) {
 
         response <- paste(response, s$choices$message.content, sep = "")
     }
+    return(response)
 }
 
 l_proffers <- list()
@@ -232,3 +225,7 @@ for (i in seq_along(dt$case_text)) {
 
     Sys.sleep(5)
 }
+
+dt$proffer_details <- l_proffers
+
+saveRDS(dt, here("derived", "ChesterfieldCo", "bos-minutes-rezonings.Rds"))
