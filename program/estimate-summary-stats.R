@@ -73,16 +73,16 @@ nrow(dt_tab1[high_proffer + no_proffer + low_proffer == 0]) == 0
 dt_tab1 <- dt_tab1[, .(
         `Local Revenue ($/capita)` = mean(rev_loc_pc),
         `Proffer Revenue ($/capita)` = mean(rev_cp_pc),
-        `Single-Family Permits Per Capita (2010-2016)` = mean(Units1 / PCT001001),
-        `Multi-Family Permits Per Capita (2010-2016)` = mean(Units2p / PCT001001),
+        `Single-Family Permits Per Thousand (2010-2016)` = mean(1000 * Units1 / PCT001001),
+        `Multi-Family Permits Per Thousand (2010-2016)` = mean(1000 * Units2p / PCT001001),
         `Zillow HVI ($)` = mean(ZHVI, na.rm = TRUE),
         `HPI (2000 = 100)` = mean(HPI),
         `Population` = mean(PCT001001),
         `Number of Counties` = uniqueN(FIPS),
         `sd_loc_rev_pc` = sd(rev_loc_pc),
         `sd_rev_cp_pc` = sd(rev_cp_pc),
-        `sd_units1` = sd(Units1),
-        `sd_units2p` = sd(Units2p),
+        `sd_units1` = sd(1000 * Units1 / PCT001001),
+        `sd_units2p` = sd(1000 * Units2p / PCT001001),
         `sd_zhvi` = sd(ZHVI, na.rm = TRUE),
         `sd_hpi` = sd(HPI),
         `sd_pop2010` = sd(PCT001001)
@@ -98,8 +98,8 @@ dt_tab1 <- dcast(melt(dt_tab1, id.vars = c("group"),
         "HPI (2000 = 100)", "sd_hpi",
         "Local Revenue ($/capita)", "sd_loc_rev_pc",
         "Proffer Revenue ($/capita)", "sd_rev_cp_pc",
-        "Building Permits (Single-Family)", "sd_units1",
-        "Building Permits (Multi-Family)", "sd_units2p"
+        "Single-Family Permits Per Thousand (2010-2016)", "sd_units1",
+        "Multi-Family Permits Per Thousand (2010-2016)", "sd_units2p"
     )), variable ~ group,
     value.var = "value"
 )
@@ -121,7 +121,7 @@ dt_tab1[grepl("sd", Variable), (v_sum) := lapply(.SD, function(x) paste0(
 dt_tab1[grepl("sd", Variable), Variable := ""]
 
 xtab1 <- xtable(dt_tab1, digits = 0, caption = "Summary Statistics")
-print.xtable(xtab1, type = "html", file = here("paper", "tables", "tab1.html"))
+print.xtable(xtab1, type = "latex", file = here("paper", "tables", "tab1.tex"))
 
 # Proffer Regressions ----
 # Proffer against density

@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+\usepackage[right=1.25in,left=1.25in,top=1.1in,bottom=1.1in]{geometry}
+\usepackage{lscape}
+\usepackage{hyperref}
+\hypersetup{colorlinks, citecolor=blue, filecolor=blue, linkcolor=blue, urlcolor=blue}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[round]{natbib}
+\usepackage{amsmath,amsthm}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{booktabs}
+% \usepackage[skip=5pt plus1pt, indent=20pt]{parskip} % USE THIS TO SET SPACING
+\usepackage{amssymb} %% Necessary, just for the checkmark command  in tables.
+% \usepackage{setspace}
+% \onehalfspacing
+\title{ \vspace*{-2.5cm} \hspace*{-0.5cm} }
+\author{Colin Williams\thanks{University of Virginia.
+\href{mailto:chv7bg@virginia.edu}{chv7bg@virginia.edu}}}
+\date{ \vspace*{0.5cm} \today} % \textbf{Preliminary and Incomplete. \ Please do not cite or circulate.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\bgroup
+\let\footnoterule\relax
+
+%\begin{singlespace}
+\maketitle
+
+\begin{abstract}
+\noindent 
+\end{abstract}
+%\end{singlespace}
+
+% These commands clear the title page
+% \thispagestyle{empty}
+% \clearpage
+% \egroup
+% \setcounter{page}{1}
+
+\noindent 
+
+\section{Data}  \label{sec:data}
+
+I compute the average amount of proffer revenue as a share of local revenue for Virginia counties in 2016. I then divide Virginia counties into three groups: above average proffers (``High Proffer''), positive and below average proffers (``Low Proffer''), and zero proffer revenue (``No Proffer''). I then restrict to counties for which I observe the Zillow House Value Index continuously between 2010 and 2021.\footnote{The Synthetic Difference-in-Differences method requires a balanced panel.} I report summary statistics below:
+
+\include{tables/tab1.tex}
+
+In general, high proffer counties tend to have higher average housing prices, larger populations, and to issue more single-family building permits. Geographically, high proffer counties tend to located in the inner suburbs of DC, though there is a fair amount of dispersion.
+
+\begin{figure}
+    \centering
+    \caption{The Geography of Proffer Revenues}
+    \includegraphics{figures/map-proffer-groups.png}
+\end{figure}
+
+\clearpage
+% \begin{singlespace}
+\bibliographystyle{chicago} % aer, plainnat
+\bibliography{} % Note: .bib file should have the same name as the .tex file
+% \end{singlespace
+\end{document}

@@ -66,7 +66,7 @@ dt_fy[, `:=`(
 nrow(dt_fy) == uniqueN(dt_fy[, .(FIPS, FY)])
 
 # Identify counties in balanced panel ----
-dt_va <- dt_fy[!is.na(HPI) & between(FY, PANEL_START, PANEL_END)]
+dt_va <- dt_fy[!is.na(ZHVI) & between(FY, PANEL_START, PANEL_END)]
 dt_va[, nObs := .N, by = .(FIPS)]
 dt_va <- dt_va[State == "51" & nObs == max(nObs) & FY == 2016]
 
@@ -92,3 +92,4 @@ ggplot(dt_va) +
         axis.ticks.x = element_blank(), axis.ticks.y = element_blank(),
         panel.background = element_blank(), text = element_text(size = 14)
     )
+ggsave("paper/figures/map-proffer-groups.png", width = 8, height = 4)
