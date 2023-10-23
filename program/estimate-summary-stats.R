@@ -1,7 +1,7 @@
 rm(list = ls())
 
 library(data.table)
-library(stargazer)
+library(fixest)
 library(ggplot2)
 library(lubridate)
 library(here)
@@ -11,6 +11,8 @@ dt <- readRDS("derived/sample.Rds")
 
 dt_app <- readRDS(here("derived", "county-rezonings.Rds"))
 dt_app[, density := n_units / Area]
+
+v_palette <- c("#D55E00", "#0072B2", "#009E73", "#F0E460")
 
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
@@ -121,25 +123,29 @@ dt_tab1[grepl("sd", Variable), Variable := ""]
 xtab1 <- xtable(dt_tab1, digits = 0, caption = "Summary Statistics")
 print.xtable(xtab1, type = "latex", file = here("paper", "tables", "tab1.tex"))
 
-# Proffer Regressions ----
-# Proffer against density
-# TODO: in-kind value as % of total proffer value histogram
-dt_prof <- dt_app[!is.na(res_cash_proffer) & !is.na(n_units)]
-
+# Proffers ----
+dt_prof <- dt_app[!is.na(res_cash_proffer) & n_units > 0 & !isExempt]
 dt_prof[, tot_proffer := res_cash_proffer * n_units]
+v_units <- c(
+    "n_sfa", "n_mfd", "n_unknown", "n_age_restrict",
+    "n_affordable"
+)
+v_shares <- gsub("n_", "share_", v_units)
+dt_prof[, (v_shares) := lapply(.SD, function(x) x / n_units), .SDcols = v_units]
 
-v_rhs <- c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict",
-             "n_affordable", "FIPS")
-fmla_prof <- as.formula(paste0("tot_proffer", " ~ ",
-                       paste0(v_rhs, collapse = " + ")))
-lm_prof <- lm(fmla_prof, dt_prof)
 
-stargazer(lm_prof, type = "text")
-
-# TODO: figure out which obs are dropped in regression
-dt_prof$res <- resid(lm_prof)
-
-# TODO: plot residuals against fiscal year
+# Scatterplots
+ggplot(dt_prof[FIPS != "51177" & n_age_restrict == 0],
+       aes(x = final_date, y = res_cash_proffer)) +
+    geom_point(aes(size = n_units), color = v_palette[2]) +
+    theme_light(base_size = 14) +
+    geom_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3), se = FALSE,
+                aes(weight = n_units), color = v_palette[2], linetype = "dashed") +
+    scale_color_manual(values = v_palette) +
+    labs(y = "Cash Proffer\n($/unit)", x = "Approval Date",
+         caption = "Note: Chart plots per-unit average cash proffer collected by Chesterfield, Goochland, and\nHanover Counties. Size of dot is proportional to the number of units allowed by the rezoning.\nDashed line shows a fitted 3rd order polynomial.") +
+    theme(legend.position = "none", plot.caption = element_text(hjust = 0))
+ggsave(here("paper", "figures", "plot_proffers.png"), width = 8, height = 4)
 
 ggplot(dt_prof, aes(
     x = log(density),
@@ -149,6 +155,18 @@ ggplot(dt_prof, aes(
     scale_x_continuous() +
     geom_smooth(method = "lm", formula = y ~ x + x^2)
 
+
+# Regressions
+# Note: sfd is omitted factor
+v_rhs <- c("-1", v_shares, "FIPS")
+fmla_prof <- as.formula(paste0("res_cash_proffer", " ~ ",
+                       paste0(v_rhs, collapse = " + ")))
+feols_prof <- feols(fmla_prof, dt_prof)
+etable(feols_prof)
+
+
+
+# TODO: in-kind value as % of total proffer value histogram
 
 # HPI Trends
 v_counties <- unique(dt[!is.na(n_units), FIPS])

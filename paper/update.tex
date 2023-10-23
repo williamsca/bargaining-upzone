@@ -42,19 +42,44 @@
 
 \noindent 
 
-\section{Data}  \label{sec:data}
+\section{New Work}  \label{sec:data}
 
-I compute the average amount of proffer revenue as a share of local revenue for Virginia counties in 2016. I then divide Virginia counties into three groups: above average proffers (``High Proffer''), positive and below average proffers (``Low Proffer''), and zero proffer revenue (``No Proffer''). I then restrict to counties for which I observe the Zillow House Value Index continuously between 2010 and 2021.\footnote{The Synthetic Difference-in-Differences method requires a balanced panel.} I report summary statistics below:
+Last week, I presented evidence that housing prices fell in Virginia after the Proffer Reform Act of 2016. 
+
+This was surprising. In the simplest urban models, housing prices are pinned down by a combination of a spatial indifference condition and an ``agricultural hinterland'' with perfectly elastic supply. Any change in the cost of building a house will be capitalized into land prices without changing housing prices. The intuition is that, modulo commuting costs, housing is perfectly substitutable across space, so demand at any location is perfectly elastic.
+
+Evidently, these simple models are not a good description of counties in Virginia. Changes in the price of an input to construction -- the right to build -- appear to be passed through to final prices. This finding is consistent with downward-sloping housing demand at the county level.
+
+The Proffer Reform Act imposed constitutional limitations on the ability of jurisdictions to collect cash proffers. Although many jurisdictions put a temporary pause on rezonings in order to determine how the law would affect their proffer systems, it appears that they ultimately reduced proffer amounts substantially. The chart below shows per-unit average proffers for rezonings in three primarily suburban counties (Hanover, Goochland, and Chesterfield) between 2014 and 2020.
+
+\begin{figure}[h]
+    \caption{Per-Unit Average Proffers}
+    \includegraphics{figures/plot_proffers.png}
+\end{figure}
+
+There is a clear decline in approved units between mid-2016 and 2018 as counties, developers, and courts interpretted the new law. However, by mid-2018, these counties approved substantial developments with zero cash proffers, a practice that rarely occured prior to 2016.
+
+To investigate the effect of the Proffer Reform on prices, I defined three groups of Virginia counties based on their share of local revenue derived from proffers in 2016. Those with a proffer share of revenues above the state average (0.33\%) were ``High Proffer''; those with a positive but below-average share were ``Low Proffer''; and those with zero proffer revenue were ``No Proffer''. I also restrict the sample to counties for which I observe the Zillow House Value Index continuously between 2010 and 2021.\footnote{The Synthetic Difference-in-Differences method requires a balanced panel.} I then ran three separate synthetic diff-in-diff regressions, constructing the synthetic control from the balance of continental US counties in each case. I followed this procedure because I was not sure how to think about spillovers across counties due to changes in proffer policy.
+
+I report summary statistics below:
 
 \include{tables/tab1.tex}
 
-In general, high proffer counties tend to have higher average housing prices, larger populations, and to issue more single-family building permits. Geographically, high proffer counties tend to located in the inner suburbs of DC, though there is a fair amount of dispersion.
+In general, high proffer counties tend to have higher average housing prices, larger populations, and to issue more single-family building permits. However, housing price growth is similar across the three groups.
+
+Geographically, high proffer counties tend to locate in the inner suburbs of DC, though there is a fair amount of dispersion.
 
 \begin{figure}
     \centering
     \caption{The Geography of Proffer Revenues}
     \includegraphics{figures/map-proffer-groups.png}
 \end{figure}
+
+\section{Next Steps}
+
+\textbf{Collecting Data.} Manually searching government minutes for details about proffers is tedious. To scale up, I've implemented a script that reads PDFs into a string of text and then then passes each page to the OpenAI API. I use the GPT 3.5 model to to identify relevant passages and summarize key information. (``The following text comes from a local government minutes. If it describes a rezoning process...'') I'm still assessing how accurate this method is. I could use an RA to check the results and track down raw data on county webpages.
+
+\textbf{Unresolved Issues.} 
 
 \clearpage
 % \begin{singlespace}

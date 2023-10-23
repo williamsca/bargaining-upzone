@@ -62,6 +62,7 @@ v_units <- c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict")
 dt[, n_units := rowSums(.SD, na.rm = TRUE), .SDcols = v_units]
 dt[n_units == 0, n_units := NA]
 dt[!is.na(n_units), (v_units) := 0]
+dt[!is.na(n_units), n_affordable := 0]
 dt[is.na(res_cash_proffer), res_cash_proffer := 0] # this is not 100% true
 
 dt[, Area := set_units(Acres, acres)]
@@ -96,8 +97,7 @@ dt <- dt[, ..v_final]
 
 # Sanity Checks
 nrow(dt[final_date < submit_date])
-
 uniqueN(dt[, .(Case.Number, gis_object)]) == nrow(dt)
-dt[!is.na(n_units)]
+
 # Save ----
 saveRDS(dt, here("derived", "ChesterfieldCo", "rezoning-applications.Rds"))

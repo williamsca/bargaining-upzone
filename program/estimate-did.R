@@ -24,7 +24,7 @@ v_groups <- c(high_proffer = "High Proffer",
 # Treatment indicators ----
 dt[, cp_share_local := rev_cp / rev_loc]
 
-INTENSITY_THRESHOLD <- mean(dt$cp_share_local, na.rm = TRUE)
+INTENSITY_THRESHOLD <- mean(dt[FY == 2016, cp_share_local], na.rm = TRUE)
 # INTENSITY_THRESHOLD <- quantile(dt$cp_share_local, 0.8, na.rm = TRUE)
 
 dt[FY == 2016, high_proffer := fifelse(
