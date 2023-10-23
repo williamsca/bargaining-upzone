@@ -22,8 +22,6 @@ Estimate a hedonic regresion of proffer amounts on development characteristics w
 
 
 # TODO
-- Parse Chesterfield minutes (manual)
-- Show the relationship between proffer revenues, rates, and county avg yearly pop growth rate 2000-2016 (need ACS census data for 2016)
 - Estimate impact on cumulative building permits
 - Get CoreLogic data
   - Check for differential impacts on new vs existing houses (test if proffers were used to fund amenities/infrastructure for the new development or were fungible with other revenue)
@@ -35,6 +33,7 @@ Estimate a hedonic regresion of proffer amounts on development characteristics w
 
 
 # Done
+- Parse Chesterfield minutes (manual)
 - Review static models of neighborhood choice / housing demand
 - Download remaining Chesterfield BoS minutes (2013-2020)
 - Write up Mike Vanderpool call notes
