@@ -229,3 +229,23 @@ for (i in seq_along(dt$case_text)) {
 dt$proffer_details <- l_proffers
 
 saveRDS(dt, here("derived", "ChesterfieldCo", "bos-minutes-rezonings.Rds"))
+
+# Human parsing
+dt <- readRDS(here("derived", "ChesterfieldCo",
+                   "bos-minutes-rezonings.Rds"))
+
+uniqueN(dt$Case.Number) == nrow(dt)
+
+v_cols <- c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_unknown_pacre",
+            "n_age_restrict",
+            "n_affordable", "res_cash_proffer",
+            "other_cash_proffer", "inkind_proffer")
+dt[, (v_cols) := NA]
+fwrite(dt[, .(Case.Number, n_units_desc, n_sfd, n_sfa, n_mfd, n_unknown,
+              n_unknown_pacre, n_age_restrict, n_affordable,
+              proffer_details,
+              res_cash_proffer, other_cash_proffer)],
+       here("data", "ChesterfieldCo", "bos-minutes-rezonings.csv"))
+
+# <human parses GPT output; saves copy in '.../derived/ChesterfieldCo/'>
+

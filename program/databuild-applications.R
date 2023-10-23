@@ -67,52 +67,9 @@ nrow(dt_pwc[is.na(submit_date)]) == 0
 
 # Chesterfield County
 dt_chesterfield <- readRDS(here("derived", "ChesterfieldCo",
-    "GIS Rezonings (2023.07.28).RDS"))
-dt_chesterfield_apps <- fread(here("data", "ChesterfieldCo",
-    "Applications", "RecordList20230824.csv"), header = TRUE)
+    "rezoning-applications.Rds"))
 
-dt_chesterfield_apps <- unique(dt_chesterfield_apps)
-
-dt_chesterfield <-
-  merge(dt_chesterfield, dt_chesterfield_apps,
-        by.x = c("CaseNum", "Status"),
-        by.y = c("Record Number", "Status")
-  )
-
-dt_chesterfield[, Area := set_units(Acres, acres)]
-
-dt_chesterfield[, FIPS := "51041"]
-
-dt_chesterfield[, submit_date := mdy(Date)]
-
-# TODO: assign Part := {1,2} based on Part column
-dt_chesterfield[, nObs := .N, by = CaseNum]
-dt_chesterfield <- dt_chesterfield[
-    nObs == 1 | Part %in% c("1 OF 2", "Part 1")
-]
-
-# AC: amend prior case
-# ZO: rezoning
-# CU: conditional use permit
-# ZOR: renew zoning approval
-# PD: planned development?
-dt_chesterfield <- dt_chesterfield[grepl("ZO", RequestType)]
-
-dt_chesterfield[grepl("^[0-9]", `Project Name`), Address := `Project Name`]
-dt_chesterfield[Status %in% c("Denied", "Withdrawn"),
-    zoning_old := AppZoning]
-
-dt_chesterfield[, isResi := grepl("R", AppZoning)]
-
-setnames(
-    dt_chesterfield,
-    c("CaseNum", "Date", "AppZoning", "CaseDescription",
-      "CashProffer", "CaseName"),
-    c("Case.Number", "Applied.Date", "zoning_new",
-      "Description", "hasCashProffer", "Project.Name")
-)
-
-uniqueN(dt_chesterfield$Case.Number) == nrow(dt_chesterfield)
+uniqueN(dt_chesterfield[, .(Case.Number, gis_object)]) == nrow(dt_chesterfield)
 nrow(dt_chesterfield[is.na(submit_date)]) == 0
 
 # Fairfax County

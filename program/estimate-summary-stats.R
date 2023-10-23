@@ -12,8 +12,6 @@ dt <- readRDS("derived/sample.Rds")
 dt_app <- readRDS(here("derived", "county-rezonings.Rds"))
 dt_app[, density := n_units / Area]
 
-arcsinh <- function(x) log(x + sqrt(x^2 + 1))
-
 # Exclude Fairfax, Loudoun for partial exemption
 # dt <- dt[!(FIPS %in% c("51059", "51107"))]
 
@@ -126,8 +124,22 @@ print.xtable(xtab1, type = "latex", file = here("paper", "tables", "tab1.tex"))
 # Proffer Regressions ----
 # Proffer against density
 # TODO: in-kind value as % of total proffer value histogram
-dt_prof <- dt_app[!is.na(res_cash_proffer) &
-    !is.na(density) & isApproved == TRUE & n_units > 5]
+dt_prof <- dt_app[!is.na(res_cash_proffer) & !is.na(n_units)]
+
+dt_prof[, tot_proffer := res_cash_proffer * n_units]
+
+v_rhs <- c("n_sfd", "n_sfa", "n_mfd", "n_unknown", "n_age_restrict",
+             "n_affordable", "FIPS")
+fmla_prof <- as.formula(paste0("tot_proffer", " ~ ",
+                       paste0(v_rhs, collapse = " + ")))
+lm_prof <- lm(fmla_prof, dt_prof)
+
+stargazer(lm_prof, type = "text")
+
+# TODO: figure out which obs are dropped in regression
+dt_prof$res <- resid(lm_prof)
+
+# TODO: plot residuals against fiscal year
 
 ggplot(dt_prof, aes(
     x = log(density),
