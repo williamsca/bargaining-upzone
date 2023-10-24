@@ -1,38 +1,10 @@
 # Models of Land Use
 Aside from adapting the language of each model to my setting, I do not make any material edits.
 
-## Dynamic
-### Scott (2014)
-Agricultural land use is dynamic. There are both switching costs (e.g., clearing forest) and benefits (e.g., crop rotation). Therefore, static models of land use estimate a short-run elasticity that is substantially lower than the long-run elasticity.
-
-For field $i$ in use $j$ in year $t$:
-
-| Variable | Description |
-| --- | --- |
-| $k_{it}$| characteristics of the field |
-| $\omega_{t}$ | market state (e.g., future prices, input costs) |
-| $R_j(\omega_t)$ | observable component of expected returns |
-| $\xi_{jk}(\omega_t)$ | unobservable aggregate shock to expected returns |
-| $\nu_{jit}$ | idiosyncratic shock |
-
-Expected payoffs to land use $j$ are
-
-$$\pi(j, k, \omega_t, \nu_{it}) = \alpha_0(j,k) + \alpha_RR_j(\omega_t) + \xi_{jk}(\omega_t) + \nu_{jit}$$
-
-Dynamics arise from the dependence of the intercept term $\alpha_0(j,k)$ on the field state $k$. 
-
-Each field is assumed to be too small to affect the market state $\omega_t$. 
-
-The field state is finite: planting crops is a *renewal action* that always results in the same state, while there many be dynamic effects from leaving the field fallow for $k$ years:
-
-$$k^+(j,k) = \begin{cases} 0 & \text{if } j = crops \\ \min\{k+1, \bar{k}\} & \text{if } j = other \end{cases} $$
-
-Assume that $\nu_{jit}$ is i.i.d. across $i$, $j$, and $t$, with T1EV distribution conditional on $\omega_t$ and $k_{it}$. 
-
-Scott, Paul. "Dynamic discrete choice estimation of agricultural land use." (2014).
-
-
 ## Static
+### Suarez Serrato and Zidar (2016)
+
+
 ### Diamond (2017)
 Consider a large number $N$ of cities indexed by $j = 1, \ldots, N$. The government of each city produces a public good according to 
 
@@ -144,3 +116,35 @@ by OLS.
 Consider using Bartik or network-based instruments for parcel demand. 
 
 Souza-Rodrigues, Eduardo. "Deforestation in the Amazon: A unified framework for estimation and policy analysis." *The Review of Economic Studies* 86, no. 6 (2019): 2713-2744.
+
+## Dynamic
+### Scott (2014)
+Agricultural land use is dynamic. There are both switching costs (e.g., clearing forest) and benefits (e.g., crop rotation). Therefore, static models of land use estimate a short-run elasticity that is substantially lower than the long-run elasticity.
+
+For field $i$ in use $j$ in year $t$:
+
+| Variable | Description |
+| --- | --- |
+| $k_{it}$| characteristics of the field |
+| $\omega_{t}$ | market state (e.g., future prices, input costs) |
+| $R_j(\omega_t)$ | observable component of expected returns |
+| $\xi_{jk}(\omega_t)$ | unobservable aggregate shock to expected returns |
+| $\nu_{jit}$ | idiosyncratic shock |
+
+Expected payoffs to land use $j$ are
+
+$$\pi(j, k, \omega_t, \nu_{it}) = \alpha_0(j,k) + \alpha_RR_j(\omega_t) + \xi_{jk}(\omega_t) + \nu_{jit}$$
+
+Dynamics arise from the dependence of the intercept term $\alpha_0(j,k)$ on the field state $k$. 
+
+Each field is assumed to be too small to affect the market state $\omega_t$. 
+
+The field state is finite: planting crops is a *renewal action* that always results in the same state, while there many be dynamic effects from leaving the field fallow for $k$ years:
+
+$$k^+(j,k) = \begin{cases} 0 & \text{if } j = crops \\ \min\{k+1, \bar{k}\} & \text{if } j = other \end{cases} $$
+
+Assume that $\nu_{jit}$ is i.i.d. across $i$, $j$, and $t$, with T1EV distribution conditional on $\omega_t$ and $k_{it}$. 
+
+Scott, Paul. "Dynamic discrete choice estimation of agricultural land use." (2014).
+
+
