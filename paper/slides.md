@@ -8,6 +8,34 @@ title: Taxing the Upzone
 author: Colin Williams
 math: mathjax
 ---
+
+# The Incidence of Impact Fees
+
+---
+
+# TODO:
+Speaks to political economy of impact fees and history of conflict between local jurisdictions and state/federal legislation
+
+---
+
+![bg cover 100%](figures/images/../tax-incidence/incidence-1.svg)
+
+---
+
+![bg cover 100%](figures/images/../tax-incidence/incidence-2.svg)
+
+---
+
+![bg cover 100%](figures/images/../tax-incidence/incidence-3.svg)
+
+---
+
+![bg cover 100%](figures/images/../tax-incidence/incidence-4.svg)
+
+---
+
+
+
 # **Municipal Responses to Zoning Reform:**
 
 ### **Evidence from Virginia's Proffer Reform Act of 2016**
