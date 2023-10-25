@@ -13,11 +13,6 @@ math: mathjax
 
 ---
 
-# TODO:
-Speaks to political economy of impact fees and history of conflict between local jurisdictions and state/federal legislation
-
----
-
 ![bg cover 100%](figures/images/../tax-incidence/incidence-1.svg)
 
 ---
