@@ -31,18 +31,16 @@ where $B_i^H$ is an exogenous productivity parameter, $p^V_i$ is the price of va
 
 $$p_i^V = r - c - \tau$$
 
-Given that $H_i^S = V_i$ under Leontief production, the supply of new housing is then
+where $r$ is the rental rate of housing and $c$ is the unit cost of materials. Given that $H_i^S = V_i$ under Leontief production, aggregate housing supply is then
 
 $$H_i^S = (B_i^H(r - c - \tau))^{\eta_i} + H_i^F$$
-
-where $r$ is the rental rate of housing and $c$ is the unit cost of materials.
 
 *Equilibrium.* The housing market clearing condition is $H_i^S = H_i^D$. It determines rents $r_i$ and is given in logs by the expression
 
 TODO
 
 # Simulations
-To simplify the presentation, I assume there are only two locations $c \in \{i,j\}$. 
+To simplify the presentation, I assume there are only two locations $i \in \{1, 2\}$. 
 
 
 # Appendix
