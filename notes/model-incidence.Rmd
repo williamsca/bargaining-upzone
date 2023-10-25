@@ -1,0 +1,53 @@
+# Local Labor Markets and Impact Fees
+Model based loosely on Suarez Serrato and Zidar (2016)
+
+Assume a total number of households $N = 1$ and let $N_i$ denote the share of households in location $c$. The model is static and assumes no population growth.
+
+### Household Problem
+I abstract away from the household's consumption decision. After choosing a location, households collect the local wage, consume one unit of housing, and spend their remaining income on a freely tradable numeraire good. 
+
+*Household Location Choice.* Wages, rents, and amenities vary across locations. The indirect utility of household $n$ from location $c$ is
+
+$$V_{ni}^W = \underbrace{a_0 + \ln w_i - \alpha \ln r_i + \bar{A}_i}_{\equiv u_i} + \xi_{ni}$$
+
+where $\bar{A}_i$ is the mean amenity in location $c$ and $\epsilon_{ni}$ is location-specific idiosyncratic preference.
+
+Assuming that $\epsilon_{ni}$ is distributed type I extreme value, the share of households who choose location $c$ is
+
+$$N_i = P\left(V_{ni}^W = \max_{i'}\{V_{ni'}^W\}\right) = \frac{\exp(u_i/\sigma^W)}{\sum_{i'}\exp(u_{i'}/\sigma^W)}$$
+
+where $\sigma^W$ is the dispersion of the idiosyncratic preference term $\xi_{ni}$.
+
+### Housing Market
+*Housing Demand.* Under the assumption that all households consume a single unit of housing, the aggregate demand at location $c$ is 
+
+$$H_i^D = N_i$$
+
+*Housing Supply.* I assume that aggregate housing supply is the sum of a fixed stock of existing housing $H_i^F$ and new housing $H_i^N$. Builders produce new housing according to a Leontif production technology which combines vacant land and materials. Builders purchase land on a spot market subject to an upward-sloping supply curve and potentially an impact fee $\tau$. For tractability, I assume the supply of vacant land $V$ is given by
+
+$$V_i = (B_i^Hp^V_i)^{\eta_i}$$
+
+where $B_i^H$ is an exogenous productivity parameter, $p^V_i$ is the price of vacant land, and $\eta_i$ is the elasticity of vacant land supply. Under perfect competition in the construction industry, the price of vacant land is pinned down by a zero-profit condition
+
+$$p_i^V = r - c - \tau$$
+
+Given that $H_i^S = V_i$ under Leontief production, the supply of new housing is then
+
+$$H_i^S = (B_i^H(r - c - \tau))^{\eta_i} + H_i^F$$
+
+where $r$ is the rental rate of housing and $c$ is the unit cost of materials.
+
+*Equilibrium.* The housing market clearing condition is $H_i^S = H_i^D$. It determines rents $r_i$ and is given in logs by the expression
+
+TODO
+
+# Simulations
+To simplify the presentation, I assume there are only two locations $c \in \{i,j\}$. 
+
+
+# Appendix
+*Household Consumption Choice.* Conditional on a location choice $c$, the household maximizes quasi-linear utility over housing $h$ and consumption $x$:
+
+$$\max_{h, x} \ln A + \alpha \ln h + x \text{ s.t. } rh + x = w$$
+
+The household's individual housing demand follows from their consumption problem and takes the form $h = \frac{\alpha}{r}$.
