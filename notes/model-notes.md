@@ -5,6 +5,8 @@ Aside from adapting the language of each model to my setting, I do not make any 
 ### Suarez Serrato and Zidar (2016)
 
 
+Suárez Serrato, Juan Carlos, and Owen Zidar. "Who benefits from state corporate tax cuts? A local labor markets approach with heterogeneous firms." *American Economic Review* 106, no. 9 (2016): 2582-2624.
+
 ### Diamond (2017)
 Consider a large number $N$ of cities indexed by $j = 1, \ldots, N$. The government of each city produces a public good according to 
 
