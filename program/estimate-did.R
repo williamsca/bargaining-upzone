@@ -114,8 +114,8 @@ RunSynthDid <- function(dt, LHS, period = "FY") {
 
 # Define treatment group
 # One of 'high_proffer', 'low_proffer', 'no_proffer'
-treatment_group <- "low_proffer"
-outcome <- "logHPI"
+treatment_group <- "high_proffer"
+outcome <- "logZHVI"
 
 dt.synthdid <- copy(dt_hy)
 dt.synthdid[FY < 2017, isTreated := 0]
@@ -157,15 +157,15 @@ plot(tau.hat, overlay = 1) +
     geom_vline(xintercept = 2016.5, linetype = "dashed") +
     theme_light(base_size = 14) +
     theme(legend.position = c(0.85, 0.18)) +
-    labs(y = "Log House Price Index",
+    labs(y = "Log ZHVI ($)",
          title = paste0("Effects on Housing Prices: ",
                         v_groups[treatment_group])) +
     geom_text(aes(x = 2018,
                   y = mean(dt.synthdid[isTreated == 1, get(outcome)])),
               label = sprintf("Estimate: %1.2f\nSD: %1.2f", tau.hat, se))
 ggsave(here("paper", "figures",
-            paste0("synthdid_", outcome, "_", treatment_group, ".png"),
-       width = 8, height = 4))
+            paste0("synthdid_", outcome, "_", treatment_group, ".png")),
+       width = 8, height = 4)
 
 # Placebo
 dt.synthdid[FY >= 2017, isTreated := no_proffer]

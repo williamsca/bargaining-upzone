@@ -9,7 +9,83 @@ author: Colin Williams
 math: mathjax
 ---
 
-# The Incidence of Impact Fees
+# Who's Impacted by Impact Fees?
+## Evidence from Virginia's Reform Act of 2016
+
+---
+
+![bg cover 80%](figures/images/rezoning-news.png)
+
+---
+
+
+## Prince William County Impact Fees (2014)
+
+|Unit| Service | Amount ($)|
+|---|---|---:|
+SFD|Schools|20,649|
+SFD|Parks & Libraries|6,403|
+SFD|Fire and Rescue|1,053|
+SFD|Transportation|16,780|
+**SFD**|**Total**|**44,930**
+**Townhouse**|**Total**|**39,837**
+**MFD**|**Total**|**26,778**
+
+---
+
+# National Background
+
+Impact fees are land or cash in exchange for development rights
+
+- Widespread in US: **~48% of suburban communities** in 2018 [(Gyourko, Hartley, and Krimmel 2021)](https://www-sciencedirect-com.proxy1.library.virginia.edu/science/article/pii/S009411902100019X)
+
+&nbsp;
+
+Impact fees occupy precarious legal ground:
+- illegal taxes? regulatory takings?
+- federal courts have ruled land exactions must be **proportional** and **reasonably related** to development impacts
+
+---
+
+# Virginia Reform Act of 2016
+
+Developers uphappy with large impact fees, lobbied state legislature for reform:
+
+- Impact fees must address impacts *specifically attributable* to proposed development
+- Applies to all **residential** rezoning applications filed after **July 1, 2016**
+- Parcel exempt if **high-density** or **near transit** (NOVA)
+- Increases ability of developers **to contest rezoning decisions** in court
+
+---
+
+# Municipality Response
+
+Loudoun, Assistant Director of Planning and Zoning:
+
+> "Where the new legislation applies, we will in fact **not accept cash or offsite [impact fees]**, completely eliminating the discussion or the **potential risk** of the county accepting the unreasonable or wrong types of [impact fees]."
+
+Portsmouth, Planning Director:
+> "If you want to submit [impact fees], **we’re not discussing it**."
+
+---
+
+![bg 100%](figures/plot_proffers.png)
+
+---
+
+# Background: The Economics of Taxes
+
+### The burden of a tax does *not* depend on who hands the cash to the government
+
+The burden ("incidence") depends on **supply and demand elasticities**
+
+&nbsp;
+
+### Research Questions:
+- When counties impose impact fees, who pays: **rural landowners** or **homebuyers**?
+- Do **urban landowners** benefit?
+
+&nbsp;
 
 ---
 
@@ -29,32 +105,71 @@ math: mathjax
 
 ---
 
+# Data
+
+For each county in VA between 2010 and 2022:
+- Housing prices from **Zillow Home Value Index** (ZHVI)
+- Tax and impact fee revenue from **VA Dept. of Community Development**
+
+&nbsp;
+
+Divide counties into three groups:
+- **High proffer** counties: proffer revenues > 2016 average
+- **Low proffer** counties: proffer revenues < 2016 average
+- **No proffer** counties: no proffer revenues
+
+---
+
+![bg cover 100%](figures/map-proffer-groups.png)
+
+---
+
+<!-- html table generated in R 4.3.1 by xtable 1.8-4 package -->
+<!-- Thu Nov  2 17:52:03 2023 -->
+<table border=1>
+<caption align="bottom"> Summary Statistics </caption>
+<tr> <th> Variable </th> <th> High Proffer </th> <th> Low Proffer </th> <th> No Proffer </th>  </tr>
+  <tr> <td> Number of Counties </td> <td> 16 </td> <td> 7 </td> <td> 16 </td> </tr>
+  <tr> <td> Population </td> <td> 193,666 </td> <td> 102,335 </td> <td> 96,270 </td> </tr>
+  <tr> <td>  </td> <td> (264,279) </td> <td> (149,563) </td> <td> (101,203) </td> </tr>
+  <tr> <td> Zillow HVI ($) </td> <td> 310,854 </td> <td> 266,700 </td> <td> 235,106 </td> </tr>
+  <tr> <td>  </td> <td> (88,505) </td> <td> (113,978) </td> <td> (168,909) </td> </tr>
+  <tr> <td> HPI (2000 = 100) </td> <td> 412 </td> <td> 421 </td> <td> 471 </td> </tr>
+  <tr> <td>  </td> <td> (171) </td> <td> (219) </td> <td> (318) </td> </tr>
+  <tr> <td> Local Revenue ($/capita) </td> <td> 2,322 </td> <td> 2,386 </td> <td> 2,557 </td> </tr>
+  <tr> <td>  </td> <td> (711) </td> <td> (1,258) </td> <td> (1,373) </td> </tr>
+  <tr> <td> Proffer Revenue ($/capita) </td> <td> 24 </td> <td> 2 </td> <td> 0 </td> </tr>
+  <tr> <td>  </td> <td> (30) </td> <td> (3) </td> <td> (0) </td> </tr>
+  <tr> <td> Single-Family Permits Per Thousand (2010-2016) </td> <td> 6 </td> <td> 3 </td> <td> 2 </td> </tr>
+  <tr> <td>  </td> <td> (3) </td> <td> (2) </td> <td> (1) </td> </tr>
+  <tr> <td> Multi-Family Permits Per Thousand (2010-2016) </td> <td> 1 </td> <td> 1 </td> <td> 1 </td> </tr>
+  <tr> <td>  </td> <td> (1) </td> <td> (2) </td> <td> (2) </td> </tr>
+   </table>
+
+
+---
+
+# Results
+
+---
+
+![bg cover 100%](figures/synthdid_logZHVI_high_proffer.png)
+
+---
+
+![bg cover 100%](figures/synthdid_logZHVI_low_proffer.png)
+
+---
+
+![bg cover 100%](figures/synthdid_logZHVI_no_proffer.png)
+
+---
 
 
 # **Municipal Responses to Zoning Reform:**
 
 ### **Evidence from Virginia's Proffer Reform Act of 2016**
 
-
----
-
-# Selling the Upzone
-
-![bg right:74% 100%](figures/images/rezoning-news.png)
-
----
-
-## Prince William County Suggested Proffers (2014)
-
-|Unit| Service | Amount ($)|
-|---|---|---:|
-SFD|Schools|20,649|
-SFD|Parks & Libraries|6,403|
-SFD|Fire and Rescue|1,053|
-SFD|Transportation|16,780|
-**SFD**|**Total**|**44,930**
-**Townhouse**|**Total**|**39,837**
-**MFD**|**Total**|**26,778**
 
 ---
 
@@ -94,41 +209,6 @@ SFD|Transportation|16,780|
 
 
 ---
-
-# National Background
-
-Impact fees (exactions) are land or cash in exchange for development rights
-
-- Widespread in US: **~48% of suburban communities** in 2018 [(Gyourko, Hartley, and Krimmel 2021)](https://www-sciencedirect-com.proxy1.library.virginia.edu/science/article/pii/S009411902100019X)
-
-Impact fees occupy precarious legal ground:
-- illegal taxes? regulatory takings?
-- federal courts have ruled land exactions must be **proportional** and **reasonably related** to development impacts
-- doctrine expanded in 2014 to include cash exactions (*Koontz v. St. Johns River Water Management District*)
-
----
-
-# Virginia Proffer Reform Act of 2016
-
-Developers uphappy with large impact fees ("proffers"), lobbied state legislature for reform:
-
-- Proffers must address impacts *specifically attributable* to proposed development
-- Applies to all **residential** rezoning applications filed after **July 1, 2016**
-- Parcel exempt if **high-density** or **near transit** (NOVA)
-- Increases ability of developers **to contest rezoning decisions** in court
-
-Substantial uncertainty over how courts would interpret the law; reform partially unwound in **2019**
-
----
-
-# Municipality Response
-
-Loudoun, Assistant Director of Planning and Zoning:
-
-> "Where the new legislation applies, we will in fact **not accept cash or offsite proffers**, completely eliminating the discussion or the **potential risk** of the county accepting the unreasonable or wrong types of proffers."
-
-Portsmouth, Planning Director:
-> "If you want to submit proffers, **we’re not discussing it**."
 
 Prince William, Board Chairman:
 > "We’re stuck,” he said. “That’s why **we haven’t approved a single house** under the new law." (12/6/2018)
