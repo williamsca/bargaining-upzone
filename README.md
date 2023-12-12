@@ -22,9 +22,10 @@ Estimate a hedonic regresion of proffer amounts on development characteristics w
 
 
 # TODO
-- Estimate impact on cumulative building permits
 - Get CoreLogic data
-  - Check for differential impacts on new vs existing houses (test if proffers were used to fund amenities/infrastructure for the new development or were fungible with other revenue)
+  - Create "upzoned" indicator variable
+  - Estimate linear probability model of upzoning after PRA16
+
 - Estimate hedonic model of proffers against size, density of development, type of housing, and document post-2016 decline
 - Literature review / policy context
   - WLURI trends 
