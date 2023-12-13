@@ -121,7 +121,7 @@ dt_tab1[grepl("sd", Variable), (v_sum) := lapply(.SD, function(x) paste0(
 dt_tab1[grepl("sd", Variable), Variable := ""]
 
 xtab1 <- xtable(dt_tab1, digits = 0, caption = "Summary Statistics")
-print.xtable(xtab1, type = "latex", file = here("paper", "tables", "tab1.tex"),
+print.xtable(xtab1, type = "html", file = here("paper", "tables", "tab1.html"),
              include.rownames = FALSE)
 
 # Proffers ----

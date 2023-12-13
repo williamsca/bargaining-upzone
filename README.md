@@ -61,6 +61,10 @@ See [Data Notes](notes/rezoning-data-notes.md) for details on how I collected th
 > Statewide zoning reforms may fail to increase housing supply if local governments can respond along unregulated margins. I study the policy response of Virginia counties to a 2016 statewide reform that restricted their ability to charge developers for residential upzonings. I find that upzoning is highly price elastic: after the reform, the number of housing units allowed through residential upzonings fell by [X]\%. In counties which were partially exempted from the reform, however, total activity remained constant as localities substituted upzoning from affected to exempt areas. Rather than playing ``whack-a-mole'' with local zoning ordinances, states should directly subsidize the number of newly-permitted housing units.
 
 ## Meetings
+Kerem (11/30/2023)
+- If not already done: distill political economy mechanism (developed vs undeveloped landowners) to clean specification and show empirically that it matters
+- Want to have anecdotes about how urban, rural, and households are affected by proffers
+
 Leora (10/12/2023)
 - The incidence of proffers on all homeowners is a good economic question
 - Is there a property tax response?
