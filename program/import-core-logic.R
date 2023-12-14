@@ -72,7 +72,7 @@ by = .(Date = floor_date(`TAXROLL CERTIFICATION DATE`, unit = "month"),
     `FIPS CODE`)
 ]
 
-setkey(dt_county, `FIPS CODE`, `TAXROLL CERTIFICATION DATE`)
+setkey(dt_county, `FIPS CODE`, Date)
 
 dt_county[, n_yr_since_cert := (Date - shift(Date)) / 365, by = `FIPS CODE`]
 dt_county[, pct_rezoned_per_yr := pctRezoned / as.numeric(n_yr_since_cert)]
@@ -88,12 +88,11 @@ dt_panel <- CJ(
 dt_panel <- merge(dt_panel, dt_county, by = c("Date", "FIPS CODE"),
                   all.x = TRUE)
 
+uniqueN(dt_panel[, .(Date, `FIPS CODE`)]) == nrow(dt_panel)
+
 View(dt_panel[pct_rezoned_per_yr > 50])
 summary(dt_panel$pct_rezoned_per_yr)
-# TODO: figure out why n_yr_since_cert is sometimes negative
 
 # Export ----
 saveRDS(dt, here("derived", "parcel-zoning-panel.Rds"))
 saveRDS(dt_panel, here("derived", "county-rezonings-panel-corelogic.Rds"))
-
-uniqueN(dt_panel[, .(Date, `FIPS CODE`)]) == nrow(dt_panel)
