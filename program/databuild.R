@@ -19,6 +19,7 @@ dt_hpi_rs <- readRDS("derived/hpi-bogin-etal.Rds")
 dt_rev <- readRDS("derived/county-revenues-2004-2022.Rds")
 dt_pop <- readRDS("derived/county-populations-2010.Rds")
 dt_rezon <- readRDS("derived/county-rezonings-panel.Rds")
+dt_pb <- readRDS(here("derived", "county-rezonings-panel-corelogic.Rds"))
 dt_wrluri <- readRDS("derived/county-wrluri.Rds")
 
 # Building Permits ----
@@ -66,6 +67,10 @@ dt <- merge(dt, dt_pop, by = c("FIPS"), all.x = TRUE)
 dt <- merge(dt, dt_rezon, by.x = c("FIPS", "Date"),
             by.y = c("FIPS", "date"), all.x = TRUE)
 
+dt_pb[, `FIPS CODE` := as.character(`FIPS CODE`)]
+dt <- merge(dt, dt_pb, by.x = c("FIPS", "Date"),
+            by.y = c("FIPS CODE", "Date"), all.x = TRUE)
+
 # Note: many WRLURI counties are not covered in the building permits survey
 dt <- merge(dt, dt_wrluri, by = c("FIPS"), all.x = TRUE)
 
@@ -80,7 +85,8 @@ dt <- dt[!(FIPS.Code.State %in% c("02", "15"))]
 v_cols <- c("FIPS", "Date", "FY", "Name", "FIPS.Code.State",
     "PCT001001", "rev_cp",
     "rev_loc", "rev_tot", "Units1", "Units2", "Units3-4", "Units5+",
-    "ZHVI", "ZHVI_SFD", "HPI", "n_units", "Area", "EI")
+    "ZHVI", "ZHVI_SFD", "HPI", "n_units", "Area", "EI",
+    "pct_rezoned_per_yr", "nParcels")
 dt <- dt[, ..v_cols]
 
 # drop 24 duplicate entries

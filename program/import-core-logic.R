@@ -25,7 +25,7 @@ cols_basic <- c(
 )
 
 l_files <- list.files(here("data", "core-logic"),
-    pattern = "hist", full.names = TRUE)
+    pattern = "hist", full.names = TRUE, recursive = TRUE)
 
 dt <- rbindlist(lapply(l_files, fread, select = cols_basic))
 
@@ -45,7 +45,6 @@ setkey(dt, CLIP, `TAXROLL CERTIFICATION DATE`)
 
 # Drop remaining duplicates (~10,000)
 dt[, isDup := .N, by = .(CLIP, `TAXROLL CERTIFICATION DATE`)]
-table(dt$isDup)
 dt <- dt[isDup == 1]
 dt$isDup <- NULL
 
@@ -54,44 +53,47 @@ uniqueN(dt[, .(CLIP, `TAXROLL CERTIFICATION DATE`)]) == nrow(dt)
 ggplot(data = dt, aes(x = `TAXROLL CERTIFICATION DATE`)) +
     geom_histogram(binwidth = 30)
 
-View(dt[`FIPS CODE` == 51045])
+View(dt[`FIPS CODE` == "51049" &
+    `TAXROLL CERTIFICATION DATE` %between% c(ymd("2013-01-01"),
+        ymd("2014-01-01"))])
 
 # Construct rezoning panel ----
 table(dt$`LAND USE CODE`) # only residential codes
+
 dt_county <- dt[!is.na(`LAND USE CODE`)]
 
-dt_county[, isRezoned := (`LAND USE CODE` != shift(`LAND USE CODE`)), by = CLIP]
+# Exclude changes from 100 (Unclassified Residential)
+dt_county[, isRezoned := (`LAND USE CODE` != shift(`LAND USE CODE`) &
+    shift(`LAND USE CODE`) != 100), by = CLIP]
 
 dt_county <- dt_county[, .(pctRezoned = 100 *
-        sum(isRezoned, na.rm = TRUE) / .N, nParcels = .N),
-    by = .(`TAXROLL CERTIFICATION DATE`, `FIPS CODE`)]
+    sum(isRezoned, na.rm = TRUE) / .N, nParcels = .N),
+by = .(Date = floor_date(`TAXROLL CERTIFICATION DATE`, unit = "month"),
+    `FIPS CODE`)
+]
 
 setkey(dt_county, `FIPS CODE`, `TAXROLL CERTIFICATION DATE`)
 
-dt_county[, n_mo_since_cert := (`TAXROLL CERTIFICATION DATE` -
-    shift(`TAXROLL CERTIFICATION DATE`)) / 30, by = `FIPS CODE`]
-dt_county[, pct_rezoned_per_mo := pctRezoned / n_mo_since_cert]
+dt_county[, n_yr_since_cert := (Date - shift(Date)) / 365, by = `FIPS CODE`]
+dt_county[, pct_rezoned_per_yr := pctRezoned / as.numeric(n_yr_since_cert)]
 
-dt_county[, Date := floor_date(`TAXROLL CERTIFICATION DATE`, unit = "month")]
-
-dt_panel <- CJ(Date = seq.Date(from = min(dt_county$Date),
-    to = max(dt_county$Date), by = "month"),
+dt_panel <- CJ(
+    Date = seq.Date(
+        from = min(dt_county$Date),
+        to = max(dt_county$Date), by = "month"
+    ),
     `FIPS CODE` = unique(dt_county$`FIPS CODE`)
 )
 
 dt_panel <- merge(dt_panel, dt_county, by = c("Date", "FIPS CODE"),
                   all.x = TRUE)
 
-View(dt_panel[pctRezoned > 50])
-
-summary(dt_panel$pct_rezoned_per_mo)
-
-dt_county[, Year := year(`TAXROLL CERTIFICATION DATE`)]
-dt_county[, isDup := .N, by = .(Year, `FIPS CODE`)]
-View(dt_county[isDup > 1])
-
-uniqueN(dt_county[, .(Year, `FIPS CODE`)])
-nrow(dt_county)
+View(dt_panel[pct_rezoned_per_yr > 50])
+summary(dt_panel$pct_rezoned_per_yr)
+# TODO: figure out why n_yr_since_cert is sometimes negative
 
 # Export ----
 saveRDS(dt, here("derived", "parcel-zoning-panel.Rds"))
+saveRDS(dt_panel, here("derived", "county-rezonings-panel-corelogic.Rds"))
+
+uniqueN(dt_panel[, .(Date, `FIPS CODE`)]) == nrow(dt_panel)

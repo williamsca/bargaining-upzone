@@ -69,7 +69,8 @@ by = .(FIPS, PCT001001, State, HPI,
 
 dt_hy <- dt[, .(
   Units1 = sum(Units1), Units2p = sum(Units2p), Units5 = sum(`Units5+`),
-  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units)
+  ZHVI = mean(ZHVI), ZHVI_SFD = mean(ZHVI_SFD), n_units = sum(n_units),
+  pct_rezoned = mean(pct_rezoned_per_yr), n_parcels = mean(nParcels)
 ),
 by = .(FIPS, PCT001001, State, HPI,
   Date = floor_date(Date, unit = "halfyear") + months(3), rev_cp,

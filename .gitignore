@@ -24,6 +24,8 @@ derived/county-rezonings-panel.Rds
 derived/county-rezonings.Rds
 derived/county-wrluri.Rds
 derived/sample.Rds
+derived/parcel-zoning-panel.Rds
+derived/county-rezonings-panel-corelogic.Rds
 
 # History files
 .Rhistory
